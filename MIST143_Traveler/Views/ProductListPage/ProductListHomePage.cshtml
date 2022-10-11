@@ -7,6 +7,7 @@
 }
 
 <body>
+   
     <script>
         function OpenModal() {
             $('#overlay').show();
@@ -14,25 +15,10 @@
         function CloseModal() {
             $('#overlay').hide();
         }
-
-        $(document).ready(function () {
-            $("#type li").hover(function () { $(this).addClass("active") }, function () { $(this).removeClass("active") })
-        })
-
+        
     </script>
     <article>
-        <ul id=menu style="margin-right:150px"> 
-            <li>
-                <figure class="figd">
-                    <video src="../Images/ProductListPageImages/煩死你.mp4" autoplay width="300" preload="auto" controls loop>
-                    </video>
-                    <a href="https://www.youtube.com/watch?v=61N5ltbDGiA">
-                        <p style="width:200px">你知道這是什麼嗎?</p>
-                    </a>
-
-                </figure>
-            </li>
-        </ul>
+        
         <div class="article-test">
             <div style=" background: url('../Images/ProductListPageImages/category.jpg'); background-size: cover; height: 350px; ">
                 <div class="rwd-experience-header-main-container">
@@ -607,7 +593,7 @@
                     </div>
 
 
-                    <div class="destination-guide-button desktop" hidden>
+                    <div class="destination-guide-button desktop" >
                         <div class="destination-tips destination-guide-button_main">
                             <div class="overlay" id="overlay">
                                 <div class="popup">
@@ -617,41 +603,41 @@
                                         <div class="ChangeDestination.Destination">
                                             <div class="search-box-recommend_left">
                                                 <ul class="search-box-recommend_groups">
-                                                    <li>
+                                                    <li class="myMOUSE">
                                                         <b class="search-box-recommend_area">東亞</b>
                                                         <div class="search-box-recommend_cities">
                                                             <span>香港</span>
                                                             <span>台北</span>
                                                         </div>
                                                     </li>
-                                                    <li>
+                                                    <li class="myMOUSE">
                                                         <b class="search-box-recommend_area">東南亞</b>
                                                         <div class="search-box-recommend_cities">
                                                             <span>新加坡</span>
                                                         </div>
                                                     </li>
-                                                    <li>
+                                                    <li class="myMOUSE">
                                                         <b class="search-box-recommend_area">南亞/中東</b>
                                                         <div class="search-box-recommend_cities">
                                                             <span>加德滿都</span>
                                                             <span>杜拜</span>
                                                         </div>
                                                     </li>
-                                                    <li>
+                                                    <li class="myMOUSE">
                                                         <b class="search-box-recommend_area">大洋洲</b>
                                                         <div class="search-box-recommend_cities">
                                                             <span>雪梨</span>
                                                             <span>墨爾本</span>
                                                         </div>
                                                     </li>
-                                                    <li>
+                                                    <li class="myMOUSE">
                                                         <b class="search-box-recommend_area">歐洲</b>
                                                         <div class="search-box-recommend_cities">
                                                             <span>倫敦</span>
                                                             <span>巴黎</span>
                                                         </div>
                                                     </li>
-                                                    <li>
+                                                    <li class="myMOUSE">
                                                         <b class="search-box-recommend_area">北美洲</b>
                                                         <div class="search-box-recommend_cities">
                                                             <span>紐約</span>
