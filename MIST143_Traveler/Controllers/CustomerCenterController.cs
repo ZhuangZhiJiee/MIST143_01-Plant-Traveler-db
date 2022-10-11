@@ -14,7 +14,7 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult List()
         {
-            //PlanetTravelContext db = new PlanetTravelContext();
+            //PlanetTravelContext db = new PlanetTravelContext();//測試一下
 
             return View();
         }
