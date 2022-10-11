@@ -1,0 +1,608 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section Styles{
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+}
+<!-- 搜尋banner區 -->
+<section>
+    <div class="banner-bar">
+        <div class="banner-bar-search">
+            <h1>探索你的玩樂世界</h1>
+            <h3>找尋在地體驗或到遠方探險，隨時隨地探索屬於你的玩樂世界</h3>
+            <form class="banner-search">
+                <div class="banner-search-box">
+                    <span class="bi-search"></span>
+                    <input type="search"
+                           name=""
+                           id=""
+                           placeholder="探索全球目的地/活動" />
+                    <button type="button" onclick="location.href='@Url.Action("ProductListHomePage", "ProductListPage")'">搜尋</button>                    
+                    
+                </div>
+            </form>
+        </div>
+        <div id="carouselExampleControls"
+             class="carousel slide"
+             data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="@Url.Content("~/Images/banner01.jpg")"
+                         class="d-block w-100"
+                         alt="banner01" />
+                </div>
+                <div class="carousel-item">
+                    <img src="@Url.Content("~/Images/banner02.jpg")"
+                         class="d-block w-100"
+                         alt="banner02" />
+                </div>
+                @*<div class="carousel-item">
+                    <img src="@Url.Content("~/Images/banner03.jpg")"
+                         class="d-block w-100"
+                         alt="banner03" />
+                </div>*@
+            </div>
+            <button class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev"
+                    style="margin-left:-50px">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next"
+                     style="margin-right:-30px">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+<!-- 搜尋banner區 -->
+<!-- 優惠跑馬燈區 -->
+<section>
+    <div class="advertisement_slider_container">
+        <div class="discount_slider">
+            <div class="advertisement_slogan"><p>激省優惠瘋搶去</p></div>
+            <div class="Swiper_container">
+                <div class="swiper-button-prev1 arrow-left">
+                    <i class="bi bi-arrow-left-circle"></i>
+                </div>
+                <div class="swiper mySwiper container">
+                    <div class="swiper-wrapper content">
+                        <div class="swiper-slide card">
+                            <img src="~/Images/discount_AD_slider/discount_AD_slider01.jpg" />
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/discount_AD_slider/discount_AD_slider02.jpg" />
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/discount_AD_slider/discount_AD_slider03.jpg" />
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/discount_AD_slider/discount_AD_slider04.jpg" />
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/discount_AD_slider/discount_AD_slider05.jpg" />
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/discount_AD_slider/discount_AD_slider06.jpg" />
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/discount_AD_slider/discount_AD_slider07.jpg" />
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/discount_AD_slider/discount_AD_slider08.jpg" />
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next1 arrow-right">
+                    <i class="bi bi-arrow-right-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 優惠跑馬燈區  -->
+<!-- 選擇 星球旅遊 的理由  -->
+<section>
+    <div class="advertisement_slider_container">
+        <div class="discount_slider">
+            <div class="advertisement_slogan"><p>選擇星球旅遊的理由</p></div>
+            <div class="Swiper_container">
+                <div class="swiper container">
+                    <div class="row">
+                        <div class="col">
+                            <img src="~/Images/icons/travel.png" />
+                            <p class="slogan_CardTiltle">發掘玩樂靈感</p>
+                            <p>
+                                提供近50萬種吃喝玩樂、租車、住宿等體驗，帶你發現更好玩的世界
+                            </p>
+                        </div>
+                        <div class="col">
+                            <img src="~/Images/icons/sunrise.png" />
+                            <p class="slogan_CardTiltle">享優惠與回饋</p>
+                            <p>以優惠價享優質體驗，再賺 Planet 積分折抵下次消費</p>
+                        </div>
+                        <div class="col">
+                            <img src="~/Images/icons/destination.png" />
+                            <p class="slogan_CardTiltle">預訂簡單快速</p>
+                            <p>享極速預訂、免排隊入場、免費取消等服務，輕鬆玩，無負擔</p>
+                        </div>
+                        <div class="col">
+                            <img src="~/Images/icons/airplane.png" />
+                            <p class="slogan_CardTiltle">玩樂品質保證</p>
+                            <p>活動評價公開，專業客服團隊協助，安心出遊不踩雷</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 選擇 星球旅遊 的理由  -->
+<!-- 在地人這樣玩 -->
+<section>
+    <div class="advertisement_slider_container">
+        <div class="discount_slider">
+            <div class="advertisement_slogan"><p>在地人這樣玩</p></div>
+            <div class="Swiper_container">
+                <div class="swiper-button-prev2 arrow-left">
+                    <i class="bi bi-arrow-left-circle"></i>
+                </div>
+                <div class="swiper mySwiper2 container">
+                    <div class="swiper-wrapper content">
+                        <div class="swiper-slide card">
+                            <img src="~/Images/cards/card01.jpg"
+                                 class="card-img-top"
+                                 alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    台中多分店｜泰晶殿｜按摩券｜需電話預約
+                                </h5>
+                                <div class="card-context">
+                                    <span>★4.8</span><span>(491)</span><span>8k+人參加過</span>
+                                </div>
+                                <p class="btn btn-secondary">即時確認</p>
+                                <p class="card-text">NT$ 1,540起</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/cards/card02.jpg"
+                                 class="card-img-top"
+                                 alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    龜山島登島・賞鯨・環繞龜山島｜宜蘭龜山島半日遊
+                                </h5>
+                                <div class="card-context">
+                                    <span>★4.8</span><span>(491)</span><span>8k+人參加過</span>
+                                </div>
+                                <p class="btn btn-secondary">即時確認</p>
+                                <p class="card-text">NT$ 899起</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/cards/card03.jpg"
+                                 class="card-img-top"
+                                 alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    澎湖藍洞｜南方四島＆七美島＆藍洞一日遊
+                                </h5>
+                                <div class="card-context">
+                                    <span>★4.8</span><span>(491)</span><span>8k+人參加過</span>
+                                </div>
+                                <p class="btn btn-secondary">即時確認</p>
+                                <p class="card-text">NT$ 940起</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/cards/card04.jpg"
+                                 class="card-img-top"
+                                 alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">台北時代寓所</h5>
+                                <div class="card-context">
+                                    <span>★4.8</span><span>(491)</span><span>8k+人參加過</span>
+                                </div>
+                                <p class="btn btn-secondary">即時確認</p>
+                                <p class="card-text">NT$ 3,300起</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/cards/card05.jpg"
+                                 class="card-img-top"
+                                 alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    台北中山｜村之閣｜Spa按摩券｜捷運中山國小站｜需電話預約
+                                </h5>
+                                <div class="card-context">
+                                    <span>★4.8</span><span>(491)</span><span>8k+人參加過</span>
+                                </div>
+                                <p class="btn btn-secondary">即時確認</p>
+                                <p class="card-text">NT$ 1,286起</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/cards/card06.jpg"
+                                 class="card-img-top"
+                                 alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    【限時9折起】台北｜雙層餐車x台北W飯店WTaipei｜下午茶・晚間套餐
+                                </h5>
+                                <div class="card-context">
+                                    <span>★4.8</span><span>(491)</span><span>8k+人參加過</span>
+                                </div>
+                                <p class="btn btn-secondary">即時確認</p>
+                                <p class="card-text">NT$ 1,800起</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/cards/card07.jpg"
+                                 class="card-img-top"
+                                 alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    【限時優惠】台北寒舍艾美酒店｜探索廚房｜捷運市政府站
+                                </h5>
+                                <div class="card-context">
+                                    <span>★4.8</span><span>(491)</span><span>8k+人參加過</span>
+                                </div>
+                                <p class="btn btn-secondary">即時確認</p>
+                                <p class="card-text">NT$ 1,590起</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/cards/card08.jpg"
+                                 class="card-img-top"
+                                 alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    獨家｜宜蘭｜張美阿嬤農場｜水豚君・笑笑羊・梅花鹿・袋鼠・草泥馬｜門票・DIY遊程套票
+                                </h5>
+                                <div class="card-context">
+                                    <span>★4.8</span><span>(491)</span><span>8k+人參加過</span>
+                                </div>
+                                <p class="btn btn-secondary">即時確認</p>
+                                <p class="card-text">NT$ 200起</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/cards/card09.jpg"
+                                 class="card-img-top"
+                                 alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    【獨家開賣】NAGOMI 和食Buffet | 捷運中山站
+                                </h5>
+                                <div class="card-context">
+                                    <span>★4.8</span><span>(491)</span><span>8k+人參加過</span>
+                                </div>
+                                <p class="btn btn-secondary">即時確認</p>
+                                <p class="card-text">NT$ 1,408起</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card">
+                            <img src="~/Images/cards/card10.jpg"
+                                 class="card-img-top"
+                                 alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    【限時72折起】台北美福飯店｜彩匯自助餐廳｜捷運劍南路站
+                                </h5>
+                                <div class="card-context">
+                                    <span>★4.8</span><span>(491)</span><span>8k+人參加過</span>
+                                </div>
+                                <p class="btn btn-secondary">即時確認</p>
+                                <p class="card-text">NT$ 935起</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next2 arrow-right">
+                    <i class="bi bi-arrow-right-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slider-footer">
+        <button type="button" class="slider-footer-button">查看更多</button>
+    </div>
+</section>
+<!-- 在地人這樣玩 -->
+<!-- 熱門目的地區 -->
+<section>
+    <div class="advertisement_slider_container">
+        <div class="discount_slider">
+            <div class="advertisement_slogan"><p>熱門目的地</p></div>
+            <div class="Swiper_container">
+                <div class="swiper-button-prev3 arrow-left">
+                    <i class="bi bi-arrow-left-circle"></i>
+                </div>
+                <div class="swiper mySwiper3 container">
+                    <div class="swiper-wrapper content">
+                        <div class="swiper-slide card top_destinationCard">
+                            <img src="~/Images/top_destination/top_destination01.jpg" />
+                            <p>東京</p>
+                        </div>
+                        <div class="swiper-slide card top_destinationCard">
+                            <img src="~/Images/top_destination/top_destination02.jpg" />
+                            <p>台北</p>
+                        </div>
+                        <div class="swiper-slide card top_destinationCard">
+                            <img src="~/Images/top_destination/top_destination03.jpg" />
+                            <p>大阪</p>
+                        </div>
+                        <div class="swiper-slide card top_destinationCard">
+                            <img src="~/Images/top_destination/top_destination04.jpg" />
+                            <p>宜蘭</p>
+                        </div>
+                        <div class="swiper-slide card top_destinationCard">
+                            <img src="~/Images/top_destination/top_destination05.jpg" />
+                            <p>台南</p>
+                        </div>
+                        <div class="swiper-slide card top_destinationCard">
+                            <img src="~/Images/top_destination/top_destination06.jpg" />
+                            <p>台中</p>
+                        </div>
+                        <div class="swiper-slide card top_destinationCard">
+                            <img src="~/Images/top_destination/top_destination07.jpg" />
+                            <p>新加坡</p>
+                        </div>
+                        <div class="swiper-slide card top_destinationCard">
+                            <img src="~/Images/top_destination/top_destination08.jpg" />
+                            <p>首爾</p>
+                        </div>
+                        <div class="swiper-slide card top_destinationCard">
+                            <img src="~/Images/top_destination/top_destination09.jpg" />
+                            <p>香港</p>
+                        </div>
+                        <div class="swiper-slide card top_destinationCard">
+                            <img src="~/Images/top_destination/top_destination10.jpg" />
+                            <p>金門、馬祖</p>
+                        </div>
+                        <div class="swiper-slide card top_destinationCard">
+                            <img src="~/Images/top_destination/top_destination11.jpg" />
+                            <p>巴黎</p>
+                        </div>
+                        <div class="swiper-slide card top_destinationCard">
+                            <img src="~/Images/top_destination/top_destination12.jpg" />
+                            <p>峇里島</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next3 arrow-right">
+                    <i class="bi bi-arrow-right-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 熱門目的地區  -->
+<!-- 本月強檔報你知 -->
+<section>
+    <div class="advertisement_slider_container">
+        <div class="discount_slider">
+            <div class="advertisement_slogan"><p>本月強檔報你知</p></div>
+            <div class="Swiper_container">
+                <div class="swiper-button-prev4 arrow-left">
+                    <i class="bi bi-arrow-left-circle"></i>
+                </div>
+                <div class="swiper mySwiper4 container">
+                    <div class="swiper-wrapper content">
+                        <div class="swiper-slide card tier_card"
+                             style="
+                    background-image: url('@Url.Content("~/Images/TireListPic/TireListPic01.jpg")');
+                  ">
+                            <div class="tier_card_slogan">
+                                <span class="tier_card_slogan_title">星級度假時光</span>
+                                <span class="tier_card_slogan_context">五星飯店17折爽住！許你一段奢華放鬆的住宿享受</span>
+                            </div>
+                            <div class="tier_card_checkEvent">
+                                <span>查看活動</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card tier_card"
+                             style="
+                    background-image: url('@Url.Content("~/Images/TireListPic/TireListPic02.jpg")');
+                  ">
+                            <div class="tier_card_slogan">
+                                <span class="tier_card_slogan_title">秋天賞楓秘境</span>
+                                <span class="tier_card_slogan_context">2022秋季限定賞楓之旅</span>
+                            </div>
+                            <div class="tier_card_checkEvent">
+                                <span>查看活動</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card tier_card"
+                             style="
+                    background-image:url('@Url.Content("~/Images/TireListPic/TireListPic03.jpg")');
+                  ">
+                            <div class="tier_card_slogan">
+                                <span class="tier_card_slogan_title">初秋微涼泡湯早鳥價</span>
+                                <span class="tier_card_slogan_context">一起來約泡！秋冬暖湯，泡湯季開跑！湯屋、大眾湯囤貨好過冬！嚴選7家PTT溫泉飯店鄉民推薦湯屋！</span>
+                            </div>
+                            <div class="tier_card_checkEvent">
+                                <span>查看活動</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card tier_card"
+                             style="
+                    background-image:url('@Url.Content("~/Images/TireListPic/TireListPic04.jpg")');
+                  ">
+                            <div class="tier_card_slogan">
+                                <span class="tier_card_slogan_title">秋高氣爽早鳥露營75折起</span>
+                                <span class="tier_card_slogan_context">夏日正好，相約露營趣！全台20大免裝備露營，帶你無憂徜徉山海景</span>
+                            </div>
+                            <div class="tier_card_checkEvent">
+                                <span>查看活動</span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide card tier_card"
+                             style="
+                    background-image: url('@Url.Content("~/Images/TireListPic/TireListPic05.jpg")');
+                  ">
+                            <div class="tier_card_slogan">
+                                <span class="tier_card_slogan_title">美食專區推薦</span>
+                                <span class="tier_card_slogan_context">5折起爽吃！全台知名人氣餐廳懶人包</span>
+                            </div>
+                            <div class="tier_card_checkEvent">
+                                <span>查看活動</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next4 arrow-right">
+                    <i class="bi bi-arrow-right-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 本月強檔報你知 -->
+<!-- 星球旅遊入門攻略 -->
+<section>
+    <div class="advertisement_slider_container">
+        <div class="discount_slider">
+            <div class="advertisement_slogan">
+                <p>星球旅遊入門攻略</p>
+                <img style="width: 95%; border-radius: 15px"
+                     src="~/Images/APP_banner01.jpg" />
+            </div>
+            <div class="app_card_container">
+                <div class="app_card">
+                    <div class="app_card_img">
+                        <img src="~/Images/app_pic03.png" />
+                    </div>
+                    <div class="app_card_title">星球旅遊部落格</div>
+                    <div class="app_card_text">
+                        <p>最新旅遊情報大公開！景點行程、住宿交通懶人包一次看！</p>
+                    </div>
+                    <div class="app_card_button">
+                        <button class="btn btn-secondary">查看攻略</button>
+                    </div>
+                </div>
+                <div class="app_card">
+                    <div class="app_card_img">
+                        <img src="~/Images/app_pic02.png" />
+                    </div>
+                    <div class="app_card_title">寫評價賺積分</div>
+                    <div class="app_card_text">
+                        <p>完成活動、留下評價賺取 星球旅遊 積分，輕鬆折抵下次消費。</p>
+                    </div>
+                    <div class="app_card_button">
+                        <button class="btn btn-secondary">查看攻略</button>
+                    </div>
+                </div>
+                <div class="app_card">
+                    <div class="app_card_img">
+                        <img src="~/Images/app_pic01.png" />
+                    </div>
+                    <div class="app_card_title">揪好友拿好康</div>
+                    <div class="app_card_text">
+                        <p>
+                            好友註冊並完成活動後，你將獲得NT$100獎勵。立即揪好友拿好康！
+                        </p>
+                    </div>
+                    <div class="app_card_button">
+                        <button class="btn btn-secondary">查看攻略</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 星球旅遊入門攻略 -->
+<!-- 合作夥伴 -->
+<section>
+    <div class="advertisement_slider_container">
+        <div class="discount_slider">
+            <div class="advertisement_slogan">
+                <p>合作夥伴</p>
+            </div>
+            <div class="partner_contaoner">
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_shangrila_cn-2b6ae9.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_airasia_tw-156c4e.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_reserve_google-8cca20.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_disney-eb8c85.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_bigbus-9b2642.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_railpass-8825f0.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_line_travel-a0f3ca.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_shopback-083204.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_hkexpress-41f296.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_star_logo-49b185.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_china_airlines-768abc.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_starlux-2f59c8.png" />
+                </a>
+            </div>
+            <div class="border-bottom-line" style="margin: 40px 0"></div>
+            <div class="advertisement_slogan">
+                <p>媒體報導</p>
+            </div>
+            <div class="partner_contaoner">
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_tx-188833.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_business_weekly-9fd6d9.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_apple_daily-54103d.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_ming_pao-ab5765.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_swsd-296715.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_techcrunch-75f1ae.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_cnbc-59625a.png" />
+                </a>
+                <a href="#" class="partner_icon">
+                    <img src="https://cdn.klook.com/s/dist_web/platform/dist_web/img/i_wsj2-283df4.png" />
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 合作夥伴 -->
+<!-- 熱門推薦(#todo_list) -->
+<!-- 熱門推薦(#todo_list) -->
+@section Scripts{
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="~/js/travelIndex.js"></script>
+}

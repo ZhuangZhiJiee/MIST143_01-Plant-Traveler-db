@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "Forgetpas";
+}
+@section Styles{
+
+}
+<link href="~/css/忘記密碼頁.css"  rel="stylesheet" />
+
+<body>
+    <div class="container col-6 text-center p-5 下邊界">
+        <div>
+            <h2 class="p3">重設密碼</h2>
+            <p class="小字體">輸入你用以創建Star帳號的電郵地址，我們會發送重設密碼的連結</p>
+            <div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="電子郵件地址" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-warning 按鈕顏色" type="button" id="send">送出</button>
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</body>
+
+<script>
+    let send = document.querySelector("#send");
+    send.addEventListener("click", () => {
+        alert("信件已送出，請查收")
+    })
+
+</script>

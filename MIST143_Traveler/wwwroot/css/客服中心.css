@@ -1,0 +1,28 @@
+.mm
+{display: flex;
+justify-content: center;
+}
+/*.mm img{
+    width: 80%;
+}*/
+.card{
+border: 0px;
+align-items: center;
+}
+.list-group-item-action{
+    align-items: center;
+    border: 0px;
+}
+.btn-warning{
+    color: white;
+}
+.ccc{
+    background-color: coral;
+    border-color: coral;
+}
+.c{
+    color: coral;
+}
+.ด๚ธี {
+    font-family: 'Noto Sans TC', sans-serif;
+}

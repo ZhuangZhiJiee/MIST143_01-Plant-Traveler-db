@@ -1,0 +1,30 @@
+/*.card img{
+    width: 48px;
+    height: 48PX;
+     display: flex; 
+    align-items: center;
+    
+}*/
+.search_area{
+    padding: 60px 0;
+}
+.search_area_contant{
+    margin: 0 auto;
+    width: 1040px;
+}
+
+
+.textmm{
+    margin-bottom: 50px;
+    font-size: 30px;
+}
+.form-control{
+    display: inline;
+    width: 70%;
+}
+a{
+    text-decoration:none;
+}
+.accordion-item{
+  border: aqua;
+}

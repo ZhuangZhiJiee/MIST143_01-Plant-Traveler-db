@@ -1,0 +1,19 @@
+﻿.小字體 {
+
+    font-size:14px;
+    color:grey;
+    margin-top:6px;
+    margin-bottom:30px;
+}
+.按鈕顏色 {
+    color: #ffffff;
+    background-color: #FF5B00;
+    border: 1px solid #FF5B00;
+    min-width: 160px;
+    align-items: center
+}
+
+.下邊界 {
+
+    margin-bottom:400px;
+}

@@ -1,0 +1,65 @@
+﻿.訂單內容物 {
+    text-align: center ;
+    display: block;
+    padding: 32px 16px;
+}
+.找不到靈感 {
+    font-size: 14px;
+    line-height: 1.44;
+    font-weight: 400;
+    margin-top: 8px;
+    color: #757575;
+}
+.還沒下單 {
+    font-size: 18px;
+    line-height: 1.44;
+    font-weight: 600;
+    margin-top: 24px;
+    color: #757575;
+}
+.人氣推薦 {
+    margin-bottom: 26px;
+}
+.按鈕顏色 {
+    color: #ffffff;
+    background-color: #FF5B00;
+    border: 1px solid #FF5B00;
+    min-width: 160px;
+    align-items:center
+}
+.按鈕間隔 {
+    margin: 19px -5px -5px;
+}
+.查看詳情 {
+    color: #212121;
+    background-color: transparent;
+    border: 1px solid #4a4a4a;
+    min-width: 160px;
+}
+
+.mborder {
+    background-image: url(https://res.klook.com/image/upload/q_80/v1638331463/wave_line_green_2x_updated_ymgpew.png);
+    height: 8px;
+    background-size: 100% 100%;
+    top: -1px;
+    width: 285px;
+    font-size:1px;
+}
+.按鈕顏色2 {
+    
+   color:black;
+    border: none;
+    min-width: 275px;
+    align-items: center
+}
+
+.小圖示{
+margin-right:10px;
+width:24px;
+height:24px;
+font-size:24px;
+}
+.上面空間{
+    margin-top:40px;
+    margin-bottom:20px;
+}

@@ -1,0 +1,93 @@
+﻿    *{
+        margin:0;
+        padding:0;
+
+        /*border:1px red solid;*/
+     }
+.分類 {
+    margin-top: 10px;
+    position:relative;
+}
+ .標題{
+        width:900px;
+ }
+.卡片 {
+    position:absolute;
+    right:0;
+    width: 290px;
+    top: 20px;
+    }
+
+.最大的 {
+    width: 1200px;
+}
+.照片的包皮 {
+    width: 100%
+}
+.評價 {
+    display: flex;
+    width: 870px;
+    position: relative;
+}
+.評價 span{
+  color:#ff6a00;
+}
+.一條根 {
+    border: 3px #ff6a00 solid;
+    border-radius: 20px;
+    font-size:25px;
+    background-color: #ff6a00;
+}
+
+.方案選擇{
+    width:250px;
+}
+.小介紹{
+    width:850px;
+}
+.下圖{
+    margin:10px 0;
+    width:850px;
+    height:400px;
+   border-radius:10px;
+}
+.下圖小字{
+    font-size:10px;
+    margin-top:2px;
+}
+.圓形 {
+    border: 6px #808080 solid;
+    border-radius: 100%;
+   width:2px;
+   height:2px;
+}
+.下面一包{
+    width:900px;
+}
+.評論 {
+    width: 900px;
+    position:relative;
+    
+}
+.活動DIV {
+    margin: 25px 0;
+}
+.活動DIV h2 span{
+    margin-left: 10px;
+    font-family:微軟正黑體;
+    font-size:30px;
+    font-weight:bold;
+}
+.小介紹{
+    width:900px;
+}
+
+.我的最愛 {
+    display: inline-flex;
+    position: absolute;
+    right: 0;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+

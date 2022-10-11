@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Coupon";
+}
+
+
+
+<link href="~/css/客服中心.css" rel="stylesheet" />
+<link href="~/css/客戶中心訂單內容物.css" rel="stylesheet" />
+
+<body>
+    <div class="col-12 上面空間">
+        <h3>優惠券</h3>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="請輸入優惠碼" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-warning 按鈕顏色" type="button" id="button-addon2">兌換</button>
+        </div>
+        <div class="container row row-2">
+            <div class="card bg-success text-white mb-3" style="max-width: 18rem;">@*//設定一個ID準備存入優惠券位置*@
+                <div class="card-header"><h3>500元</h3></div>
+                <div class="card-body">
+                    <h5 class="card-title">加入會員優惠券</h5>
+                    <p class="card-text">折抵條件:消費1000元</p>
+                    <p class="card-text">到期日期:2023/6/14</p>
+                </div>
+                <div class="mborder"></div>
+            </div>
+            <div class="col-6">
+                <div class="card bg-success text-white mb-3" style="max-width: 18rem;">
+                    <div class="card-header"><h3>300元</h3></div>
+                    <div class="card-body">
+                        <h5 class="card-title">春節優惠券</h5>
+                        <p class="card-text">折抵條件:消費1000元</p>
+                        <p class="card-text">到期日期:2023/6/14</p>
+                    </div>
+                    <div class="mborder"></div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

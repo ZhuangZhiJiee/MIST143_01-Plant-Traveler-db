@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "CustomerInfo";
+}
+@section Styles{
+
+}
+
+<link href="~/css/客服中心.css" rel="stylesheet" />
+<link href="~/css/客戶中心訂單內容物.css" rel="stylesheet" />
+
+<div class="row row-cols-1">
+    <div class="col 上面空間">
+        <h3>個人資訊</h3>
+        <p>以下資訊僅用於幫助你在付款時自動填寫你的個人資料，你的資料將會安全地保存且不會公開</p>
+    </div>
+    <div class="box_body d-flex  mb-2">
+        <div class="inputs p-2 flex-fill">
+            <header>姓氏</header>
+            <input class="form-control" type="text" placeholder="姓氏" aria-label="default input example">
+        </div>
+
+        <div class="inputs p-2 flex-fill">
+            <header>名稱</header>
+            <input class="form-control" type="text" placeholder="名稱" aria-label="default input example">
+        </div>
+    </div>
+
+    <div class="box_body d-flex  mb-2">
+        <div class="inputs p-2 flex-fill">
+            <header>EMAIL</header>
+            <input class="form-control" type="text" placeholder="123" aria-label="default input example">
+        </div>
+
+        <div class="inputs p-2 flex-fill">
+            <header>聯繫電話</header>
+            <input class="form-control" type="text" placeholder="PHONE" aria-label="default input example">
+        </div>
+    </div>
+
+    <div class="box_body d-flex  mb-2">
+        <div class="inputs p-2 ">
+            <header>居住縣市</header>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>台北市</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+        <div class="inputs p-2 ">
+            <header>居住區域</header>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>大安區</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+
+        <div class="inputs p-2 flex-grow-1">
+            <header>地址</header>
+            <input class="form-control" type="text" placeholder="北投區111號" aria-label="default input example">
+        </div>
+    </div>
+
+    <div class="box_body d-flex  mb-2">
+        <div class="inputs p-2 flex-fill">
+            <header>重設密碼</header>
+            <input class="form-control" type="text" placeholder="password" aria-label="default input example">
+        </div>
+
+        <div class="inputs p-2 flex-fill">
+            <header>再次確認密碼</header>
+            <input class="form-control" type="text" placeholder="password" aria-label="default input example">
+        </div>
+    </div>
+
+    <div class="d-flex mb-3">
+        <div class="me-auto p-2">
+            <button type="button" class="btn btn-warning 按鈕顏色" id="send">儲存</button>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    const send = document.querySelector("#send");
+    send.addEventListener("click", () => {
+        alert("您的變更已儲存")
+    })
+
+
+</script>
+

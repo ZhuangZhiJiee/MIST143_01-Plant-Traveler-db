@@ -1,0 +1,727 @@
+﻿
+@{
+    ViewData["Title"] = "ProductListHomePage";
+}
+@section Styles{
+    <link href="@Url.Content("~/css/ProductListPage.css")" rel="stylesheet" />
+}
+
+<body>
+    <script>
+        function OpenModal() {
+            $('#overlay').show();
+        }
+        function CloseModal() {
+            $('#overlay').hide();
+        }
+
+        $(document).ready(function () {
+            $("#type li").hover(function () { $(this).addClass("active") }, function () { $(this).removeClass("active") })
+        })
+
+    </script>
+    <article>
+        <ul id=menu style="margin-right:150px">
+            <li>
+                <figure class="figd">
+                    <video src="../Images/ProductListPageImages/煩死你.mp4" autoplay width="300" preload="auto" controls loop>
+                    </video>
+                    <a href="https://www.youtube.com/watch?v=61N5ltbDGiA">
+                        <p style="width:200px">你知道這是什麼嗎?</p>
+                    </a>
+
+                </figure>
+            </li>
+        </ul>
+        <div class="article-test">
+            <div style=" background: url('../Images/ProductListPageImages/category.jpg'); background-size: cover; height: 350px; ">
+                <div class="rwd-experience-header-main-container">
+                    <div class="rwd-header-container">
+                        <div class="experience-title-and-location-button">
+                            <div class="experiences-title">
+                                <span class="experiences-title-text">玩樂</span>
+                            </div>
+                            <h1 class="experiences-tips">
+                                探索景點、行程等
+                            </h1>
+                            <div class="location-select-button desktop">
+                                <div class="location-select-button_main">
+                                    <div class="location-select-button_main-select">
+                                        <div>
+                                            <img src="../Images/ProductListPageImages/maps.jpg" class="svg-icon">
+                                            <span class="experiences-title-text">世界各地</span>
+                                            <img src="../Images/ProductListPageImages/down.jpg" class="svg-icon">
+                                        </div>
+                                    </div>
+                                    <div class="destination-tips-popup-new">
+                                        <div class="destination-tips-new">
+                                            <span class="destination-tips_title">想尋找<span style="color:#FF5B00;font-weight:bold;">台灣</span>人氣玩樂？</span><div class="destination-tips_buttons">
+                                                <button data-v-0eaa3c40="" type="button" class="destination-tips_link klk-button klk-button-primary klk-button-mini">
+                                                    <!----> <!----> <span>
+                                                        Go
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="header-search-box-desktop rwd-header-search-box-desktop">
+                            <label class="input-box" width="622" height="54">
+                                <img src="../Images/ProductListPageImages/search.jpg" />
+                                <input type="text" placeholder="想去哪裡玩?" size="80" style="border-style:none" class="js-experience-search-input js-all-search-input-active" />
+                                <button type="button" onclick="location.href='@Url.Action("ProductListHomePage", "ProductListPage")'" class="search klk-button klk-button-primary">
+                                    <span>
+                                        搜尋
+                                    </span>
+                                </button>
+                            </label>
+                            <div class="search-suggest-container"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div>
+                <div class="expend_test">
+
+                    <div class="expend_test">
+
+
+                    </div>
+                </div>
+
+                <div>
+                    <div class="asdqwr">
+                        <div class="card" style="width: 148px;height:117px;">
+                            <div class="cardsize">
+                                <img src="../Images/ProductListPageImages/icon_all.jpg" class="cardimg-top" alt="...">
+                                <span class="experience-menu-name">總覽</span>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 148px;height:117px;">
+                            <div class="cardsize">
+                                <img src="../Images/ProductListPageImages/icon_theme_water_parks.jpg" class="cardimg-top" alt="...">
+                                <span class="experience-menu-name">樂園</span>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 148px;height:117px;">
+                            <div class="cardsize">
+                                <img src="../Images/ProductListPageImages/icon_camping_glamping.jpg" class="cardimg-top" alt="...">
+                                <span class="experience-menu-name">露營</span>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 148px;height:117px;">
+                            <div class="cardsize">
+                                <img src="../Images/ProductListPageImages/icon_boat_tours_cruises_yachts.jpg" class="cardimg-top" alt="...">
+                                <span class="experience-menu-name">觀光</span>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 148px;height:117px;">
+                            <div class="cardsize">
+                                <img src="../Images/ProductListPageImages/icon_museums_exhibitions.jpg" class="cardimg-top" alt="...">
+                                <span class="experience-menu-name">藝術</span>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 148px;height:117px;">
+                            <div class="cardsize">
+                                <img src="../Images/ProductListPageImages/icon_spa_massages.jpg" class="cardimg-top" alt="...">
+                                <span class="experience-menu-name">SPA</span>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 148px;height:117px;">
+                            <div class="cardsize">
+                                <img src="../Images/ProductListPageImages/icon_thrill_seeking_activities.jpg" class="cardimg-top" alt="...">
+                                <span class="experience-menu-name">運動</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience-activity-card-section j-experience-activity-card-section desktop">
+                    <div class="asdqwr">
+                        <div class="card" style="background: url('../Images/ProductListPageImages/country_taiwan.jpg'); background-size: cover;">
+                            <div class="card-img">
+                                <div class="title">
+                                    <a>台灣</a>
+                                </div>
+                                <div class="explore">
+                                    <span>探索 ></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="">
+                            <img class="card-img-top" src="../Images/ProductListPageImages/landscape_101.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <a href="https://localhost:44302/ProductPage/Index">
+                                    <h3 class="activity-card-title">
+                                        【領券現折100】Klook獨家優惠｜台北101觀景台門票｜萬聖節搗蛋派對｜高空Sky Lounge百萬夜景
+                                    </h3>
+                                </a>
+                                <div class="page-activity-recommend-score">
+                                    <span class="page-activity-recommend-score-number">
+                                        <svg width="12" height="12" class="svg-icon"></svg>
+                                        <span class="score-rate">4.7</span>
+                                    </span>
+                                    <span class="page-activity-recommend-review-number">
+                                        (
+                                        <span class="review-number">30K+ 則評價</span>
+                                        )
+                                    </span>
+                                </div>
+                                <div class="activity-card-bottom">
+                                    <div>
+                                        <div class="activity-card-price-box home-activity-card_price small-card">
+                                            <span class="activity-card-price-box__sell-price dynamic-width-price">NT$300</span>
+                                            <span class="activity-card-price-box__underline-price dynamic-width-price">NT$600</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tagging-wrap bottom-tag small-style">
+                                    <div class="tagging-box">
+                                        <div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                                            <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card" style="">
+                            <img class="card-img-top" src="../Images/ProductListPageImages/landscape_bskoc8tnkvymafbwpvvg.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h3 class="activity-card-title">
+                                    屏東｜墾丁 鹿境梅花鹿生態園區｜門票｜指定方案贈統一超商虛擬商品卡抵用金100元
+                                </h3>
+                                <div class="page-activity-recommend-score">
+                                    <span class="page-activity-recommend-score-number">
+                                        <svg width="12" height="12" class="svg-icon"></svg>
+                                        <span class="score-rate">4.7</span>
+                                    </span>
+                                    <span class="page-activity-recommend-review-number">
+                                        (
+                                        <span class="review-number">6,222 則評價</span>
+                                        )
+                                    </span>
+                                </div>
+                                <div class="activity-card-bottom">
+                                    <div>
+                                        <div class="activity-card-price-box home-activity-card_price small-card">
+                                            <span class="activity-card-price-box__sell-price dynamic-width-price">NT$185</span>
+                                            <span class="activity-card-price-box__underline-price dynamic-width-price">NT$200</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tagging-wrap bottom-tag small-style">
+                                    <div class="tagging-box">
+                                        <div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                                            <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card" style="">
+                            <img class="card-img-top" src="../Images/ProductListPageImages/landscape_frvcre680l3ett2xxspa.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h3 class="activity-card-title">
+                                    【即買即用】花蓮｜遠雄海洋公園｜門票・餐點套票｜指定方案贈統一超商虛擬商品卡抵用金100元
+                                </h3>
+                                <div class="page-activity-recommend-score">
+                                    <span class="page-activity-recommend-score-number">
+                                        <svg width="12" height="12" class="svg-icon"></svg>
+                                        <span class="score-rate">4.8</span>
+                                    </span>
+                                    <span class="page-activity-recommend-review-number">
+                                        (
+                                        <span class="review-number">4069 則評價</span>
+                                        )
+                                    </span>
+                                </div>
+                                <div class="activity-card-bottom">
+                                    <div>
+                                        <div class="activity-card-price-box home-activity-card_price small-card">
+                                            <span class="activity-card-price-box__sell-price dynamic-width-price">
+                                                NT$ 1,560
+                                            </span>
+                                            <span class="activity-card-price-box__underline-price dynamic-width-price">
+                                                NT$ 1,580
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tagging-wrap bottom-tag small-style">
+                                    <div class="tagging-box">
+                                        <div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                                            <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card" style="">
+                            <img class="card-img-top" src="../Images/ProductListPageImages/landscape_jxd7k5wsyex8xtlmpoc0.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h3 class="activity-card-title">
+                                    嘉義｜阿里山國家森林遊樂區｜門票・套票（台灣籍限定）｜指定方案贈統一超商虛擬商品卡抵用金100元
+                                </h3>
+                                <div class="page-activity-recommend-score">
+                                    <span class="page-activity-recommend-score-number">
+                                        <svg width="12" height="12" class="svg-icon"></svg>
+                                        <span class="score-rate">4.8</span>
+                                    </span>
+                                    <span class="page-activity-recommend-review-number">
+                                        (
+                                        <span class="review-number">1874 則評價</span>
+                                        )
+                                    </span>
+                                </div>
+                                <div class="activity-card-bottom">
+                                    <div>
+                                        <div class="activity-card-price-box home-activity-card_price small-card">
+                                            <span class="activity-card-price-box__sell-price dynamic-width-price">NT$200</span>
+                                            <span class="activity-card-price-box__underline-price dynamic-width-price">NT$300</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tagging-wrap bottom-tag small-style">
+                                    <div class="tagging-box">
+                                        <div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                                            <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="asdqwr">
+                        <div class="card" style="background: url('../Images/ProductListPageImages/country_uh0bj6hri28y3r8dmudf.jpg'); background-size: cover; ">
+                            <div class="card-img">
+                                <div class="title">
+                                    <a>日本</a>
+                                </div>
+                                <div class="explore">
+                                    <span>探索 ></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="">
+                            <img class="card-img-top" src="../Images/ProductListPageImages/landscape_kpqk30edg6vmvjkjbjgp.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h3 class="activity-card-title">
+                                    日本環球影城門票
+                                </h3>
+                                <br />
+                                <div class="page-activity-recommend-score">
+                                    <span class="page-activity-recommend-score-number">
+                                        <svg width="12" height="12" class="svg-icon"></svg>
+                                        <span class="score-rate">4.8</span>
+                                    </span>
+                                    <span class="page-activity-recommend-review-number">
+                                        (
+                                        <span class="review-number">5,555 則評價</span>
+                                        )
+                                    </span>
+                                </div>
+                                <div class="activity-card-bottom">
+                                    <div>
+                                        <div class="activity-card-price-box home-activity-card_price small-card">
+                                            <span class="activity-card-price-box__sell-price dynamic-width-price">NT$1833</span>
+                                            @*<span class="activity-card-price-box__underline-price dynamic-width-price">NT$600</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="tagging-wrap bottom-tag small-style">
+                                        <div class="tagging-box">
+                                            <div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                                                <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                            </div>
+
+                        </div>
+                        <div class="card" style="">
+                            <img class="card-img-top" src="../Images/ProductListPageImages/landscape_hi97iw5mnrarneohire2.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h3 class="activity-card-title">
+                                    東京迪士尼度假區一日護照
+                                </h3>
+                                <div class="page-activity-recommend-score">
+                                    <span class="page-activity-recommend-score-number">
+                                        <svg width="12" height="12" class="svg-icon"></svg>
+                                        <span class="score-rate">4.8</span>
+                                    </span>
+                                    <span class="page-activity-recommend-review-number">
+                                        (
+                                        <span class="review-number">9147 則評價</span>
+                                        )
+                                    </span>
+                                </div>
+                                <div class="activity-card-bottom">
+                                    <div>
+                                        <div class="activity-card-price-box home-activity-card_price small-card">
+                                            <span class="activity-card-price-box__sell-price dynamic-width-price">NT$1833</span>
+                                            @*<span class="activity-card-price-box__underline-price dynamic-width-price">NT$600</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="tagging-wrap bottom-tag small-style">
+                                        <div class="tagging-box">
+                                            <div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                                                <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                            </div>
+                        </div>
+                        <div class="card" style="">
+                            <img class="card-img-top" src="../Images/ProductListPageImages/landscape_xzckg1iq60tcpszvmjya.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h3 class="activity-card-title">
+                                    【獨家優惠】東京豐洲 teamLab Planets TOKYO 門票
+                                </h3>
+                                <div class="page-activity-recommend-score">
+                                    <span class="page-activity-recommend-score-number">
+                                        <svg width="12" height="12" class="svg-icon"></svg>
+                                        <span class="score-rate">4.7</span>
+                                    </span>
+                                    <span class="page-activity-recommend-review-number">
+                                        (
+                                        <span class="review-number">1290 則評價</span>
+                                        )
+                                    </span>
+                                </div>
+                                <div class="activity-card-bottom">
+                                    <div>
+                                        <div class="activity-card-price-box home-activity-card_price small-card">
+                                            <span class="activity-card-price-box__sell-price dynamic-width-price">NT$698</span>
+                                            @*<span class="activity-card-price-box__underline-price dynamic-width-price">NT$600</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tagging-wrap bottom-tag small-style">
+                                    <div class="tagging-box">
+                                        <div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                                            <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card" style="">
+                            <img class="card-img-top" src="../Images/ProductListPageImages/landscape_kpqk30edg6vmvjkjbjgp.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h3 class="activity-card-title">
+                                    日本環球影城 Express Pass 快速通關券7
+                                </h3>
+                                <div class="page-activity-recommend-score">
+                                    <span class="page-activity-recommend-score-number">
+                                        <svg width="12" height="12" class="svg-icon"></svg>
+                                        <span class="score-rate">4.8</span>
+                                    </span>
+                                    <span class="page-activity-recommend-review-number">
+                                        (
+                                        <span class="review-number">3929 則評價</span>
+                                        )
+                                    </span>
+                                </div>
+                                <div class="activity-card-bottom">
+                                    <div>
+                                        <div class="activity-card-price-box home-activity-card_price small-card">
+                                            <span class="activity-card-price-box__sell-price dynamic-width-price">NT$2357</span>
+                                            @*<span class="activity-card-price-box__underline-price dynamic-width-price">NT$600</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="tagging-wrap bottom-tag small-style">
+                                        <div class="tagging-box">
+                                            <div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                                                <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="asdqwr">
+                        <div class="card" style="background: url('../Images/ProductListPageImages/country_kdvtctis9mh7ticu01ji.jpg'); background-size: cover; ">
+                            <div class="card-img">
+                                <div class="title">
+                                    <a>美國</a>
+                                </div>
+                                <div class="explore">
+                                    <span>探索 ></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="">
+                            <img class="card-img-top" src="../Images/ProductListPageImages/landscape_zq2dtc7izos2pqdokgog.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h3 class="activity-card-title">
+                                    加州迪士尼樂園＆迪士尼加州冒險樂園門票
+                                </h3>
+                                <div class="page-activity-recommend-score">
+                                    <span class="page-activity-recommend-score-number">
+                                        <svg width="12" height="12" class="svg-icon"></svg>
+                                        <span class="score-rate">4.9</span>
+                                    </span>
+                                    <span class="page-activity-recommend-review-number">
+                                        (
+                                        <span class="review-number">3548 則評價</span>
+                                        )
+                                    </span>
+                                </div>
+                                <div class="activity-card-bottom">
+                                    <div>
+                                        <div class="activity-card-price-box home-activity-card_price small-card">
+                                            <span class="activity-card-price-box__sell-price dynamic-width-price">NT$3414</span>
+                                            <span class="activity-card-price-box__underline-price dynamic-width-price">NT$3615</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="tagging-wrap bottom-tag small-style">
+                                        <div class="tagging-box">
+                                            <div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                                                <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                            </div>
+
+                        </div>
+                        <div class="card" style="">
+                            <img class="card-img-top" src="../Images/ProductListPageImages/landscape_mempqbckk4axnidjycqu.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h3 class="activity-card-title">
+                                    聖地亞哥海洋世界門票
+                                </h3>
+                                <br />
+                                <div class="page-activity-recommend-score">
+                                    <span class="page-activity-recommend-score-number">
+                                        <svg width="12" height="12" class="svg-icon"></svg>
+                                        <span class="score-rate">4.7</span>
+                                    </span>
+                                    <span class="page-activity-recommend-review-number">
+                                        (
+                                        <span class="review-number">564 則評價</span>
+                                        )
+                                    </span>
+                                </div>
+                                <div class="activity-card-bottom">
+                                    <div>
+                                        <div class="activity-card-price-box home-activity-card_price small-card">
+                                            <span class="activity-card-price-box__sell-price dynamic-width-price">NT$2457</span>
+                                            <span class="activity-card-price-box__underline-price dynamic-width-price">NT$3043</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tagging-wrap bottom-tag small-style">
+                                    <div class="tagging-box">
+                                        <div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                                            <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card" style="">
+                            <img class="card-img-top" src="../Images/ProductListPageImages/landscape_mmai0x6awiozechow3kj.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h3 class="activity-card-title">
+                                    惠特尼美國藝術博物館門票
+                                </h3>
+                                <div class="page-activity-recommend-score">
+                                    <span class="page-activity-recommend-score-number">
+                                        <svg width="12" height="12" class="svg-icon"></svg>
+                                        <span class="score-rate">4.6</span>
+                                    </span>
+                                    <span class="page-activity-recommend-review-number">
+                                        (
+                                        <span class="review-number">36 則評價</span>
+                                        )
+                                    </span>
+                                </div>
+                                <div class="activity-card-bottom">
+                                    <div>
+                                        <div class="activity-card-price-box home-activity-card_price small-card">
+                                            <span class="activity-card-price-box__sell-price dynamic-width-price">NT$594</span>
+                                            <span class="activity-card-price-box__underline-price dynamic-width-price">NT$793</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tagging-wrap bottom-tag small-style">
+                                    <div class="tagging-box">
+                                        <div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                                            <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card" style="">
+                            <img class="card-img-top" src="../Images/ProductListPageImages/landscape_u3e0wvtbkd9jnevkcarf.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h3 class="activity-card-title">
+                                    紐約范德堡一號大樓 SUMMIT
+                                </h3>
+                                <div class="page-activity-recommend-score">
+                                    <span class="page-activity-recommend-score-number">
+                                        <svg width="12" height="12" class="svg-icon"></svg>
+                                        <span class="score-rate">4.9</span>
+                                    </span>
+                                    <span class="page-activity-recommend-review-number">
+                                        (
+                                        <span class="review-number">22 則評價</span>
+                                        )
+                                    </span>
+                                    <br />
+                                </div>
+                                <div class="activity-card-bottom">
+                                    <div>
+                                        <div class="activity-card-price-box home-activity-card_price small-card">
+                                            <span class="activity-card-price-box__sell-price dynamic-width-price">NT$1346</span>
+                                            @*<span class="activity-card-price-box__underline-price dynamic-width-price">NT$</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<div class="tagging-wrap bottom-tag small-style">
+                                        <div class="tagging-box">
+                                            <div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                                                <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="destination-guide-button desktop" hidden>
+                        <div class="destination-tips destination-guide-button_main">
+                            <div class="overlay" id="overlay">
+                                <div class="popup">
+                                    <div onclick="CloseModal()" class="CloseIcon">&#10006;</div>
+                                    <input placeholder="想去哪自己找" type="text" class="destination-search-input">
+                                    <div class="search-box-recommend search-box-recommend">
+                                        <div class="ChangeDestination.Destination">
+                                            <div class="search-box-recommend_left">
+                                                <ul class="search-box-recommend_groups">
+                                                    <li>
+                                                        <b class="search-box-recommend_area">東亞</b>
+                                                        <div class="search-box-recommend_cities">
+                                                            <span>香港</span>
+                                                            <span>台北</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <b class="search-box-recommend_area">東南亞</b>
+                                                        <div class="search-box-recommend_cities">
+                                                            <span>新加坡</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <b class="search-box-recommend_area">南亞/中東</b>
+                                                        <div class="search-box-recommend_cities">
+                                                            <span>加德滿都</span>
+                                                            <span>杜拜</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <b class="search-box-recommend_area">大洋洲</b>
+                                                        <div class="search-box-recommend_cities">
+                                                            <span>雪梨</span>
+                                                            <span>墨爾本</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <b class="search-box-recommend_area">歐洲</b>
+                                                        <div class="search-box-recommend_cities">
+                                                            <span>倫敦</span>
+                                                            <span>巴黎</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <b class="search-box-recommend_area">北美洲</b>
+                                                        <div class="search-box-recommend_cities">
+                                                            <span>紐約</span>
+                                                            <span>洛杉磯</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="search-box-recommend_right">
+                                                <div class="area-selector">
+                                                    <div class="area-selector_label">國家</div>
+                                                    <ul class="area-selector_list">
+                                                        <li class="poli">
+                                                            <b class="area-selector_country">
+                                                                <a class="vofk">香港&澳門</a>
+                                                            </b>
+                                                            <div class="area-selector_cities">
+                                                                <a>香港</a>
+                                                                <a>澳門</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="area-selector_list">
+                                                        <li class="poli">
+                                                            <b class="area-selector_country">
+                                                                <a class="vofk">香港&澳門</a>
+                                                            </b>
+                                                            <div class="area-selector_cities">
+                                                                <a>香港</a>
+                                                                <a>澳門</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="area-selector_list">
+                                                        <li class="poli">
+                                                            <b class="area-selector_country">
+                                                                <a class="vofk">香港&澳門</a>
+                                                            </b>
+                                                            <div class="area-selector_cities">
+                                                                <a>香港</a>
+                                                                <a>澳門</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="area-selector_list">
+                                                        <li class="poli">
+                                                            <b class="area-selector_country">
+                                                                <a class="vofk">香港&澳門</a>
+                                                            </b>
+                                                            <div class="area-selector_cities">
+                                                                <a>香港</a>
+                                                                <a>澳門</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="area_button" onclick="OpenModal()">選擇其他目的地</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </article>
+</body>
