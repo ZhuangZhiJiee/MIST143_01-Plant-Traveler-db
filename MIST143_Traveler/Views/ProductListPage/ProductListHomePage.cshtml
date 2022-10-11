@@ -7,7 +7,7 @@
 }
 
 <body>
-   
+
     <script>
         function OpenModal() {
             $('#overlay').show();
@@ -15,10 +15,10 @@
         function CloseModal() {
             $('#overlay').hide();
         }
-        
+
     </script>
     <article>
-        
+
         <div class="article-test">
             <div style=" background: url('../Images/ProductListPageImages/category.jpg'); background-size: cover; height: 350px; ">
                 <div class="rwd-experience-header-main-container">
@@ -593,121 +593,89 @@
                     </div>
 
 
-                    <div class="destination-guide-button desktop" >
+                    <div class="destination-guide-button desktop">
                         <div class="destination-tips destination-guide-button_main">
                             <div class="overlay" id="overlay">
                                 <div class="popup">
                                     <div onclick="CloseModal()" class="CloseIcon">&#10006;</div>
                                     <input placeholder="想去哪自己找" type="text" class="destination-search-input">
-                                    <div class="search-box-recommend search-box-recommend">
-                                        <div class="ChangeDestination.Destination">
-                                            <div class="search-box-recommend_left">
-                                                <ul class="search-box-recommend_groups">
-                                                    <li class="myMOUSE">
-                                                        <b class="search-box-recommend_area">東亞</b>
-                                                        <div class="search-box-recommend_cities">
-                                                            <span>香港</span>
-                                                            <span>台北</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="myMOUSE">
-                                                        <b class="search-box-recommend_area">東南亞</b>
-                                                        <div class="search-box-recommend_cities">
-                                                            <span>新加坡</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="myMOUSE">
-                                                        <b class="search-box-recommend_area">南亞/中東</b>
-                                                        <div class="search-box-recommend_cities">
-                                                            <span>加德滿都</span>
-                                                            <span>杜拜</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="myMOUSE">
-                                                        <b class="search-box-recommend_area">大洋洲</b>
-                                                        <div class="search-box-recommend_cities">
-                                                            <span>雪梨</span>
-                                                            <span>墨爾本</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="myMOUSE">
-                                                        <b class="search-box-recommend_area">歐洲</b>
-                                                        <div class="search-box-recommend_cities">
-                                                            <span>倫敦</span>
-                                                            <span>巴黎</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="myMOUSE">
-                                                        <b class="search-box-recommend_area">北美洲</b>
-                                                        <div class="search-box-recommend_cities">
-                                                            <span>紐約</span>
-                                                            <span>洛杉磯</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="list-group" id="list-tab" role="tablist">
+                                                <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">
+                                                    <b class="search-box-recommend_area">東亞</b>
+                                                    <div class="search-box-recommend_cities">
+                                                        <span>香港</span>
+                                                        <span>台北</span>
+                                                    </div>
+                                                </a>
+                                                <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">
+                                                    <b class="search-box-recommend_area">東南亞</b>
+                                                    <div class="search-box-recommend_cities">
+                                                        <span>新加坡</span>
+                                                    </div>
+                                                </a>
+                                                <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">
+                                                    <b class="search-box-recommend_area">南亞/中東</b>
+                                                    <div class="search-box-recommend_cities">
+                                                        <span>加德滿都</span>
+                                                        <span>杜拜</span>
+                                                    </div>
+                                                </a>
+                                                <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">
+                                                    <b class="search-box-recommend_area">大洋洲</b>
+                                                    <div class="search-box-recommend_cities">
+                                                        <span>雪梨</span>
+                                                        <span>墨爾本</span>
+                                                    </div>
+                                                </a>
+                                                <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">
+                                                    <b class="search-box-recommend_area">歐洲</b>
+                                                    <div class="search-box-recommend_cities">
+                                                        <span>倫敦</span>
+                                                        <span>巴黎</span>
+                                                    </div>
+                                                </a>
+                                                <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">
+                                                    <b class="search-box-recommend_area">北美洲</b>
+                                                    <div class="search-box-recommend_cities">
+                                                        <span>紐約</span>
+                                                        <span>洛杉磯</span>
+                                                    </div>
+                                                </a>
                                             </div>
-                                            <div class="search-box-recommend_right">
-                                                <div class="area-selector">
-                                                    <div class="area-selector_label">國家</div>
-                                                    <ul class="area-selector_list">
-                                                        <li class="poli">
-                                                            <b class="area-selector_country">
-                                                                <a class="vofk">香港&澳門</a>
-                                                            </b>
-                                                            <div class="area-selector_cities">
-                                                                <a>香港</a>
-                                                                <a>澳門</a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <ul class="area-selector_list">
-                                                        <li class="poli">
-                                                            <b class="area-selector_country">
-                                                                <a class="vofk">香港&澳門</a>
-                                                            </b>
-                                                            <div class="area-selector_cities">
-                                                                <a>香港</a>
-                                                                <a>澳門</a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <ul class="area-selector_list">
-                                                        <li class="poli">
-                                                            <b class="area-selector_country">
-                                                                <a class="vofk">香港&澳門</a>
-                                                            </b>
-                                                            <div class="area-selector_cities">
-                                                                <a>香港</a>
-                                                                <a>澳門</a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <ul class="area-selector_list">
-                                                        <li class="poli">
-                                                            <b class="area-selector_country">
-                                                                <a class="vofk">香港&澳門</a>
-                                                            </b>
-                                                            <div class="area-selector_cities">
-                                                                <a>香港</a>
-                                                                <a>澳門</a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="area-selector_label">選擇國家</div>
+                                                <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+                                                <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+                                                <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+                                                <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+                                                <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
                                             </div>
                                         </div>
                                     </div>
+                                    
+
+
+
+
+
+
+
+
                                 </div>
                             </div>
-                            <button class="area_button" onclick="OpenModal()">選擇其他目的地</button>
                         </div>
                     </div>
-
-
+                    <button class="area_button" onclick="OpenModal()">選擇其他目的地</button>
                 </div>
-
-
             </div>
+
+
         </div>
+
     </article>
 </body>

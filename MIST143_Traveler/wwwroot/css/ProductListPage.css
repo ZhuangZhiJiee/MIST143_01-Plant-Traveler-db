@@ -806,11 +806,12 @@ b, strong {
     overflow-y: auto;
 }
 
+
 .area-selector {
     width: 100%;
 }
 .area-selector_label {
-    margin-bottom: 20px;
+    left:0px;
 }
 .area-selector_country .area-selector_country:lang(zh-Hans-CN), .area-selector_country:lang(zh-Hant-HK), .area-selector_country:lang(zh-Hant-TW) {
     float:left;
