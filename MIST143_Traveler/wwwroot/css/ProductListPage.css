@@ -706,7 +706,7 @@ body {
     margin-left: 50%;
     margin-right: 50%;
     margin: auto;
-    width: 50%;
+    width: 100%;
     display: -webkit-inline-box;
     display: inline-flex;
     -webkit-box-flex: 0;
@@ -838,6 +838,9 @@ b, strong {
     margin-top: -2.5em;
 }
 .area_button{
-    margin-left:50%;
-    width:10em;
+    margin-left:45%;
+    width:8em;
+}
+.myMOUSE {
+    cursor: pointer;
 }
