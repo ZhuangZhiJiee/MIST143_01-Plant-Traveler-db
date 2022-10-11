@@ -4,17 +4,33 @@
 }
 
 @section Styles{
-
+    
+    
 }
-<link href="~/css/客服中心.css" rel="stylesheet" />
 <link href="~/css/客戶中心訂單內容物.css" rel="stylesheet" />
+<link href="~/css/客服中心.css" rel="stylesheet" />
+
 <body>
 
     <article>
         <div class="col-12 上面空間">
 
 
-            <h3>訂單管理</h3>
+            <!-- Example single danger button -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    訂單管理
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                </ul>
+            </div>
+
+
             <div>
                 <div class="text-center">
                     <img src="https://res.klook.com/image/upload/v1645521732/tuv7ipnsnwwp5sa8sbjg.gif" width="260" height="180" alt="">
@@ -34,5 +50,11 @@
 
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  
 </body>
+@section Scripts{
+    <script>
+
+
+    </script>
+}
