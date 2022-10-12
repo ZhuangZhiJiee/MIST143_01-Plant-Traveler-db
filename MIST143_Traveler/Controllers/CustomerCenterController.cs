@@ -14,11 +14,11 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult List()
         {
-            //PlanetTravelContext db = new PlanetTravelContext();
+            //PlanetTravelContext db = new PlanetTravelContext();//測試一下
 
             return View();
         }
-
+        //左邊功能開始
         public IActionResult ProductManage()
         {
             return PartialView();
@@ -40,11 +40,13 @@ namespace MIST143_Traveler.Controllers
         {
             return PartialView();
         }
-
+       
         public IActionResult CustomerInfo()
         {
             return PartialView();
         }
+        //左邊功能結束
+
 
         public IActionResult Createmember(string Email)
         {
@@ -68,6 +70,15 @@ namespace MIST143_Traveler.Controllers
         {
             return View();
         }
+
+        //public IActionResult 訂單管理_未使用()
+        //{
+        //    return PartialView();
+        //}
+        //public IActionResult 訂單管理_已使用()
+        //{
+        //    return PartialView();
+        //}
     }
 }
 

@@ -20,7 +20,7 @@
                 <div class="box_body d-flex  mb-2">
                     <div class="inputs p-2 flex-fill">
                         <header>姓氏</header>
-                        <input class="form-control" type="text" placeholder="姓氏" aria-label="default input example" name="MemberTittle"id="TitleName">
+                        <input class="form-control" type="text" placeholder="姓氏" aria-label="default input example" name="MemberTittle" id="TitleName">
                     </div>
 
                     <div class="inputs p-2 flex-fill">
@@ -115,7 +115,7 @@
 
 
 <div class="modal-footer">
-    
+
     <button type="button" class="btn btn-success" onclick="BtnDemo()">Demo</button>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
     <button type="submit" class="btn btn-primary ccc" data-bs-dismiss="modal" onclick="Btncre()">註冊</button>
@@ -134,10 +134,30 @@
     const Btncre = () => {
         alert("註冊成功")
     }
-    
+
 </script>
 
 @section Scripts {
+    <script>
+        const selCity = document.querySelector("#SelectCity")
 
+
+        selCity.addEventListener("change", function () {
+
+            LoadCities()
+        })
+        LoadCities()
+        async function LoadCities() {
+            let response = await fetch("@Url.Content("~/members/city")")
+
+            let datas = await response.json()
+            datas.forEach(city => {
+                const opt = new Option(city, city)
+                selCity.options.add(opt)
+            })
+        }
+
+
+    </script>
     @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
 }
