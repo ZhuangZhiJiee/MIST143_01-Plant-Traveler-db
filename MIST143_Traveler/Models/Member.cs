@@ -21,7 +21,7 @@ namespace MIST143_Traveler.Models
         public string Email { get; set; }
         public string Gender { get; set; }
         public int CityId { get; set; }
-        public DateTime BirthDay { get; set; }
+        public string BirthDay { get; set; }
         public string PhotoPath { get; set; }
         public int MemberStatusId { get; set; }
 

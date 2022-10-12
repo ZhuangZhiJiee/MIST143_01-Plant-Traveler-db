@@ -7,7 +7,7 @@
 }
 
 <body>
-   
+
     <script>
         function OpenModal() {
             $('#overlay').show();
@@ -15,6 +15,7 @@
         function CloseModal() {
             $('#overlay').hide();
         }
+
         
     </script>
     <article>
@@ -593,12 +594,15 @@
                     </div>
 
 
-                    <div class="destination-guide-button desktop" >
+
+                    <div class="destination-guide-button desktop">
+
                         <div class="destination-tips destination-guide-button_main">
                             <div class="overlay" id="overlay">
                                 <div class="popup">
                                     <div onclick="CloseModal()" class="CloseIcon">&#10006;</div>
                                     <input placeholder="想去哪自己找" type="text" class="destination-search-input">
+
                                     <div class="search-box-recommend search-box-recommend">
                                         <div class="ChangeDestination.Destination">
                                             <div class="search-box-recommend_left">
@@ -645,69 +649,31 @@
                                                         </div>
                                                     </li>
                                                 </ul>
+
                                             </div>
-                                            <div class="search-box-recommend_right">
-                                                <div class="area-selector">
-                                                    <div class="area-selector_label">國家</div>
-                                                    <ul class="area-selector_list">
-                                                        <li class="poli">
-                                                            <b class="area-selector_country">
-                                                                <a class="vofk">香港&澳門</a>
-                                                            </b>
-                                                            <div class="area-selector_cities">
-                                                                <a>香港</a>
-                                                                <a>澳門</a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <ul class="area-selector_list">
-                                                        <li class="poli">
-                                                            <b class="area-selector_country">
-                                                                <a class="vofk">香港&澳門</a>
-                                                            </b>
-                                                            <div class="area-selector_cities">
-                                                                <a>香港</a>
-                                                                <a>澳門</a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <ul class="area-selector_list">
-                                                        <li class="poli">
-                                                            <b class="area-selector_country">
-                                                                <a class="vofk">香港&澳門</a>
-                                                            </b>
-                                                            <div class="area-selector_cities">
-                                                                <a>香港</a>
-                                                                <a>澳門</a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <ul class="area-selector_list">
-                                                        <li class="poli">
-                                                            <b class="area-selector_country">
-                                                                <a class="vofk">香港&澳門</a>
-                                                            </b>
-                                                            <div class="area-selector_cities">
-                                                                <a>香港</a>
-                                                                <a>澳門</a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="area-selector_label">選擇國家</div>
+                                                <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+                                                <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+                                                <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+                                                <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+                                                <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
                                             </div>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
-                            <button class="area_button" onclick="OpenModal()">選擇其他目的地</button>
                         </div>
                     </div>
-
-
+                    <button class="area_button" onclick="OpenModal()">選擇其他目的地</button>
                 </div>
-
-
             </div>
+
+
         </div>
+
     </article>
 </body>

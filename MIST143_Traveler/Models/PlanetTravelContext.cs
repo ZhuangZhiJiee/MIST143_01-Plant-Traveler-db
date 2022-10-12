@@ -153,7 +153,9 @@ namespace MIST143_Traveler.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.BirthDay).HasColumnType("date");
+                entity.Property(e => e.BirthDay)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.CityId).HasColumnName("CityID");
 
@@ -169,7 +171,9 @@ namespace MIST143_Traveler.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.MemberStatusId).HasColumnName("MemberStatusID");
+                entity.Property(e => e.MemberStatusId)
+                    .HasColumnName("MemberStatusID")
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Password)
                     .IsRequired()
