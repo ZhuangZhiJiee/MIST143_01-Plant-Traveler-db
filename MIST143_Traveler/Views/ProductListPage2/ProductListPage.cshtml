@@ -1,0 +1,38 @@
+﻿
+@section Styles{
+    <link href="@Url.Content("~/css/ProductListPage.css")" rel="stylesheet" />
+}
+
+ 
+<body>
+    <article>
+        <div style=" background: url('../Images/ProductListPageImages/category.jpg'); background-size: cover; height: 350px; ">
+            <div class="rwd-experience-header-main-container">
+                <div class="rwd-header-container">
+                    <div class="experience-title-and-location-button">
+                        <div class="experiences-title">
+                            <span class="experiences-title-text">玩樂</span>
+                        </div>
+                        <h1 class="experiences-tips">
+                            探索景點、行程等
+                        </h1>
+                        
+                    </div>
+                    <div class="header-search-box-desktop rwd-header-search-box-desktop">
+                        <label class="input-box" width="622" height="54">
+                            <img src="../Images/ProductListPageImages/search.jpg" />
+                            <input type="text" placeholder="想去哪裡玩?" size="80" style="border-style:none" class="js-experience-search-input js-all-search-input-active" />
+                            <button type="button" onclick="location.href='@Url.Content("~/ProductListPage2/ProductListPage")'" class="search klk-button klk-button-primary">
+                                <span>
+                                    搜尋
+                                </span>
+                            </button>
+                        </label>
+                        <div class="search-suggest-container"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </article>
+</body>
