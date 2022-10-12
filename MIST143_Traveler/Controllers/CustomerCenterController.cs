@@ -1,13 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using MIST143_Traveler.Models;
+using MIST143_Traveler.Models.miViewModel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MIST143_Traveler.Controllers
 {
     public class CustomerCenterController : Controller
     {
+        private readonly PlanetTravelContext _PlanetTravelContext;
+        public CustomerCenterController(PlanetTravelContext PlanetTrave)
+        {
+            _PlanetTravelContext = PlanetTrave;
+        }
         public IActionResult Index()
         {
             return View();
@@ -63,6 +73,24 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult LoginModal()
         {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult LoginModal(CLogin vModel)
+        {
+            Member cust = new PlanetTravelContext().Members.FirstOrDefault
+               (c => c.Email.Equals(vModel.Email));
+            if (cust != null)
+            {
+                if (cust.Password.Equals(vModel.Password))
+                {
+                    string jsonUser = JsonSerializer.Serialize(cust);
+                    HttpContext.Session.SetString(
+                        CDictionary.SK_Login, jsonUser);
+                    return RedirectToAction("List");
+                    //return View(cust);
+                }
+            }
             return View();
         }
 
