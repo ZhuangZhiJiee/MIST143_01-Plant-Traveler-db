@@ -2,26 +2,26 @@
 @{
     ViewData["Title"] = "LoginModal";
     Layout = null;
-    
+
 
 }
 
 
 
-@using (Html.BeginForm())
-{
-
+@*@using (Html.BeginForm())
+    {*@
+<form name="userInfo" method="post" enctype="application/x-www-form-urlencoded" action="~/CustomerCenter/LogApi">
     <h1>歡迎</h1>
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">使用者帳號</label>
-       @* <input type="text" class="form-control" id="Actemail" placeholder="name@example.com">*@
+        @* <input type="text" class="form-control" id="Actemail" placeholder="name@example.com">*@
         @Html.TextBox("Email", "", new { @class = "form-control", id = "Actemail", placeholder = "name@example.com" })
         <small id="sm" class="form-text text-muted"></small>
     </div>
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">使用者密碼</label>
-       @* <input type="password" class="form-control" id="Pas" placeholder="password">*@
-        @Html.TextBox("Password", "", new { @class = "form-control",id="Pas", placeholder = "password",type= "password" })
+        @* <input type="password" class="form-control" id="Pas" placeholder="password">*@
+        @Html.TextBox("Password", "", new { @class = "form-control", id = "Pas", placeholder = "password", type = "password" })
     </div>
     <div class="modal-footer mx-auto">
         <div style="margin-right:150px;">
@@ -34,20 +34,21 @@
                 </label>
             </span>
         </div>
-        <button type="submit" class="btn btn-primary" id="btnlogin" onclick="BtnLogin()">登入</button>
+        <button type="submit" class="btn btn-primary" id="btnlogin">登入</button>
         <button type="button" class="btn btn-success" id=" demo" onclick="DemoValue()">Demo</button>
         <a href="@Url.Content("~/CustomerCenter/Forgetpas")" class="btn-outline-dark">忘記密碼?</a>
 
     </div>
-}
-@section Scripts {
-    <script>
-        //const login = document.querySelector("#btnlogin");
-        //login.addEventListener("")
+    </form>
+    @*}*@
+    @section Scripts {
+        <script>
+            //const login = document.querySelector("#btnlogin");
+            //login.addEventListener("")
 
 
-    </script>
-}
+        </script>
+    }
 
 <script>
         const DemoValue = () => {
@@ -55,14 +56,19 @@
         let pas = document.querySelector("#Pas");
         act.value = "d555@gmail.com";
         pas.value = "a1234567";
-        
+
     }
 
-    const BtnLogin = () => {
-            alert("登入成功")
-        }
+        //const xhr = new XMLHttpRequest()
+        //    xhr.addEventListener("click", () => {
+        //            const nnam = xhr.responseText
+        //            smtxt.textContent = nnam
+        //        })
+        //    xhr.open("POST",document.userInfo.action) //"/api/register"
+        //    xhr.send(formData)
+        //    })
 </script>
-   
 
-@*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }*@
+
+    @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }*@

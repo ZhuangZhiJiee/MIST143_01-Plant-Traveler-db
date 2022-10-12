@@ -53,6 +53,8 @@ namespace MIST143_Traveler.Controllers
        
         public IActionResult CustomerInfo()
         {
+
+
             return PartialView();
         }
         //左邊功能結束
@@ -90,8 +92,13 @@ namespace MIST143_Traveler.Controllers
                     return RedirectToAction("List");
                     //return View(cust);
                 }
+                else
+                {
+                    return Content("0", "text/plain");
+                }
             }
-            return View();
+
+            return Content("0", "text/plain");
         }
 
         public IActionResult Forgetpas()
