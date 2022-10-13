@@ -21,7 +21,9 @@
     max-width: 1200px;
     margin: auto;
 }
-
+.ban-sea-box {
+margin-top:3%;
+}
 .main-header .logo {
     max-width: 70px;
 }
