@@ -99,8 +99,7 @@ namespace MIST143_Traveler.Controllers
         {
             return View();
         }
-        
-        
+
 
         public IActionResult Forgetpas()
         {

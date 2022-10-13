@@ -1,0 +1,511 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    /* border: 1px solid red; */
+    font-family: Georgia, "Times New Roman", Times, serif;
+  }
+  .border-bottom-line {
+    border-bottom: 2px solid rgba(225, 221, 221, 0.622);
+    border-bottom: 2px solid rgba(225, 221, 221, 0.622);
+  }
+  
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body {
+    background-color: #FCFCFC;
+    align-items: center;
+}
+
+/* .header {
+    display: flex;
+    padding: 0 10px;
+    background-color: #000;
+}
+
+.header .logo {
+    display: inline-block;
+    padding: 6px 0;
+}
+
+.header nav {
+    text-align: right;
+    width: 100%;
+    font-size: 0;
+}
+
+.header nav a {
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    line-height: 52px;
+    padding: 0 10px;
+}
+
+.header nav a:hover {
+    background-color: #fa0;
+} */
+
+
+.banner img {
+    width: 100%;
+}
+
+
+.hori-line{
+width: 5px;
+height: 5px;
+border-top: solid #c0c3c0;
+
+}
+.research .wrap {
+
+    padding: 40px;
+
+    font-size: 14px;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.research .a {
+
+    padding-bottom: 10px;
+    
+    font-size: 14px;
+
+}
+
+.research .b {
+    display: flex;
+    padding: 0px 40px 0px 0;
+    border: 2px solid #f00;
+    font-size: 14px;
+    width: 960px;
+    background-color: lemonchiffon;
+    border-radius: 5px;
+}
+
+.research .c {
+    display: flex;
+    padding: 0px 40px 0px 0;
+    background-color: lemonchiffon;
+    border: 2px solid #f00;
+    font-size: 14px;
+    width: 960px;
+    border-radius: 5px;
+    margin-left: 2px;
+}
+
+.research .bc {
+    display: flex;
+    padding-top: 10px;
+    font-size: 14px;
+    justify-content: space-around;
+    width: 960px;
+}
+
+.research .d {
+    display: flex;
+    border: 2px solid #f00;
+    font-size: 14px;
+    margin-left: 100px;
+}
+
+.research .e {
+    border: 2px solid #f00;
+    font-size: 14px;
+    margin-left: 100px;
+    width: 100px;
+}
+
+.research .f {
+    border: 2px solid #f00;
+    font-size: 14px;
+    text-align: right;
+    width: 110px;
+}
+
+.research .wrap {
+    width: 960px;
+
+}
+
+.research .wrap p {
+    display: flex;
+}
+
+.advertisment .wrap {
+    display: flex;
+    font-size: 10px;
+    height: 60px;
+}
+
+.advertisment .wrap p {}
+
+.advertisment .wrap span {}
+
+.advertisment .wrap .item img {
+    margin-right: 15px;
+    margin-left: 15px;
+    height: 50px;
+    width: 50px;
+}
+
+.likeIt>h2 {
+    font-size: 36px;
+    padding: 30px 0 30px 0;
+    text-align: center;
+}
+
+.likeIt .wrap {
+    width: 1200px;
+    display: flex;
+    margin: auto;
+}
+
+.likeIt .item {
+    width: 368px;
+    margin: 15px;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    transform: translateY(0px);
+    transition: 0.5s;
+}
+
+.likeIt .item img {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.likeIt .item h2 {
+    border-bottom: 1px solid #888;
+    padding-bottom: 0.3em;
+    margin-bottom: 0.4em;
+    font-weight: 900;
+    transition: 0.25s;
+}
+
+.likeIt .item p {
+    line-height: 1.6;
+    font-weight: 300;
+    transition: 0.25s;
+}
+
+.likeIt .item.txt {
+    padding: 20px;
+    position: relative;
+}
+
+.likeIt .item.txt:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 0;
+    top: 0;
+    border-top: 50px solid transparent;
+    border-left: 184px solid #fff;
+    border-right: 184px solid #fff;
+    transform: translateY(-100%);
+}
+
+.likeIt .item:hover {
+    transform: translateY(-50px);
+}
+
+.likeIt .item:hover.txt {
+    background-image:
+        linear-gradient(0deg, #fb8076, #feb85d);
+}
+
+.likeIt .item:hover .txt:before {
+    border-left: 184px solid #feb85d;
+    border-right: 184px solid #feb85d;
+}
+
+.likeIt .item:hover h2 {
+    color: #fff;
+    border-bottom-color: #fff;
+}
+
+.likeIt .item:hover p {
+    color: #fff;
+}
+
+/* .path {
+    display: flex;
+} */
+
+/* .path li {
+    position: relative;
+    padding: 6px 8px;
+}
+
+.path li a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+} */
+
+/* .path li+li::before {
+    content: '/';
+    color: #aaa;
+    position: absolute;
+    left: 0;
+} */
+
+.item h3 {
+    font-size: 36px;
+    padding: 0 0 30px;
+}
+
+.wrap {
+    width: 960px;
+    margin: auto;
+}
+
+.about {
+    padding: 40px 0 60px;
+}
+
+.about .wrap {
+    display: flex;
+
+}
+
+.about .item {
+    width: 300px;
+    margin: 0 10px;
+    text-align: center;
+
+}
+
+.about .item img {
+    border-radius: 50%;
+}
+
+.about>h2 {
+    width: 960px;
+    font-size: 42px;
+    margin: auto;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.about>p {
+    width: 660px;
+    margin: auto;
+    padding: 0px 0 40px;
+    text-align: center;
+}
+
+.products {
+    background-color: #ccc;
+
+}
+
+.products .wrap {
+    display: flex;
+}
+
+.products .item {
+    width: 50%;
+    padding-left: 20px;
+}
+
+.products .item img {
+    width: 100%;
+    vertical-align: bottom;
+}
+
+.products .pic {}
+
+.products .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px;
+    text-align: center;
+}
+/* 收折頁 */
+.flip1 {
+    margin: 0px;
+    padding: 5px;
+    text-align: center;
+    
+    cursor: pointer;
+    font-family: 'Arial';
+}
+
+.panel1 {
+    margin: 0px;
+    padding: 5px;
+    text-align: center;
+    
+    display: none;
+    font-family: 'Arial';
+}
+
+/* 收折頁尾 */
+.service {
+    padding: 40px 0;
+
+}
+
+.service>h2 {
+    width: 960px;
+    margin: auto;
+    text-align: center;
+    font-size: 42px;
+    padding: 20px 0;
+}
+
+.service .wrap .item {
+    font-size: 20px;
+}
+
+.service>p {
+    width: 960px;
+    margin: auto;
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.service .wrap {
+    display: flex;
+}
+
+.service .item {
+    margin: 30px;
+    width: 500px;
+    text-align: center;
+    
+}
+
+.service .item h3 {}
+
+.service .item p {}
+
+.service .item img {
+    width: 50px;
+    height: 50px;
+}
+.service .question{
+text-align: center;
+
+}
+.service .topic{
+    display: flex;
+}
+/* footer的css範圍 */
+.main-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  .default-footer {
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgb(122, 122, 128);
+  }
+  
+  .default-footer_copyright {
+    width: 250px;
+  }
+  .default-footer_internal_links {
+    display: flex;
+  }
+  .default-footer_links {
+    margin: 0px 40px;
+  }
+  .default-footer_links ul,
+  .default-footer_links li {
+    margin: 0px;
+    padding: 10px 0 0 0;
+  }
+  
+  .footer_label {
+    font-weight: bold;
+  }
+  
+  .subcribe_email input {
+    border: 1px solid rgba(225, 221, 221, 0.622);
+    width: 20em;
+    padding: 5px 10px;
+    border-radius: 5px 0 0 5px;
+    background-color: rgba(225, 221, 221, 0.622);
+    outline: none;
+    margin-bottom: 15px;
+  }
+  .subcribe_email button {
+    border-radius: 0 5px 5px 0;
+    border: 1px solid coral(225, 221, 221, 0.622);
+    border: none;
+    padding: 5px 10px;
+    outline: none;
+    background-color: coral;
+    color: aliceblue;
+    font-size: 13px;
+  }
+  .subcribe_email input:hover,
+  .subcribe_email input:focus {
+    background-color: white;
+    border: 1px solid orange;
+  }
+  .footer_paymentInfo {
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer_paymentInfo li {
+    font-size: 40px;
+    margin-right: 50px;
+  }
+  /* footer的css範圍 */
