@@ -38,7 +38,8 @@
 
                 <a href="@Url.Content("~/Shopping/ShoppingCart")">購物車</a>
                 <a class="btn btn-outline-warning" onclick="showmodal('@Url.Action("Createmember","CustomerCenter",null,Context.Request.Scheme)',null)">註冊</a>
-                <a class="btn btn-outline-light" onclick="LOGIN('@Url.Action("LoginModal","CustomerCenter",null,Context.Request.Scheme)',null)">登入</a>
+               
+                <a  class="btn btn-outline-light" href="@Url.Content("~/CustomerCenter/newLoginpag")">登入</a>
                 <a href="https://localhost:44338/Home/Index">後台</a>
             </nav>
             <div class="border-bottom-line"></div>
@@ -59,22 +60,7 @@
             </div>
         </div>
         <!--註冊的光箱結束-->
-        <!-- Modal 登入-->
-        <div class="modal fade" id="LOGIN" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        @*<h5 class="modal-title" id="staticBackdropLabel"></h5>*@
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!-- Modal 登入光箱結束-->
+      
 
     </header>
     <nav>
