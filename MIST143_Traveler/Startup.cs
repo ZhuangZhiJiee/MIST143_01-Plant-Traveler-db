@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +31,11 @@ namespace MIST143_Traveler
             {
                 options.UseSqlServer(Configuration.GetConnectionString("PlanetTravelConnection"));
             });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+            {
+                //未登入時會自動導到這個網址
+                option.LoginPath = new PathString("/api/Login/NoLogin");
+            });
             services.AddControllersWithViews();
             services.AddSession();
         }
@@ -50,6 +57,9 @@ namespace MIST143_Traveler
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
+            app.UseCookiePolicy();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseAuthorization();
 

@@ -22,6 +22,11 @@ namespace MIST143_Traveler.Controllers
         {
             return PartialView();
         }
+        public IActionResult newLoginpag()
+        {
+            return View();
+        }
+        [HttpPost]
         public IActionResult newLoginpag(CLogin vModel)
         {
             Member cust = new PlanetTravelContext().Members.FirstOrDefault
@@ -35,14 +40,11 @@ namespace MIST143_Traveler.Controllers
                         CDictionary.SK_Login, jsonUser);
                     return RedirectToAction("List");
                 }
-                else
-                {
-                    return Content("0", "text/plain");
-                }
+            
             }
 
             return View();
-           
+
         }
         public IActionResult List()
         {
@@ -107,19 +109,7 @@ namespace MIST143_Traveler.Controllers
             return View();
         }
         
-       public IActionResult LogApi(string Email)
-        {
-            PlanetTravelContext db = new PlanetTravelContext();
-            var qq = _PlanetTravelContext.Members.Where(a => a.Email == Email).ToList();
-            if (qq.Count > 0)
-
-                return Content("此帳號已存在", "text/plain", System.Text.Encoding.UTF8);
-
-            else
-
-                return Content("帳號可以使用", "text/plain", System.Text.Encoding.UTF8);
-
-        }
+     
         //public IActionResult 訂單管理_未使用()
         //{
         //    return PartialView();

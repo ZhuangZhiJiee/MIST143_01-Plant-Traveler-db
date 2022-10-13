@@ -1,16 +1,13 @@
 ﻿
 @{
     ViewData["Title"] = "newLoginpag";
-    
+
 }
 
 
 <!------ Include the above in your HEAD tag ---------->
-
 <!------ Include the above in your HEAD tag ---------->
-
-
-<html>
+@*<html>*@
 <head>
     <title>Login Page</title>
 
@@ -22,9 +19,12 @@
     <!--Custom styles-->
 
 </head>
+@using (Html.BeginForm())
+{
 
-<body>
-   
+    @Html.AntiForgeryToken()
+    <body>
+
         <div class="container">
             <div class="d-flex justify-content-center h-100 p-5">
                 <div class="card">
@@ -37,27 +37,27 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form name="userInfo" method="post" enctype="application/x-www-form-urlencoded" action="~/CustomerCenter/newLoginpag">
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Email帳號" id="Actemail">
+                        @*<form name="userInfo" method="post" enctype="application/x-www-form-urlencoded" action="~/Login/LoginApi">*@
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Email帳號" id="Actemail" name="Email">
 
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                </div>
-                                <input type="password" class="form-control" placeholder="password" id="Pas">
-                            </div>
-                            <div class="row align-items-center remember">
-                                <input type="checkbox">記住我
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Login" id="btnlog" class="btn float-right login_btn">
-                            </div>
-                        </form>
+                            <input type="password" class="form-control" placeholder="password" id="Pas" name="Password">
+                        </div>
+                        <div class="row align-items-center remember">
+                            <input type="checkbox">記住我
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Login" id="btnlog" class="btn float-right login_btn">
+                        </div>
+                        @*</form>*@
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-center links">
@@ -71,11 +71,12 @@
                 </div>
             </div>
         </div>
-    
-</body>
-</html>
 
-<script>
+    </body>
+    @*</html>*@
+}
+@section Scripts{
+    <script>
     const DemoValue = () => {
         let act = document.querySelector("#Actemail");
         let pas = document.querySelector("#Pas");
@@ -88,24 +89,25 @@
         pas.value = "a1234567";
     }
 
-    const btnL = document.querySelector("btnlog")
-    const formData = new FormData(document.userInfo);
-    const xhr = new XMLHttpRequest()
-    xhr.addEventListener("load", () => {
-        btnL.addEventListener("click", () => {
-            const nnam = xhr.responseText
-            if (nnam == "0") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!',
-                    footer: '<a href="">Why do I have this issue?</a>'
-                })
-            }
-        })
-        
-    })
-    xhr.open("POST", document.userInfo.action) //"/api/register"
-    xhr.send(formData)
-</script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        fetch("@Url.Content("~/CustomerCenter/CustomerInfo")")
+            .then(Response => {
+                console.log(Response.status)
+                console.log(Response)
+                console.log(Response.text)
+            })
+    @*const btnL = document.querySelector("btnlog")
+    btnL.addEventListener("click", async () => {
+        let response = await fetch("@Url.Content("~/CustomerCenter/newLoginpag")")
+        let txt =await response.text();
+        alert(txt);
+
+    })*@
+    </script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+}
+
+
+
+
+
