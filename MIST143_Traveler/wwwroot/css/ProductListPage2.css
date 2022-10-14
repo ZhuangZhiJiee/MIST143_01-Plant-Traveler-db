@@ -720,3 +720,19 @@ a {
     font-weight: 400;
     color: #212121;
 }
+.btnright {
+    margin-right: 10%;
+    left: 30px;
+    width: 150%;
+    top:-35px;
+    padding:-10px;
+}
+.acchei{
+    height:48px;
+}
+.frmcheckin {
+    vertical-align:auto;
+}
+.search-result-activity-container{
+    width:100%;
+}
