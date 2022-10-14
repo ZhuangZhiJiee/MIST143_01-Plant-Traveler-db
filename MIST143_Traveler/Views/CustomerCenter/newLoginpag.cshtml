@@ -6,8 +6,10 @@
 
 
 <!------ Include the above in your HEAD tag ---------->
+
 <!------ Include the above in your HEAD tag ---------->
 @*<html>*@
+
 <head>
     <title>Login Page</title>
 
@@ -19,11 +21,13 @@
     <!--Custom styles-->
 
 </head>
+
 @using (Html.BeginForm())
 {
 
     @Html.AntiForgeryToken()
     <body>
+
 
         <div class="container">
             <div class="d-flex justify-content-center h-100 p-5">
@@ -37,6 +41,7 @@
                         </div>
                     </div>
                     <div class="card-body">
+
                         @*<form name="userInfo" method="post" enctype="application/x-www-form-urlencoded" action="~/Login/LoginApi">*@
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
@@ -58,6 +63,7 @@
                             <input type="submit" value="Login" id="btnlog" class="btn float-right login_btn">
                         </div>
                         @*</form>*@
+
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-center links">
@@ -72,11 +78,13 @@
             </div>
         </div>
 
+
     </body>
     @*</html>*@
 }
 @section Scripts{
     <script>
+
     const DemoValue = () => {
         let act = document.querySelector("#Actemail");
         let pas = document.querySelector("#Pas");
@@ -88,6 +96,7 @@
         act.value = "d555@gmail.com";
         pas.value = "a1234567";
     }
+
         //var postData = {
         //    actt: document.querySelector("#Actemail"),
         //    pass: document.querySelector("#Pas")
@@ -126,6 +135,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 }
+
 
 
 

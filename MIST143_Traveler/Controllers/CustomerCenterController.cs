@@ -22,11 +22,13 @@ namespace MIST143_Traveler.Controllers
         {
             return PartialView();
         }
+
         public IActionResult newLoginpag()
         {
             return View();
         }
         [HttpPost]
+
         public IActionResult newLoginpag(CLogin vModel)
         {
             Member cust = new PlanetTravelContext().Members.FirstOrDefault
@@ -38,6 +40,7 @@ namespace MIST143_Traveler.Controllers
                     string jsonUser = JsonSerializer.Serialize(cust);
                     HttpContext.Session.SetString(
                         CDictionary.SK_Login, jsonUser);
+
                     return RedirectToAction("index", "home");
                     //return Content("123", "text/plain", System.Text.Encoding.UTF8);
                     //return Json("成功");
@@ -46,6 +49,7 @@ namespace MIST143_Traveler.Controllers
             }
 
             return View();
+
 
         }
         public IActionResult List()
@@ -106,12 +110,13 @@ namespace MIST143_Traveler.Controllers
         
         
 
+
         public IActionResult Forgetpas()
         {
             return View();
         }
         
-     
+
         //public IActionResult 訂單管理_未使用()
         //{
         //    return PartialView();
