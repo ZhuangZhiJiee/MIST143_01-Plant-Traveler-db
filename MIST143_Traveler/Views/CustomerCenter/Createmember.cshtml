@@ -1,9 +1,9 @@
-﻿
+﻿@model MIST143_Traveler.Models.Member
+
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Createmember";
     Layout = null;
 }
-
 
 @section Sytles{
     <style>
@@ -11,153 +11,209 @@
 }
 <h1>歡迎成為會員</h1>
 
-<h4>現在加入領取優惠</h4>
+@*<h4>Member</h4>*@
 <hr />
-<div class="container">
-    <div class="col-12">
-        <div class="row row-cols-1">
-            <div class="col">
-                <div class="box_body d-flex  mb-2">
-                    <div class="inputs p-2 flex-fill">
-                        <header>姓氏</header>
-                        <input class="form-control" type="text" placeholder="姓氏" aria-label="default input example" name="MemberTittle" id="TitleName">
-                    </div>
 
-                    <div class="inputs p-2 flex-fill">
-                        <header>名稱</header>
-                        <input class="form-control" type="text" placeholder="名稱" aria-label="default input example" name="MemberName" id="Name">
-                    </div>
-                </div>
+<form asp-action="Createmember">
+    <div class="container">
+        <div class="col-12">
+            <div class="row row-cols-1">
+                <div class="col">
+                    <div class="box_body d-flex  mb-2">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
-                <div class="box_body d-flex  mb-2">
-                    <div class="inputs p-2 flex-fill">
-                        <header>EMAIL</header>
-                        <input class="form-control" type="email" placeholder="123" aria-label="default input example" name="Email" id="Email">
-                        <small id="sm" class="form-text text-muted"></small>
-                    </div>
-
-                    <div class="inputs p-2 flex-fill">
-                        <header>聯繫電話</header>
-                        <input class="form-control" type="text" placeholder="PHONE" aria-label="default input example" name="Phone" id="Phone">
-                    </div>
-                </div>
-
-                <div class="box_body d-flex  mb-2">
-                    <div class="inputs p-2 flex-fill">
-                        <header>密碼</header>
-                        <input class="form-control" type="password" placeholder="password" aria-label="default input example" name="Password" id="Password">
-                    </div>
-
-                    <div class="inputs p-2 flex-fill">
-                        <header>再次確認密碼</header>
-                        <input class="form-control" type="password" placeholder="password" aria-label="default input example" id="Password2">
-                    </div>
-                </div>
-
-
-                <div class="box_body d-flex  mb-2">
-                    <div class="inputs p-2 ">
-                        <header>居住縣市</header>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>台北市</option>
-                            <option value="1">新北市</option>
-                            <option value="2">基隆市</option>
-                            <option value="3">桃園市</option>
-                        </select>
-                    </div>
-
-                    <div class="inputs p-2 ">
-                        <header>居住區域</header>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>大安區</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                    </div>
-
-                    <div class="inputs p-2 flex-grow-1">
-                        <header>地址</header>
-                        <input class="form-control" type="text" placeholder="北投區111號" aria-label="default input example" name="Address" id="address">
-                    </div>
-                </div>
-
-                <div class="box_body d-flex  mb-2">
-                    <div class="inputs p-2 flex-fill">
-                        <header>生日</header>
-                        <input class="form-control" type="date" value="1990-01-01" aria-label="default input example" name="BirthDay">
-                    </div>
-
-                    <div class="inputs p-2 flex-fill">
-                        <header>生理性別</header>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                男
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                女
-                            </label>
+                        <div class="inputs p-2 flex-fill">
+                            @*<header>EMAIL帳號</header>*@
+                            <label asp-for="Email" class="control-label"></label>
+                            <input class="form-control" type="email" asp-for="Email" placeholder="123" aria-label="default input example" name="Email" id="Email">
+                            <small id="sm" class="form-text text-muted"></small>
                         </div>
                     </div>
-                </div>
+                    @*<div class="form-group">
+                            <label asp-for="MemberName" class="control-label"></label>
+                            <input asp-for="MemberName" class="form-control" />
+                            <span asp-validation-for="MemberName" class="text-danger"></span>
+                        </div>*@
+                    <div class="box_body d-flex  mb-2">
+                        <div class="inputs p-2 flex-fill">
+                            <label asp-for="MemberName" class="control-label"></label>
+                            <input class="form-control" asp-for="MemberName" type="text" placeholder="名稱" aria-label="default input example" name="MemberName" id="Name">
+                        </div>
 
+                        <div class="inputs p-2 flex-fill">
+                            <label asp-for="Phone" class="control-label"></label>
+                            <input class="form-control" asp-for="Phone" type="text" placeholder="PHONE" aria-label="default input example" name="Phone" id="Phone">
+                        </div>
+                    </div>
+
+                    <div class="box_body d-flex  mb-2">
+                        <div class="inputs p-2 flex-fill">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input class="form-control" asp-for="Password" type="password" placeholder="password" aria-label="default input example" name="Password" id="Password">
+                        </div>
+
+                        <div class="inputs p-2 flex-fill">
+                            <header>再次確認密碼</header>
+                            <input class="form-control" type="password" placeholder="password" aria-label="default input example" id="Password2">
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>*@
+                    @*<div class="form-group">
+                            <label asp-for="Phone" class="control-label"></label>
+                            <input asp-for="Phone" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>*@
+                    @*<div class="form-group">
+                            <label asp-for="Address" class="control-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>*@
+                    <div class="box_body d-flex  mb-2">
+                        <div class="inputs p-2 ">
+                            <header>居住縣市</header>
+                            <select id="selectC" class="form-select" aria-label="Default select example" name="城市">
+                            </select>
+                        </div>
+
+                        @*<div class="inputs p-2 ">
+                                <header>居住區域</header>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>大安區</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>*@
+
+                        <div class="inputs p-2 flex-grow-1">
+                            <header>地址</header>
+                            <input class="form-control" asp-for="Address" type="text" placeholder="北投區111號" aria-label="default input example" name="Address" id="address">
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            <label asp-for="MemberName" class="control-label"></label>
+                            <input asp-for="MemberName" class="form-control" />
+                            <span asp-validation-for="MemberName" class="text-danger"></span>
+                        </div>*@
+                    <div class="box_body d-flex  mb-2">
+                        <div class="inputs p-2 flex-fill">
+                            <header>生日</header>
+                            <input class="form-control" type="date" asp-for="BirthDay" value="1990-01-01" aria-label="default input example" name="BirthDay">
+                        </div>
+
+                        <div class="inputs p-2 flex-fill">
+                            <header>生理性別</header>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="Gender" value="男" id="Man">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    男
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="Gender" value="女" id="Won">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    女
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                
+                    @*<div class="form-group">
+                            <label asp-for="BirthDay" class="control-label"></label>
+                            <input asp-for="BirthDay" class="form-control" />
+                            <span asp-validation-for="BirthDay" class="text-danger"></span>
+                        </div>*@
+
+                    @*<div class="form-group">
+                            <label asp-for="MemberStatusId" class="control-label"></label>
+                            <input asp-for="MemberStatusId" class="form-control" />
+                            <span asp-validation-for="MemberStatusId" class="text-danger"></span>
+                        </div>*@
+                    @*<div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>*@
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-success" id="sb1" onclick="BtnDemo()">Demo</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                        <button type="submit" class="btn btn-primary ccc" data-bs-dismiss="modal" onclick="Btncre()">註冊</button>
+                    </div>
+
+
+                </div>
             </div>
-
         </div>
+
     </div>
 
-</div>
+</form>
 
 
-<div class="modal-footer">
 
-    <button type="button" class="btn btn-success" onclick="BtnDemo()">Demo</button>
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-    <button type="submit" class="btn btn-primary ccc" data-bs-dismiss="modal" onclick="Btncre()">註冊</button>
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 <script>
+    //DEMO
+
     function BtnDemo() {
-        $("#TitleName").val("林")
+
         $('#Name').val("恆佑")
         $('#Email').val("ask@yahoo.com.tw")
         $('#Phone').val("0966666666")
         $('#Password').val("a77777777")
         $('#Password2').val("a77777777")
+
         $('#address').val("和平東路二段106號11樓")
     }
     const Btncre = () => {
         alert("註冊成功")
     }
 
+    const selCity = document.querySelector("#selectC")
+    async function LoadCities() {
+    let response = await fetch("@Url.Content("~/CustomerCenter/city")")
+    let datas = await response.json()
+    datas.forEach(city => {
+    const opt = new Option(city, city)
+    selCity.options.add(opt)
+    })
+    }
+    LoadCities()
+
+    //var result="";
+    //$("input[type:checked]").each(function () {
+    //    result = this.val();
+    //    console.log(result);
+    //}
+    var method = $("input[name='Gender']:checked").val();
+    console.log(method)
+
+
+
+
+    //性別
+    /*$("#sb1").click(function () {*/
+
+    //    console.log(method);
+    //    if (typeof (method) == "undefined") {
+    //        alert("請選取操作方式！");
+    //        return false;
+    //    }
+
 </script>
 
 @section Scripts {
     <script>
-        const selCity = document.querySelector("#SelectCity")
-
-
-        selCity.addEventListener("change", function () {
-
-            LoadCities()
-        })
-        LoadCities()
-        async function LoadCities() {
-            let response = await fetch("@Url.Content("~/members/city")")
-
-            let datas = await response.json()
-            datas.forEach(city => {
-                const opt = new Option(city, city)
-                selCity.options.add(opt)
-            })
-        }
-
-
+      
     </script>
+   
     @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
 }

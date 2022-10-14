@@ -37,9 +37,11 @@ namespace MIST143_Traveler
                 //���n�J�ɷ|�۰ʾɨ�o�Ӻ�}
                 option.LoginPath = new PathString("/api/Login/NoLogin");
             });
-
             services.AddControllersWithViews();
             services.AddSession();
+            services.AddMvc();
+            services.AddHttpContextAccessor();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

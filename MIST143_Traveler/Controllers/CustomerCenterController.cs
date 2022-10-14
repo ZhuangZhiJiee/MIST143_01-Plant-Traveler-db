@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MIST143_Traveler.Models;
 using MIST143_Traveler.Models.miViewModel;
+
+using MIST143_Traveler.MViewModel;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,10 +28,12 @@ namespace MIST143_Traveler.Controllers
 
         public IActionResult newLoginpag()
         {
+
             return View();
+
+
         }
         [HttpPost]
-
         public IActionResult newLoginpag(CLogin vModel)
         {
             Member cust = new PlanetTravelContext().Members.FirstOrDefault
@@ -40,7 +45,6 @@ namespace MIST143_Traveler.Controllers
                     string jsonUser = JsonSerializer.Serialize(cust);
                     HttpContext.Session.SetString(
                         CDictionary.SK_Login, jsonUser);
-
                     return RedirectToAction("index", "home");
                     //return Content("123", "text/plain", System.Text.Encoding.UTF8);
                     //return Json("成功");
@@ -49,7 +53,6 @@ namespace MIST143_Traveler.Controllers
             }
 
             return View();
-
 
         }
         public IActionResult List()
@@ -98,10 +101,22 @@ namespace MIST143_Traveler.Controllers
         //左邊功能結束
 
 
-        public IActionResult Createmember(string Email)
+        public IActionResult Createmember()
         {
             
             return View();
+        }
+        [HttpPost]
+        public IActionResult Createmember(CMemberView CCC)
+        {
+            var q = _PlanetTravelContext.Cities.FirstOrDefault(a => a.CityName == CCC.城市);
+            CCC.CityId = q.CityId;
+            Member aa = CCC.member;
+            
+            _PlanetTravelContext.Add(aa);
+            _PlanetTravelContext.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
         }
         public IActionResult LoginModal()
         {
@@ -116,6 +131,13 @@ namespace MIST143_Traveler.Controllers
             return View();
         }
         
+
+        public IActionResult City()
+        {
+            var city = _PlanetTravelContext.Cities.Where(a => a.CountryId == 1).Select(a => a.CityName);
+            return Json(city);
+        }
+     
 
         //public IActionResult 訂單管理_未使用()
         //{

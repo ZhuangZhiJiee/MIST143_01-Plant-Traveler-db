@@ -14,6 +14,9 @@
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
+    @using Microsoft.AspNetCore.Http
+    @using System.Text.Json;
+    @inject IHttpContextAccessor Accessor
     <!-- 從這邊開始複製header跟nav，上面引用的css位置注意一下-->
     <header class="main-header">
         <div class="container">
@@ -38,9 +41,26 @@
                 <a href="@Url.Content("~/ProductListPage/ProductListHomePage")">最近逛過</a>
 
                 <a href="@Url.Content("~/Shopping/ShoppingCart")">購物車</a>
-                <a class="btn btn-outline-warning" onclick="showmodal('@Url.Action("Createmember","CustomerCenter",null,Context.Request.Scheme)',null)">註冊</a>
-               
-                <a  class="btn btn-outline-light" href="@Url.Content("~/CustomerCenter/newLoginpag")">登入</a>
+
+                @{
+                    if (Accessor.HttpContext.Session.Keys.Contains(CDictionary.SK_Login))
+                    {
+
+                        <a class="btn btn-outline-light" href="@Url.Content("~/CustomerCenter/newLoginpag")">登出</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-warning" onclick="showmodal('@Url.Action("Createmember","CustomerCenter",null,Context.Request.Scheme)',null)">註冊</a>
+
+                        <a class="btn btn-outline-light" href="@Url.Content("~/CustomerCenter/newLoginpag")">登入</a>
+
+                    }
+
+                }
+
+
+
+
                 <a href="https://localhost:44338/Home/Index">後台</a>
             </nav>
             <div class="border-bottom-line"></div>
@@ -61,7 +81,7 @@
             </div>
         </div>
         <!--註冊的光箱結束-->
-      
+
 
     </header>
     <nav>
@@ -152,12 +172,14 @@
     </footer>
 
     <!-- 結束 -->
+
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
             integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
             crossorigin="anonymous"></script>
+
     @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/jquery.unobtrusive-ajax.min.js"></script>
+    @*<script src="~/js/jquery.unobtrusive-ajax.min.js"></script>*@
     <script src="https://cdn.jsdelivr.net/npm/&#64;popperjs/core@2.11.6/dist/umd/popper.min.js"
             integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
             crossorigin="anonymous"></script>
