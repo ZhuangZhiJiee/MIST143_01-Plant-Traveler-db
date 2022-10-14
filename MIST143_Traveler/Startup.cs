@@ -31,15 +31,17 @@ namespace MIST143_Traveler
             {
                 options.UseSqlServer(Configuration.GetConnectionString("PlanetTravelConnection"));
             });
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
             {
-                //未登入時會自動導到這個網址
+                //嚙踝蕭嚙緯嚙皚嚙褕會嚙諛動導剁蕭o嚙諉綽蕭}
                 option.LoginPath = new PathString("/api/Login/NoLogin");
             });
             services.AddControllersWithViews();
             services.AddSession();
             services.AddMvc();
             services.AddHttpContextAccessor();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +64,7 @@ namespace MIST143_Traveler
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

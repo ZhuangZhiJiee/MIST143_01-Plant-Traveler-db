@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MIST143_Traveler.Models;
 using MIST143_Traveler.Models.miViewModel;
+
 using MIST143_Traveler.MViewModel;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,9 +25,13 @@ namespace MIST143_Traveler.Controllers
         {
             return PartialView();
         }
+
         public IActionResult newLoginpag()
         {
+
             return View();
+
+
         }
         [HttpPost]
         public IActionResult newLoginpag(CLogin vModel)
@@ -119,17 +125,20 @@ namespace MIST143_Traveler.Controllers
         
         
 
+
         public IActionResult Forgetpas()
         {
             return View();
         }
         
+
         public IActionResult City()
         {
             var city = _PlanetTravelContext.Cities.Where(a => a.CountryId == 1).Select(a => a.CityName);
             return Json(city);
         }
      
+
         //public IActionResult 訂單管理_未使用()
         //{
         //    return PartialView();
