@@ -88,13 +88,33 @@
         act.value = "d555@gmail.com";
         pas.value = "a1234567";
     }
+        //var postData = {
+        //    actt: document.querySelector("#Actemail"),
+        //    pass: document.querySelector("#Pas")
+        //};
+        @*$.ajax({
+            url: '@Url.Action("/api/login")',
+            method: 'POST',
+            dataType: 'JSON',
+            data: { data: postData },
+            success: function (datas) {
+                if (datas.Errmsg) {
+                    Swal.fire(datas.Errmsg);
+                    return;
+                }
+                Swal.fire(datas.ResultMsg);
+            },
+            error: function (err) {
+                Swal.fire(err);
+            },
 
-        fetch("@Url.Content("~/CustomerCenter/CustomerInfo")")
+        });*@
+        @*fetch("@Url.Content("~/CustomerCenter/CustomerInfo")")
             .then(Response => {
                 console.log(Response.status)
                 console.log(Response)
                 console.log(Response.text)
-            })
+            })*@
     @*const btnL = document.querySelector("btnlog")
     btnL.addEventListener("click", async () => {
         let response = await fetch("@Url.Content("~/CustomerCenter/newLoginpag")")

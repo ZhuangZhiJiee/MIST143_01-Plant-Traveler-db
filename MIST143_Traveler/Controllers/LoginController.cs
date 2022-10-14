@@ -21,10 +21,10 @@ namespace MIST143_Traveler.Controllers
         {
             _PlanetTravelContext = PlanetTrave; 
         }
-        public string LoginApi()
-        {
-            return "123";
-        }
+        //public string LoginApi()
+        //{
+        //    return "123";
+        //}
         [HttpPost]
         public string LoginApi(CLogin Value)
         {

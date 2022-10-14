@@ -38,7 +38,9 @@ namespace MIST143_Traveler.Controllers
                     string jsonUser = JsonSerializer.Serialize(cust);
                     HttpContext.Session.SetString(
                         CDictionary.SK_Login, jsonUser);
-                    return RedirectToAction("List");
+                    return RedirectToAction("index", "home");
+                    //return Content("123", "text/plain", System.Text.Encoding.UTF8);
+                    //return Json("成功");
                 }
             
             }
