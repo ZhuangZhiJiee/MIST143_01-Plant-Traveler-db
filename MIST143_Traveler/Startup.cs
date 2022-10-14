@@ -38,6 +38,8 @@ namespace MIST143_Traveler
             });
             services.AddControllersWithViews();
             services.AddSession();
+            services.AddMvc();
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +62,7 @@ namespace MIST143_Traveler
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
