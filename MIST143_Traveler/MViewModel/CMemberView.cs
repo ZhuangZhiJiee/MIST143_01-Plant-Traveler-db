@@ -1,6 +1,7 @@
 ﻿using MIST143_Traveler.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,6 +32,7 @@ namespace MIST143_Traveler.MViewModel
             get { return _member.MemberName; }
             set { _member.MemberName = value; }
         }
+        [Required(ErrorMessage ="密碼未填寫")]
         public string Password
         {
             get { return _member.Password; }

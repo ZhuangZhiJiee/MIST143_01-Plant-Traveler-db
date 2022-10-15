@@ -45,23 +45,48 @@ namespace MIST143_Traveler.Controllers
                     string jsonUser = JsonSerializer.Serialize(cust);
                     HttpContext.Session.SetString(
                         CDictionary.SK_Login, jsonUser);
-                    return RedirectToAction("index", "home");
+                    //return RedirectToAction("index", "home");
                     //return Content("123", "text/plain", System.Text.Encoding.UTF8);
-                    //return Json("成功");
+                    return Json(new {Res=true,Msg="成功"});
                 }
-            
+                 else
+                    return Json(new {Res = false, Msg = "失敗" });
+
             }
 
             return View();
 
         }
-        public IActionResult List()
+        public IActionResult List(int MembersId)
         {
-            //PlanetTravelContext db = new PlanetTravelContext();//測試一下
+            if (MembersId != 0)
+            {
+                var Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == MembersId);
+                if (Cus != null)
+                {
+                    return View(Cus);
+                }
+            }
 
-            return View();
+            return View("test");
+            
+
         }
         //左邊功能開始
+        public IActionResult Order(int MembersId)//客戶找出訂單
+        {
+            if (MembersId != 0)
+            {
+                var Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == MembersId);
+                if (Cus != null)
+                {
+                    var od = _PlanetTravelContext.Orders.Where(b => b.MemberId == Cus.MembersId);
+                    return View(od);
+                }
+            }
+            return View("ProductManage");
+        }
+
         public IActionResult ProductManage()
         {
             return PartialView();
@@ -84,22 +109,41 @@ namespace MIST143_Traveler.Controllers
             return PartialView();
         }
        
-        public IActionResult CustomerInfo(Member memberid)
+        public IActionResult CustomerInfo(int MembersId)
         {
-            IEnumerable<Member> datas = null;
-          
-                datas = _PlanetTravelContext.Members.Where(a => a.Email == memberid.Email);
-            
-            return PartialView(datas);
+
+            if (MembersId != 0)
+            {
+                var Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == MembersId);
+                //var ctt = _PlanetTravelContext.Cities.FirstOrDefault(b => b.CityId == CityId);
+                //CMemberView cm = new CMemberView();
+                //cm.城市 = ctt.CityName;
+                //Member gg = cm.member;
+                if (Cus != null)
+                {
+                    return View(Cus);
+                }
+            }
+
+            return View("test");
         }
         [HttpPost]
-        public IActionResult CustomerInfo()
+        public IActionResult CustomerInfo(CMemberView inCus)
         {
-            //_PlanetTravelContext.Members
+
+            var info = _PlanetTravelContext.Members.Where(a => a.Email == inCus.Email);
+
+            var ct = _PlanetTravelContext.Cities.FirstOrDefault(a => a.CityName == inCus.城市);
+            ct.CityId = inCus.CityId;
+            
             return PartialView();
         }
         //左邊功能結束
+        public IActionResult test()
+        {
 
+            return View();
+        }
 
         public IActionResult Createmember()
         {
@@ -107,9 +151,10 @@ namespace MIST143_Traveler.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Createmember(CMemberView CCC)
+        public IActionResult Createmember(CMemberView CCC)//註冊
         {
             var q = _PlanetTravelContext.Cities.FirstOrDefault(a => a.CityName == CCC.城市);
+
             CCC.CityId = q.CityId;
             Member aa = CCC.member;
             
@@ -122,8 +167,16 @@ namespace MIST143_Traveler.Controllers
         {
             return View();
         }
-        
-        
+
+        public IActionResult CheckPas(string Email)
+        {
+            var e = _PlanetTravelContext.Members.Where(a => a.Email == Email).ToList();
+            if (e.Count>0)
+                return Content("此帳號已存在", "text/plain");
+            
+            else
+                return Content("帳號可以使用", "text/plain");
+        }
 
 
         public IActionResult Forgetpas()
@@ -137,7 +190,21 @@ namespace MIST143_Traveler.Controllers
             var city = _PlanetTravelContext.Cities.Where(a => a.CountryId == 1).Select(a => a.CityName);
             return Json(city);
         }
-     
+      
+        public IActionResult Delete(int? id)
+        {
+            if (id != null)
+            {
+
+                var c =_PlanetTravelContext.Orders.FirstOrDefault(a => a.OrderId == id);
+                if (c != null)
+                {
+                    _PlanetTravelContext.Orders.Remove(c);
+                    _PlanetTravelContext.SaveChanges();
+                }
+            }
+            return RedirectToAction("ProductManage");
+        }
 
         //public IActionResult 訂單管理_未使用()
         //{
