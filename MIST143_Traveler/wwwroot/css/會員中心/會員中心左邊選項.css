@@ -1,0 +1,13 @@
+﻿.按鈕顏色2 {
+    color: black;
+    border: none;
+    min-width: 275px;
+    align-items: center
+}
+
+.小圖示 {
+    margin-right: 10px;
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+}

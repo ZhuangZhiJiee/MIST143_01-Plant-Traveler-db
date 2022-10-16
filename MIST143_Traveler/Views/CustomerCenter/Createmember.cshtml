@@ -25,54 +25,38 @@
                         <div class="inputs p-2 flex-fill">
                             @*<header>EMAIL帳號</header>*@
                             <label asp-for="Email" class="control-label"></label>
-                            <input class="form-control" type="email" asp-for="Email" placeholder="123" aria-label="default input example" name="Email" id="Email">
+                            <input class="form-control" type="email" asp-for="Email" placeholder="123" aria-label="default input example" name="Email" id="Email" required>
                             <small id="sm" class="form-text text-muted"></small>
                         </div>
                     </div>
-                    @*<div class="form-group">
-                            <label asp-for="MemberName" class="control-label"></label>
-                            <input asp-for="MemberName" class="form-control" />
-                            <span asp-validation-for="MemberName" class="text-danger"></span>
-                        </div>*@
+
                     <div class="box_body d-flex  mb-2">
                         <div class="inputs p-2 flex-fill">
                             <label asp-for="MemberName" class="control-label"></label>
-                            <input class="form-control" asp-for="MemberName" type="text" placeholder="名稱" aria-label="default input example" name="MemberName" id="Name">
+                            <input class="form-control" asp-for="MemberName" type="text" placeholder="名稱" aria-label="default input example" name="MemberName" id="Name" required>
                         </div>
 
                         <div class="inputs p-2 flex-fill">
                             <label asp-for="Phone" class="control-label"></label>
-                            <input class="form-control" asp-for="Phone" type="text" placeholder="PHONE" aria-label="default input example" name="Phone" id="Phone">
+                            <input class="form-control" asp-for="Phone" type="text" placeholder="PHONE" aria-label="default input example" name="Phone" id="Phone" required>
                         </div>
                     </div>
 
                     <div class="box_body d-flex  mb-2">
                         <div class="inputs p-2 flex-fill">
+
                             <label asp-for="Password" class="control-label"></label>
-                            <input class="form-control" asp-for="Password" type="password" placeholder="password" aria-label="default input example" name="Password" id="Password">
+                            <input class="form-control" asp-for="Password" type="password" placeholder="password" aria-label="default input example" name="Password" id="Password1" required>
                         </div>
 
                         <div class="inputs p-2 flex-fill">
                             <header>再次確認密碼</header>
-                            <input class="form-control" type="password" placeholder="password" aria-label="default input example" id="Password2">
+                            <input class="form-control" type="password" placeholder="password" aria-label="default input example" id="Password2" required>
+                            <small id="checkps" class="form-text text-muted"></small>
                         </div>
                     </div>
 
-                    @*<div class="form-group">
-                            <label asp-for="Password" class="control-label"></label>
-                            <input asp-for="Password" class="form-control" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>*@
-                    @*<div class="form-group">
-                            <label asp-for="Phone" class="control-label"></label>
-                            <input asp-for="Phone" class="form-control" />
-                            <span asp-validation-for="Phone" class="text-danger"></span>
-                        </div>*@
-                    @*<div class="form-group">
-                            <label asp-for="Address" class="control-label"></label>
-                            <input asp-for="Address" class="form-control" />
-                            <span asp-validation-for="Address" class="text-danger"></span>
-                        </div>*@
+
                     <div class="box_body d-flex  mb-2">
                         <div class="inputs p-2 ">
                             <header>居住縣市</header>
@@ -92,14 +76,10 @@
 
                         <div class="inputs p-2 flex-grow-1">
                             <header>地址</header>
-                            <input class="form-control" asp-for="Address" type="text" placeholder="北投區111號" aria-label="default input example" name="Address" id="address">
+                            <input class="form-control" asp-for="Address" type="text" placeholder="北投區111號" aria-label="default input example" name="Address" id="address" required>
                         </div>
                     </div>
-                    @*<div class="form-group">
-                            <label asp-for="MemberName" class="control-label"></label>
-                            <input asp-for="MemberName" class="form-control" />
-                            <span asp-validation-for="MemberName" class="text-danger"></span>
-                        </div>*@
+
                     <div class="box_body d-flex  mb-2">
                         <div class="inputs p-2 flex-fill">
                             <header>生日</header>
@@ -109,7 +89,7 @@
                         <div class="inputs p-2 flex-fill">
                             <header>生理性別</header>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="Gender" value="男" id="Man">
+                                <input class="form-check-input" type="radio" name="Gender" value="男" id="Man" checked>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     男
                                 </label>
@@ -123,26 +103,13 @@
                         </div>
                     </div>
 
-                
-                    @*<div class="form-group">
-                            <label asp-for="BirthDay" class="control-label"></label>
-                            <input asp-for="BirthDay" class="form-control" />
-                            <span asp-validation-for="BirthDay" class="text-danger"></span>
-                        </div>*@
 
-                    @*<div class="form-group">
-                            <label asp-for="MemberStatusId" class="control-label"></label>
-                            <input asp-for="MemberStatusId" class="form-control" />
-                            <span asp-validation-for="MemberStatusId" class="text-danger"></span>
-                        </div>*@
-                    @*<div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-primary" />
-                        </div>*@
+
                     <div class="modal-footer">
 
                         <button type="button" class="btn btn-success" id="sb1" onclick="BtnDemo()">Demo</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                        <button type="submit" class="btn btn-primary ccc" data-bs-dismiss="modal" onclick="Btncre()">註冊</button>
+                        <input type="submit" class="btn btn-primary ccc">
                     </div>
 
 
@@ -154,12 +121,6 @@
 
 </form>
 
-
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 <script>
     //DEMO
 
@@ -168,15 +129,15 @@
         $('#Name').val("恆佑")
         $('#Email').val("ask@yahoo.com.tw")
         $('#Phone').val("0966666666")
-        $('#Password').val("a77777777")
+        $('#Password1').val("a77777777")
         $('#Password2').val("a77777777")
 
         $('#address').val("和平東路二段106號11樓")
     }
-    const Btncre = () => {
-        alert("註冊成功")
-    }
-
+    //const Btncre = () => {
+    //    alert("註冊成功")
+    //}
+     //抓資料庫城市資料
     const selCity = document.querySelector("#selectC")
     async function LoadCities() {
     let response = await fetch("@Url.Content("~/CustomerCenter/city")")
@@ -188,32 +149,25 @@
     }
     LoadCities()
 
-    //var result="";
-    //$("input[type:checked]").each(function () {
-    //    result = this.val();
-    //    console.log(result);
-    //}
-    var method = $("input[name='Gender']:checked").val();
-    console.log(method)
+    //判斷密碼是否一致
+    let emsm=document.querySelector("#sm")
+    let smps = document.querySelector("#checkps")
+    let ps1=document.querySelector("#password1")
+    let ps2 = document.querySelector("#password2")
+    @*ps2.addEventListener("blur", async () => {
+            let response = await fetch("@Url.Content("~/CustomerCenter/CheckPas")")
+            let datas = await response.text()
+            smps.textContent = datas
 
+    })*@
+    //判斷是否有人使用帳號
+    let Em = document.querySelector("#Email")
+    Em.addEventListener("blur", async () => {
+        let response = await fetch("@Url.Content("~/CustomerCenter/CheckPas")" + `?name=${Em.value}`)
+            let datas = await response.text()
+            emsm.textContent = datas
 
-
-
-    //性別
-    /*$("#sb1").click(function () {*/
-
-    //    console.log(method);
-    //    if (typeof (method) == "undefined") {
-    //        alert("請選取操作方式！");
-    //        return false;
-    //    }
-
+    })
 </script>
+@*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
 
-@section Scripts {
-    <script>
-      
-    </script>
-   
-    @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
-}
