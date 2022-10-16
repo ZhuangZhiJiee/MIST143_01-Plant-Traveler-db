@@ -11,7 +11,7 @@
 }
 <h1>歡迎成為會員</h1>
 
-@*<h4>Member</h4>*@
+
 <hr />
 
 <form asp-action="Createmember">
@@ -83,7 +83,7 @@
                     <div class="box_body d-flex  mb-2">
                         <div class="inputs p-2 flex-fill">
                             <header>生日</header>
-                            <input class="form-control" type="date" asp-for="BirthDay" value="1990-01-01" aria-label="default input example" name="BirthDay">
+                            <input class="form-control" type="date" asp-for="BirthDay" value="1990-01-01" id="BirthDay" aria-label="default input example" name="BirthDay">
                         </div>
 
                         <div class="inputs p-2 flex-fill">
@@ -120,7 +120,12 @@
     </div>
 
 </form>
+@section Scripts{ 
+    <script>
+    
 
+    </script>
+}
 <script>
     //DEMO
 
@@ -137,6 +142,19 @@
     //const Btncre = () => {
     //    alert("註冊成功")
     //}
+    var Postdata = {
+        Email=$("#Email").val(),
+        MemberName=$("#MemberName").val(),
+        Phone=$("#Phone").val(),
+        Email=$("#Email").val(),
+        Address=$("#Address").val(),
+        BirthDay=$("#BirthDay").val(),
+        Gender=$("#Gender").val()
+    }
+    @*$.ajax({
+        url: '@Url.Action("Createmember", "CustomerCenter")',
+
+    })*@
      //抓資料庫城市資料
     const selCity = document.querySelector("#selectC")
     async function LoadCities() {
@@ -148,26 +166,27 @@
     })
     }
     LoadCities()
-
     //判斷密碼是否一致
-    let emsm=document.querySelector("#sm")
-    let smps = document.querySelector("#checkps")
-    let ps1=document.querySelector("#password1")
-    let ps2 = document.querySelector("#password2")
-    @*ps2.addEventListener("blur", async () => {
-            let response = await fetch("@Url.Content("~/CustomerCenter/CheckPas")")
-            let datas = await response.text()
-            smps.textContent = datas
+    //let emsm=document.querySelector("#sm")
+    //let smps = document.querySelector("#checkps")
+    //let ps1=document.querySelector("#password1")
+    //let ps2 = document.querySelector("#password2")
+    //ps2.addEventListener("blur", () => {
+    //        if 
+                
+    //            (ps1 != ps2)
+    //            smps.textContent = "密碼必須一致!";
 
-    })*@
+    //})
     //判斷是否有人使用帳號
     let Em = document.querySelector("#Email")
     Em.addEventListener("blur", async () => {
-        let response = await fetch("@Url.Content("~/CustomerCenter/CheckPas")" + `?name=${Em.value}`)
+        let response = await fetch("@Url.Content("~/CustomerCenter/CheckPas")" + `?Email=${Em.value}`)
             let datas = await response.text()
             emsm.textContent = datas
 
     })
+
 </script>
 @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
 

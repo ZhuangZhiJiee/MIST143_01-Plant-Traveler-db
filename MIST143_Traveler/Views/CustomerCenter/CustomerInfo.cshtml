@@ -20,11 +20,11 @@
         </div>
 
         <div class="box_body d-flex  mb-2">
-        
+
             <div class="inputs p-2 flex-fill">
                 <header>名稱</header>
 
-                <input class="form-control" type="text" placeholder="名稱" aria-label="default input example" name="MemberName">
+                <input class="form-control" type="text" asp-for="MemberName" placeholder="名稱" aria-label="default input example" name="MemberName">
             </div>
             <div class="inputs p-2 flex-fill">
                 <header>聯繫電話</header>
@@ -36,7 +36,6 @@
             <div class="inputs p-2 ">
                 <header>居住縣市</header>
                 <select class="form-select" aria-label="Default select example" asp-for="CityId" name="城市">
-                    
                 </select>
             </div>
 
@@ -68,10 +67,9 @@
 </div>
 
 
-
-            
-
-
 @section Scripts {
+    
+      <script></script>
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

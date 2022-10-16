@@ -1,5 +1,5 @@
-﻿@model MIST143_Traveler.Models.Member
-@*@model MIST143_Traveler.MViewModel.CMemberView*@
+﻿@model MIST143_Traveler.MViewModel.CMemberView
+
 @using Microsoft.AspNetCore.Http
 @using System.Text.Json;
 @inject IHttpContextAccessor Accessor
@@ -73,7 +73,7 @@
                         <div class="box_body d-flex  mb-2">
                             <div class="inputs p-2 ">
                                 <header>居住縣市</header>
-                                <select class="form-select" aria-label="Default select example" asp-for="CityId" id="CityId" name="CityName">
+                                <select class="form-select" aria-label="Default select example" asp-for="CityId" id="CityId" name="城市">
                                 </select>
                             </div>
 
@@ -115,7 +115,6 @@
 
 @section Scripts{
     <script>
-        const cont = document.querySelector("#cont")
         const Btnsave = document.querySelector("#send")
         const bb = () => {
 
@@ -178,33 +177,6 @@
              $('#btnorder').removeClass("active")
     })
 
-        @*$('#btnorder').click(function () {
-            $('#cont').load(
-            $.ajax({
-            url:'@Url.Action("Order","CustomerCenter",new {v.MembersId})',
-            method: 'Post',
-            dataType: 'int',
-            )
-        })*@
-        @*const btnord = document.querySelector("#btnorder")
-        btnord.addEventListener("click", async () => {
-            let response = await fetch('@Url.Action("Order","CustomerCenter",new {v.MembersId})')
-            let result = await response.json()
-            
-            let htmldatas = result.map(data => {
-                return (`<tr>${data[0]}</tr>`)
-            })
-            console.log(result)
-            
-            console.log(htmldatas[0])
-            cont.innerHTML = htmldatas
-        })*@
-
-        @*$('#btnorder').click(function () {
-            $.getJSON('@Url.Content("~/CustomerCenter/Order")', { "MembersId": "v.MembersId" }, function (datas) {
-                console.log(datas)
-            })
-        })*@
 
         $('#btnorder').click(function () {
         $('#cont').load('@Url.Action("Order","CustomerCenter",new {v.MembersId})')
@@ -261,6 +233,5 @@
 
 
     </script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
