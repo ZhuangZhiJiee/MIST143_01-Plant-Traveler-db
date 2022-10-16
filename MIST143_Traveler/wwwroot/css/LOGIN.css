@@ -90,6 +90,6 @@ input:focus {
 .main-header{
     display: none;
 }
-.main-footer, .border-bottom-line {
+.main-footer, .border-bottom-line, .secondary-nav{
     display: none;
 }

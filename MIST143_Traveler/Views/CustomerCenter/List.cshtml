@@ -1,54 +1,122 @@
-﻿@section Styles{
+﻿@model MIST143_Traveler.Models.Member
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@section Styles{
 
 }
 <link href="~/css/客服中心.css" rel="stylesheet" />
-<link href="~/css/客服中心訂單內容物.css" rel="stylesheet" />
-<body>
+@*<link href="~/css/客服中心訂單內容物.css" rel="stylesheet" />*@
+<link href="~/css/會員中心/會員中心左邊選項.css" rel="stylesheet" />
 
-    <article>
-        <div class="container p-5">
-            <div class="row">
-                <div class="col-12 col-md-3">
-                    <div class="card" style="width: 18rem;">
+    <body>
+
+        <article>
+            <div class="container p-5">
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <div class="card" style="width: 18rem;">
+                            <div>
+                                <img src="@Url.Content("~/images/contact/大頭貼修改.png")" />
+                            </div>
+                            <div class="card-body mb-3">
+                                <h5 class="card-title text-center">橘子</h5>
+
+                                <input type="file" class="form-control" id="inputGroupFile02">
+                            </div>
+                        </div>
+
+
+
                         <div>
-                            <img src="@Url.Content("~/images/contact/大頭貼修改.png")" />
-                        </div>
-                        <div class="card-body mb-3">
-                            <h5 class="card-title text-center">橘子</h5>
-
-                            <input type="file" class="form-control" id="inputGroupFile02">
+                            <div><button id="btncus" class="btn btn-outline-warning 按鈕顏色2 active 選單"><span class="bi bi-people 小圖示"></span>個人資訊</button></div>
+                            <div>@*@Html.ActionLink("個人資訊", "List", "CustomerCenter", null, new { @class = "list-group-item list-group-item-action active", aria_current = "true"  })*@</div>
+                            <div><button id="btnorder" class="btn btn-outline-warning 按鈕顏色2"><span class=" bi bi-bag 小圖示"></span>訂單管理</button></div>
+                            @*<div>@Html.ActionLink("訂單管理", "ProductManage", "CustomerCenter", null, new { @class = "list-group-item list-group-item-action" })</div>*@
+                            <div><button id="btnlove" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-heart 小圖示"></span>我的最愛</button></div>
+                            <div><button id="btnreview" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-chat-left-text 小圖示"></span>我的評論</button></div>
+                            <div><button id="btnstar" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-star 小圖示"></span>Star積分</button></div>
+                            <div><button id="btncop" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-wallet2 小圖示"></span>優惠票券</button></div>
                         </div>
                     </div>
 
-                    
+                    <div id="cont" class="col-12 col-md-9">
+                        <div class="row row-cols-1">
+                            <div class="col 上面空間">
+                                <h3>個人資訊</h3>
+                                <p>以下資訊僅用於幫助你在付款時自動填寫你的個人資料，你的資料將會安全地保存且不會公開</p>
+                            </div>
+                            <div class="box_body d-flex  mb-2">
+                                <div class="inputs p-2 flex-fill">
+                                    <header>EMAIL</header>
+                                    <input class="form-control" type="email" asp-for="Email" placeholder="123" aria-label="default input example" name="EMAIL">
+                                </div>
+                            </div>
 
-                    <div>
-                        <div><button id="btncus" class="btn btn-outline-warning 按鈕顏色2 active 選單"><span class="bi bi-people 小圖示"></span>個人資訊</button></div>
-                        <div>@*@Html.ActionLink("個人資訊", "List", "CustomerCenter", null, new { @class = "list-group-item list-group-item-action active", aria_current = "true"  })*@</div>
-                        <div><button id="btnorder" class="btn btn-outline-warning 按鈕顏色2"><span class=" bi bi-bag 小圖示"></span>訂單管理</button></div>
-                        @*<div>@Html.ActionLink("訂單管理", "ProductManage", "CustomerCenter", null, new { @class = "list-group-item list-group-item-action" })</div>*@
-                        <div><button id="btnlove" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-heart 小圖示"></span>我的最愛</button></div>
-                        <div><button id="btnreview" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-chat-left-text 小圖示"></span>我的評論</button></div>
-                        <div><button id="btnstar" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-star 小圖示"></span>Star積分</button></div>
-                        <div><button id="btncop" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-wallet2 小圖示"></span>優惠票券</button></div>
+                            <div class="box_body d-flex  mb-2">
+                                
+                                <div class="inputs p-2 flex-fill">
+                                    <header>名稱</header>
+                                    <input class="form-control" asp-for="MemberName" type="text" placeholder="名稱" aria-label="default input example" name="MemberName">
+                                </div>
+                                <div class="inputs p-2 flex-fill">
+                                    <header>聯繫電話</header>
+                                    <input class="form-control" type="text" asp-for="Phone" placeholder="PHONE" aria-label="default input example" name="PHONE">
+                                </div>
+                            </div>
+
+                            <div class="box_body d-flex  mb-2">
+                                <div class="inputs p-2 ">
+                                    <header>居住縣市</header>
+                                    <select class="form-select" aria-label="Default select example" name="城市">
+                                   
+                                    </select>
+                                </div>
+
+
+                                <div class="inputs p-2 flex-grow-1">
+                                    <header>地址</header>
+                                    <input class="form-control" type="text" asp-for="Address" placeholder="北投區111號" aria-label="default input example" name="Address">
+                                </div>
+                            </div>
+
+                            <div class="box_body d-flex  mb-2">
+                                <div class="inputs p-2 flex-fill">
+                                    <header>重設密碼</header>
+                                    <input class="form-control" type="text" placeholder="password" aria-label="default input example">
+                                </div>
+
+                                <div class="inputs p-2 flex-fill">
+                                    <header>再次確認密碼</header>
+                                    <input class="form-control" type="text" placeholder="password" aria-label="default input example">
+                                </div>
+                            </div>
+
+                            <div class="d-flex mb-3">
+                                <div class="me-auto p-2">
+                                    <button type="button" class="btn btn-warning 按鈕顏色" id="send">儲存</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div id="cont" class="col-12 col-md-9">
+
 
                 </div>
             </div>
-        </div>
+        </article>
+    </body>
 
-    </article>
-</body>
 @section Scripts{
     <script>
-        $('#cont').load('@Url.Content("~/CustomerCenter/CustomerInfo")')
+        @*$('#cont').load('@Url.Content("~/CustomerCenter/CustomerInfo")')*@
+        @{var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+                var v = JsonSerializer.Deserialize<Member>(OBJ); }
+        $('#btncus').click(function () {
 
-         $('#btncus').click(function () {
-        $('#cont').load('@Url.Content("~/CustomerCenter/CustomerInfo")')
-             $(this).addClass("btn btn-outline-warning 按鈕顏色2 active")//訂單按鈕
+            $('#cont').load('@Url.Action("CustomerInfo","CustomerCenter",new {v.MembersId})')
+            
+             $(this).addClass("btn btn-outline-warning 按鈕顏色2 active")//會員資訊按鈕
              $('#btnlove').removeClass("active")
              $('#btnreview').removeClass("active")
              $('#btnstar').removeClass("active")
@@ -57,8 +125,8 @@
     })
 
 
-    $('#btnorder').click(function () {
-        $('#cont').load('@Url.Content("~/CustomerCenter/ProductManage")')
+        $('#btnorder').click(function () {
+        $('#cont').load('@Url.Action("Order","CustomerCenter",new {v.MembersId})')
         $(this).addClass("btn btn-outline-warning 按鈕顏色2 active")//訂單按鈕
         $('#btnlove').removeClass("active")
         $('#btnreview').removeClass("active")
@@ -109,7 +177,7 @@
         })
 
 
-    
+
 
     </script>
 

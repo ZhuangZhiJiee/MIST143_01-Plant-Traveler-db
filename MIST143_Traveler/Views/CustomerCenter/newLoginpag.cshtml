@@ -22,15 +22,15 @@
 
 </head>
 
-@using (Html.BeginForm())
+@*@using (Html.BeginForm())
 {
 
-    @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()*@
     <body>
 
 
         <div class="container">
-            <div class="d-flex justify-content-center h-100 p-5">
+            <div class="d-flex justify-content-center h-100 p-5 mt-5">
                 <div class="card">
                     <div class="card-header">
                         <h3>Sign In</h3>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="card-body">
 
-                        @*<form name="userInfo" method="post" enctype="application/x-www-form-urlencoded" action="~/Login/LoginApi">*@
+                        @*<form name="userInfo" method="post" enctype="application/x-www-form-urlencoded" action="~/CustomerCenter/newLogh">*@
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -60,7 +60,7 @@
                             <input type="checkbox">記住我
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Login" id="btnlog" class="btn float-right login_btn">
+                            <input type="submit" value="Login" onclick="BtnLogin()" id="btnlog" class="btn float-right login_btn">
                         </div>
                         @*</form>*@
 
@@ -81,43 +81,59 @@
 
     </body>
     @*</html>*@
-}
+@*}*@
 @section Scripts{
     <script>
 
     const DemoValue = () => {
         let act = document.querySelector("#Actemail");
         let pas = document.querySelector("#Pas");
-        Swal.fire(
-            'Good job!',
-            'You clicked the button!',
-            'success'
-        )
+        //Swal.fire(
+        //    'Good job!',
+        //    'You clicked the button!',
+        //    'success'
+        //)
         act.value = "d555@gmail.com";
         pas.value = "a1234567";
     }
 
-        //var postData = {
-        //    actt: document.querySelector("#Actemail"),
-        //    pass: document.querySelector("#Pas")
-        //};
-        @*$.ajax({
-            url: '@Url.Action("/api/login")',
+        const BtnLogin = () => {
+           
+        var postData = {
+            Email: $("#Actemail").val(),
+            Password: $("#Pas").val()
+            };
+            
+          
+            
+        $.ajax({
+            url: '@Url.Action("newLoginpag","CustomerCenter")',
             method: 'POST',
-            dataType: 'JSON',
-            data: { data: postData },
-            success: function (datas) {
-                if (datas.Errmsg) {
-                    Swal.fire(datas.Errmsg);
+            dataType: 'JSON',//前端給後端
+            data: { vModel: postData },
+            success: function (datas) {//從後端傳回前端的動作
+                
+                if (!datas.res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '輸入錯誤',
+                        text: datas.msg,
+                        
+                    })
+                    /*Swal.fire(datas.msg);*/
                     return;
                 }
-                Swal.fire(datas.ResultMsg);
+                
+              
+                window.location = "/Home/Index";
+                
             },
             error: function (err) {
-                Swal.fire(err);
+                Swal.fire('請輸入資料');
             },
 
-        });*@
+        });
+        }
         @*fetch("@Url.Content("~/CustomerCenter/CustomerInfo")")
             .then(Response => {
                 console.log(Response.status)
