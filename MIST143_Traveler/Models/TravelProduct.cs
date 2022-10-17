@@ -22,6 +22,9 @@ namespace MIST143_Traveler.Models
         public string Description { get; set; }
         public int CountryId { get; set; }
         public int Cost { get; set; }
+        public string EventIntroduction { get; set; }
+        public string PreparationDescription { get; set; }
+        public string ProductStatus { get; set; }
 
         public virtual Country Country { get; set; }
         public virtual TravelProductType TravelProductType { get; set; }
