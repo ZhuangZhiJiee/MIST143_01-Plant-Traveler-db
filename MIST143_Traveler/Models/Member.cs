@@ -12,6 +12,7 @@ namespace MIST143_Traveler.Models
         public Member()
         {
             MemberMessages = new HashSet<MemberMessage>();
+            Myfavorites = new HashSet<Myfavorite>();
             Orders = new HashSet<Order>();
         }
 
@@ -32,6 +33,7 @@ namespace MIST143_Traveler.Models
         public virtual City City { get; set; }
         public virtual MemberStatus MemberStatus { get; set; }
         public virtual ICollection<MemberMessage> MemberMessages { get; set; }
+        public virtual ICollection<Myfavorite> Myfavorites { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

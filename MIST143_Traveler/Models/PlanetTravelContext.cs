@@ -43,7 +43,7 @@ namespace MIST143_Traveler.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=PlanetTravel;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=192.168.36.26;Initial Catalog=PlanetTravel;User ID=yo;Password=1234");
             }
         }
 
@@ -56,6 +56,8 @@ namespace MIST143_Traveler.Models
                 entity.ToTable("Admin");
 
                 entity.Property(e => e.AdminId).HasColumnName("AdminID");
+
+                entity.Property(e => e.Account).HasMaxLength(50);
 
                 entity.Property(e => e.AdminName)
                     .IsRequired()
@@ -73,6 +75,8 @@ namespace MIST143_Traveler.Models
                 entity.Property(e => e.AdminStatusId).HasColumnName("AdminStatusID");
 
                 entity.Property(e => e.AdminId).HasColumnName("AdminID");
+
+                entity.Property(e => e.AdminStatus1).HasColumnName("AdminStatus");
 
                 entity.HasOne(d => d.Admin)
                     .WithMany(p => p.AdminStatuses)
@@ -235,6 +239,12 @@ namespace MIST143_Traveler.Models
                 entity.Property(e => e.MembersId).HasColumnName("MembersID");
 
                 entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
+
+                entity.HasOne(d => d.Members)
+                    .WithMany(p => p.Myfavorites)
+                    .HasForeignKey(d => d.MembersId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Myfavorites_Members");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -389,6 +399,10 @@ namespace MIST143_Traveler.Models
                 entity.Property(e => e.Description).IsRequired();
 
                 entity.Property(e => e.Price).HasColumnType("money");
+
+                entity.Property(e => e.ProductStatus)
+                    .IsRequired()
+                    .HasDefaultValueSql("('未上架')");
 
                 entity.Property(e => e.TravelProductName)
                     .IsRequired()

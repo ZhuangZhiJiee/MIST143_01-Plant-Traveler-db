@@ -217,6 +217,8 @@ margin-top:3%;
 
 .card {
     margin: 0 auto;
+    margin: 2px;
+    border-radius: 4px;
 }
 
 .asdqwr {

@@ -1,7 +1,9 @@
-﻿
+﻿@model MIST143_Traveler.Models.TravelProduct
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "List";
 }
+
 @section Styles{
 
     <link href="~/css/924自用.css" rel="stylesheet" />
@@ -22,15 +24,15 @@
                 </div>
                 <div class="carousel-inner 照片的包皮">
                     <div class="carousel-item active">
-                        <img src=" https://picsum.photos/1200/400?random2" class="d-block" alt="...">
+                        <img src=" https://localhost:44338/images/TravelProductPictures/d76afc3e-b9f0-495a-97d5-c2788e096483.jpg" class="d-block" alt="...">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="https://picsum.photos/1200/400?random2" class="d-block" alt="...">
+                        <img src="https://localhost:44338/images/TravelProductPictures/d76afc3e-b9f0-495a-97d5-c2788e096483.jpg" class="d-block" alt="...">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="https://picsum.photos/1200/400?random2" class="d-block" alt="...">
+                        <img src="https://localhost:44338/images/TravelProductPictures/d76afc3e-b9f0-495a-97d5-c2788e096483.jpg" class="d-block" alt="...">
                     </div>
 
                 </div>
@@ -55,17 +57,15 @@
             <div class="卡片">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">NT$ 300</h5>
-                        <p class="card-text">若您發現更低的價格，我們承諾提供兩倍差價退費！</p>
-                        <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#joinModal">加入購物車</a>
+                        <h5 class="card-title">NT$ @Model.Price.ToString("###,###,##0")</h5>
+                        <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#joinModal">選擇方案</a>
                     </div>
                 </div>
             </div>
         </div>
 
-
         <div class="標題">
-            <h3>【領券現折100】Klook獨家優惠｜台北101觀景台門票｜萬聖節搗蛋派對｜高空Sky Lounge百萬夜景</h3>
+            <h3>@Model.TravelProductName</h3>
         </div>
         <div class="小介紹">
             <div class="評價">
@@ -85,10 +85,7 @@
         <br />
         <div class="小介紹">
             <ul class="">
-                <li>台北101觀景台門票限時優惠5折起！</li>
-                <li>91樓戶外觀景台天空草原野餐場地，在海拔400公尺的高空之上來場Chill的「天際之旅」</li>
-                <li>即日起至12/31，購票即可獲得全台最高精品咖啡kafeD限定組合券一張，憑券選購一杯精品咖啡與一個經典年輪蛋糕可現折100元</li>
-                <li>即日起至12/31，購票加贈「台北101觀景台NTD100消費券」乙張（乙張門票限兌乙張消費券）</li>
+                @Model.Description
             </ul>
         </div>
         <article class="payContainer choose">
@@ -102,7 +99,7 @@
                                     <div class="infoTitle mt-4">選擇日期及方案組合</div>
                                     <button type="button" class="btn btn-outline-primary mx-3">清除全部</button>
                                 </div>
-                                <div class="subInfoText ps-3">請選擇參加日期</div>
+                                @*<div class="subInfoText ps-3">請選擇參加日期</div>
                                 <div class="selectInput ps-3">
                                     <input type="date" id="start" name="trip-start" class="form-control" value="2022-10-11"
                                            min="2022-10-11" max="2022-12-31">
@@ -111,15 +108,15 @@
                                 <div class="subInfoText ps-3">請選擇時間</div>
                                 <div class="selectInput ps-3">
                                     <select class="form-select" aria-label="Default select example">
-                                        <option selected>09:00 上午 NT$300</option>
+                                        <option selected>09:00 上午 NT$ @Model.Price.ToString("###,###,##0")</option>
                                         <option value="1">01:00 下午 NT$ 300</option>
                                     </select>
-                                </div>
+                                </div>*@
 
                                 <div class="subInfoText ps-3">方案類型</div>
                                 <div class="payUserRow ps-3">
                                     <div class="payUser active">
-                                        【台北101觀景台】最High夜景-搗蛋派對星光票
+                                        @Model.TravelProductName
                                     </div>
                                 </div>
                                 <div class="subInfoText ps-3">數量</div>
@@ -142,25 +139,25 @@
                                         </div>
                                     </div>
                                     @*<div class="chooseNumberRow mx-3 mt-2">
-                                        <div class="chooseTitle">
-                                            兒童
-                                        </div>
-                                        <div class="chooseNumberBlock">
-                                            <button type="button" id="childMinus"
-                                                    class="btn btn-outline-secondary">
-                                                -
-                                            </button>
-                                            <div class="number" id="childNum">0</div>
-                                            <button type="button" id="childPlus"
-                                                    class="btn btn-outline-secondary">
-                                                +
-                                            </button>
-                                        </div>
-                                    </div>*@
+                                            <div class="chooseTitle">
+                                                兒童
+                                            </div>
+                                            <div class="chooseNumberBlock">
+                                                <button type="button" id="childMinus"
+                                                        class="btn btn-outline-secondary">
+                                                    -
+                                                </button>
+                                                <div class="number" id="childNum">0</div>
+                                                <button type="button" id="childPlus"
+                                                        class="btn btn-outline-secondary">
+                                                    +
+                                                </button>
+                                            </div>
+                                        </div>*@
                                 </div>
                                 <div class="px-3 totalRow">
                                     <div class="my-3">
-                                        <div class="titleFontStyle" >NT$ <span id="totalPrice">0</span></div>
+                                        <div class="titleFontStyle">NT$ <span id="totalPrice">0</span></div>
                                         <div class="subInfoText">完成所有必填選項</div>
                                     </div>
                                     <div class="rightBtns">
@@ -187,7 +184,6 @@
 
                 89樓觀景台打造全新空間「高空Sky Lounge區」，以及於91樓戶外觀景平台打造波希米亞風格的「戶外賞月區」，讓夜晚賞月賞景更有氣氛、更加浪漫。白天亦有絕佳視野，可以享受各種風情與色彩的黃昏美景！
             </div>
-
 
             <figure>
                 <img src="~/Images/Product/PIC3.png" class="下圖">
@@ -222,101 +218,99 @@
 
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7229.948194328446!2d121.56082411303484!3d25.034953105720405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abb6e9d93249%3A0xd508f7b3aa02d931!2z5Y-w5YyXMTAx6KeA5pmv5Y-wIFRhaXBlaSAxMDEgb2JzZXJ2YXRvcnk!5e0!3m2!1szh-TW!2stw!4v1664517429937!5m2!1szh-TW!2stw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="下圖"></iframe>
 
-
-
-
-
-
             <div class="活動DIV">
                 <h2><span class="一條根"> </span><span>活動評價</span></h2> @*i love apple*@
             </div>
 
             <div class="評論">
-                <div class="card mb-3" style="max-width: 850px;">@*jjjjjjjjjjj*@
-                    <div class="row g-0">
-
-                        <div class="col-md-1">
-                            <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
-                        </div>
-
-                        <div class="col-md-10">
-                            <div class="card-body">
-                                <h5 class="card-title">恆佑</h5>
-                                <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
-                                <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
-                                <p class="card-text"><small class="text-muted">2022/5/35</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="card mb-3" style="max-width: 850px;">
-                    <div class="row g-0">
+                    @*jjjjjjjjjjj*@
+                <div class="row g-0">
 
-                        <div class="col-md-1">
-                            <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
-                        </div>
+                    <div class="col-md-1">
+                        <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
+                    </div>
 
-                        <div class="col-md-10">
-                            <div class="card-body">
-                                <h5 class="card-title">恆佑</h5>
-                                <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
-                                <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
-                                <p class="card-text"><small class="text-muted">2022/5/35</small></p>
-                            </div>
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title">恆佑</h5>
+                            <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
+                            <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
+                            <p class="card-text"><small class="text-muted">2022/5/35</small></p>
                         </div>
                     </div>
                 </div>
-
-                <div class="card mb-3" style="max-width: 850px;">
-                    <div class="row g-0">
-
-                        <div class="col-md-1">
-                            <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
-                        </div>
-
-                        <div class="col-md-10">
-                            <div class="card-body">
-                                <h5 class="card-title">恆佑</h5>
-                                <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
-                                <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
-                                <p class="card-text"><small class="text-muted">2022/5/35</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
-            <div class="活動DIV">
-                <h2><span class="一條根"> </span><span>常見問題</span></h2>
+            <div class="card mb-3" style="max-width: 850px;">
+                <div class="row g-0">
+
+                    <div class="col-md-1">
+                        <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
+                    </div>
+
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title">恆佑</h5>
+                            <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
+                            <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
+                            <p class="card-text"><small class="text-muted">2022/5/35</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3" style="max-width: 850px;">
+                <div class="row g-0">
+
+                    <div class="col-md-1">
+                        <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
+                    </div>
+
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title">恆佑</h5>
+                            <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
+                            <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
+                            <p class="card-text"><small class="text-muted">2022/5/35</small></p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
+
+        <div class="活動DIV">
+            <h2><span class="一條根"> </span><span>常見問題</span></h2>
+        </div>
+
     </div>
-    <!-- 已加入購物車訊息彈窗 -->
-    <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-         style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <button type="button" class="btn-close modalClose " data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                <div class="infoTitle mt-4"></div>
-                <div class="modal-body text-center ">
-                    <h4>已加入至購物車</h4>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        aria-label="Close">確定</button>
-                </div>
+</div>
+<!-- 已加入購物車訊息彈窗 -->
+<div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button type="button" class="btn-close modalClose " data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            <div class="infoTitle mt-4"></div>
+            <div class="modal-body text-center ">
+                <h4>已加入至購物車</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        aria-label="Close">
+                    確定
+                </button>
             </div>
         </div>
     </div>
-    @section Scripts{
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.1.js"
-                integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-        <script src="~/js/travelOrder.js"></script>
-    }
+</div>
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="~/js/travelOrder.js"></script>
+}
 </body>
 

@@ -207,11 +207,10 @@
     display: flex;
     align-content: center;
     flex-wrap: wrap;
-    max-width: 1200px;
+    max-width: 1159px;
     margin: auto;
     padding: 40px;
 }
-
 .card {
     margin: 0 auto;
     width: 210px;
@@ -730,9 +729,12 @@ a {
 .acchei{
     height:48px;
 }
-.frmcheckin {
-    vertical-align:auto;
+.accordion-btn {
+    width:83%;
 }
-.search-result-activity-container{
-    width:100%;
+.frmcheckin {
+    vertical-align: auto;
+}
+.search-result-activity-container {
+    width: 100%;
 }

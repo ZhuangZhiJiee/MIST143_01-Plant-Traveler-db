@@ -81,7 +81,6 @@ namespace MIST143_Traveler.Controllers
                 var Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId ==MembersId);
                 //cm.MembersId = Cus.MembersId;
                 //var CC = _PlanetTravelContext.Members.FirstOrDefault(x => x.MembersId == cm.MembersId);
-                
                 if (Cus != null)
                 {
                     return View(Cus);
@@ -248,7 +247,6 @@ namespace MIST143_Traveler.Controllers
         {
             if (id != null)
             {
-
                 var c = _PlanetTravelContext.Orders.FirstOrDefault(a => a.OrderId == id);
                 if (c != null)
                 {

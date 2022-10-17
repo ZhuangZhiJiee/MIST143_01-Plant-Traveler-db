@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Productpagelist\**" />
+    <Content Remove="Views\Productpagelist\**" />
+    <EmbeddedResource Remove="Views\Productpagelist\**" />
+    <None Remove="Views\Productpagelist\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
@@ -41,10 +48,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Productpagelist\Components\NewFolder\" />
   </ItemGroup>
 
 </Project>

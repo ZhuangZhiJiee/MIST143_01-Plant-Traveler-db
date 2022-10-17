@@ -1,7 +1,9 @@
-﻿
+﻿@model MIST143_Traveler.Models.TravelProduct
+
 @{
     ViewData["Title"] = "PayData";
 }
+
 @section Styles{
     <link rel="stylesheet" href="~/css/travelOrder.css" />
 }
@@ -41,50 +43,50 @@
                                          class="rounded float-start" alt="...">
                                 </div>
                                 <div class="infoBox">
-                                    <div class="titleFontStyle">【領券現折100】Klook獨家優惠｜台北101觀景台門票｜萬聖節搗蛋派對｜高空Sky Lounge百萬夜景</div>
-                                    <div class="subText">【台北101觀景台】最High夜景-搗蛋派對星光票</div>
+                                    <div class="titleFontStyle">@Model.TravelProductName</div>
+                                    <div class="subText">@Model.EventIntroduction</div>
                                 </div>
                             </div>
                         </div>
                         @*<div class="infoTitle mt-4">參加人資料</div>
-                        <div class="infoBoxOuter">
-                            <div class="infoBoxInner">
-                                <div class="titleFontStyle">成人</div>
-                                <div class="payUserRow">
-                                    <div class="payUser active">
-                                        林恆佑
+                            <div class="infoBoxOuter">
+                                <div class="infoBoxInner">
+                                    <div class="titleFontStyle">成人</div>
+                                    <div class="payUserRow">
+                                        <div class="payUser active">
+                                            林恆佑
+                                        </div>
+                                        <div class="payUser" data-bs-toggle="modal" data-bs-target="#joinModal">
+                                            + 新增
+                                        </div>
                                     </div>
-                                    <div class="payUser" data-bs-toggle="modal" data-bs-target="#joinModal">
-                                        + 新增
+                                    <div class="userInfoBox">
+                                        <div class="leftUserInfoBox">
+                                            <div>姓名</div>
+                                            <div>生日</div>
+                                            <div>身分證件號碼</div>
+                                        </div>
+                                        <div class="rightUserInfoBox">
+                                            <div>林恆佑</div>
+                                            <div>2000/1/1</div>
+                                            <div>A123456789</div>
+                                        </div>
+                                        <div class="editBox">
+                                            <button type="button" class="btn btn-main-outline" data-bs-toggle="modal"
+                                                    data-bs-target="#joinModal">
+                                                編輯
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="userInfoBox">
-                                    <div class="leftUserInfoBox">
-                                        <div>姓名</div>
-                                        <div>生日</div>
-                                        <div>身分證件號碼</div>
-                                    </div>
-                                    <div class="rightUserInfoBox">
-                                        <div>林恆佑</div>
-                                        <div>2000/1/1</div>
-                                        <div>A123456789</div>
-                                    </div>
-                                    <div class="editBox">
-                                        <button type="button" class="btn btn-main-outline" data-bs-toggle="modal"
-                                                data-bs-target="#joinModal">
-                                            編輯
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>*@
+                            </div>*@
                         @*<div class="infoTitle mt-4">其他附加資訊</div>
-                        <div class="p-3 pt-0">
-                            <div>聯絡電話 <span class="color-main"> *</span></div>
-                            <div class="mb-3">
-                                <input type="tel" class="form-control" placeholder="例: +886900000099">
-                            </div>
-                        </div>*@
+                            <div class="p-3 pt-0">
+                                <div>聯絡電話 <span class="color-main"> *</span></div>
+                                <div class="mb-3">
+                                    <input type="tel" class="form-control" placeholder="例: +886900000099">
+                                </div>
+                            </div>*@
                         <div class="infoTitle hasTag">聯絡資料</div>
                         <div class="subInfoText ps-3">如訂單有變動，我們將通知您</div>
                         <div class="infoBoxOuter">
@@ -130,22 +132,22 @@
                 </div>
                 <div class="col-4 ">
                     <div class="rightSide ">
-                        <div class="titleFontStyle">【領券現折100】Klook獨家優惠｜台北101觀景台門票｜萬聖節搗蛋派對｜高空Sky Lounge百萬夜景</div>
-                        <div class="subtext">【台北101觀景台】最High夜景-搗蛋派對星光票</div>
+                        <div class="titleFontStyle">@Model.TravelProductName</div>
+                        <div class="subtext">@Model.EventIntroduction</div>
                         <div class="border-bottom-line"></div>
-                        <div class="infoRow">
+                        @*<div class="infoRow">
                             <div class="subInfoText">日期</div>
                             <div>2022年10月11日 10:00 上午</div>
-                        </div>
+                        </div>*@
                         <div class="infoRow">
                             <div class="subInfoText">數量</div>
-                            <div>1 x 成人</div>
+                            <div>1 每人</div>
                         </div>
 
                         <div class="border-bottom-line"></div>
                         <div class="infoRow">
                             <div class="subInfoText">總價</div>
-                            <div class="titleFontStyle">NT$ 300</div>
+                            <div class="titleFontStyle">NT$ @Model.Price.ToString("###,###,##0")</div>
                         </div>
                     </div>
                 </div>
@@ -153,41 +155,41 @@
         </div>
         <!-- 編輯參加人彈窗 -->
         @*<div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <button type="button" class="btn-close modalClose " data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    <div class="infoTitle mt-4">編輯參加人資料</div>
-                    <div class="border-bottom-line"></div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label class="col-form-label">姓名:<span class="color-main"> *</span></label>
-                                <input type="text" class="form-control" value="">
-                            </div>
-                            <div class="mb-3">
-                                <label class="col-form-label">生日:<span class="color-main"> *</span></label>
-                                <input type="date" id="start" name="trip-start" class="form-control"
-                                       value="2018-07-22" min="2018-01-01" max="2018-12-31">
-                            </div>
-                            <div class="mb-3">
-                                <label class="col-form-label">
-                                    身分證件號碼（台灣身分證）:<span class="color-main">
-                                        *
-                                    </span>
-                                </label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary">儲存</button>
+                 aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <button type="button" class="btn-close modalClose " data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        <div class="infoTitle mt-4">編輯參加人資料</div>
+                        <div class="border-bottom-line"></div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label class="col-form-label">姓名:<span class="color-main"> *</span></label>
+                                    <input type="text" class="form-control" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="col-form-label">生日:<span class="color-main"> *</span></label>
+                                    <input type="date" id="start" name="trip-start" class="form-control"
+                                           value="2018-07-22" min="2018-01-01" max="2018-12-31">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="col-form-label">
+                                        身分證件號碼（台灣身分證）:<span class="color-main">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary">儲存</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
         <!-- 編輯聯絡資料彈窗 -->
         <div class="modal fade" id="contentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
              aria-hidden="true" style="display: none;">
@@ -223,7 +225,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal">儲存</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">儲存</button>
                     </div>
                 </div>
             </div>
@@ -231,3 +233,6 @@
     </div>
 </article>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
