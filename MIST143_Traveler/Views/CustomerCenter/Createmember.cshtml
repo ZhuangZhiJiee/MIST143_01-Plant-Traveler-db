@@ -120,14 +120,12 @@
     </div>
 
 </form>
-@section Scripts{ 
+@section Scripts{
     <script>
-    
 
 
     </script>
 }
-
 <script>
     //DEMO
 
@@ -144,21 +142,19 @@
     //const Btncre = () => {
     //    alert("註冊成功")
     //}
-
-    var Postdata = {
-        Email=$("#Email").val(),
-        MemberName=$("#MemberName").val(),
-        Phone=$("#Phone").val(),
-        Email=$("#Email").val(),
-        Address=$("#Address").val(),
-        BirthDay=$("#BirthDay").val(),
-        Gender=$("#Gender").val()
-    }
+    //var Postdata = {
+    //    Email=$("#Email").val(),
+    //    MemberName=$("#MemberName").val(),
+    //    Phone=$("#Phone").val(),
+    //    Email=$("#Email").val(),
+    //    Address=$("#Address").val(),
+    //    BirthDay=$("#BirthDay").val(),
+    //    Gender=$("#Gender").val()
+    //}
     @*$.ajax({
         url: '@Url.Action("Createmember", "CustomerCenter")',
 
     })*@
-
      //抓資料庫城市資料
     const selCity = document.querySelector("#selectC")
     async function LoadCities() {
@@ -171,16 +167,15 @@
     }
     LoadCities()
     //判斷密碼是否一致
-    //let emsm=document.querySelector("#sm")
+    let emsm=document.querySelector("#sm")
     //let smps = document.querySelector("#checkps")
     //let ps1=document.querySelector("#password1")
     //let ps2 = document.querySelector("#password2")
     //ps2.addEventListener("blur", () => {
-    //        if 
-                
+    //        if
+
     //            (ps1 != ps2)
     //            smps.textContent = "密碼必須一致!";
-
 
     //})
     //判斷是否有人使用帳號
@@ -192,8 +187,6 @@
 
     })
 
-
-    })
 </script>
 @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
 
