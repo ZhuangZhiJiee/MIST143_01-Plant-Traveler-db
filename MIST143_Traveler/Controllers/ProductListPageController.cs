@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MIST143_Traveler.Models;
+using MIST143_Traveler.MViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,9 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult ProductListHomePage()
         {
+            
             return View();
         }
+      
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MIST143_Traveler.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,16 @@ namespace MIST143_Traveler.ViewComponents
 {
     public class ProductlistpagiViewComponent : Microsoft.AspNetCore.Mvc.ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync(int page)
+        private readonly PlanetTravelContext _travel;
+        public ProductlistpagiViewComponent(PlanetTravelContext travel) 
+        {
+            _travel = travel;
+        }
+
+        public async Task<IViewComponentResult> InvokeAsync(TravelProduct tr)
         {
 
-            return View(page);
+            return View(tr);
         }
     }
 }

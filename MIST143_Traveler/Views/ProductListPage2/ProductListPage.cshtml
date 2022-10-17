@@ -1,10 +1,10 @@
-﻿
+﻿@*@addTagHelper *, MIST143_Traveler*@
+@model List<MIST143_Traveler.Models.TravelProduct>
 @section Styles{
     <link href="@Url.Content("~/css/ProductListPage2.css")" rel="stylesheet" />
 }
 
-
-<body>
+@section Scripts{
     <script>
         function showButtonEvent() {
             var content = document.getElementById("text");
@@ -15,130 +15,183 @@
         }
 
     </script>
-    <article>
-        <div style="background: url('../Images/ProductListPageImages/category.jpg');background-size: cover;height: 216px;top: 50%;">
-            <div class="rwd-experience-header-main-container">
-                <div class="rwd-header-container">
-                    <div class="experience-title-and-location-button">
-                        <div class="content">
-                            <h1 class="content_text">玩樂</h1>
-                            <p>探索景點、行程等</p>
-                        </div>
-                    </div>
-                    <div class="banner-search-box ban-sea-box ban-box">
-                        <span class="bi-search"></span>
-                        <input type="search"
-                               name=""
-                               id="text"
-                               placeholder="探索全球目的地/活動" />
-                        <button type="button" onclick="showButtonEvent()">搜尋</button>
+}
 
+
+@*<vc:productlistpagi page="5"></vc:productlistpagi>*@
+<article>
+    <div style="background: url('../Images/ProductListPageImages/category.jpg');background-size: cover;height: 216px;top: 50%;">
+        <div class="rwd-experience-header-main-container">
+            <div class="rwd-header-container">
+                <div class="experience-title-and-location-button">
+                    <div class="content">
+                        <h1 class="content_text">玩樂</h1>
+                        <p>探索景點、行程等</p>
                     </div>
                 </div>
+                <div class="banner-search-box ban-sea-box ban-box">
+                    <span class="bi-search"></span>
+                    <input type="search"
+                            name=""
+                            id="text"
+                            placeholder="探索全球目的地/活動" />
+                    <button type="button" onclick="showButtonEvent()">搜尋</button>
 
+                </div>
             </div>
-        </div>
-        <div class="search-page-breadcrumb search-breadcrumb">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="@Url.Content("~/Home/Index")">首頁</a></li>
-                    <li class="breadcrumb-item"><a href="@Url.Content("~/ProductListPage/ProductListHomePage")">玩樂</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">搜尋結果</li>
-                </ol>
-            </nav>
-        </div>
-        <div class="main-content search-main-content">
-            <p class="search-result-title">以下是與「 <a id="changeText"></a>」的體驗</p>
-            <div class="category-tree-and-activity-list js-category-tree-and-activity-list">
-                <div class="destinations-category-tree">
-                    <div class="contain containerp">
-                        <div class="tree-list-item">
-                            <div class="title">目的地</div>
-                            <div class="js-range-tree-spm">
-                                <div class="klk-tree klk-tree-checkable klk-tree-multiple">
 
-                                    <div class="accordion" id="accordionPanelsStayOpenExample">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                                <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-                                                    東亞
-                                                </button>
-                                            </h2>
-                                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
-                                                <div class="accordion-body">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label>台灣</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label>韓國</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label>日本</label>
-                                                    </div>
+        </div>
+    </div>
+    <div class="search-page-breadcrumb search-breadcrumb">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Content("~/Home/Index")">首頁</a></li>
+                <li class="breadcrumb-item"><a href="@Url.Content("~/ProductListPage/ProductListHomePage")">玩樂</a></li>
+                <li class="breadcrumb-item active" aria-current="page">搜尋結果</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="main-content search-main-content">
+        <p class="search-result-title">以下是與「 <a id="changeText"></a>」的體驗</p>
+        <div class="category-tree-and-activity-list js-category-tree-and-activity-list">
+            <div class="destinations-category-tree">
+                <div class="contain containerp">
+                    <div class="tree-list-item">
+                        <div class="title">目的地</div>
+                        <div class="js-range-tree-spm">
+                            <div class="klk-tree klk-tree-checkable klk-tree-multiple">
+
+                                <div class="accordion" id="accordionPanelsStayOpenExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                            <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                                                東亞
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                                            <div class="accordion-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label>台灣</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label>韓國</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label>日本</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                                <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                                    東南亞
-                                                </button>
-                                            </h2>
-                                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                                                <div class="accordion-body">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label>新加坡</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label>泰國</label>
-                                                    </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                            <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                                東南亞
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                                            <div class="accordion-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label>新加坡</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label>泰國</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                                <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                                    北美洲
-                                                </button>
-                                            </h2>
-                                            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                                                <div class="accordion-body">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label>美國</label>
-                                                    </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                                            <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                                北美洲
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                                            <div class="accordion-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label>美國</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-                                                <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
-                                                    北歐
-                                                </button>
-                                            </h2>
-                                            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
-                                                <div class="accordion-body">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
-                                                        <label>冰島</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label>芬蘭</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
-                                                        <label>挪威</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label>丹麥</label>
-                                                    </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                                            <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                                                北歐
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+                                            <div class="accordion-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
+                                                    <label>冰島</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label>芬蘭</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
+                                                    <label>挪威</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label>丹麥</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+                                            <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+                                                西歐
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
+                                            <div class="accordion-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label>英國</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label>法國</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
+                                                    <label>荷蘭</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
+                                                    <label>愛爾蘭</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingSix">
+                                            <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
+                                                中歐
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
+                                            <div class="accordion-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label>德國</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
+                                                    <label>奧地利</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label>瑞士</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -194,17 +247,23 @@
                                         </div>
 
                                     </div>
+
                                 </div>
 
                             </div>
+
                         </div>
                     </div>
                 </div>
-                <div class="search-result-activity-container">
-                    @await Component.InvokeAsync("Productlistpagi")
-                </div>
+            </div>
+            <div class="search-result-activity-container">
+                @for (int i = 0; i < 8; i++)
+                {
+                    @await Component.InvokeAsync("Productlistpagi", new { tr = Model[i] })
+                }
             </div>
 
         </div>
-    </article>
-</body>
+
+    </div>
+</article>
