@@ -45,14 +45,17 @@ namespace MIST143_Traveler.Controllers
                         CDictionary.SK_Login, jsonUser);
                     //return RedirectToAction("index", "home");
                     //return Content("123", "text/plain", System.Text.Encoding.UTF8);
+
                     return Json(new { Res = true, Msg = "成功" });
                 }
                 else
                     return Json(new { Res = false, Msg = "失敗" });
 
+
             }
             return View();
         }
+
         //會員中心變更保存資料
         [HttpPost]
         public IActionResult SaveCusInfo(Member inCus)
@@ -73,6 +76,7 @@ namespace MIST143_Traveler.Controllers
             }
             return Json(new { Res = false, Msg = "失敗" });
         }
+
         public IActionResult List(int MembersId)
         {
             if (MembersId != 0)
@@ -84,7 +88,9 @@ namespace MIST143_Traveler.Controllers
                 }
             }
 
+
             return View("test");
+
         }
         //public IActionResult List(CMemberView showCus)
         //{
@@ -120,6 +126,7 @@ namespace MIST143_Traveler.Controllers
         {
             if (MembersId != 0)
             {
+
                 var Cus = _PlanetTravelContext.Orders.Where(a => a.MemberId == MembersId).ToList();
                 if (Cus.Count > 0)
                 {
@@ -128,6 +135,7 @@ namespace MIST143_Traveler.Controllers
                 }
                 //else
                 //    return RedirectToAction();
+
             }
             return View("ProductManage");
         }
@@ -220,8 +228,10 @@ namespace MIST143_Traveler.Controllers
         public IActionResult CheckPas(string Email)
         {
             var e = _PlanetTravelContext.Members.Where(a => a.Email == Email).ToList();
+
             if (e.Count > 0)
                 return Content("此帳號已存在", "text/plain");
+
 
             else
                 return Content("帳號可以使用", "text/plain");
@@ -240,19 +250,25 @@ namespace MIST143_Traveler.Controllers
             return Json(city);
         }
 
+
         public IActionResult Delete(int? id, int? MemberId)
+
         {
             if (id != null)
             {
 
+
                 var c = _PlanetTravelContext.Orders.FirstOrDefault(a => a.OrderId == id);
+
                 if (c != null)
                 {
                     _PlanetTravelContext.Orders.Remove(c);
                     _PlanetTravelContext.SaveChanges();
                 }
             }
+
             return RedirectToAction("List",new { MembersId = MemberId });
+
         }
 
         //public IActionResult 訂單管理_未使用()

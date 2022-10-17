@@ -96,7 +96,9 @@
         act.value = "d555@gmail.com";
         pas.value = "a1234567";
     }
+
         //登入開始
+
         const BtnLogin = () => {
            
         var postData = {
@@ -104,7 +106,9 @@
             Password: $("#Pas").val()
             };
             
+
           console.log(123)
+
             
         $.ajax({
             url: '@Url.Action("newLoginpag","CustomerCenter")',
@@ -120,6 +124,8 @@
                         text: datas.msg,
                         
                     })
+
+
                     return;
                 }
                 

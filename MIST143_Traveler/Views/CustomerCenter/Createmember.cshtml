@@ -124,8 +124,10 @@
     <script>
     
 
+
     </script>
 }
+
 <script>
     //DEMO
 
@@ -142,6 +144,7 @@
     //const Btncre = () => {
     //    alert("註冊成功")
     //}
+
     var Postdata = {
         Email=$("#Email").val(),
         MemberName=$("#MemberName").val(),
@@ -155,6 +158,7 @@
         url: '@Url.Action("Createmember", "CustomerCenter")',
 
     })*@
+
      //抓資料庫城市資料
     const selCity = document.querySelector("#selectC")
     async function LoadCities() {
@@ -177,6 +181,7 @@
     //            (ps1 != ps2)
     //            smps.textContent = "密碼必須一致!";
 
+
     //})
     //判斷是否有人使用帳號
     let Em = document.querySelector("#Email")
@@ -187,6 +192,8 @@
 
     })
 
+
+    })
 </script>
 @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
 

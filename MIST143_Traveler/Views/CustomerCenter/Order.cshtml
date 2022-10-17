@@ -47,14 +47,17 @@
                     @Html.DisplayFor(modelItem => item.OrderStatusId)
                 </td>
                 <td>
+
                     @Html.ActionLink("刪除", "Delete", "CustomerCenter", new { id = item.OrderId, MemberId = item.MemberId },
                    new { onclick = "return confirm('確定要刪除?')" })
                    
+
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
 @section Scripts{ 
     <script>
 
@@ -63,3 +66,4 @@
 
 }
     
+

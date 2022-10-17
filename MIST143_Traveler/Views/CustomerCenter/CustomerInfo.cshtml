@@ -21,6 +21,7 @@
 
         <div class="box_body d-flex  mb-2">
 
+
             <div class="inputs p-2 flex-fill">
                 <header>名稱</header>
 
@@ -52,6 +53,7 @@
                 <input class="form-control" type="text" placeholder="password" aria-label="default input example">
             </div>
 
+
             <div class="inputs p-2 flex-fill">
                 <header>再次確認密碼</header>
                 <input class="form-control" type="text" placeholder="password" aria-label="default input example">
@@ -67,9 +69,11 @@
 </div>
 
 
+
 @section Scripts {
     
       <script></script>
+
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
