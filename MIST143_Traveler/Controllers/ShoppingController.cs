@@ -26,9 +26,6 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult PayCheckout()
         {
-            //PlanetTravelContext pt = new PlanetTravelContext();
-            //var data = from p in pt.TravelProducts
-            //        select p;
             var data = pt.TravelProducts.Where(x => x.TravelProductId == 1).FirstOrDefault();
             return View(data);
         }
