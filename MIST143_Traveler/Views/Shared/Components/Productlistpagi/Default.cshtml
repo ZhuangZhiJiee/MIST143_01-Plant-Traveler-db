@@ -12,7 +12,7 @@
             <div class="card" style="">
                 <img class="card-img-top" src="../Images/ProductListPageImages/landscape_101.jpg" alt="Card image cap">
                 <div class="card-body">
-                    <a href="https://localhost:44302/ProductPage/Index">
+                    <a href="@Url.Action("List" ,"shopping", new { Model.TravelProductId })">
                         <h3 class="activity-card-title">
                             @*【領券現折100】Klook獨家優惠｜台北101觀景台門票｜萬聖節搗蛋派對｜高空Sky Lounge百萬夜景*@
                             @Model.TravelProductName
