@@ -75,9 +75,13 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult List(int MembersId)
         {
+            CMemberView cm =new CMemberView();
             if (MembersId != 0)
             {
-                var Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == MembersId);
+                var Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId ==MembersId);
+                //cm.MembersId = Cus.MembersId;
+                //var CC = _PlanetTravelContext.Members.FirstOrDefault(x => x.MembersId == cm.MembersId);
+                
                 if (Cus != null)
                 {
                     return View(Cus);
@@ -123,13 +127,13 @@ namespace MIST143_Traveler.Controllers
                 var Cus = _PlanetTravelContext.Orders.Where(a => a.MemberId == MembersId).ToList();
                 if (Cus.Count > 0)
                 {
-                    var od = _PlanetTravelContext.Orders.Where(o => o.MemberId == MembersId);
-                    return PartialView(Cus);
+                    //var od = _PlanetTravelContext.Orders.Where(o => o.MemberId == MembersId);
+                    return ViewComponent("CustomerOrder", Cus);
                 }
                 //else
                 //    return RedirectToAction();
             }
-            return View("ProductManage");
+            return ViewComponent("ProductManage");
         }
 
         public IActionResult ProductManage()
@@ -252,7 +256,7 @@ namespace MIST143_Traveler.Controllers
                     _PlanetTravelContext.SaveChanges();
                 }
             }
-            return RedirectToAction("List",new { MembersId = MemberId });
+            return RedirectToAction("Order",new { MembersId = MemberId });
         }
 
         //public IActionResult 訂單管理_未使用()

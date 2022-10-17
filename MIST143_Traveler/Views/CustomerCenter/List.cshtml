@@ -1,8 +1,9 @@
-﻿@model MIST143_Traveler.Models.Member
-@*@model MIST143_Traveler.MViewModel.CMemberView*@
+﻿@*@model MIST143_Traveler.Models.Member*@
+@model MIST143_Traveler.Models.Member
 @using Microsoft.AspNetCore.Http
 @using System.Text.Json;
 @inject IHttpContextAccessor Accessor
+@using MIST143_Traveler.ViewComponents
 @section Styles{
 
 }
@@ -42,7 +43,7 @@
                 </div>
 
                 <div id="cont" class="col-12 col-md-9">
-
+                    
                     <div class="row row-cols-1">
                         <div class="col 上面空間">
                             <h3>個人資訊</h3>
@@ -74,6 +75,7 @@
                             <div class="inputs p-2 ">
                                 <header>居住縣市</header>
                                 <select class="form-select" aria-label="Default select example" asp-for="CityId" id="CityId" name="CityName">
+                                    @*<option>@Model.城市</option>*@
                                 </select>
                             </div>
 
@@ -190,12 +192,12 @@
         btnord.addEventListener("click", async () => {
             let response = await fetch('@Url.Action("Order","CustomerCenter",new {v.MembersId})')
             let result = await response.json()
-            
+
             let htmldatas = result.map(data => {
                 return (`<tr>${data[0]}</tr>`)
             })
             console.log(result)
-            
+
             console.log(htmldatas[0])
             cont.innerHTML = htmldatas
         })*@
@@ -207,7 +209,7 @@
         })*@
 
         $('#btnorder').click(function () {
-        $('#cont').load('@Url.Action("Order","CustomerCenter",new {v.MembersId})')
+            $('#cont').load('@Url.Action("Order","CustomerCenter",new {v.MembersId})')
         $(this).addClass("btn btn-outline-warning 按鈕顏色2 active")//訂單按鈕
         $('#btnlove').removeClass("active")
         $('#btnreview').removeClass("active")
