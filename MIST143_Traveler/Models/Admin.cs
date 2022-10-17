@@ -14,6 +14,7 @@ namespace MIST143_Traveler.Models
 
         public int AdminId { get; set; }
         public string AdminName { get; set; }
+        public string Account { get; set; }
         public string Password { get; set; }
 
         public virtual ICollection<AdminStatus> AdminStatuses { get; set; }
