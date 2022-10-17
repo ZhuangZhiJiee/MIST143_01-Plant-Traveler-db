@@ -1,0 +1,152 @@
+﻿@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@section Styles{
+
+}
+
+<link href="~/css/客服中心.css" rel="stylesheet" />
+<link href="~/css/會員中心/會員中心左邊選項.css" rel="stylesheet" />
+
+<body>
+
+    <article>
+        <div class="container p-5">
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <div class="card" style="width: 18rem;">
+                        <div>
+                            <img src="@Url.Content("~/images/contact/大頭貼修改.png")" />
+                        </div>
+                        <div class="card-body mb-3">
+                            <h5 class="card-title text-center">橘子</h5>
+
+                            <input type="file" class="form-control" id="inputGroupFile02">
+                        </div>
+                    </div>
+
+
+
+                    <div>
+                        <div><button id="btncus" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-people 小圖示"></span>個人資訊</button></div>
+                        <div>@*@Html.ActionLink("個人資訊", "List", "CustomerCenter", null, new { @class = "list-group-item list-group-item-action active", aria_current = "true"  })*@</div>
+                        <div><button id="btnorder" class="btn btn-outline-warning 按鈕顏色2 active 選單"><span class=" bi bi-bag 小圖示"></span>訂單管理</button></div>
+                        @*<div>@Html.ActionLink("訂單管理", "ProductManage", "CustomerCenter", null, new { @class = "list-group-item list-group-item-action" })</div>*@
+                        <div><button id="btnlove" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-heart 小圖示"></span>我的最愛</button></div>
+                        <div><button id="btnreview" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-chat-left-text 小圖示"></span>我的評論</button></div>
+                        <div><button id="btnstar" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-star 小圖示"></span>Star積分</button></div>
+                        <div><button id="btncop" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-wallet2 小圖示"></span>優惠票券</button></div>
+                    </div>
+                </div>
+
+                <div id="cont" class="col-12 col-md-9">
+
+                    <div class="row row-cols-1">
+                        <div class="col-12 上面空間">
+
+
+                            <!-- Example single danger button -->
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    訂單管理
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+
+
+                            <div>
+                                <div class="text-center">
+                                    <img src="https://res.klook.com/image/upload/v1645521732/tuv7ipnsnwwp5sa8sbjg.gif" width="260" height="180" alt="">
+                                    <h4 class="還沒下單">還沒下單?</h4>
+                                    <div class="找不到靈感">找不到靈感?不妨看看下方精選推薦！</div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </article>
+</body>
+@section Scripts{
+    <script>
+     @{var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+                var v = JsonSerializer.Deserialize<Member>(OBJ); }
+        $('#btncus').click(function () {
+
+            $('#cont').load('@Url.Action("CustomerInfo","CustomerCenter",new {v.MembersId})')
+
+             $(this).addClass("btn btn-outline-warning 按鈕顏色2 active")//會員資訊按鈕
+             $('#btnlove').removeClass("active")
+             $('#btnreview').removeClass("active")
+             $('#btnstar').removeClass("active")
+             $('#btncop').removeClass("active")
+             $('#btnorder').removeClass("active")
+    })
+
+
+        $('#btnorder').click(function () {
+        $('#cont').load('@Url.Action("Order","CustomerCenter",new {v.MembersId})')
+        $(this).addClass("btn btn-outline-warning 按鈕顏色2 active")//訂單按鈕
+        $('#btnlove').removeClass("active")
+        $('#btnreview').removeClass("active")
+        $('#btnstar').removeClass("active")
+        $('#btncop').removeClass("active")
+        $('#btncus').removeClass("active")
+    })
+
+    $('#btnlove').click(function () {
+        $('#cont').load('@Url.Content("~/CustomerCenter/Myfavorites")')
+        $(this).addClass("btn btn-outline-warning 按鈕顏色2 active")
+        $('#btnorder').removeClass("active")
+        $('#btnreview').removeClass("active")
+        $('#btnstar').removeClass("active")
+        $('#btncop').removeClass("active")
+        $('#btncus').removeClass("active")
+        //我的最愛按鈕
+        })
+
+        $('#btnreview').click(function () {
+        $('#cont').load('@Url.Content("~/CustomerCenter/Review")')
+            $(this).addClass("btn btn-outline-warning 按鈕顏色2 active") //我的評論按鈕
+            $('#btnorder').removeClass("active")
+            $('#btnlove').removeClass("active")
+            $('#btnstar').removeClass("active")
+            $('#btncop').removeClass("active")
+            $('#btncus').removeClass("active")
+        })
+
+        $('#btnstar').click(function () {
+        $('#cont').load('@Url.Content("~/CustomerCenter/Star")')
+            $(this).addClass("btn btn-outline-warning 按鈕顏色2 active") //Star
+            $('#btnorder').removeClass("active")
+            $('#btnlove').removeClass("active")
+            $('#btnreview').removeClass("active")
+            $('#btncop').removeClass("active")
+            $('#btncus').removeClass("active")
+        })
+
+        $('#btncop').click(function () {
+        $('#cont').load('@Url.Content("~/CustomerCenter/Coupon")')
+            $(this).addClass("btn btn-outline-warning 按鈕顏色2 active") //優惠券按鈕
+            $('#btnorder').removeClass("active")
+            $('#btnlove').removeClass("active")
+            $('#btnreview').removeClass("active")
+            $('#btnstar').removeClass("active")
+            $('#btncus').removeClass("active")
+        })
+    </script>
+}
