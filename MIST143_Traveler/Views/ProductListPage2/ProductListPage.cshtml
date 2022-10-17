@@ -195,9 +195,61 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+                                                <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+                                                    西歐
+                                                </button>
+                                            </h2>
+                                            <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
+                                                <div class="accordion-body">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label>英國</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label>法國</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
+                                                        <label>荷蘭</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
+                                                        <label>愛爾蘭</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="panelsStayOpen-headingSix">
+                                                <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
+                                                    中歐
+                                                </button>
+                                            </h2>
+                                            <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
+                                                <div class="accordion-body">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label>德國</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
+                                                        <label>奧地利</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label>瑞士</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                 </div>
+
                             </div>
 
                         </div>
@@ -209,9 +261,8 @@
                 {
                     @await Component.InvokeAsync("Productlistpagi", new { tr = Model[i] })
                 }
-
-
             </div>
+
         </div>
 
     </div>
