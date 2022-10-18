@@ -52,6 +52,67 @@
                 </div>
 
                 <div id="cont" class="col-12 col-md-9">
+                    
+                    <div class="row row-cols-1">
+                        <div class="col 上面空間">
+                            <h3>個人資訊</h3>
+                            <p>以下資訊僅用於幫助你在付款時自動填寫你的個人資料，你的資料將會安全地保存且不會公開</p>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="MembersId" name="MembersId" id="MembersId" class="form-control" type="hidden" />
+                        </div>
+                        <div class="box_body d-flex  mb-2">
+                            <div class="inputs p-2 flex-fill">
+                                <header>EMAIL</header>
+                                <input class="form-control" type="email" asp-for="Email" placeholder="123" aria-label="default input example" name="EMAIL">
+                            </div>
+                        </div>
+
+                        <div class="box_body d-flex  mb-2">
+
+                            <div class="inputs p-2 flex-fill">
+                                <header>名稱</header>
+                                <input class="form-control" asp-for="MemberName" type="text" placeholder="名稱" id="MemberName" aria-label="default input example" name="MemberName">
+                            </div>
+                            <div class="inputs p-2 flex-fill">
+                                <header>聯繫電話</header>
+                                <input class="form-control" type="text" asp-for="Phone" placeholder="PHONE" id="Phone" aria-label="default input example" name="PHONE">
+                            </div>
+                        </div>
+
+                        <div class="box_body d-flex  mb-2">
+                            <div class="inputs p-2 ">
+                                <header>居住縣市</header>
+                                <select class="form-select" aria-label="Default select example" asp-for="CityId" id="CityId" name="CityName">
+                                    @*<option>@Model.城市</option>*@
+                                </select>
+                            </div>
+
+
+                            <div class="inputs p-2 flex-grow-1">
+                                <header>地址</header>
+                                <input class="form-control" type="text" asp-for="Address" id="Address" placeholder="北投區111號" aria-label="default input example" name="Address">
+                            </div>
+                        </div>
+
+                        <div class="box_body d-flex  mb-2">
+                            <div class="inputs p-2 flex-fill">
+                                <header>重設密碼</header>
+                                <input class="form-control" type="text" id="Password" placeholder="password" aria-label="default input example">
+                            </div>
+
+                            <div class="inputs p-2 flex-fill">
+                                <header>再次確認密碼</header>
+                                <input class="form-control" type="text" placeholder="password" aria-label="default input example">
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-3">
+                            <div class="me-auto p-2">
+                                <button type="submit" class="btn btn-warning 按鈕顏色" id="send" onclick="bb()">儲存</button>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row row-cols-1">
                         <div class="col 上面空間">

@@ -15,7 +15,7 @@ namespace MIST143_Traveler.ViewComponents
             _travel = travel;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(TravelProduct tr)
+        public async Task<IViewComponentResult> InvokeAsync(List<TravelProduct> tr)
         {
 
             return View(tr);

@@ -6,13 +6,14 @@
 
 @section Scripts{
     <script>
-        function showButtonEvent() {
-            var content = document.getElementById("text");
-            document.getElementById("changeText").textContent = content.value;
-        }
-        function tmenu(number) {
-            var menu = document.getElementById("menu-" + number);
-        }
+
+
+        $("#btn").click(function () {
+            var qq = $("#text").val()
+            var url = "@Url.Content("~/ProductListPage2/filter")"
+            var name = `?keyword=` + qq
+            $("#ans").load(url + name)
+        })
 
     </script>
 }
@@ -31,12 +32,9 @@
                 </div>
                 <div class="banner-search-box ban-sea-box ban-box">
                     <span class="bi-search"></span>
-                    <input type="search"
-                            name=""
-                            id="text"
-                            placeholder="探索全球目的地/活動" />
-                    <button type="button" onclick="showButtonEvent()">搜尋</button>
-
+                    <input type="text" name="keyword" id="text" placeholder="探索全球目的地/活動" />
+                    @*<a href="@Url.Action("ProductListPage","ProductListPage2",new {})">搜尋</a>*@
+                    <button type="button" id="btn">搜尋</button>
                 </div>
             </div>
 
@@ -52,7 +50,7 @@
         </nav>
     </div>
     <div class="main-content search-main-content">
-        <p class="search-result-title">以下是與「 <a id="changeText"></a>」的體驗</p>
+        <p class="search-result-title">以下是與「 <a id="text"></a>」的體驗</p>
         <div class="category-tree-and-activity-list js-category-tree-and-activity-list">
             <div class="destinations-category-tree">
                 <div class="contain containerp">
@@ -256,8 +254,9 @@
                     </div>
                 </div>
             </div>
-            <div class="search-result-activity-container">
-                @for (int i = 0; i < 8; i++)
+
+            <div class="search-result-activity-containe asd" id="ans">
+                @for (int i = 0; i < ViewBag.Count; i++)
                 {
                     @await Component.InvokeAsync("Productlistpagi", new { tr = Model[i] })
                 }

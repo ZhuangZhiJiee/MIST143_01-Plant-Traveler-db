@@ -35,7 +35,6 @@ namespace MIST143_Traveler.Controllers
         {
             return View();
         }
-
         //會員中心變更保存資料
         [HttpPost]
         public IActionResult SaveCusInfo(Member inCus)
@@ -78,6 +77,7 @@ namespace MIST143_Traveler.Controllers
             CMemberView cm =new CMemberView();
             if (MembersId != 0)
             {
+
                 var Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == MembersId);
                 //cm.MembersId = Cus.MembersId;
                 //var CC = _PlanetTravelContext.Members.FirstOrDefault(x => x.MembersId == cm.MembersId);
@@ -120,6 +120,7 @@ namespace MIST143_Traveler.Controllers
               (c => c.Email.Equals(vModel.Email));
             if (cust != null)
             {
+
                 if (cust.Password.Equals(vModel.Password))
                 {
                     string jsonUser = JsonSerializer.Serialize(cust);
@@ -158,7 +159,7 @@ namespace MIST143_Traveler.Controllers
                 }
                
             }
-            return View("ProductManage");
+            return ViewComponent("ProductManage");
         }
         
      
@@ -271,7 +272,6 @@ namespace MIST143_Traveler.Controllers
             return Json(city);
         }
 
-     
 
         //public IActionResult 訂單管理_未使用()
         //{
