@@ -120,12 +120,10 @@
     </div>
 
 </form>
-@section Scripts{ 
+@*@section Scripts{*@ 
     <script>
        
-    </script>
-}
-<script>
+
     //DEMO
      function BtnDemo() {
 
@@ -157,11 +155,11 @@
         url: '@Url.Action("Createmember", "CustomerCenter")',
 
     })*@
-     //抓資料庫城市資料
-    const selCity = document.querySelector("#selectC")
+   
     async function LoadCities() {
         /*  selCity.options.length = 0;*/
-        
+        //抓資料庫城市資料
+    let selCity = document.querySelector("#selectC")
     let response = await fetch("@Url.Content("~/CustomerCenter/city")")
     let datas = await response.json()
     datas.forEach(city => {
@@ -171,7 +169,7 @@
     }
     LoadCities()
     //判斷密碼是否一致
-    let emsm=document.querySelector("#sm")
+    @*let emsm=document.querySelector("#sm")
     //let smps = document.querySelector("#checkps")
     //let ps1=document.querySelector("#password1")
     //let ps2 = document.querySelector("#password2")
@@ -189,8 +187,9 @@
             let datas = await response.text()
             emsm.textContent = datas
 
-    })
+    })*@
 
 </script>
+@*}*@
 @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
 

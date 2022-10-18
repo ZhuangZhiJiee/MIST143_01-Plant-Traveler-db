@@ -1,4 +1,5 @@
-﻿using MIST143_Traveler.Models;
+﻿using Microsoft.AspNetCore.Http;
+using MIST143_Traveler.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -79,5 +80,11 @@ namespace MIST143_Traveler.MViewModel
             set { _member.MemberStatusId = value; }
         }
         public string 城市 { get; set; }
+        public string FImagePath
+        {
+            get { return member.PhotoPath; }
+            set { member.PhotoPath = value; }
+        }
+        public IFormFile photo { get; set; }
     }
 }

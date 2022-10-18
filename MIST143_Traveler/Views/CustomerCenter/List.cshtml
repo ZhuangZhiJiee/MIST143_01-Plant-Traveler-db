@@ -1,5 +1,4 @@
 
-﻿@*@model MIST143_Traveler.Models.Member*@
 @model MIST143_Traveler.Models.Member
 @using Microsoft.AspNetCore.Http
 @using System.Text.Json;
@@ -12,8 +11,14 @@
 
 <link href="~/css/會員中心/會員中心左邊選項.css" rel="stylesheet" />
 
+<script>
+        @{
+             var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+             var v = JsonSerializer.Deserialize<Member>(OBJ);
+        }
+</script>
 <body>
-
+   
     <article>
         <div class="container p-5">
             <div class="row">
@@ -22,11 +27,14 @@
                         <div>
                             <img src="@Url.Content("~/images/contact/大頭貼修改.png")" />
                         </div>
-                        <div class="card-body mb-3">
-                            <h5 class="card-title text-center">橘子</h5>
+                        <form asp-action="Edit" enctype="multipart/form-data">
+                            <div class="card-body mb-3">
 
-                            <input type="file" class="form-control" id="inputGroupFile02">
-                        </div>
+                                <h5 class="card-title text-center">橘子</h5>
+
+                                <input type="file" class="form-control" id="inputGroupFile02">
+                            </div>
+                        </form>
                     </div>
 
 
@@ -117,7 +125,7 @@
                         <div class="box_body d-flex  mb-2">
                             <div class="inputs p-2 flex-fill">
                                 <header>EMAIL</header>
-                                <input class="form-control" type="email" asp-for="Email" placeholder="123" aria-label="default input example" name="EMAIL">
+                                <input class="form-control" type="email" asp-for="Email" placeholder="123" aria-label="default input example" name="EMAIL" disabled="disabled">
                             </div>
                         </div>
 
@@ -137,6 +145,7 @@
                             <div class="inputs p-2 ">
                                 <header>居住縣市</header>
                                 <select class="form-select" aria-label="Default select example" asp-for="CityId" id="CityId" name="CityName">
+                                    @*<option>@Model.城市</option>*@
                                 </select>
                             </div>
 
@@ -225,10 +234,9 @@
           })
              }
            LoadCities()
+      
 
 
-        @{var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
-                var v = JsonSerializer.Deserialize<Member>(OBJ); }
         $('#btncus').click(function () {
 
             $('#cont').load('@Url.Action("CustomerInfo","CustomerCenter",new {v.MembersId})')
@@ -241,33 +249,7 @@
              $('#btnorder').removeClass("active")
     })
 
-        @*$('#btnorder').click(function () {
-            $('#cont').load(
-            $.ajax({
-            url:'@Url.Action("Order","CustomerCenter",new {v.MembersId})',
-            method: 'Post',
-            dataType: 'int',
-            )
-        })*@
-        @*const btnord = document.querySelector("#btnorder")
-        btnord.addEventListener("click", async () => {
-            let response = await fetch('@Url.Action("Order","CustomerCenter",new {v.MembersId})')
-            let result = await response.json()
-
-            let htmldatas = result.map(data => {
-                return (`<tr>${data[0]}</tr>`)
-            })
-            console.log(result)
-
-            console.log(htmldatas[0])
-            cont.innerHTML = htmldatas
-        })*@
-
-        @*$('#btnorder').click(function () {
-            $.getJSON('@Url.Content("~/CustomerCenter/Order")', { "MembersId": "v.MembersId" }, function (datas) {
-                console.log(datas)
-            })
-        })*@
+      
 
         $('#btnorder').click(function () {
             $('#cont').load('@Url.Action("Order","CustomerCenter",new {v.MembersId})')
@@ -278,6 +260,10 @@
         $('#btncop').removeClass("active")
         $('#btncus').removeClass("active")
     })
+        @*$('#btnorder').click(function () {
+           "@Url.ActionLink("Order","CustomerCenter",new {v.MembersId})"
+    })*@
+
 
     $('#btnlove').click(function () {
         $('#cont').load('@Url.Content("~/CustomerCenter/Myfavorites")')
