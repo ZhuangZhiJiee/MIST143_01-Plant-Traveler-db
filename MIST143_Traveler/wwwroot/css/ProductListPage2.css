@@ -173,6 +173,7 @@
     display: flex;
     justify-content: space-between;
 }
+
     .footer_paymentInfo li {
         font-size: 40px;
         margin-right: 50px;
@@ -211,10 +212,12 @@
     margin: auto;
     padding: 40px;
 }
+
 .asd {
     display: flex;
     margin: -15px;
 }
+
 .card {
     margin: 0 auto;
     width: 210px;
@@ -247,7 +250,7 @@ img {
     left: 13%;
     font-size: 20px;
     z-index: 2;
-    padding-left:0;
+    padding-left: 0;
     font-weight: 600;
 }
 
@@ -318,16 +321,20 @@ img {
     -webkit-box-align: start;
     align-items: flex-start;
 }
+
 .js-experience-search-input {
     border-style: none;
 }
+
 .dynamic-width-price {
     margin-bottom: 2px;
 }
-.ban-box{
+
+.ban-box {
     margin-top: 10%;
-    margin-right:10%;
+    margin-right: 10%;
 }
+
 .activity-card-price-box__sell-price {
     font-size: 16px;
     line-height: 23px;
@@ -356,6 +363,7 @@ img {
     display: flex;
     flex-wrap: wrap;
 }
+
 .small-style
 .tagging-tag:last-of-type {
     margin-right: 0;
@@ -434,16 +442,19 @@ img {
     width: 800px;
     color: #fff;
     font-size: 16px;
-    margin-top:-3%;
+    margin-top: -3%;
 }
+
 .content_text {
     text-align: center;
     font-weight: bold;
     font-size: 32px;
 }
+
 a {
     text-decoration: none;
 }
+
 .bg-img img, .content {
     position: absolute;
     top: 50%;
@@ -466,6 +477,7 @@ a {
     margin-top: 4px;
     color: #fff;
 }
+
 .experience-title-and-location-button .location-select-button {
     margin-top: 20px;
     display: -webkit-box;
@@ -502,6 +514,7 @@ a {
         width: 132px;
         height: 44px;
     }
+
 .svg-icon {
     fill: currentColor;
     width: 16px;
@@ -509,17 +522,17 @@ a {
 }
 
 .desktop {
-    /*display: flex;*/
     margin-top: 20px;
-    margin: auto;
     font-size: 14px;
     font-weight: 400;
+    display: flex;
+    flex-wrap: wrap;
     /*line-height: 16.1px;*/
 }
 
 .rwd-header-search-box-desktop {
     margin-top: 15%;
-    margin-left:20%;
+    margin-left: 20%;
 }
 
 .header-search-box-desktop .input-box {
@@ -537,6 +550,7 @@ a {
     border-radius: 8px;
     padding-left: 16px;
 }
+
 [type=reset], [type=submit], button, html [type=button] {
     -webkit-appearance: button;
 }
@@ -576,6 +590,7 @@ a {
     overflow: hidden;
     cursor: pointer;
 }
+
 .search-suggest-container {
     position: absolute;
     top: 68px;
@@ -596,7 +611,7 @@ a {
     -webkit-box-pack: start;
     justify-content: flex-start;
     width: 800px;
-    left:70%;
+    left: 70%;
     margin-right: 10px;
     background-color: #fff;
     border: 1px solid transparent;
@@ -611,6 +626,7 @@ a {
     width: 8em;
     margin-top: -2.5em;
 }
+
 .klk-breadcrumb-inner {
     display: -webkit-box;
     display: flex;
@@ -619,11 +635,13 @@ a {
     white-space: nowrap;
     overflow: auto;
 }
+
 .search-breadcrumb {
     margin: 4px auto;
     width: 1160px;
     background-color: #fafafa;
 }
+
 .klk-breadcrumb-item {
     color: #757575;
 }
@@ -631,6 +649,7 @@ a {
 .klk-breadcrumb-divider, .klk-breadcrumb-item {
     flex-shrink: 0;
 }
+
 .main-content {
     margin: 0 auto;
     width: 1160px;
@@ -641,6 +660,7 @@ a {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
 }
+
 .search-result-title {
     font-size: 28px;
     line-height: 1.18;
@@ -648,12 +668,14 @@ a {
     padding-top: 4px;
     padding-bottom: 24px;
 }
+
 .category-tree-and-activity-list {
     position: relative;
     display: -webkit-box;
     display: flex;
     padding-bottom: 70px;
 }
+
 .destinations-category-tree .contain {
     position: -webkit-sticky;
     position: sticky;
@@ -668,20 +690,24 @@ a {
     flex-shrink: 0;
     margin-right: 21px;
 }
+
 .contain {
     height: 531px;
 }
+
 .destinations-category-tree .tree-list-item {
     border-bottom: 1px solid #eee;
     padding-bottom: 7px;
     margin-bottom: 16px;
 }
+
 .destinations-category-tree .title {
     font-size: 16px;
     line-height: 1.44;
     font-weight: 500;
     margin-bottom: 16px;
 }
+
 .klk-tree, .klk-tree .klk-tree-node {
     display: -webkit-box;
     display: flex;
@@ -689,6 +715,7 @@ a {
     -webkit-box-direction: normal;
     flex-direction: column;
 }
+
     .klk-tree > .klk-tree-node > .klk-tree-node-inner {
         padding: 13px 16px;
     }
@@ -701,6 +728,7 @@ a {
         align-items: flex-start;
         color: #212121;
     }
+
 .js-category-tree-spm .klk-tree-node-inner .klk-checkbox, .js-range-tree-spm .klk-tree-node-inner .klk-checkbox {
     width: 48px;
 }
@@ -723,27 +751,32 @@ a {
     font-weight: 400;
     color: #212121;
 }
+
 .btnright {
     margin-right: 10%;
     left: 30px;
     width: 150%;
-    top:-35px;
-    padding:-10px;
+    top: -35px;
+    padding: -10px;
 }
-.acchei{
-    height:48px;
+
+.acchei {
+    height: 48px;
 }
+
 .accordion-btn {
-    width:83%;
+    width: 83%;
 }
+
 .frmcheckin {
     vertical-align: auto;
 }
+
 .search-result-activity-containe {
     width: 100%;
-    height: 1200px;
-    overflow-wrap: break-word;
-    flex-wrap: wrap;
+    /*    flex-wrap: wrap;*/
     padding: 30px;
+    flex-direction: row;
+    align-content: stretch;
+    flex-wrap: wrap;
 }
-
