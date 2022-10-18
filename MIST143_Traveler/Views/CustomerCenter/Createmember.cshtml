@@ -26,10 +26,10 @@
                             @*<header>EMAIL帳號</header>*@
                             <label asp-for="Email" class="control-label"></label>
                             <input class="form-control" type="email" asp-for="Email" placeholder="123" aria-label="default input example" name="Email" id="Email" required>
-                            <small id="sm" class="form-text text-muted"></small>
+                            <div><small id="sm" class="form-text text-muted"></small></div>
                         </div>
-                    </div>
 
+                    </div>
                     <div class="box_body d-flex  mb-2">
                         <div class="inputs p-2 flex-fill">
                             <label asp-for="MemberName" class="control-label"></label>
@@ -65,14 +65,14 @@
                         </div>
 
                         @*<div class="inputs p-2 ">
-                                <header>居住區域</header>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>大安區</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>*@
+                <header>居住區域</header>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>大安區</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>*@
 
                         <div class="inputs p-2 flex-grow-1">
                             <header>地址</header>
@@ -106,9 +106,9 @@
 
 
                     <div class="modal-footer">
-
+                        
                         <button type="button" class="btn btn-success" id="sb1" onclick="BtnDemo()">Demo</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >關閉</button>
                         <input type="submit" class="btn btn-primary ccc">
                     </div>
 
@@ -120,25 +120,27 @@
     </div>
 
 </form>
-@section Scripts{
+@section Scripts{ 
     <script>
-
-
+       
     </script>
 }
 <script>
     //DEMO
+     function BtnDemo() {
 
-    function BtnDemo() {
+            $('#Name').val("恆佑")
+            $('#Email').val("ask@yahoo.com.tw")
+            $('#Phone').val("0966666666")
+            $('#Password1').val("a77777777")
+            $('#Password2').val("a77777777")
 
-        $('#Name').val("恆佑")
-        $('#Email').val("ask@yahoo.com.tw")
-        $('#Phone').val("0966666666")
-        $('#Password1').val("a77777777")
-        $('#Password2').val("a77777777")
+            $('#address').val("和平東路二段106號11樓")
+        }
 
-        $('#address').val("和平東路二段106號11樓")
-    }
+
+
+
     //const Btncre = () => {
     //    alert("註冊成功")
     //}
@@ -158,10 +160,12 @@
      //抓資料庫城市資料
     const selCity = document.querySelector("#selectC")
     async function LoadCities() {
+        /*  selCity.options.length = 0;*/
+        
     let response = await fetch("@Url.Content("~/CustomerCenter/city")")
     let datas = await response.json()
     datas.forEach(city => {
-    const opt = new Option(city, city)
+    const opt = new Option(city)
     selCity.options.add(opt)
     })
     }
@@ -172,8 +176,8 @@
     //let ps1=document.querySelector("#password1")
     //let ps2 = document.querySelector("#password2")
     //ps2.addEventListener("blur", () => {
-    //        if
-
+    //        if 
+                
     //            (ps1 != ps2)
     //            smps.textContent = "密碼必須一致!";
 
