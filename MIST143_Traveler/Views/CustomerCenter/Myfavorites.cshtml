@@ -3,38 +3,77 @@
     ViewData["Title"] = "Myfavorites";
 }
 @section Styles{
-    
+
 }
 <link href="~/css/客戶中心訂單內容物.css" rel="stylesheet" />
 <link href="~/css/客服中心.css" rel="stylesheet" />
+
+<link href="~/css/客服中心.css" rel="stylesheet" />
+
+<link href="~/css/會員中心/會員中心左邊選項.css" rel="stylesheet" />
+
 <body>
 
     <article>
+        <div class="container p-5">
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <div class="card" style="width: 18rem;">
+                        <div>
+                            <img src="@Url.Content("~/images/contact/大頭貼修改.png")" />
+                        </div>
+                        <div class="card-body mb-3">
+                            <h5 class="card-title text-center">橘子</h5>
 
-        <div class="col-12 上面空間">
+                            <input type="file" class="form-control" id="inputGroupFile02">
+                        </div>
+                    </div>
 
-            <h3>我的最愛</h3>
-            <div>
-                <div class="text-center">
-                    <img src="https://res.klook.com/image/upload/v1645521935/ksalrkpnskhbbh9s84mg.webp" width="260" height="180" alt="">
-                    <h4 class="還沒下單">這裡有點空</h4>
-                    <div class="找不到靈感">點擊活動頁面愛心圖示，收藏你的最愛吧！</div>
 
-                    <div class="按鈕間隔">
-                        <button type="button" class="btn btn-warning 按鈕顏色">
-                            <span>
-                                去逛逛
-                            </span>
-                        </button>
+
+                    <div>
+                        <div><button id="btncus" class="btn btn-outline-warning 按鈕顏色2 active 選單"><span class="bi bi-people 小圖示"></span>個人資訊</button></div>
+                        <div>@*@Html.ActionLink("個人資訊", "List", "CustomerCenter", null, new { @class = "list-group-item list-group-item-action active", aria_current = "true"  })*@</div>
+                        <div><button id="btnorder" class="btn btn-outline-warning 按鈕顏色2"><span class=" bi bi-bag 小圖示"></span>訂單管理</button></div>
+                        @*<div>@Html.ActionLink("訂單管理", "ProductManage", "CustomerCenter", null, new { @class = "list-group-item list-group-item-action" })</div>*@
+                        <div><button id="btnlove" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-heart 小圖示"></span>我的最愛</button></div>
+                        <div><button id="btnreview" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-chat-left-text 小圖示"></span>我的評論</button></div>
+                        <div><button id="btnstar" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-star 小圖示"></span>Star積分</button></div>
+                        <div><button id="btncop" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-wallet2 小圖示"></span>優惠票券</button></div>
                     </div>
                 </div>
+
+                <div id="cont" class="col-12 col-md-9">
+
+                    <div class="row row-cols-1">
+                        <div class="col-12 上面空間">
+
+                            <h3>我的最愛</h3>
+                            <div>
+                                <div class="text-center">
+                                    <img src="https://res.klook.com/image/upload/v1645521935/ksalrkpnskhbbh9s84mg.webp" width="260" height="180" alt="">
+                                    <h4 class="還沒下單">這裡有點空</h4>
+                                    <div class="找不到靈感">點擊活動頁面愛心圖示，收藏你的最愛吧！</div>
+
+                                    <div class="按鈕間隔">
+                                        <button type="button" class="btn btn-warning 按鈕顏色">
+                                            <span>
+                                                去逛逛
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
             </div>
         </div>
-
-
-
     </article>
-
-
 </body>
+
+
 
