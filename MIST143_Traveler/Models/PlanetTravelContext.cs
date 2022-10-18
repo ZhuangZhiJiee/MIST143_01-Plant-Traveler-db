@@ -43,7 +43,7 @@ namespace MIST143_Traveler.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=192.168.36.26;Initial Catalog=PlanetTravel;User ID=yo;Password=1234");
+                optionsBuilder.UseSqlServer("Data Source=192.168.36.26;Initial Catalog=PlanetTravel;User ID=jay;Password=1234");
             }
         }
 
@@ -379,6 +379,10 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.TravelPicture1).HasColumnName("TravelPicture");
 
+                entity.Property(e => e.TravelPictureText)
+                    .IsRequired()
+                    .HasDefaultValueSql("('圖片描述')");
+
                 entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
 
                 entity.HasOne(d => d.TravelProduct)
@@ -397,6 +401,8 @@ namespace MIST143_Traveler.Models
                 entity.Property(e => e.CountryId).HasColumnName("CountryID");
 
                 entity.Property(e => e.Description).IsRequired();
+
+                entity.Property(e => e.MapUrl).HasDefaultValueSql("('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.010806047606!2d121.54111421524708!3d25.033707344456612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abd37971c7cb%3A0x40ba641f27b6d4e3!2zMTA25Y-w5YyX5biC5aSn5a6J5Y2A5b6p6IiI5Y2X6Lev5LiA5q61Mzkw6Jmf!5e0!3m2!1szh-TW!2stw!4v1666082951345!5m2!1szh-TW!2stw\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade')");
 
                 entity.Property(e => e.Price).HasColumnType("money");
 
