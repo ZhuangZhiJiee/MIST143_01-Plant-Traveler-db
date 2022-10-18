@@ -1,8 +1,13 @@
-﻿@model MIST143_Traveler.MViewModel.CPhotoListViewModel
+﻿
+@model MIST143_Traveler.MViewModel.CProductxViewModel
 @{
     ViewData["Title"] = "testPage";
 }
 
 <h1>testPage</h1>
 
-<img src="https://localhost:44338/images/TravelProductPictures/ @Model.proctphotos[0].TravelPicture1" />
+@foreach (var item in Model.產品列表.FirstOrDefault().productpictures)
+{
+    <img src="https://localhost:44338/images/TravelProductPictures/@item.TravelPicture1" />
+}
+

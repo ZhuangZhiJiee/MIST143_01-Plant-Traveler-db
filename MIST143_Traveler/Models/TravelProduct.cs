@@ -24,6 +24,7 @@ namespace MIST143_Traveler.Models
         public int Cost { get; set; }
         public string EventIntroduction { get; set; }
         public string PreparationDescription { get; set; }
+        public string MapUrl { get; set; }
         public string ProductStatus { get; set; }
 
         public virtual Country Country { get; set; }

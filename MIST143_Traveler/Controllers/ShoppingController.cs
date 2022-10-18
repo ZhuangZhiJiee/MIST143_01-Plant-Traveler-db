@@ -17,22 +17,81 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult testPage()
         {
-            CPhotoListViewModel vmp = new CPhotoListViewModel();
-            var photos = pt.TravelPictures.Where(x => x.TravelPictureId == 1).FirstOrDefault();
-            vmp.proctphotos.Add(photos);
+            //CProductViewModel vmp = new CProductViewModel();
+            //vmp.productpictures = pt.TravelPictures.Where(x => x.TravelProductId == 9).ToList();
+
+            //return View(vmp);
+            CProductxViewModel vmp = new CProductxViewModel();
+
+            vmp.產品列表 = (from c in pt.TravelProducts
+                        where c.TravelProductId == 9
+                        select new 產品格式
+                        {
+                            TravelProductName = c.TravelProductName,
+                            TravelProductId = c.TravelProductId,
+                            Price = c.Price,
+                            TravelProductTypeId = c.TravelProductTypeId,
+                            Stocks = c.Stocks,
+                            Description = c.Description,
+                            CountryId = c.CountryId,
+                            Cost = c.Cost,
+                            EventIntroduction = c.EventIntroduction,
+                            PreparationDescription = c.PreparationDescription,
+                            productpictures = c.TravelPictures.ToList(),
+                        }).ToList();
+
             return View(vmp);
+
         }
         public IActionResult List(int? TravelProductId)
         {
+            CProductxViewModel vmp = new CProductxViewModel();
 
-                var data = pt.TravelProducts.Where(x => x.TravelProductId == (int)TravelProductId).FirstOrDefault();
-                return View(data);
+            vmp.產品列表 = (from c in pt.TravelProducts
+                           where c.TravelProductId == (int)TravelProductId
+                        select new 產品格式
+                           {
+                               TravelProductName = c.TravelProductName,
+                               TravelProductId = c.TravelProductId,
+                               Price = c.Price,
+                               TravelProductTypeId = c.TravelProductTypeId,
+                               Stocks = c.Stocks,
+                               Description = c.Description,
+                               CountryId = c.CountryId,
+                               Cost = c.Cost,
+                               EventIntroduction = c.EventIntroduction,
+                               MapUrl = c.MapUrl,
+                               PreparationDescription = c.PreparationDescription,
+                               productpictures = c.TravelPictures.ToList(),
+                           }).ToList();
+
+            return View(vmp);
 
         }
         public IActionResult PayData(int? TravelProductId)
         {
-            var data = pt.TravelProducts.Where(x => x.TravelProductId == (int)TravelProductId).FirstOrDefault();
-            return View(data);
+            CProductxViewModel vmp = new CProductxViewModel();
+
+            vmp.產品列表 = (from c in pt.TravelProducts
+                        where c.TravelProductId == (int)TravelProductId
+                        select new 產品格式
+                        {
+                            TravelProductName = c.TravelProductName,
+                            TravelProductId = c.TravelProductId,
+                            Price = c.Price,
+                            TravelProductTypeId = c.TravelProductTypeId,
+                            Stocks = c.Stocks,
+                            Description = c.Description,
+                            CountryId = c.CountryId,
+                            Cost = c.Cost,
+                            EventIntroduction = c.EventIntroduction,
+                            MapUrl = c.MapUrl,
+                            PreparationDescription = c.PreparationDescription,
+                            productpictures = c.TravelPictures.ToList(),
+                        }).ToList();
+
+            return View(vmp);
+
         }
         public IActionResult PayCheckout(int? TravelProductId)
         {
