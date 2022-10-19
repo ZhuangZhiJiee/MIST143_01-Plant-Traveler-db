@@ -1,21 +1,6 @@
 $(function () {
 
-    $('#adultPlus').click(function () {
-        let currentNum = parseInt($('#adultNum').text())
-        currentNum += 1
-        $('#adultNum').text(currentNum)
 
-        $('#totalPrice').text(currentNum * 300)
-    });
-    $('#adultMinus').click(function () {
-        let currentNum = parseInt($('#adultNum').text())
-        if(currentNum > 0) {
-            currentNum -= 1
-            $('#adultNum').text(currentNum)
-        }
-        $('#totalPrice').text(currentNum * 300)
-        console.log($('#adultNum').text())
-    });
     $('#childPlus').click(function () {
         let currentNum = parseInt($('#childNum').text())
         currentNum += 1
