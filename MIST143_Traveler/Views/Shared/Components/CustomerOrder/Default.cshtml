@@ -1,52 +1,61 @@
-﻿@model IEnumerable<MIST143_Traveler.Models.Order>
+﻿@model MIST143_Traveler.MViewModel.COrderDetail
 @using Microsoft.AspNetCore.Http
 @using System.Text.Json;
 @inject IHttpContextAccessor Accessor
 @{
     ViewData["Title"] = "Default";
+
 }
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
-@*<script src="https://code.jquery.com/jquery-3.6.1.min.js"
-        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-        crossorigin="anonymous"></script>*@
 
-<table class="table">
+
+<table id="table_id">
     <thead>
         <tr>
-            @*<th>
-                @Html.DisplayNameFor(model => model.OrderDetailId)
-            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.MembersId)
+                @Html.DisplayNameFor(model => model.訂單.FirstOrDefault().訂單編號)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
+                @Html.DisplayNameFor(model => model.訂單.FirstOrDefault().商品名稱)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderStatusId)
+                @Html.DisplayNameFor(model => model.訂單.FirstOrDefault().訂購日期)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.訂單.FirstOrDefault().購買金額)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.訂單.FirstOrDefault().訂單狀態)
+            </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.訂單)
         {
+
             <tr>
 
                 <!--<td>-->
                     @*@Html.DisplayFor(modelItem => item.OrderDetailId)*@
                 <!--</td>-->
                 <td>
-                    @Html.DisplayFor(modelItem => item.MembersId)
+                    @Html.DisplayFor(modelItem => item.訂單編號)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.OrderDate)
+                    @Html.DisplayFor(modelItem => item.商品名稱)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.OrderStatusId)
+                    @Html.DisplayFor(modelItem => item.訂購日期)
                 </td>
                 <td>
-                    <button class="delete" value="@item.OrderId">刪除</button>
+                    @Html.DisplayFor(modelItem => item.購買金額)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.訂單狀態)
+                </td>
+                <td>
+                    <button class="delete" value="@item.orderId">取消</button>
                     @*@Html.ActionLink("刪除", "Delete", "CustomerCenter", new { id = item.OrderId, MemberId = item.MemberId },
                         new { onclick = "return confirm('確定要刪除?')",id="de"})*@
                 </td>
@@ -54,22 +63,28 @@
         }
     </tbody>
 </table>
-@*@section Scripts{*@
-
 <script>
 
 
-
-@{
-    var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
-    var v = JsonSerializer.Deserialize<Member>(OBJ);
-}
-    $(".delete").click(function () {
-        const orderId = $(this)/*.closest("td").siblings().find(".OId")*/.val();
-        $('#cont').load("@Url.Content("~/CustomerCenter/Order")" + `?MembersId=${@v.MembersId}&OrderId=${orderId}`);
-    });
-        
-
 </script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+@section Scripts{
+    <script>
 
-@*}*@
+    @{
+        var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+        var v = JsonSerializer.Deserialize<Member>(OBJ);
+    }
+    $(".delete").click(function () {
+    const orderId = $(this)/*.closest("td").siblings().find(".OId")*/.val();
+    $('#cont').load("@Url.Content("~/CustomerCenter/Order")" + `?MembersId=${@v.MembersId}&OrderId=${orderId}`);
+    });
+
+
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+
+    </script>
+    
+}

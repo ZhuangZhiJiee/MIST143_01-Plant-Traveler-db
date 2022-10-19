@@ -1,9 +1,15 @@
-﻿@model MIST143_Traveler.Models.Member
+﻿@model MIST143_Traveler.MViewModel.CMemberView
 @{ Layout = null;}
 @using Microsoft.AspNetCore.Http
 @using System.Text.Json;
 @inject IHttpContextAccessor Accessor
 
+<script>
+        @{
+        var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+        var v = JsonSerializer.Deserialize<Member>(OBJ);
+    }
+</script>
 <link href="~/css/客服中心.css" rel="stylesheet" />
 <link href="~/css/客服中心訂單內容物.css" rel="stylesheet" />
 <div id="cont">
@@ -11,6 +17,9 @@
         <div class="col 上面空間">
             <h3>個人資訊</h3>
             <p>以下資訊僅用於幫助你在付款時自動填寫你的個人資料，你的資料將會安全地保存且不會公開</p>
+        </div>
+        <div class="form-group">
+            <input asp-for="MembersId" name="MembersId" id="MembersId" value="@Model.MembersId" class="form-control" type="hidden" />
         </div>
         <div class="box_body d-flex  mb-2">
             <div class="inputs p-2 flex-fill">
@@ -23,33 +32,34 @@
 
             <div class="inputs p-2 flex-fill">
                 <header>名稱</header>
-
-                <input class="form-control" type="text" asp-for="MemberName" placeholder="名稱" aria-label="default input example" name="MemberName">
+                <input class="form-control" asp-for="MemberName" type="text" placeholder="名稱" id="MemberName" aria-label="default input example" name="MemberName">
             </div>
             <div class="inputs p-2 flex-fill">
                 <header>聯繫電話</header>
-                <input class="form-control" type="text" asp-for="Phone" placeholder="PHONE" aria-label="default input example" name="PHONE">
+                <input class="form-control" type="text" asp-for="Phone" placeholder="PHONE" id="Phone" aria-label="default input example" name="PHONE">
             </div>
         </div>
 
         <div class="box_body d-flex  mb-2">
             <div class="inputs p-2 ">
                 <header>居住縣市</header>
-                <select class="form-select" aria-label="Default select example" asp-for="CityId" name="城市">
+                <input type="hidden" id="cid" value="@Model.CityId" />
+                <select class="form-select" aria-label="Default select example" @*asp-for="CityId"*@ id="CityId" name="Cityname">
+                    <option selected>@Model.Cityname</option>
                 </select>
             </div>
 
 
             <div class="inputs p-2 flex-grow-1">
                 <header>地址</header>
-                <input class="form-control" type="text" asp-for="Address" placeholder="北投區111號" aria-label="default input example" name="Address">
+                <input class="form-control" type="text" asp-for="Address" id="Address" placeholder="北投區111號" aria-label="default input example" name="Address">
             </div>
         </div>
 
         <div class="box_body d-flex  mb-2">
             <div class="inputs p-2 flex-fill">
                 <header>重設密碼</header>
-                <input class="form-control" type="text" placeholder="password" aria-label="default input example">
+                <input class="form-control" type="text" id="Password" placeholder="password" aria-label="default input example">
             </div>
 
             <div class="inputs p-2 flex-fill">
@@ -60,7 +70,7 @@
 
         <div class="d-flex mb-3">
             <div class="me-auto p-2">
-                <button type="button" class="btn btn-warning 按鈕顏色" id="send">儲存</button>
+                <button type="submit" class="btn btn-warning 按鈕顏色" id="send" onclick="bb()">儲存</button>
             </div>
         </div>
     </div>
@@ -69,7 +79,62 @@
 
 @section Scripts {
     
-      <script></script>
+    <script>
+          @*const cont = document.querySelector("#cont")
+        const Btnsave = document.querySelector("#send")
+        const bb = () => {
+
+            var postData = {
+               Address: $("#Address").val(),
+               MemberName: $("#MemberName").val(),
+               Phone: $("#Phone").val(),
+               MembersId: $("#MembersId").val(),
+                Password: $("#Password").val(),
+                Cityname: $("#CityId").val(),
+            };
+            //console.log(123)
+             $.ajax({
+                url: '@Url.Action("SaveCusInfo", "CustomerCenter")',
+                method: 'Post',
+                dataType: 'Json',
+                 data: { inCus: postData },
+                success: function (datas) {
+                    if (!datas.res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '輸入錯誤',
+                            text: datas.msg,
+
+                        })
+                        return;
+                    }
+                    Swal.fire(
+                        '您的變更已儲存!',
+                        '讚啦!',
+                        'success'
+                    )
+                }
+            })
+        }*@
+         //抓資料庫城市資料
+
+        async function LoadCities() {
+            let mm = $('#cid').val()
+            let selCity = document.querySelector("#CityId")
+            let response = await fetch("@Url.Content("~/CustomerCenter/city")" + `?id=${mm}`)
+          let datas = await response.json()
+          datas.forEach(city => {
+          const opt = new Option(city, city)
+          selCity.options.add(opt)
+          })
+             }
+           LoadCities()
+
+
+
+
+
+    </script>
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
