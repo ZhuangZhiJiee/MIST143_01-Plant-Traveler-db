@@ -13,11 +13,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.OrderDetailId)
-            </th>
+            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.MemberId)
+                @Html.DisplayNameFor(model => model.MembersId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.OrderDate)
@@ -33,12 +33,11 @@
         {
             <tr>
 
+                <!--<td>-->
+                    @*@Html.DisplayFor(modelItem => item.OrderDetailId)*@
+                <!--</td>-->
                 <td>
-
-                    @Html.DisplayFor(modelItem => item.OrderDetailId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MemberId)
+                    @Html.DisplayFor(modelItem => item.MembersId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.OrderDate)

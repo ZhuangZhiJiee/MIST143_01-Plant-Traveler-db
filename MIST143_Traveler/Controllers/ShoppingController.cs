@@ -5,6 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.Text.Json;
+
+
 
 namespace MIST143_Traveler.Controllers
 {
@@ -17,31 +21,22 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult testPage()
         {
-            //CProductViewModel vmp = new CProductViewModel();
-            //vmp.productpictures = pt.TravelPictures.Where(x => x.TravelProductId == 9).ToList();
+            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+            var v = JsonSerializer.Deserialize<Member>(Name);
 
-            //return View(vmp);
-            CProductxViewModel vmp = new CProductxViewModel();
+            CProductMemberViewModel pmv = new CProductMemberViewModel();
 
-            vmp.產品列表 = (from c in pt.TravelProducts
-                        where c.TravelProductId == 9
-                        select new 產品格式
+            pmv.產品會員 = (from c in pt.TravelProducts
+                        where c.TravelProductId == 1
+                        select new 產品會員
                         {
-                            TravelProductName = c.TravelProductName,
+                            MemberName = v.MemberName,
                             TravelProductId = c.TravelProductId,
+                            TravelProductName = c.TravelProductName,
                             Price = c.Price,
-                            TravelProductTypeId = c.TravelProductTypeId,
-                            Stocks = c.Stocks,
-                            Description = c.Description,
-                            CountryId = c.CountryId,
-                            Cost = c.Cost,
-                            EventIntroduction = c.EventIntroduction,
-                            PreparationDescription = c.PreparationDescription,
                             productpictures = c.TravelPictures.ToList(),
                         }).ToList();
-
-            return View(vmp);
-
+            return View(pmv);
         }
         public IActionResult List(int? TravelProductId)
         {
@@ -70,36 +65,36 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult PayData(int? TravelProductId)
         {
-            CProductxViewModel vmp = new CProductxViewModel();
+            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+            var v = JsonSerializer.Deserialize<Member>(Name);
+    
+            CProductMemberViewModel pmv = new CProductMemberViewModel();
 
-            vmp.產品列表 = (from c in pt.TravelProducts
+            pmv.產品會員 = (from c in pt.TravelProducts
                         where c.TravelProductId == (int)TravelProductId
-                        select new 產品格式
+                        select new 產品會員
                         {
-                            TravelProductName = c.TravelProductName,
+                            MemberName = v.MemberName,
+                            Email = v.Email,
+                            Phone = v.Phone,
                             TravelProductId = c.TravelProductId,
+                            TravelProductName = c.TravelProductName,
                             Price = c.Price,
-                            TravelProductTypeId = c.TravelProductTypeId,
-                            Stocks = c.Stocks,
-                            Description = c.Description,
-                            CountryId = c.CountryId,
-                            Cost = c.Cost,
-                            EventIntroduction = c.EventIntroduction,
-                            MapUrl = c.MapUrl,
-                            PreparationDescription = c.PreparationDescription,
                             productpictures = c.TravelPictures.ToList(),
                         }).ToList();
 
-            return View(vmp);
+            return View(pmv);
 
         }
         public IActionResult PayCheckout(int? TravelProductId)
         {
-            //PlanetTravelContext pt = new PlanetTravelContext();
-            //var data = from p in pt.TravelProducts
-            //        select p;
             var data = pt.TravelProducts.Where(x => x.TravelProductId == (int)TravelProductId).FirstOrDefault();
             return View(data);
+        }
+        [HttpPost]
+        public IActionResult PayCheckout()
+        {
+            return View();
         }
         public IActionResult ShoppingCart()
         {

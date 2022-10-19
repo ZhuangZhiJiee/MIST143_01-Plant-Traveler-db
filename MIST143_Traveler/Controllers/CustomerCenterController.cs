@@ -148,7 +148,7 @@ namespace MIST143_Traveler.Controllers
                     _PlanetTravelContext.SaveChanges();
                 }
                 
-                var Cus = _PlanetTravelContext.Orders.Where(a => a.MemberId == MembersId).ToList();
+                var Cus = _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId).ToList();
                 
                
                 if (Cus.Count > 0)
