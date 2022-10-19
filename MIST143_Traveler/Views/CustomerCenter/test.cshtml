@@ -1,16 +1,52 @@
-﻿
+﻿@model MIST143_Traveler.Models.Order
 
-<input type="text" id="aa" />
-<button type="button" class="btn btn-success" id="sb1" onclick="BtnDemo()">Demo</button>
-
-@section Scripts {
-    <script>
-        //DEMO
-
-        function BtnDemo() {
-
-            $('#aa').val("恆佑")
-          
-    }
-    </script>
+@{
+    ViewData["Title"] = "test";
 }
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<table class="display-1 table-hover cell-border" id="table_id">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => Model.OrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.OrderDate)
+                </td>
+             
+                    @*@Html.ActionLink("刪除", "Delete", "CustomerCenter", new { id = item.OrderId, MemberId = item.MemberId },
+                        new { onclick = "return confirm('確定要刪除?')",id="de"})*@
+                </td>
+            </tr>
+        
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+
+    </script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+}
+
+

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MIST143_Traveler.Models;
+using MIST143_Traveler.MViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,10 @@ namespace MIST143_Traveler.ViewComponents
         //{
         //    _PlanetTravelContext = PlanetTrave;
         //}
-        public async Task<IViewComponentResult> InvokeAsync(List<Order> Cus)
+        public async Task<IViewComponentResult> InvokeAsync(COrderDetail Oe)
         {
             
-            return View(Cus);
+            return View(Oe);
         }
     }
 }

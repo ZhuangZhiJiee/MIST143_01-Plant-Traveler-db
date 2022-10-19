@@ -43,7 +43,7 @@ namespace MIST143_Traveler.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=192.168.36.26;Initial Catalog=PlanetTravel;User ID=jay;Password=1234");
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=PlanetTravel;Integrated Security=True");
             }
         }
 
@@ -77,12 +77,6 @@ namespace MIST143_Traveler.Models
                 entity.Property(e => e.AdminId).HasColumnName("AdminID");
 
                 entity.Property(e => e.AdminStatus1).HasColumnName("AdminStatus");
-
-                entity.HasOne(d => d.Admin)
-                    .WithMany(p => p.AdminStatuses)
-                    .HasForeignKey(d => d.AdminId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_AdminStatus_Admin");
             });
 
             modelBuilder.Entity<City>(entity =>
@@ -253,33 +247,40 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
-                entity.Property(e => e.MemberId).HasColumnName("MemberID");
+                entity.Property(e => e.CouponId).HasColumnName("CouponID");
+
+                entity.Property(e => e.MembersId).HasColumnName("MembersID");
 
                 entity.Property(e => e.OrderDate)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.OrderDetailId).HasColumnName("OrderDetailID");
-
                 entity.Property(e => e.OrderStatusId).HasColumnName("OrderStatusID");
 
-                entity.HasOne(d => d.Member)
+                entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
+
+                entity.HasOne(d => d.Coupon)
                     .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.MemberId)
+                    .HasForeignKey(d => d.CouponId)
+                    .HasConstraintName("FK_Order_Coupon");
+
+                entity.HasOne(d => d.Members)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.MembersId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Order_Members");
-
-                entity.HasOne(d => d.OrderDetail)
-                    .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.OrderDetailId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Order_OrderDetail");
 
                 entity.HasOne(d => d.OrderStatus)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.OrderStatusId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Order_OrderStatus");
+
+                entity.HasOne(d => d.Payment)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.PaymentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Order_Payment");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
@@ -288,25 +289,16 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.OrderDetailId).HasColumnName("OrderDetailID");
 
-                entity.Property(e => e.CouponId).HasColumnName("CouponID");
-
-                entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
                 entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
 
                 entity.Property(e => e.UnitPrice).HasColumnType("money");
 
-                entity.HasOne(d => d.Coupon)
+                entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.CouponId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OrderDetail_Coupon");
-
-                entity.HasOne(d => d.Payment)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.PaymentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OrderDetail_Payment");
+                    .HasForeignKey(d => d.OrderId)
+                    .HasConstraintName("FK_OrderDetail_Order");
 
                 entity.HasOne(d => d.TravelProduct)
                     .WithMany(p => p.OrderDetails)

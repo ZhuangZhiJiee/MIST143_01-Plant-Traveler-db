@@ -9,12 +9,12 @@ namespace MIST143_Traveler.Models
     {
         public Payment()
         {
-            OrderDetails = new HashSet<OrderDetail>();
+            Orders = new HashSet<Order>();
         }
 
         public int PaymentId { get; set; }
         public string PaymentName { get; set; }
 
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MIST143_Traveler.MViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
