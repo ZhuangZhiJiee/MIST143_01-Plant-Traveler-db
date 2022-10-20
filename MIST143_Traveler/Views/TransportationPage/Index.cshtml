@@ -1,0 +1,103 @@
+﻿@model IEnumerable<MIST143_Traveler.Models.TravelProduct>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<form method="post">
+
+</form>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TravelProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TravelProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TravelProductTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stocks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventIntroduction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreparationDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MapUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TravelProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TravelProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TravelProductTypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stocks)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventIntroduction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreparationDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MapUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductStatus)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
