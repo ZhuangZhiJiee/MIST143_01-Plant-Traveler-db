@@ -1,0 +1,78 @@
+﻿@model MIST143_Traveler.MViewModel.CCommentList
+
+@{
+    ViewData["Title"] = "CommentEdit";
+    Layout = null;
+}
+@*<script src="~/js/site.js"></script>*@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<h4>修改評論</h4>
+<hr />
+<div class="row">
+    <div class="col-12">
+        @*<form asp-action="Edit" enctype="multipart/form-data">*@
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" id="CID" asp-for="@Model.評論.FirstOrDefault().CommentID" />
+
+
+        <div class="form-group">
+            <label asp-for="@Model.評論.FirstOrDefault().產品名稱" class="control-label"></label>
+            <input asp-for="評論.FirstOrDefault().產品名稱" class="form-control" disabled="disabled" />
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="@Model.評論.FirstOrDefault().內容" class="control-label"></label>
+            <input asp-for="評論.FirstOrDefault().內容" id="cen" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.評論.FirstOrDefault().分數" class="control-label"></label>
+            <input asp-for="評論.FirstOrDefault().分數" id="point" class="form-control" />
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="修改" onclick="se()" class="btn btn-primary" />
+        </div>
+        @*</form>*@
+    </div>
+</div>
+<script>
+    const se = () => {
+        var Data = {
+            內容: $("#cen").val(),
+            分數: $("#point").val(),
+            CommentID: $("#CID").val(),
+        };
+        $.ajax({
+            url: '@Url.Action("CommentEdit","CustomerCenter")',
+            method: 'Post',
+            dataType: 'Json',
+            data: { inComli: Data },
+            success: function (datas) {
+                if (!datas.res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '輸入錯誤',
+                        text: datas.msg,
+                    })
+                    return;
+                }
+                Swal.fire(
+                    '您的變更已儲存!',
+                    '讚啦!',
+                    'success')
+            }
+        })
+     }
+
+</script>
+@section Scripts {
+
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>

@@ -59,8 +59,9 @@
         </tr>
            }
     </tbody>
-</table>
 
+</table>
+@*<button class="delete" value="@item.orderId">取消</button>*@
 
 <script>
     $(document).ready(function () {
@@ -78,7 +79,7 @@
     }
     $(".delete").click(function () {
     const orderId = $(this)/*.closest("td").siblings().find(".OId")*/.val();
-    $('#cont').load("@Url.Content("~/CustomerCenter/Order")" + `?MembersId=${@v.MembersId}&OrderId=${orderId}`);
+        $('#cont').load("@Url.Content("~/CustomerCenter/Order")" + `?MembersId=${@v.MembersId}&OrderId=${orderId}`);
     });
 
 

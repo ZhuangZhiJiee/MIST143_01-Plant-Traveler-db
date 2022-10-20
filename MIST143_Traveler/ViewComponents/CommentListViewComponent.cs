@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MIST143_Traveler.Models;
 using MIST143_Traveler.MViewModel;
 using System;
 using System.Collections.Generic;
@@ -9,12 +8,12 @@ using System.Threading.Tasks;
 namespace MIST143_Traveler.ViewComponents
 {
     [Microsoft.AspNetCore.Mvc.ViewComponent]
-    public class CustomerOrderViewComponent : Microsoft.AspNetCore.Mvc.ViewComponent
+    public class CommentListViewComponent:Microsoft.AspNetCore.Mvc.ViewComponent
     {
-     
-        public async Task<IViewComponentResult> InvokeAsync(COrderDetail Oe)
+        public async Task<IViewComponentResult> InvokeAsync(CCommentList Comli)
         {
-            return View(Oe);
+
+            return View(Comli);
         }
     }
 }

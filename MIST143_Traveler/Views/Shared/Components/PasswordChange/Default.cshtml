@@ -1,0 +1,94 @@
+﻿@model MIST143_Traveler.MViewModel.CPasswordChange
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@using MIST143_Traveler.ViewComponents
+@{
+    ViewData["Title"] = "Star";
+}
+@section Styles{
+
+}
+<link href="~/css/客服中心.css" rel="stylesheet" />
+<link href="~/css/客戶中心訂單內容物.css" rel="stylesheet" />
+<script>
+        @{
+        var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+        var v = JsonSerializer.Deserialize<Member>(OBJ);
+    }
+</script>
+<body>
+
+    <article>
+        <div class="col-12 上面空間">
+            <h3>變更密碼</h3>
+            <div>
+                <div class="text-center">
+                    <div class="box_body col-4">
+                        <div class="inputs p-2">
+                            <header>舊密碼</header>
+                            <input id="@v.MembersId" value="@v.MembersId" type="hidden"/>
+                            <input class="form-control" type="text" name="OldPassword" id="OldPassword" placeholder="password" aria-label="default input example">
+                        </div>
+                        <div class="inputs p-2">
+                            <header>重設密碼</header>
+                            <input class="form-control" type="text" name="Password1" id="Password1" placeholder="password" aria-label="default input example">
+                        </div>
+
+                        <div class="inputs p-2">
+                            <header>再次確認密碼</header>
+                            <input class="form-control" type="text" name="Password2" id="Password2" placeholder="password" aria-label="default input example">
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-3">
+                        <div class="me-auto p-2">
+                            <button type="submit" class="btn btn-warning 按鈕顏色" id="send" onclick="bb()">儲存</button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </article>
+
+
+</body>
+
+<script>
+    const Pas = () => {
+        var pasData = {
+            MembersId: $("#MembersId").val(),
+            OldPassword: $("#OldPassword").val(),
+            Password1: $("#Password1").val(),
+            Password2: $("#Password2").val(),
+        }
+        $.ajax({
+            url: '@Url.Action("PasswordChange", "CustomerCenter")',
+            method: 'Post',
+            dataType: 'Json',
+            data: { CP: pasData },
+            success: function (datas) {
+                if (!datas.res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '輸入錯誤',
+                        text: datas.msg,
+
+                    })
+                    return;
+                }
+                Swal.fire(
+                    '您的變更已儲存!',
+                    '讚啦!',
+                    'success'
+                )
+            }
+        })
+    }
+
+</script>

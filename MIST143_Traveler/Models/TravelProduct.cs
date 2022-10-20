@@ -9,9 +9,10 @@ namespace MIST143_Traveler.Models
     {
         public TravelProduct()
         {
+            Comments = new HashSet<Comment>();
             OrderDetails = new HashSet<OrderDetail>();
-            ProductToTransportations = new HashSet<ProductToTransportation>();
             TravelPictures = new HashSet<TravelPicture>();
+            TravelProductDetails = new HashSet<TravelProductDetail>();
         }
 
         public int TravelProductId { get; set; }
@@ -29,8 +30,9 @@ namespace MIST143_Traveler.Models
 
         public virtual Country Country { get; set; }
         public virtual TravelProductType TravelProductType { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        public virtual ICollection<ProductToTransportation> ProductToTransportations { get; set; }
         public virtual ICollection<TravelPicture> TravelPictures { get; set; }
+        public virtual ICollection<TravelProductDetail> TravelProductDetails { get; set; }
     }
 }
