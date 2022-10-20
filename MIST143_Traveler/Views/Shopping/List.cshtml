@@ -3,94 +3,97 @@
 
 
 
-    @{
-        ViewData["Title"] = "List";
-    }
+@{
+    ViewData["Title"] = "List";
+}
 
-    @section Styles{
+@section Styles{
 
-        <link href="~/css/924自用.css" rel="stylesheet" />
-        <link href="~/css/style.css" rel="stylesheet" />
-        @*<link href="~/css/bootstrap.min.css" rel="stylesheet" />*@
-        <link href="~/css/product.css" rel="stylesheet" />
-        <link rel="stylesheet" href="~/css/travelOrder.css" />
-    }
-    <body class="p-0 m-0 border-0 bd-example">
-
-        <div class="p-0 m-0 border-0 mx-auto 最大的">
-            <div class="activity-page-container">
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="幻燈片 1" src=" https://picsum.photos/400/300"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="幻燈片 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="幻燈片 3"></button>
-                    </div>
-                    <div class="carousel-inner 照片的包皮">
-                        <div class="carousel-item active">
-                            <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block" alt="...">
-                        </div>
-
-                        <div class="carousel-item">
-                            <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block" alt="...">
-                        </div>
-
-                        <div class="carousel-item">
-                            <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block" alt="...">
-                        </div>
-
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">以前的</font></font></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下一個</font></font></span>
-                    </button>
+    <link href="~/css/924自用.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    @*<link href="~/css/bootstrap.min.css" rel="stylesheet" />*@
+    <link href="~/css/product.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/travelOrder.css" />
+}
+@{
+    int count = 0;
+}
+<body class="p-0 m-0 border-0 bd-example">
+    <div class="p-0 m-0 border-0 mx-auto 最大的">
+        <div class="activity-page-container">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="幻燈片 1" src=" https://picsum.photos/400/300"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="幻燈片 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="幻燈片 3"></button>
                 </div>
-
-            </div>
-            <div class="分類">
-                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">首頁</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">101</li>
-                    </ol>
-                </nav>
-                <div class="卡片">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">NT$ @Model.產品列表.FirstOrDefault().Price.ToString("###,###,##0")</h5>
-                            <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#joinModal">選擇方案</a>
-                        </div>
+                <div class="carousel-inner 照片的包皮">
+                    <div class="carousel-item active">
+                        <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block" alt="...">
                     </div>
-                </div>
-            </div>
 
-            <div class="標題">
-                <h3>@Model.產品列表.FirstOrDefault().TravelProductName</h3>
-            </div>
-            <div class="小介紹">
-                <div class="評價">
-                    <img src="~/Images/Product/一顆星.png" /><span>5.0</span>(3則評價) 3人參加過
+                    <div class="carousel-item">
+                        <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block" alt="...">
+                    </div>
 
-                    <div class="我的最愛">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                        </svg>
-                        <div>
-                            @Html.ActionLink("加入我的最愛", null, null, null, null)
-                        </div>
+                    <div class="carousel-item">
+                        <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block" alt="...">
                     </div>
 
                 </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">以前的</font></font></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下一個</font></font></span>
+                </button>
             </div>
-            <br />
-            <div class="小介紹">
-                <ul class="">
-                    @Model.產品列表.FirstOrDefault().Description
-                </ul>
+
+        </div>
+        <div class="分類">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">首頁</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">101</li>
+                </ol>
+            </nav>
+            <div class="卡片">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">NT$ @Model.產品列表.FirstOrDefault().Price.ToString("###,###,##0")</h5>
+                        <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#joinModal">選擇方案</a>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <div class="標題">
+            <h3>@Model.產品列表.FirstOrDefault().TravelProductName</h3>
+        </div>
+        <div class="小介紹">
+            <div class="評價">
+                <img src="~/Images/Product/一顆星.png" /><span>5.0</span>(3則評價) 3人參加過
+
+                <div class="我的最愛">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                    </svg>
+                    <div>
+                        @Html.ActionLink("加入我的最愛", null, null, null, null)
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br />
+        <div class="小介紹">
+
+            @Model.產品列表.FirstOrDefault().Description
+
+        </div>
+        <form method="post" action="PayData">
             <article class="payContainer choose">
                 <div class="payContainerInner">
                     <div>
@@ -123,7 +126,6 @@
                                         </div>
                                     </div>
                                     <div class="subInfoText ps-3">數量</div>
-
                                     <div class="py-3">
                                         <div class="chooseNumberRow mx-3">
                                             <div class="chooseTitle">
@@ -134,29 +136,15 @@
                                                         class="btn btn-outline-secondary">
                                                     -
                                                 </button>
-                                                <div class="number" id="adultNum">0</div>
+                                                <div class="number" id="adultNum">0
+                                                    @*<input type="text" name="count"  value="@count" />*@
+                                                </div>
                                                 <button type="button" id="adultPlus"
                                                         class="btn btn-outline-secondary">
                                                     +
                                                 </button>
                                             </div>
                                         </div>
-                                        @*<div class="chooseNumberRow mx-3 mt-2">
-                                                <div class="chooseTitle">
-                                                    兒童
-                                                </div>
-                                                <div class="chooseNumberBlock">
-                                                    <button type="button" id="childMinus"
-                                                            class="btn btn-outline-secondary">
-                                                        -
-                                                    </button>
-                                                    <div class="number" id="childNum">0</div>
-                                                    <button type="button" id="childPlus"
-                                                            class="btn btn-outline-secondary">
-                                                        +
-                                                    </button>
-                                                </div>
-                                            </div>*@
                                     </div>
                                     <div class="px-3 totalRow">
                                         <div class="my-3">
@@ -165,10 +153,17 @@
                                             <div class="subInfoText">剩餘:  @Model.產品列表.FirstOrDefault().Stocks 個位置</div>
                                         </div>
                                         <div class="rightBtns">
-                                            <button type="button" class="btn btn-main" data-bs-toggle="modal" data-bs-target="#joinModal">加入購物車</button>
-                                            <button type="button" class="btn btn-main ms-3">
-                                                <a class="buttonInnderA" href="@Url.Action("PayData" ,"shopping", new { Model.產品列表.FirstOrDefault().TravelProductId })">立即預定</a>
+                                            <button type="button" class="btn btn-main" data-bs-toggle="modal" data-bs-target="#joinModal">
+                                                <a class="buttonInnderA" href="@Url.Action("testpage" ,"shopping", new { Model.產品列表.FirstOrDefault().TravelProductId })">加入購物車</a>
                                             </button>
+
+                                            <input type="hidden" name="TravelProductId" value="@Model.產品列表.FirstOrDefault().TravelProductId" />
+                                            <input type="submit" value="立即預定" class="btn btn-main ms-3" />
+
+
+                                            @*<button type="button" class="btn btn-main ms-3">
+                                                    <a class="buttonInnderA" href="@Url.Action("PayData" ,"shopping", new { Model.產品列表.FirstOrDefault().TravelProductId })">立即預定</a>
+                                                </button>*@
                                         </div>
                                     </div>
                                 </div>
@@ -177,146 +172,122 @@
                     </div>
                 </div>
             </article>
-            <div class="下面一包">
-                <div class="活動DIV">
-                    <h2><span class="一條根"> </span><span>活動介紹</span></h2>
-                </div>
-                <div class="小介紹">
-                    @Model.產品列表.FirstOrDefault().EventIntroduction
-                </div>
-                @foreach (var item in Model.產品列表.FirstOrDefault().productpictures)
-                {
-                    <img src="https://localhost:44338/images/TravelProductPictures/@item.TravelPicture1" class="下圖" />
-                    <figcaption class="下圖小字">@item.TravelPictureText</figcaption>
-                }
-                @*<div class="小介紹">
-            即訂即出台北101觀景台門票，掃 QRcode 快速入場！搭乘世界超快速度電梯，抵達 89 樓觀景台，登上台灣第一高樓，俯瞰大台北城市夜景，盡享全視野景觀！
-
-            89樓觀景台打造全新空間「高空Sky Lounge區」，以及於91樓戶外觀景平台打造波希米亞風格的「戶外賞月區」，讓夜晚賞月賞景更有氣氛、更加浪漫。白天亦有絕佳視野，可以享受各種風情與色彩的黃昏美景！
-        </div>
-
-        <figure>
-            <img src="~/Images/Product/PIC3.png" class="下圖">
-            <figcaption class="下圖小字">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z" />
-                </svg>89樓高空夜景Sky Lounge區
-            </figcaption>
-        </figure>
-
-        <figure>
-            <img src="~/Images/Product/PIC4.png" class="下圖">
-            <figcaption class="下圖小字">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z" />
-                </svg>91樓戶外「戶外賞月區」
-            </figcaption>
-        </figure>
-
-        <figure>
-            <img src="~/Images/Product/PIC5.png" class="下圖">
-            <figcaption class="下圖小字">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z" />
-                </svg>89樓高空日景Sky Lounge區
-            </figcaption>
-        </figure>*@
-
-                <div class="活動DIV">
-                    <h2><span class="一條根"> </span><span>地點</span></h2>
-                </div>
-                <iframe src="@Model.產品列表.FirstOrDefault().MapUrl" width="850" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <div class="活動DIV">
-                    <h2><span class="一條根"> </span><span>活動評價</span></h2> @*i love apple*@
-                    <div class="評論">
-                        <div class="card mb-3" style="max-width: 850px;">
-                            <div class="row g-0">
-
-                                <div class="col-md-1">
-                                    <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
-                                </div>
-
-                                <div class="col-md-10">
-                                    <div class="card-body">
-                                        <h5 class="card-title">恆佑</h5>
-                                        <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
-                                        <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
-                                        <p class="card-text"><small class="text-muted">2022/5/35</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mb-3" style="max-width: 850px;">
-                            <div class="row g-0">
-
-                                <div class="col-md-1">
-                                    <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
-                                </div>
-
-                                <div class="col-md-10">
-                                    <div class="card-body">
-                                        <h5 class="card-title">恆佑</h5>
-                                        <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
-                                        <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
-                                        <p class="card-text"><small class="text-muted">2022/5/35</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mb-3" style="max-width: 850px;">
-                            <div class="row g-0">
-
-                                <div class="col-md-1">
-                                    <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
-                                </div>
-
-                                <div class="col-md-10">
-                                    <div class="card-body">
-                                        <h5 class="card-title">恆佑</h5>
-                                        <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
-                                        <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
-                                        <p class="card-text"><small class="text-muted">2022/5/35</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="活動DIV">
-                        <h2><span class="一條根"> </span><span>常見問題</span></h2>
-                    </div>
-
-                </div>
+        </form>
+        <div class="下面一包">
+            <div class="活動DIV">
+                <h2><span class="一條根"> </span><span>活動介紹</span></h2>
             </div>
-        <!-- 已加入購物車訊息彈窗 -->
-        <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-             style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <button type="button" class="btn-close modalClose " data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    <div class="infoTitle mt-4"></div>
-                    <div class="modal-body text-center ">
-                        <h4>已加入至購物車</h4>
+            <div class="小介紹">
+                @Model.產品列表.FirstOrDefault().EventIntroduction
+            </div>
+            @foreach (var item in Model.產品列表.FirstOrDefault().productpictures)
+            {
+                <img src="https://localhost:44338/images/TravelProductPictures/@item.TravelPicture1" class="下圖" />
+                <figcaption class="下圖小字">@item.TravelPictureText</figcaption>
+            }
+
+            <div class="活動DIV">
+                <h2><span class="一條根"> </span><span>地點</span></h2>
+            </div>
+            <iframe src="@Model.產品列表.FirstOrDefault().MapUrl" width="850" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="活動DIV">
+                <h2><span class="一條根"> </span><span>注意事項</span></h2>
+            </div>
+            <div class="小介紹">
+                @Model.產品列表.FirstOrDefault().PreparationDescription
+            </div>
+            <div class="活動DIV">
+                <h2><span class="一條根"> </span><span>活動評價</span></h2>
+                <div class="評論">
+                    <div class="card mb-3" style="max-width: 850px;">
+                        <div class="row g-0">
+
+                            <div class="col-md-1">
+                                <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">恆佑</h5>
+                                    <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
+                                    <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
+                                    <p class="card-text"><small class="text-muted">2022/5/35</small></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                aria-label="Close">
-                            確定
-                        </button>
+
+                    <div class="card mb-3" style="max-width: 850px;">
+                        <div class="row g-0">
+
+                            <div class="col-md-1">
+                                <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">恆佑</h5>
+                                    <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
+                                    <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
+                                    <p class="card-text"><small class="text-muted">2022/5/35</small></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="card mb-3" style="max-width: 850px;">
+                        <div class="row g-0">
+
+                            <div class="col-md-1">
+                                <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">恆佑</h5>
+                                    <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
+                                    <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
+                                    <p class="card-text"><small class="text-muted">2022/5/35</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="活動DIV">
+                    <h2><span class="一條根"> </span><span>常見問題</span></h2>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 已加入購物車訊息彈窗 -->
+    <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="btn-close modalClose " data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                <div class="infoTitle mt-4"></div>
+                <div class="modal-body text-center ">
+                    <h4>已加入至購物車</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                            aria-label="Close">
+                        確定
+                    </button>
                 </div>
             </div>
         </div>
-        @section Scripts{
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="https://code.jquery.com/jquery-3.6.1.js"
-                    integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-            <script src="~/js/travelOrder.js"></script>
-            <script>
+    </div>
+    @section Scripts{
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.1.js"
+                integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+        <script src="~/js/travelOrder.js"></script>
+        <script>
                 $('#adultPlus').click(function () {
                     let currentNum = parseInt($('#adultNum').text())
                     currentNum += 1
@@ -333,7 +304,7 @@
                     $('#totalPrice').text(currentNum * @Model.產品列表.FirstOrDefault().Price)
                     console.log($('#adultNum').text())
                 });
-            </script>
-        }
-    </body>
+        </script>
+    }
+</body>
 

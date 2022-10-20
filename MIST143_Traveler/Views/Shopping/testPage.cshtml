@@ -1,13 +1,11 @@
 ﻿
-@model MIST143_Traveler.MViewModel.CProductMemberViewModel
 @{
     ViewData["Title"] = "testPage";
 }
 
 <h1>testPage</h1>
-
-@*@foreach (var item in Model.產品列表.FirstOrDefault().productpictures)
-{
-    <img src="https://localhost:44338/images/TravelProductPictures/@item.TravelPicture1" />
-}*@
-
+<form method="post" action="testPagee">
+    <input type="text" name="TravelProductId" value="1" />
+    <input type="text" name="TravelProductName" value="名字" />
+    <input type="submit" value="立即預定" class="btn btn-main ms-3" />
+</form>
