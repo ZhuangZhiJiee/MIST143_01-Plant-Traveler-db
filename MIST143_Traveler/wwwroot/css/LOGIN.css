@@ -49,6 +49,7 @@ html, body {
     background-color: #FFC312;
     color: black;
     border: 0 !important;
+    height:38px;
 }
 
 input:focus {
@@ -86,9 +87,3 @@ input:focus {
         margin-left: 4px;
     }
 
-.main-header{
-    display: none;
-}
-.main-footer, .border-bottom-line, .secondary-nav{
-    display: none;
-}

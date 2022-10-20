@@ -1,12 +1,17 @@
 ﻿
 @{
     ViewData["Title"] = "newLoginpag";
+    Layout = null;
 
 }
 
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous" />
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
 <!------ Include the above in your HEAD tag ---------->
-
 <!------ Include the above in your HEAD tag ---------->
 @*<html>*@
 
@@ -23,66 +28,66 @@
 </head>
 
 @*@using (Html.BeginForm())
-{
+    {
 
-    @Html.AntiForgeryToken()*@
-    <body>
+        @Html.AntiForgeryToken()*@
+<body>
 
 
-        <div class="container">
-            <div class="d-flex justify-content-center h-100 p-5 mt-5">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Sign In</h3>
-                        <div class="d-flex justify-content-end social_icon">
-                            <span><i class="fab fa-facebook-square"></i></span>
-                            <span><i class="fab fa-google-plus-square"></i></span>
-                            <span><i class="fab fa-twitter-square"></i></span>
-                        </div>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Sign In</h3>
+                    <div class="d-flex justify-content-end social_icon">
+                        <span><i class="fab fa-facebook-square"></i></span>
+                        <span><i class="fab fa-google-plus-square"></i></span>
+                        <span><i class="fab fa-twitter-square"></i></span>
                     </div>
-                    <div class="card-body">
+                </div>
+                <div class="card-body">
 
-                        @*<form name="userInfo" method="post" enctype="application/x-www-form-urlencoded" action="~/CustomerCenter/newLogh">*@
-                        <div class="input-group form-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Email帳號" id="Actemail" name="Email">
-
+                    @*<form name="userInfo" method="post" enctype="application/x-www-form-urlencoded" action="~/CustomerCenter/newLogh">*@
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <div class="input-group form-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
-                            <input type="password" class="form-control" placeholder="password" id="Pas" name="Password">
-                        </div>
-                        <div class="row align-items-center remember">
-                            <input type="checkbox">記住我
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Login" onclick="BtnLogin()" id="btnlog" class="btn float-right login_btn">
-                        </div>
-                        @*</form>*@
+                        <input type="text" class="form-control" placeholder="Email帳號" id="Actemail" name="Email">
 
                     </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-center links">
-                            Don't have an account?<a href="#">Sign Up</a>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <a href="#">Forgot your password?</a>
-                        </div>
-                        <button type="button" class="btn btn-success" id=" demo" onclick="DemoValue()">Demo</button>
+                        <input type="password" class="form-control" placeholder="password" id="Pas" name="Password">
                     </div>
+                    <div class="row align-items-center remember">
+                        <input type="checkbox">記住我
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Login" onclick="BtnLogin()" id="btnlog" class="btn float-right login_btn">
+                    </div>
+                    @*</form>*@
+
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Don't have an account?<a href="#">Sign Up</a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="#">Forgot your password?</a>
+                    </div>
+                    <button type="button" class="btn btn-success" id=" demo" onclick="DemoValue()">Demo</button>
                 </div>
             </div>
         </div>
+    </div>
 
 
-    </body>
-    @*</html>*@
+</body>
+@*</html>*@
 @*}*@
-@section Scripts{
+
     <script>
 
     const DemoValue = () => {
@@ -98,21 +103,21 @@
     }
         //登入開始
         const BtnLogin = () => {
-           
+
         var postData = {
             Email: $("#Actemail").val(),
             Password: $("#Pas").val()
             };
-            
+
           console.log(123)
-            
+
         $.ajax({
             url: '@Url.Action("newLoginpag","CustomerCenter")',
             method: 'POST',
             dataType: 'JSON',//前端給後端
             data: { vModel: postData },
             success: function (datas) {//從後端傳回前端的動作
-                
+
                 if (!datas.res) {
                     Swal.fire({
                         icon: 'error',
@@ -121,12 +126,12 @@
 
                     })
                     return;
-                } 
+                }
                 //todo 顯示剩下訂單
                 //$('cont').load( partialview)
-              
+
                 window.location = "/Home/Index";
-                
+
             },
             error: function (err) {
                 Swal.fire('請輸入資料');
@@ -134,23 +139,17 @@
 
         });
         }
-        @*fetch("@Url.Content("~/CustomerCenter/CustomerInfo")")
-            .then(Response => {
-                console.log(Response.status)
-                console.log(Response)
-                console.log(Response.text)
-            })*@
-    @*const btnL = document.querySelector("btnlog")
-    btnL.addEventListener("click", async () => {
-        let response = await fetch("@Url.Content("~/CustomerCenter/newLoginpag")")
-        let txt =await response.text();
-        alert(txt);
 
-    })*@
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+          media="screen" />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-}
+
 
 
 
