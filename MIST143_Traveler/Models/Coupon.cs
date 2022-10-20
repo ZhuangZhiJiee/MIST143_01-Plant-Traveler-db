@@ -9,7 +9,7 @@ namespace MIST143_Traveler.Models
     {
         public Coupon()
         {
-            Orders = new HashSet<Order>();
+            OrderDetails = new HashSet<OrderDetail>();
         }
 
         public int CouponId { get; set; }
@@ -17,6 +17,6 @@ namespace MIST143_Traveler.Models
         public decimal Discount { get; set; }
         public string Photo { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

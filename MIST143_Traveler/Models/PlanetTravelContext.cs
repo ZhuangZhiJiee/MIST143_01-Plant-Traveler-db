@@ -20,6 +20,7 @@ namespace MIST143_Traveler.Models
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<AdminStatus> AdminStatuses { get; set; }
         public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<Hotel> Hotels { get; set; }
@@ -32,9 +33,11 @@ namespace MIST143_Traveler.Models
         public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<ProductToTransportation> ProductToTransportations { get; set; }
+        public virtual DbSet<ProductToView> ProductToViews { get; set; }
         public virtual DbSet<Trasportation> Trasportations { get; set; }
         public virtual DbSet<TravelPicture> TravelPictures { get; set; }
         public virtual DbSet<TravelProduct> TravelProducts { get; set; }
+        public virtual DbSet<TravelProductDetail> TravelProductDetails { get; set; }
         public virtual DbSet<TravelProductType> TravelProductTypes { get; set; }
         public virtual DbSet<View> Views { get; set; }
 
@@ -77,6 +80,12 @@ namespace MIST143_Traveler.Models
                 entity.Property(e => e.AdminId).HasColumnName("AdminID");
 
                 entity.Property(e => e.AdminStatus1).HasColumnName("AdminStatus");
+
+                entity.HasOne(d => d.Admin)
+                    .WithMany(p => p.AdminStatuses)
+                    .HasForeignKey(d => d.AdminId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AdminStatus_Admin");
             });
 
             modelBuilder.Entity<City>(entity =>
@@ -96,6 +105,33 @@ namespace MIST143_Traveler.Models
                     .HasForeignKey(d => d.CountryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_City_Country");
+            });
+
+            modelBuilder.Entity<Comment>(entity =>
+            {
+                entity.ToTable("Comment");
+
+                entity.Property(e => e.CommentId).HasColumnName("CommentID");
+
+                entity.Property(e => e.CommentDate)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.MembersId).HasColumnName("MembersID");
+
+                entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
+
+                entity.HasOne(d => d.Members)
+                    .WithMany(p => p.Comments)
+                    .HasForeignKey(d => d.MembersId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Comment_Members");
+
+                entity.HasOne(d => d.TravelProduct)
+                    .WithMany(p => p.Comments)
+                    .HasForeignKey(d => d.TravelProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Comment_TravelProduct");
             });
 
             modelBuilder.Entity<Country>(entity =>
@@ -119,7 +155,7 @@ namespace MIST143_Traveler.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Discount).HasColumnType("numeric(3, 2)");
+                entity.Property(e => e.Discount).HasColumnType("decimal(18, 1)");
             });
 
             modelBuilder.Entity<Hotel>(entity =>
@@ -247,8 +283,6 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
-                entity.Property(e => e.CouponId).HasColumnName("CouponID");
-
                 entity.Property(e => e.MembersId).HasColumnName("MembersID");
 
                 entity.Property(e => e.OrderDate)
@@ -258,11 +292,6 @@ namespace MIST143_Traveler.Models
                 entity.Property(e => e.OrderStatusId).HasColumnName("OrderStatusID");
 
                 entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
-
-                entity.HasOne(d => d.Coupon)
-                    .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.CouponId)
-                    .HasConstraintName("FK_Order_Coupon");
 
                 entity.HasOne(d => d.Members)
                     .WithMany(p => p.Orders)
@@ -289,11 +318,19 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.OrderDetailId).HasColumnName("OrderDetailID");
 
+                entity.Property(e => e.CouponId).HasColumnName("CouponID");
+
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
                 entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
 
                 entity.Property(e => e.UnitPrice).HasColumnType("money");
+
+                entity.HasOne(d => d.Coupon)
+                    .WithMany(p => p.OrderDetails)
+                    .HasForeignKey(d => d.CouponId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OrderDetail_Coupon");
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetails)
@@ -337,7 +374,7 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.TrasportationId).HasColumnName("TrasportationID");
 
-                entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
+                entity.Property(e => e.TravelProductDetailId).HasColumnName("TravelProductDetailID");
 
                 entity.HasOne(d => d.Trasportation)
                     .WithMany(p => p.ProductToTransportations)
@@ -345,11 +382,34 @@ namespace MIST143_Traveler.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ProductToTransportation_Trasportation");
 
-                entity.HasOne(d => d.TravelProduct)
+                entity.HasOne(d => d.TravelProductDetail)
                     .WithMany(p => p.ProductToTransportations)
-                    .HasForeignKey(d => d.TravelProductId)
+                    .HasForeignKey(d => d.TravelProductDetailId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ProductToTransportation_TravelProduct");
+                    .HasConstraintName("FK_ProductToTransportation_TravelProductDetail");
+            });
+
+            modelBuilder.Entity<ProductToView>(entity =>
+            {
+                entity.ToTable("ProductToView");
+
+                entity.Property(e => e.ProductToViewId).HasColumnName("ProductToViewID");
+
+                entity.Property(e => e.TravelProductDetailId).HasColumnName("TravelProductDetailID");
+
+                entity.Property(e => e.ViewId).HasColumnName("ViewID");
+
+                entity.HasOne(d => d.TravelProductDetail)
+                    .WithMany(p => p.ProductToViews)
+                    .HasForeignKey(d => d.TravelProductDetailId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProductToView_TravelProductDetail");
+
+                entity.HasOne(d => d.View)
+                    .WithMany(p => p.ProductToViews)
+                    .HasForeignKey(d => d.ViewId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProductToView_View");
             });
 
             modelBuilder.Entity<Trasportation>(entity =>
@@ -419,6 +479,32 @@ namespace MIST143_Traveler.Models
                     .HasForeignKey(d => d.TravelProductTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_TravelProduct_TravelProductType");
+            });
+
+            modelBuilder.Entity<TravelProductDetail>(entity =>
+            {
+                entity.ToTable("TravelProductDetail");
+
+                entity.Property(e => e.TravelProductDetailId).HasColumnName("TravelProductDetailID");
+
+                entity.Property(e => e.DailyDetailText).IsRequired();
+
+                entity.Property(e => e.Date).IsRequired();
+
+                entity.Property(e => e.HotelId).HasColumnName("HotelID");
+
+                entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
+
+                entity.HasOne(d => d.Hotel)
+                    .WithMany(p => p.TravelProductDetails)
+                    .HasForeignKey(d => d.HotelId)
+                    .HasConstraintName("FK_TravelProductDetail_Hotel");
+
+                entity.HasOne(d => d.TravelProduct)
+                    .WithMany(p => p.TravelProductDetails)
+                    .HasForeignKey(d => d.TravelProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_TravelProductDetail_TravelProduct");
             });
 
             modelBuilder.Entity<TravelProductType>(entity =>

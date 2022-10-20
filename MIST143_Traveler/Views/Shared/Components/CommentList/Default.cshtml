@@ -1,0 +1,120 @@
+﻿@model MIST143_Traveler.MViewModel.CCommentList
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@{
+    ViewData["Title"] = "Default";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
+<h1>評論</h1>
+
+
+<table id="table_idd">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.評論.FirstOrDefault().產品名稱)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.評論.FirstOrDefault().內容)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.評論.FirstOrDefault().分數)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.評論.FirstOrDefault().日期)
+            </th>
+
+            <th>
+                <input type="hidden" @Html.DisplayNameFor(model => model.評論.FirstOrDefault().CommentID)>
+            </th>
+            <th>
+                <input type="hidden" @Html.DisplayNameFor(model => model.評論.FirstOrDefault().CommentID)>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.評論)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.產品名稱)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.內容)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.分數)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.日期)
+                </td>
+                <td>
+                    <a class="btn btn-outline-warning" onclick="showmodal('@Url.Action("CommentEdit","CustomerCenter",new {@item.CommentID},Context.Request.Scheme)',null)">編輯</a>
+                </td>
+                <td>
+                    <button class="delete" value="@item.CommentID">刪除</button>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<!--修改光箱-->
+
+@*<div class="modal-dialog modal-dialog-centered" id="newstaticBackdrop">
+    <div class="modal-body">
+
+
+    </div>
+</div>*@
+<div class="modal fade" id="newstaticBackdrop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+            </div>
+
+            <div class="modal-body">
+                
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send 11message</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--修改光箱-->
+
+<script>
+       @{
+        var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+        var v = JsonSerializer.Deserialize<Member>(OBJ);
+    }
+   
+    $(document).ready(function () {
+        $('#table_idd').DataTable();
+    });
+
+
+       $(".delete").click(function () {
+        const CommentID = $(this)/*.closest("td").siblings().find(".OId")*/.val();
+        $('#cont').load("@Url.Content("~/CustomerCenter/CommentDelete")" + `?MembersId=${@v.MembersId}&CommentID=${CommentID }`);
+       });
+
+
+</script>
+
+@section Scripts{
+    <script>
+      
+    </script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+}
