@@ -21,22 +21,7 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult testPage()
         {
-            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
-            var v = JsonSerializer.Deserialize<Member>(Name);
-
-            CProductMemberViewModel pmv = new CProductMemberViewModel();
-
-            pmv.產品會員 = (from c in pt.TravelProducts
-                        where c.TravelProductId == 1
-                        select new 產品會員
-                        {
-                            MemberName = v.MemberName,
-                            TravelProductId = c.TravelProductId,
-                            TravelProductName = c.TravelProductName,
-                            Price = c.Price,
-                            productpictures = c.TravelPictures.ToList(),
-                        }).ToList();
-            return View(pmv);
+            return View();
         }
         public IActionResult List(int? TravelProductId)
         {
@@ -63,7 +48,8 @@ namespace MIST143_Traveler.Controllers
             return View(vmp);
 
         }
-        public IActionResult PayData(int? TravelProductId)
+        [HttpPost]
+        public IActionResult PayData(CPayDataParameterViewModel p)
         {
             var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
             var v = JsonSerializer.Deserialize<Member>(Name);
@@ -71,7 +57,7 @@ namespace MIST143_Traveler.Controllers
             CProductMemberViewModel pmv = new CProductMemberViewModel();
 
             pmv.產品會員 = (from c in pt.TravelProducts
-                        where c.TravelProductId == (int)TravelProductId
+                        where c.TravelProductId == p.TravelProductId
                         select new 產品會員
                         {
                             MemberName = v.MemberName,

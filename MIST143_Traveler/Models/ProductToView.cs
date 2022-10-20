@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace MIST143_Traveler.Models
 {
-    public partial class ProductToTransportation
+    public partial class ProductToView
     {
-        public int ProductToTransportationId { get; set; }
+        public int ProductToViewId { get; set; }
         public int TravelProductDetailId { get; set; }
-        public int TrasportationId { get; set; }
+        public int ViewId { get; set; }
 
-        public virtual Trasportation Trasportation { get; set; }
         public virtual TravelProductDetail TravelProductDetail { get; set; }
+        public virtual View View { get; set; }
     }
 }

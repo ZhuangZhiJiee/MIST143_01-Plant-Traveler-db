@@ -14,5 +14,7 @@ namespace MIST143_Traveler.Models
         public bool MemberStatus { get; set; }
         public bool AdminStatus1 { get; set; }
         public bool OrderStatus { get; set; }
+
+        public virtual Admin Admin { get; set; }
     }
 }
