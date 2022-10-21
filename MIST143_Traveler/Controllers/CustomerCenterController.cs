@@ -64,8 +64,11 @@ namespace MIST143_Traveler.Controllers
             {
                 if (inCP.舊密碼 == Cus.Password && inCP.新密碼 == inCP.確認新密碼)
                 {
-
+                    Cus.Password = inCP.確認新密碼;
+                    _PlanetTravelContext.SaveChanges();
+                    return Json(new { Res = true, Msg = "成功" });
                 }
+                return Json(new { Res = false, Msg = "失敗" });
             }
             return ViewComponent("PasswordChange");
         }
@@ -136,36 +139,46 @@ namespace MIST143_Traveler.Controllers
 
 
 
-        public IActionResult Order(int MembersId, int? OrderId)//客戶找出訂單
+        public IActionResult Order(int MembersId)//客戶找出訂單
         {
             if (MembersId != 0)
             {
-                if (OrderId != null)
-                {
-                    var od = _PlanetTravelContext.Orders.Where(x => x.OrderId == OrderId).FirstOrDefault();
-                    //_PlanetTravelContext.Orders.Remove(od);
-                    od.OrderStatusId = 4;
-                    _PlanetTravelContext.SaveChanges();
-                }
-                COrderDetail Oe = new COrderDetail();
 
-                Oe.訂單 = (from c in _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId)
-                         select new 會員訂單
-                         {
-                             orderId = c.OrderId,
-                             訂單編號 = c.OrderId,
-                             商品名稱 = c.OrderDetails.FirstOrDefault().TravelProduct.TravelProductName,
-                             訂購日期 = c.OrderDate,
-                             訂單狀態 = c.OrderStatus.OrderStatusName,
-                             購買金額 = c.OrderDetails.FirstOrDefault().UnitPrice,
+                //if (OM.orderId != null)
+                //{
 
-                         }).ToList();
+                //    var od = _PlanetTravelContext.Orders.Where(x => x.OrderId == OM.orderId.FirstOrDefault()).FirstOrDefault();
+                //    //_PlanetTravelContext.Orders.Remove(od);
+                //    od.OrderStatusId = 1;
+                //    _PlanetTravelContext.SaveChanges();
+                //    return ViewComponent("CustomerOrder", od);
 
-                if (Oe.訂單.Count > 0)
-                {
-                    return ViewComponent("CustomerOrder", Oe);
-                }
+                //}
 
+                //var od = _PlanetTravelContext.Orders.FirstOrDefault(x => x.MembersId == MembersId);
+                //COrderDetail Oe = new COrderDetail();
+                //Oe = _PlanetTravelContext.Orders.Where(a => a.MembersId == od.MembersId).Select(c=> new COrderDetail
+                //{
+                //                      orderId = c.OrderId,
+                //                      訂單編號 = c.OrderId,
+                //                      商品名稱 = c.OrderDetails.Where(a=>a.Order.MembersId == od.MembersId).Select(o => o.TravelProduct.TravelProductName).ToList(),
+                //                      //訂購日期 = c.OrderDate,
+                //                      //訂單狀態 = c.OrderStatus.OrderStatusName,
+                //                      //購買金額 = c.OrderDetails.FirstOrDefault().UnitPrice,
+                //                  }).ToList();
+
+
+
+                //{
+
+
+                //    //     }).ToList();
+
+                //    //if (Oe.訂單.Count > 0)
+                //    //{
+                //    //    return ViewComponent("CustomerOrder", Oe);
+                //    //}
+                //}
             }
             return ViewComponent("ProductManage");
         }
@@ -250,19 +263,56 @@ namespace MIST143_Traveler.Controllers
 
             return View();
         }
+        //[HttpPost]
+        //public IActionResult Createmember(CMemberView CCC)//註冊
+        //{
+        //    var q = _PlanetTravelContext.Cities.FirstOrDefault(a => a.CityName == CCC.Cityname);
+
+        //    CCC.CityId = q.CityId;
+        //    Member aa = CCC.member;
+
+        //    _PlanetTravelContext.Add(aa);
+        //    _PlanetTravelContext.SaveChanges();
+
+        //    return RedirectToAction("Index", "Home");
+        //}
+
+
+        //===================================註冊頁面=======================================
+
         [HttpPost]
         public IActionResult Createmember(CMemberView CCC)//註冊
         {
-            var q = _PlanetTravelContext.Cities.FirstOrDefault(a => a.CityName == CCC.Cityname);
+            if (ModelState.IsValid)
+            {
+                if (CCC != null)
+                {
 
-            CCC.CityId = q.CityId;
-            Member aa = CCC.member;
+                    var e = _PlanetTravelContext.Members.Where(a => a.Email == CCC.Email).ToList();
 
-            _PlanetTravelContext.Add(aa);
-            _PlanetTravelContext.SaveChanges();
+                    if (e.Count > 0)
+                        return Json(new { Res = false, Msg = "EMAIL帳號重複" });
+                    if (e.Count == 0 && CCC.Password == CCC.Password2)
+                    {
+                        var q = _PlanetTravelContext.Cities.FirstOrDefault(a => a.CityName == CCC.Cityname);
 
+                        CCC.CityId = q.CityId;
+                        Member aa = CCC.member;
+
+                        _PlanetTravelContext.Add(aa);
+                        _PlanetTravelContext.SaveChanges();
+
+                        return Json(new { Res = true, Msg = "成功" });
+                    }
+                    return Json(new { Res = false, Msg = "失敗" });
+
+
+
+                }
+            }
             return RedirectToAction("Index", "Home");
         }
+        //===================================註冊頁面=======================================
         public IActionResult LoginModal()
         {
             return View();
@@ -299,9 +349,9 @@ namespace MIST143_Traveler.Controllers
         {
             if (MembersId != 0)
             {
-          
-                    CCommentList Comli = new CCommentList();
-                    Comli.評論 = (from li in _PlanetTravelContext.Comments.Where(a => a.MembersId == MembersId)
+
+                CCommentList Comli = new CCommentList();
+                Comli.評論 = (from li in _PlanetTravelContext.Comments.Where(a => a.MembersId == MembersId)
                             select new 會員評論
                             {
                                 CommentID = li.CommentId,
@@ -310,11 +360,11 @@ namespace MIST143_Traveler.Controllers
                                 分數 = li.Star,
                                 日期 = li.CommentDate
                             }).ToList();
-                    if (Comli.評論.Count > 0)
-                    {
-                        return ViewComponent("CommentList", Comli);
-                    }
-                
+                if (Comli.評論.Count > 0)
+                {
+                    return ViewComponent("CommentList", Comli);
+                }
+
             }
             return PartialView("Review");
         }
@@ -331,7 +381,7 @@ namespace MIST143_Traveler.Controllers
                                 產品名稱 = li.TravelProduct.TravelProductName,
                                 內容 = li.CommentText,
                                 分數 = li.Star,
-                                
+
                             }).ToList();
                 return View(Comli);
             }
@@ -374,11 +424,11 @@ namespace MIST143_Traveler.Controllers
                         return ViewComponent("CommentList", Comli);
                     }
                 }
-                
+
             }
             return PartialView("Review");
 
-          //客戶評論 ================================================
+            //客戶評論 ================================================
         }
     }
 }

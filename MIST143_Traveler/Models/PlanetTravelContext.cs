@@ -46,7 +46,7 @@ namespace MIST143_Traveler.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=192.168.36.26;Initial Catalog=PlanetTravel;User ID=jay;Password=1234");
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=PlanetTravel;Integrated Security=True");
             }
         }
 
@@ -268,6 +268,8 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.MembersId).HasColumnName("MembersID");
 
+                entity.Property(e => e.PhotoPath).IsRequired();
+
                 entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
 
                 entity.HasOne(d => d.Members)
@@ -275,6 +277,12 @@ namespace MIST143_Traveler.Models
                     .HasForeignKey(d => d.MembersId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Myfavorites_Members");
+
+                entity.HasOne(d => d.TravelProduct)
+                    .WithMany(p => p.Myfavorites)
+                    .HasForeignKey(d => d.TravelProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Myfavorites_TravelProduct");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -329,12 +337,12 @@ namespace MIST143_Traveler.Models
                 entity.HasOne(d => d.Coupon)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.CouponId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderDetail_Coupon");
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderDetail_Order");
 
                 entity.HasOne(d => d.TravelProduct)

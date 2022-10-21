@@ -2,6 +2,7 @@
 using MIST143_Traveler.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,6 +40,11 @@ namespace MIST143_Traveler.MViewModel
             get { return _member.Password; }
             set { _member.Password = value; }
         }
+        public string Password2
+        {
+            get { return _member.Password; }
+            set { _member.Password = value; }
+        }
         public string Phone
         {
             get { return _member.Phone; }
@@ -49,12 +55,18 @@ namespace MIST143_Traveler.MViewModel
             get { return _member.Address; }
             set { _member.Address = value; }
         }
+        [DisplayName("EMAIL帳號")]
         public string Email
         {
             get { return _member.Email; }
             set { _member.Email = value; }
         }
-        public string Gender
+        public string Gender1
+        {
+            get { return _member.Gender; }
+            set { _member.Gender = value; }
+        }
+        public string Gender2
         {
             get { return _member.Gender; }
             set { _member.Gender = value; }
