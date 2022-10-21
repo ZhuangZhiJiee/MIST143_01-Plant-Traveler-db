@@ -54,5 +54,9 @@ namespace MIST143_Traveler.Controllers
             //return View();
             return ViewComponent("Productlistpagi", q.ToList());
         }
+        public IActionResult selecter()
+        {
+            return View();
+        }
     }
 }
