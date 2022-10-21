@@ -1,4 +1,4 @@
-﻿@model MIST143_Traveler.MViewModel.CProductxViewModel
+﻿@model MIST143_Traveler.MViewModel.CProductViewModel
 
 
 
@@ -14,9 +14,6 @@
     @*<link href="~/css/bootstrap.min.css" rel="stylesheet" />*@
     <link href="~/css/product.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/travelOrder.css" />
-}
-@{
-    int count = 0;
 }
 <body class="p-0 m-0 border-0 bd-example">
     <div class="p-0 m-0 border-0 mx-auto 最大的">
@@ -136,8 +133,8 @@
                                                         class="btn btn-outline-secondary">
                                                     -
                                                 </button>
-                                                <div class="number" id="adultNum">0
-                                                    @*<input type="text" name="count"  value="@count" />*@
+                                                <div class="number" id="adultNum">
+                                                    <input type="number" class="productNumber"  name="Count"  value="0" />
                                                 </div>
                                                 <button type="button" id="adultPlus"
                                                         class="btn btn-outline-secondary">
@@ -154,16 +151,11 @@
                                         </div>
                                         <div class="rightBtns">
                                             <button type="button" class="btn btn-main" data-bs-toggle="modal" data-bs-target="#joinModal">
-                                                <a class="buttonInnderA" href="@Url.Action("testpage" ,"shopping", new { Model.產品列表.FirstOrDefault().TravelProductId })">加入購物車</a>
+                                                <a class="buttonInnderA" >加入購物車</a>
                                             </button>
 
                                             <input type="hidden" name="TravelProductId" value="@Model.產品列表.FirstOrDefault().TravelProductId" />
                                             <input type="submit" value="立即預定" class="btn btn-main ms-3" />
-
-
-                                            @*<button type="button" class="btn btn-main ms-3">
-                                                    <a class="buttonInnderA" href="@Url.Action("PayData" ,"shopping", new { Model.產品列表.FirstOrDefault().TravelProductId })">立即預定</a>
-                                                </button>*@
                                         </div>
                                     </div>
                                 </div>
@@ -191,10 +183,16 @@
             </div>
             <iframe src="@Model.產品列表.FirstOrDefault().MapUrl" width="850" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <div class="活動DIV">
-                <h2><span class="一條根"> </span><span>注意事項</span></h2>
+                <h2><span class="一條根"> </span><span>行前準備</span></h2>
             </div>
             <div class="小介紹">
                 @Model.產品列表.FirstOrDefault().PreparationDescription
+            </div>
+            <div class="活動DIV">
+                <h2><span class="一條根"> </span><span>行程明細</span></h2>
+            </div>
+            <div class="小介紹">
+                @Model.產品列表.FirstOrDefault().DailyDetailText
             </div>
             <div class="活動DIV">
                 <h2><span class="一條根"> </span><span>活動評價</span></h2>

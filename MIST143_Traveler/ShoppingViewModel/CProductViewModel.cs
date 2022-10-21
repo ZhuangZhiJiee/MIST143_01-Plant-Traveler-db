@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MIST143_Traveler.MViewModel
 {
-    public class CProductxViewModel
+    public class CProductViewModel
     {
         public List<產品格式> 產品列表;
 
@@ -26,5 +26,6 @@ namespace MIST143_Traveler.MViewModel
         public string PreparationDescription { get; set; }
         public int count { get; set; }
         public List<TravelPicture> productpictures { get; set; }
+        public string DailyDetailText { get; set; }
     }
 }

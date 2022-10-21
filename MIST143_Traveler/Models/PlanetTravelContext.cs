@@ -268,6 +268,8 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.MembersId).HasColumnName("MembersID");
 
+                entity.Property(e => e.PhotoPath).IsRequired();
+
                 entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
 
                 entity.HasOne(d => d.Members)
@@ -275,6 +277,12 @@ namespace MIST143_Traveler.Models
                     .HasForeignKey(d => d.MembersId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Myfavorites_Members");
+
+                entity.HasOne(d => d.TravelProduct)
+                    .WithMany(p => p.Myfavorites)
+                    .HasForeignKey(d => d.TravelProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Myfavorites_TravelProduct");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -329,7 +337,6 @@ namespace MIST143_Traveler.Models
                 entity.HasOne(d => d.Coupon)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.CouponId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderDetail_Coupon");
 
                 entity.HasOne(d => d.Order)

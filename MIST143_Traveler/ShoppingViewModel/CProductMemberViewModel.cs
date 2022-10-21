@@ -21,6 +21,7 @@ namespace MIST143_Traveler.MViewModel
         public string MemberName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public int Count { get; set; }
     }
 }
 

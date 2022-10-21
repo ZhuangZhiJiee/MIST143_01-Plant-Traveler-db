@@ -25,7 +25,7 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult List(int? TravelProductId)
         {
-            CProductxViewModel vmp = new CProductxViewModel();
+            CProductViewModel vmp = new CProductViewModel();
 
             vmp.產品列表 = (from c in pt.TravelProducts
                            where c.TravelProductId == (int)TravelProductId
@@ -43,7 +43,8 @@ namespace MIST143_Traveler.Controllers
                                MapUrl = c.MapUrl,
                                PreparationDescription = c.PreparationDescription,
                                productpictures = c.TravelPictures.ToList(),
-                           }).ToList();
+                               DailyDetailText = c.TravelProductDetails.FirstOrDefault().DailyDetailText,
+                        }).ToList();
 
             return View(vmp);
 
@@ -67,20 +68,59 @@ namespace MIST143_Traveler.Controllers
                             TravelProductName = c.TravelProductName,
                             Price = c.Price,
                             productpictures = c.TravelPictures.ToList(),
+                            Count = p.Count,
                         }).ToList();
-
             return View(pmv);
 
         }
-        public IActionResult PayCheckout(int? TravelProductId)
+        [HttpPost]
+        public IActionResult PayCheckout(CPayDataParameterViewModel p)
         {
-            var data = pt.TravelProducts.Where(x => x.TravelProductId == (int)TravelProductId).FirstOrDefault();
-            return View(data);
+            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+            var v = JsonSerializer.Deserialize<Member>(Name);
+
+            CProductMemberViewModel pmv = new CProductMemberViewModel();
+
+            pmv.產品會員 = (from c in pt.TravelProducts
+                        where c.TravelProductId == p.TravelProductId
+                        select new 產品會員
+                        {
+                            MemberName = v.MemberName,
+                            Email = v.Email,
+                            Phone = v.Phone,
+                            TravelProductId = c.TravelProductId,
+                            TravelProductName = c.TravelProductName,
+                            Price = c.Price,
+                            productpictures = c.TravelPictures.ToList(),
+                            Count = p.Count,
+                        }).ToList();
+            return View(pmv);
         }
         [HttpPost]
-        public IActionResult PayCheckout()
+        public IActionResult PayEnd(CPayViewModel p)
         {
-            return View();
+            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+            var v = JsonSerializer.Deserialize<Member>(Name);
+            Order od = new Order()
+            {
+                MembersId = v.MembersId,
+                PaymentId = p.PaymethodId,
+                OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                OrderStatusId = 3,
+            };
+            pt.Orders.Add(od);
+            pt.SaveChanges();
+
+            OrderDetail odd = new OrderDetail()
+            {
+                OrderId = pt.Orders.OrderBy(e => e.OrderId).LastOrDefault().OrderId,
+                TravelProductId = p.TravelProductId,
+                UnitPrice = p.UnitPrice,
+                Quantity =p.Quantity,
+            };
+            pt.OrderDetails.Add(odd);
+            pt.SaveChanges();
+            return RedirectToAction("Index","Home");
         }
         public IActionResult ShoppingCart()
         {
