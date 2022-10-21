@@ -8,6 +8,9 @@ namespace MIST143_Traveler.MViewModel
 {
     public class CPayViewModel
     {
-        public List<TravelProduct> productID { get; set; }
+        public int PaymethodId { get; set; }
+        public int TravelProductId { get; set; }
+        public decimal UnitPrice { get; set; }
+        public int Quantity { get; set; }
     }
 }
