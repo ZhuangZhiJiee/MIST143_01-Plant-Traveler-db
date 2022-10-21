@@ -7,7 +7,7 @@ namespace MIST143_Traveler.MViewModel
 {
     public class COrderID
     {
-        public int OrderId { get; set; }
+        public List<int> orderId { get; set; }
         public int MemberId { get; set; }
     }
 }

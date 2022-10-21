@@ -172,6 +172,37 @@
              }
            LoadCities()
 
+        const Pas = () => {
+        var pasData = {
+            MembersId: $("#MembersId").val(),
+            OldPassword: $("#OldPassword").val(),
+            Password1: $("#Password1").val(),
+            Password2: $("#Password2").val(),
+        }
+        $.ajax({
+            url: '@Url.Action("PasswordChange", "CustomerCenter")',
+            method: 'Post',
+            dataType: 'Json',
+            data: { CP: pasData },
+            success: function (datas) {
+                if (!datas.res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '輸入錯誤',
+                        text: datas.msg,
+
+                    })
+                    return;
+                }
+                Swal.fire(
+                    '您的變更已儲存!',
+                    '讚啦!',
+                    'success'
+                )
+            }
+        })
+    }
+
 
 
         $('#btncus').click(function () {

@@ -8,7 +8,7 @@ namespace MIST143_Traveler.MViewModel
     public class CCommentList
     {
         
-            public List<會員評論> 評論;
+        public List<會員評論> 評論;
         public string 內容 { get; set; }
         public int 分數 { get; set; }
 
