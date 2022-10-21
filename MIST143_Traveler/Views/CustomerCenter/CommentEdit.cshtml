@@ -27,7 +27,14 @@
         </div>
         <div class="form-group">
             <label asp-for="@Model.評論.FirstOrDefault().分數" class="control-label"></label>
-            <input asp-for="評論.FirstOrDefault().分數" id="point" class="form-control" />
+            <select asp-for="評論.FirstOrDefault().分數" id="point">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            @*<input asp-for="評論.FirstOrDefault().分數" id="point" class="form-control" />*@
         </div>
 
 

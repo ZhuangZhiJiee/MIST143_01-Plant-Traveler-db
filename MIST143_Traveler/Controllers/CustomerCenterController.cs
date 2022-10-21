@@ -139,51 +139,6 @@ namespace MIST143_Traveler.Controllers
 
 
 
-        public IActionResult Order(int MembersId)//客戶找出訂單
-        {
-            if (MembersId != 0)
-            {
-
-                //if (OM.orderId != null)
-                //{
-
-                //    var od = _PlanetTravelContext.Orders.Where(x => x.OrderId == OM.orderId.FirstOrDefault()).FirstOrDefault();
-                //    //_PlanetTravelContext.Orders.Remove(od);
-                //    od.OrderStatusId = 1;
-                //    _PlanetTravelContext.SaveChanges();
-                //    return ViewComponent("CustomerOrder", od);
-
-                //}
-
-                //var od = _PlanetTravelContext.Orders.FirstOrDefault(x => x.MembersId == MembersId);
-                //COrderDetail Oe = new COrderDetail();
-                //Oe = _PlanetTravelContext.Orders.Where(a => a.MembersId == od.MembersId).Select(c=> new COrderDetail
-                //{
-                //                      orderId = c.OrderId,
-                //                      訂單編號 = c.OrderId,
-                //                      商品名稱 = c.OrderDetails.Where(a=>a.Order.MembersId == od.MembersId).Select(o => o.TravelProduct.TravelProductName).ToList(),
-                //                      //訂購日期 = c.OrderDate,
-                //                      //訂單狀態 = c.OrderStatus.OrderStatusName,
-                //                      //購買金額 = c.OrderDetails.FirstOrDefault().UnitPrice,
-                //                  }).ToList();
-
-
-
-                //{
-
-
-                //    //     }).ToList();
-
-                //    //if (Oe.訂單.Count > 0)
-                //    //{
-                //    //    return ViewComponent("CustomerOrder", Oe);
-                //    //}
-                //}
-            }
-            return ViewComponent("ProductManage");
-        }
-
-
         public IActionResult ProductManage()
         {
             return View();
@@ -257,28 +212,47 @@ namespace MIST143_Traveler.Controllers
 
             return View();
         }
+      
+        //============================找出客戶訂單=============================
+        public IActionResult Order(int MembersId)
+        {
+            if (MembersId != 0)
+            {
+                COrderDetail Cord = new COrderDetail();
+                Cord.訂單 = (from od in _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId)
+                            from p in od.OrderDetails.Where(a=>a.OrderId==od.OrderId)
+                           select new 訂單管理
+                           {
+                               orderId=od.OrderId,
+                               訂單編號=od.OrderId,
+                               商品名稱=p.TravelProduct.TravelProductName,
+                               訂單狀態=od.OrderStatus.OrderStatusName,
+                               訂購日期=od.OrderDate,
+                               購買金額=p.UnitPrice,
+                           }).ToList();
+                if (Cord.訂單.Count > 0)
+                {
+                    return ViewComponent("CustomerOrder", Cord);
+                }
 
-        public IActionResult Createmember()
+
+            }
+            return ViewComponent("ProductManage");
+        }
+        //===================================客戶取消訂單光箱================================
+        public IActionResult OrderCancel(int orderId)
         {
 
             return View();
         }
-        //[HttpPost]
-        //public IActionResult Createmember(CMemberView CCC)//註冊
-        //{
-        //    var q = _PlanetTravelContext.Cities.FirstOrDefault(a => a.CityName == CCC.Cityname);
-
-        //    CCC.CityId = q.CityId;
-        //    Member aa = CCC.member;
-
-        //    _PlanetTravelContext.Add(aa);
-        //    _PlanetTravelContext.SaveChanges();
-
-        //    return RedirectToAction("Index", "Home");
-        //}
-
+        
 
         //===================================註冊頁面=======================================
+
+        public IActionResult Createmember()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult Createmember(CMemberView CCC)//註冊
