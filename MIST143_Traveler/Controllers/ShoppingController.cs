@@ -7,8 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.Text.Json;
-
-
+using MIST143_Traveler.ShoppingViewModel;
 
 namespace MIST143_Traveler.Controllers
 {
@@ -49,6 +48,15 @@ namespace MIST143_Traveler.Controllers
             return View(vmp);
 
         }
+        [HttpPost]
+        public IActionResult AddToSession(CAddToSessionViewModel s) 
+        {
+            string jsonBurchased = JsonSerializer.Serialize(s);
+            HttpContext.Session.SetString(
+                CDictionary.SK_PURCHASED_PRODUCT, jsonBurchased);
+            return NoContent();
+        }
+
         [HttpPost]
         public IActionResult PayData(CPayDataParameterViewModel p)
         {
@@ -124,7 +132,16 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult ShoppingCart()
         {
-            return View();
+            var shopping = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+            var c = JsonSerializer.Deserialize<CshoppingCartViewModel>(shopping);
+            CTranshoppingCartViewModel tsc = new CTranshoppingCartViewModel()
+            {
+                TravelProductId = c.TravelProductId,
+                TravelProductName = pt.TravelProducts.Where(a =>a.TravelProductId == c.TravelProductId).FirstOrDefault().TravelProductName,
+                Count = c.Count,
+                Price = pt.TravelProducts.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().Price,
+            };
+            return View(tsc);
         }
     }
 }
