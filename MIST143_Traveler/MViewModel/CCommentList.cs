@@ -25,7 +25,7 @@ namespace MIST143_Traveler.MViewModel
     public class 會員評論
     {
 
-
+        
         public int CommentID { get; set; }
 
         public string 產品名稱 { get; set; }

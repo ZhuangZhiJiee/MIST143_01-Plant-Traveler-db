@@ -2,16 +2,3 @@
     color: coral
 }
 
-
-
-/*** 奇数行颜色设置 ***/
-table.dataTable.stripe tbody tr.odd,
-table.dataTable.display tbody tr.odd {
-    background-color: #f9f9f9;
-}
-
-/*** 偶数行颜色设置 ***/
-table.dataTable.stripe tbody tr.even,
-table.dataTable.display tbody tr.even {
-    background-color: #ffffff;
-}
