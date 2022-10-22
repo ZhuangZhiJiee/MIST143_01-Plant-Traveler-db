@@ -9,6 +9,7 @@ using MIST143_Traveler.MViewModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -36,17 +37,66 @@ namespace MIST143_Traveler.Controllers
             return View();
         }
         //會員中心變更保存資料
+        //[HttpPost]
+        //public IActionResult SaveCusInfo(CMemberView inCus)
+        //{
+        //    Member Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == inCus.MembersId);
+
+        //    if (Cus != null)
+        //    {
+
+        //        //Cus.CityId = ccc.CityId;
+        //        Cus.Address = inCus.Address;
+        //        //Cus.Password = inCus.Password;
+        //        Cus.MemberName = inCus.MemberName;
+        //        Cus.Phone = inCus.Phone;
+        //        Cus.CityId = _PlanetTravelContext.Cities.FirstOrDefault(a => a.CityName == inCus.Cityname).CityId;
+        //        _PlanetTravelContext.SaveChanges();
+        //        return Json(new { Res = true, Msg = "成功" });
+        //    }
+        //    return Json(new { Res = false, Msg = "失敗" });
+        //}
+
+        //====================================測試AJAX上傳圖片=========================
+        public IActionResult FileUpLoad(IFormFile files)
+        {
+            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+            var v = JsonSerializer.Deserialize<Member>(Name);
+            Member Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == v.MembersId);
+            
+            if (files != null)
+            {
+                string pName = Guid.NewGuid().ToString() + ".jpg";
+                Cus.PhotoPath = pName;
+                string path = _enviro.WebRootPath + "/Images/客戶大頭貼/" + pName;
+                using (var steam = new FileStream(path, FileMode.Create))
+                {
+                    files.CopyTo(steam);
+                    _PlanetTravelContext.SaveChanges();
+                    
+                }
+                string p = "/Images/客戶大頭貼/" + pName;
+                return Json(p);
+                //return new ObjectResult(new { status = "success" });
+            }
+            return Json(new { Res = false, Msg = "失敗" });
+        }
         [HttpPost]
         public IActionResult SaveCusInfo(CMemberView inCus)
         {
             Member Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == inCus.MembersId);
 
+
             if (Cus != null)
             {
-
-                //Cus.CityId = ccc.CityId;
+                if (inCus.photo != null)
+                {
+                    string pName = Guid.NewGuid().ToString() + ".jpg";//創造一個唯一路徑
+                    Cus.PhotoPath = pName;
+                    string path = _enviro.WebRootPath + "/Images/客戶大頭貼/" + pName;//此為網頁路徑  
+                    inCus.photo.CopyTo(new FileStream(path, FileMode.Create));//FileStream這串流需要兩個參數1.網路路徑OR專案路徑2.FILEMODE
+                }
                 Cus.Address = inCus.Address;
-                //Cus.Password = inCus.Password;
                 Cus.MemberName = inCus.MemberName;
                 Cus.Phone = inCus.Phone;
                 Cus.CityId = _PlanetTravelContext.Cities.FirstOrDefault(a => a.CityName == inCus.Cityname).CityId;
@@ -55,7 +105,6 @@ namespace MIST143_Traveler.Controllers
             }
             return Json(new { Res = false, Msg = "失敗" });
         }
-
         //=============================變更密碼頁============================
         public IActionResult PasswordChange(CPasswordChange inCP)
         {

@@ -4,126 +4,233 @@
     ViewData["Title"] = "Createmember";
     Layout = null;
 }
-
+<link href="~/css/會員中心/註冊光箱.css" rel="stylesheet" />
 @section Sytles{
     <style>
     </style>
 }
+
 <h1>歡迎成為會員</h1>
 
 
 <hr />
+<form id="form" method="post">
+    @*<form asp-action="Createmember">*@
+    <div class="container">
+        <div class="col-12">
+            <div class="row row-cols-1">
+                <div class="col">
+                    <div class="box_body d-flex  mb-2">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-@*<form asp-action="Createmember">*@
-<div class="container">
-    <div class="col-12">
-        <div class="row row-cols-1">
-            <div class="col">
-                <div class="box_body d-flex  mb-2">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="inputs p-2 flex-fill">
+                            @*<header>EMAIL帳號</header>*@
+                            <label asp-for="Email" class="control-label"></label>
+                            <input class="form-control" type="email" for="Email" placeholder="123" aria-label="default input example" name="Email" id="Email" required>
+                            @*<span asp-validation-for="Email" class="text-danger"></span>*@
+                            <div><small id="sm" class="form-text text-muted"></small></div>
+                        </div>
 
-                    <div class="inputs p-2 flex-fill">
-                        @*<header>EMAIL帳號</header>*@
-                        <label asp-for="Email" class="control-label"></label>
-                        <input class="form-control" type="email" asp-for="Email" placeholder="123" aria-label="default input example" name="Email" id="Email" required>
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                        <div><small id="sm" class="form-text text-muted"></small></div>
+                    </div>
+                    <div class="box_body d-flex  mb-2">
+                        <div class="inputs p-2 flex-fill">
+                            <label asp-for="MemberName" class="control-label"></label>
+                            <input class="form-control" asp-for="MemberName" type="text" placeholder="名稱" aria-label="default input example" name="MemberName" id="Name">
+                        </div>
+
+                        <div class="inputs p-2 flex-fill">
+                            <label asp-for="Phone" class="control-label"></label>
+                            <input class="form-control" asp-for="Phone" type="text" placeholder="PHONE" aria-label="default input example" name="Phone" id="Phone">
+                        </div>
                     </div>
 
-                </div>
-                <div class="box_body d-flex  mb-2">
-                    <div class="inputs p-2 flex-fill">
-                        <label asp-for="MemberName" class="control-label"></label>
-                        <input class="form-control" asp-for="MemberName" type="text" placeholder="名稱" aria-label="default input example" name="MemberName" id="Name" required>
+                    <div class="box_body d-flex  mb-2">
+                        <div class="inputs p-2 flex-fill">
+
+                            <label asp-for="Password" class="control-label"></label>
+                            <input class="form-control" asp-for="Password" type="password" placeholder="password" aria-label="default input example" name="Password" id="Password1">
+                        </div>
+
+                        <div class="inputs p-2 flex-fill">
+                            <header>再次確認密碼</header>
+                            <input class="form-control" type="password" placeholder="password" aria-label="default input example" id="Password2" name="Password2">
+                            <small id="checkps" class="form-text text-muted"></small>
+                        </div>
                     </div>
 
-                    <div class="inputs p-2 flex-fill">
-                        <label asp-for="Phone" class="control-label"></label>
-                        <input class="form-control" asp-for="Phone" type="text" placeholder="PHONE" aria-label="default input example" name="Phone" id="Phone" required>
-                    </div>
-                </div>
 
-                <div class="box_body d-flex  mb-2">
-                    <div class="inputs p-2 flex-fill">
-
-                        <label asp-for="Password" class="control-label"></label>
-                        <input class="form-control" asp-for="Password" type="password" placeholder="password" aria-label="default input example" name="Password1" id="Password" required>
-                    </div>
-
-                    <div class="inputs p-2 flex-fill">
-                        <header>再次確認密碼</header>
-                        <input class="form-control" type="password" placeholder="password" aria-label="default input example" id="Password2" name="Password2" required>
-                        <small id="checkps" class="form-text text-muted"></small>
-                    </div>
-                </div>
-
-
-                <div class="box_body d-flex  mb-2">
-                    <div class="inputs p-2 ">
-                        <header>居住縣市</header>
-                        <select id="selectC" class="form-select Ccity" aria-label="Default select example" name="Cityname">
-                        </select>
-                    </div>
-
-                    @*<div class="inputs p-2 ">
-                            <header>居住區域</header>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>大安區</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                    <div class="box_body d-flex  mb-2">
+                        <div class="inputs p-2 ">
+                            <header>居住縣市</header>
+                            <select id="selectC" class="form-select Ccity" aria-label="Default select example" name="Cityname">
                             </select>
-                        </div>*@
-
-                    <div class="inputs p-2 flex-grow-1">
-                        <header>地址</header>
-                        <input class="form-control" asp-for="Address" type="text" placeholder="北投區111號" aria-label="default input example" name="Address" id="address" required>
-                    </div>
-                </div>
-
-                <div class="box_body d-flex  mb-2">
-                    <div class="inputs p-2 flex-fill">
-                        <header>生日</header>
-                        <input class="form-control" type="date" asp-for="BirthDay" value="1990-01-01" id="BirthDay" aria-label="default input example" name="BirthDay">
-                    </div>
-
-                    <div class="inputs p-2 flex-fill">
-                        <header>生理性別</header>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="Gender1" value="男" id="Man" checked>
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                男
-                            </label>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="Gender2" value="女" id="Won">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                女
-                            </label>
+
+                        @*<div class="inputs p-2 ">
+                                <header>居住區域</header>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>大安區</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>*@
+
+                        <div class="inputs p-2 flex-grow-1">
+                            <header>地址</header>
+                            <input class="form-control" asp-for="Address" type="text" placeholder="北投區111號" aria-label="default input example" name="Address" id="address">
                         </div>
                     </div>
+
+                    <div class="box_body d-flex  mb-2">
+                        <div class="inputs p-2 flex-fill">
+                            <header>生日</header>
+                            <input class="form-control" type="date" asp-for="BirthDay" value="1990-01-01" id="BirthDay" aria-label="default input example" name="BirthDay">
+                        </div>
+
+                        <div class="inputs p-2 flex-fill">
+                            <header>生理性別</header>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="Gender" value="男" id="Man" checked>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    男
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="Gender" value="女" id="Won">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    女
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-success" id="sb1" onclick="BtnDemo()">Demo</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                        <input type="submit" onclick="CC()" class="btn btn-primary ccc">
+                    </div>
+
+
                 </div>
-
-
-
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn-success" id="sb1" onclick="BtnDemo()">Demo</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                    <input type="submit" onclick="Crea()" class="btn btn-primary ccc">
-                </div>
-
-
             </div>
         </div>
+
     </div>
 
-</div>
+</form>
+@section Scripts{
 
-@*</form>*@
-@*@section Scripts{*@
+}
+@*<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>*@
+
 <script>
+    //表單驗證
+    $(function () {
+        $("#form").validate({
+            onkeyup: function (element, event) {
+                var value = this.elementValue(element).replace(/^\s+/g, "");
+                $(element).val(value);
+            },
+            rules: {
+                Email: {
+                    required: true,
+                    email:true
+                },
+                Phone: {
+                    required: true,
+                    minlength: 8,
+                    maxlength:10,
+                    number: true
+                },
+                Address: {
+                    required: true,
+                },
+                MemberName: {
+                    required: true,
+                },
+                Password: {
+                    required: true,
+                },
+                Password2: {
+                    equalTo:"#Password1",
+                    required: true,
+                },
 
+
+            },
+            messages: {
+                Email: {
+                    required: '必填',
+                    email:'Email格式不正確'
+                },
+                Phone: {
+                    required: '必填',
+                    minlength: '不得少於8位',
+                    maxlength: '不得大於10位',
+                    number: '電話需為數字'
+                },
+                Address: {
+                    required: '必填',
+                },
+                MemberName: {
+                    required: '必填',
+                },
+                Password: {
+                    required: '必填',
+                },
+                Password2: {
+                    required: '必填',
+                    equalTo:"密碼輸入不一致",
+                },
+
+            },
+            submitHandler: function (form) {
+                var Cdata = {
+            Email: $("#Email").val(),
+            MemberName: $("#Name").val(),
+            Phone: $("#Phone").val(),
+            Password: $("#Password1").val(),
+            Password2: $("#Password2").val(),
+            Cityname: $(".Ccity").val(),
+            Address: $("#address").val(),
+            BirthDay: $("#BirthDay").val(),
+            Gender1: $("#Man").val(),
+            Gender2: $("#Won").val(),
+        }
+        $.ajax({
+            url: '@Url.Action("Createmember", "CustomerCenter")',
+            method: 'Post',
+            dataType: 'Json',
+            data: { CCC: Cdata },
+            success: function (datas) {
+                if (!datas.res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '輸入錯誤',
+                        text: datas.msg,
+
+                    })
+                    return;
+                }
+                Swal.fire(
+                    '註冊成功!',
+                    '讚啦!',
+                    'success'
+
+                )
+            }
+        })
+                /*form.submit();*/
+            }
+        })
+    })
 
     //DEMO
      function BtnDemo() {
@@ -137,45 +244,9 @@
             $('#address').val("和平東路二段106號11樓")
         }
 
-        const Crea = () => {
-            var Cdata = {
-                Email: $("#Email").val(),
-                MemberName: $("#Name").val(),
-                Phone: $("#Phone").val(),
-                Password: $("#Password").val(),
-                Password2: $("#Password2").val(),
-                Cityname: $(".Ccity").val(),
-                Address: $("#address").val(),
-                BirthDay: $("#BirthDay").val(),
-                Gender1: $("#Man").val(),
-                Gender2: $("#Won").val(),
-            }
-            $.ajax({
-                url: '@Url.Action("Createmember", "CustomerCenter")',
-                method: 'Post',
-                dataType: 'Json',
-                data:{ CCC: Cdata },
-                success: function (datas) {
-                    if (!datas.res) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: '輸入錯誤',
-                            text: datas.msg,
+   /* function CC() {*/
 
-                        })
-                        return;
-                    }
-                    Swal.fire(
-                        '註冊成功!',
-                        '讚啦!',
-                        'success'
-
-                    )
-                }
-            })
-        }
-
-
+   /* }*/
 
 
 
@@ -191,21 +262,20 @@
     })
     }
     LoadCities()
-    //判斷密碼是否一致
-    let emsm=document.querySelector("#sm")
-
     //判斷是否有人使用帳號
+
+    function EMM() {
+    let emsm=document.querySelector("#sm")
     let Em = document.querySelector("#Email")
     Em.addEventListener("blur", async () => {
         let response = await fetch("@Url.Content("~/CustomerCenter/CheckPas")" + `?Email=${Em.value}`)
             let datas = await response.text()
             emsm.textContent = datas
     })
-
+    }
+    EMM()
 </script>
+
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-@*}*@
-@*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
 
