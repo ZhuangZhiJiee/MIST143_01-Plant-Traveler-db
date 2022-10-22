@@ -20,47 +20,78 @@
                 商品名稱
             </th>
             <th>
-              訂購日期
+                訂購日期
             </th>
             <th>
-               購買金額
+                購買金額
             </th>
             <th>
-               訂單狀態
+                訂單狀態
             </th>
             <th>
             </th>
         </tr>
     </thead>
     <tbody>
-        @*@foreach (var item in Model.OrderDetail)
-        {*@
+        @foreach (var item in Model.訂單)
+        {
 
-        @*<tr class="樣式">
-            <td>
-                @Html.DisplayFor(modelItem => item.訂單編號)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.商品名稱)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.訂購日期)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.購買金額)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.訂單狀態)
-            </td>
-            <td>
-                <button class="delete btn btn-outline-dark" onclick="return confirm('確定要刪除嗎?')" value="@item.orderId">取消</button>
-            </td>
-        </tr>*@
-           @*}*@
+            <tr class="樣式">
+                <td>
+                    @Html.DisplayFor(modelItem => item.訂單編號)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.商品名稱)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.訂購日期)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.購買金額)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.訂單狀態)
+                </td>
+                <td>
+                    <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"onclick="OrderCancel('@Url.Action("OrderCancel","CustomerCenter",new {@item.orderId},Context.Request.Scheme)',null)">申請取消</a>
+                    
+                </td>
+            </tr>
+        }
     </tbody>
 
 </table>
 @*<button class="delete" value="@item.orderId">取消</button>*@
+
+<!--修改光箱-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Recipient:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Message:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--修改光箱-->
 
 <script>
     $(document).ready(function () {
@@ -305,7 +336,7 @@
                 "searchPlaceholder": "請輸入關鍵字",
                 "thousands": ","
             },
-            "autoWidth":true,
+            "autoWidth": true,
         });
     });
 
@@ -326,9 +357,9 @@
     });
 
 
-       
+
 
     </script>
-    
+
 }
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
