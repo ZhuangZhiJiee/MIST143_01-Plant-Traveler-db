@@ -767,8 +767,9 @@ a {
 .accordion-btn {
     width: 83%;
 }
+
 .accord-btn {
-    display:contents;
+    display: contents;
 }
 
 .frmcheckin {
@@ -783,6 +784,7 @@ a {
     align-content: stretch;
     flex-wrap: wrap;
 }
+
 .klk-button-small {
     min-width: 72px;
     line-height: 20px;
@@ -826,9 +828,10 @@ a {
     -moz-appearance: none;
     text-transform: none;
     text-decoration: none;
-/*    overflow: hidden;
-*/    cursor: pointer;
+    /*    overflow: hidden;
+*/ cursor: pointer;
 }
+
 .klk-modal-wrapper {
     --bs-modal-zindex: 1055;
     --bs-modal-width: 900px;
@@ -845,6 +848,7 @@ a {
     align-items: center;
     color: #212121;
 }
+
 .klk-modal {
     position: relative;
     background-color: #fff;
@@ -855,6 +859,7 @@ px
  0; */
     /* box-shadow: 0 4px 20px 0 rgb(0 0 0 / 8%); */
 }
+
 .klk-icon {
     display: inline-block;
     font-style: normal;
@@ -865,7 +870,8 @@ px
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
 }
-.form-check-input{
+
+.form-check-input {
     border-radius: 0.25em;
 }
 
@@ -876,7 +882,7 @@ px
 
 .form-check-input {
     width: 1em;
-     height: 0; 
+    height: 0;
     margin-top: 0.25em;
     vertical-align: top;
     background-color: #fff;
@@ -884,12 +890,7 @@ px
     background-position: center;
     background-size: contain;
     border: 1px solid rgba(0,0,0,.25);
-   
-   
-
     -webkit-print-color-adjust: exact;
-
-
 }
 
 .klk-modal-scrollable .klk-modal-body {
@@ -903,6 +904,7 @@ px
     padding-left: 40px;
     padding-right: 40px;
 }
+
 .klk-modal-close {
     position: absolute;
     right: -38px;
@@ -912,16 +914,19 @@ px
     color: #fff;
     fill: white;
 }
+
 svg {
     width: 1em;
     height: 1em;
     fill: currentColor;
 }
+
 .klk-icon svg {
     width: 1em;
     height: 1em;
     fill: white;
 }
+
 .modal-container .search .search-input-desktop {
     position: relative;
     display: -webkit-box;
@@ -949,10 +954,11 @@ user agent stylesheet
 div {
     display: block;
 }
-.modal-container .search .search-input-desktop input{
+
+.modal-container .search .search-input-desktop input {
     display: block;
     width: 100%;
-     font-size: 20px; 
+    font-size: 20px;
     font-weight: 500;
     color: #212121;
     padding: 10px 0;
@@ -960,8 +966,8 @@ div {
     border: none;
     border-bottom: 1px solid #4a4a4a;
 }
-input {
 
+input {
     width: 97%;
     /* font-size: 20px; */
     font-weight: 500;
@@ -971,6 +977,7 @@ input {
     border: none;
     border-bottom: 1px solid #4a4a4a;
 }
+
 .footer {
     text-align: right;
     padding-top: 20px;
@@ -980,6 +987,7 @@ input {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
 }
+
 .klk-button-primary {
     color: #fff;
     background-color: #ff5b00;
@@ -1003,12 +1011,12 @@ input {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    
     text-transform: none;
     text-decoration: none;
     overflow: hidden;
     cursor: pointer;
 }
+
 .klk-tree, .klk-tree .klk-tree-node {
     display: -webkit-box;
     display: flex;
@@ -1021,15 +1029,21 @@ input {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
 }
+
 .tree {
-    height:3890px;
+    height: 3890px;
 }
+
 .aitem {
     width: 100%;
     height: 10%;
 }
+
 .aitemhi {
-    margin:3px;
-    padding:2px;
- 
+    margin: 3px;
+    padding: 2px;
+}
+
+.as {
+    width: 13%;
 }
