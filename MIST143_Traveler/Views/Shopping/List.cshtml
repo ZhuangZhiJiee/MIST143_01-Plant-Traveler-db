@@ -18,38 +18,38 @@
 }
 <body class="p-0 m-0 border-0 bd-example">
     <div class="p-0 m-0 border-0 mx-auto 最大的">
-        <div class="activity-page-container">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="幻燈片 1" src=" https://picsum.photos/400/300"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="幻燈片 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="幻燈片 3"></button>
+        <div class="col-10">
+            <div class="activity-page-container">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="幻燈片 1" src=" https://picsum.photos/400/300"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="幻燈片 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="幻燈片 3"></button>
+                    </div>
+
+                    <div class="carousel-inner 照片的包皮">
+                        @foreach (var item in Model.產品列表.FirstOrDefault().Runproductpictures)
+                        {
+                            <div class="carousel-item active">
+                                <img src="https://localhost:44338/images/TravelProductPictures/@item.TravelPicture1" class="d-block carouselImg" alt="...">
+                            </div>
+
+                        }
+
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">以前的</font></font></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下一個</font></font></span>
+                    </button>
                 </div>
-                <div class="carousel-inner 照片的包皮">
-                    <div class="carousel-item active">
-                        <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block carouselImg" " alt="...">
-                    </div>
 
-                    <div class="carousel-item">
-                        <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block carouselImg" " alt="...">
-                    </div>
-
-                    <div class="carousel-item">
-                        <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block carouselImg" " alt="...">
-                    </div>
-
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">以前的</font></font></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下一個</font></font></span>
-                </button>
             </div>
-
         </div>
+        
         <div class="分類">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -112,28 +112,29 @@
                                             @Model.產品列表.FirstOrDefault().TravelProductName
                                         </div>
                                     </div>
-                                    <div class="subInfoText ps-3">數量</div>
-                                    <div class="py-3">
-                                        <div class="chooseNumberRow mx-3">
-                                            <div class="chooseTitle">
-                                                每人
-                                            </div>
-                                            <div class="chooseNumberBlock">
-                                                <button type="button" id="productMinus"
-                                                        class="btn btn-outline-secondary">
-                                                    -
-                                                </button>
-                                                <div class="number">
-                                                    <input type="number" class="productNumber" id="productNum" name="Count" value="1" />
+                                    <form method="post" action="PayData">
+                                        <div class="subInfoText ps-3">數量</div>
+                                        <div class="py-3">
+                                            <div class="chooseNumberRow mx-3">
+                                                <div class="chooseTitle">
+                                                    每人
                                                 </div>
-                                                <button type="button" id="productPlus"
-                                                        class="btn btn-outline-secondary">
-                                                    +
-                                                </button>
+                                                <div class="chooseNumberBlock">
+                                                    <button type="button" id="productMinus"
+                                                            class="btn btn-outline-secondary">
+                                                        -
+                                                    </button>
+                                                    <div class="number">
+                                                        <input type="number" class="productNumber" id="productNum" name="Count" value="1" />
+                                                    </div>
+                                                    <button type="button" id="productPlus"
+                                                            class="btn btn-outline-secondary">
+                                                        +
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <form method="post" action="PayData">
+
                                         <div class="px-3 totalRow">
                                             <div class="my-3">
                                                 <div class="titleFontStyle">NT$ <span id="totalPrice">0</span></div>
@@ -152,15 +153,17 @@
                                     </form>
                                     <form method="post" action="AddToSession" class="addshoppingCart">
                                         <input type="hidden" name="TravelProductId" value="@Model.產品列表.FirstOrDefault().TravelProductId" />
-                                        <input type="hidden" name="Count" value="1" id="postProductNum"/>
-                                        <input type="submit" value="加入購物車" class="btn btn-main mx-3" />
+                                        <input type="hidden" name="Count" value="1" id="postProductNum" />
+                                        <input type="submit" value="加入購物車"  data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3" />
                                     </form>
 
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="leftSide grey p-3">
-                                    <div class="titleFontStyle">已選方案詳情</div>
+                                    <div class="titleFontStyle">行程明細</div>
+                                    <div class="hiddenInfoNote hiddenEle" >@Model.產品列表.FirstOrDefault().DailyDetailText</div>
+                                    <div id="productInfoNote"></div>
                                 </div>
                             </div>
                         </div>
@@ -190,12 +193,6 @@
             </div>
             <div class="小介紹">
                 @Model.產品列表.FirstOrDefault().PreparationDescription
-            </div>
-            <div class="活動DIV">
-                <h2><span class="一條根"> </span><span>行程明細</span></h2>
-            </div>
-            <div class="小介紹">
-                @Model.產品列表.FirstOrDefault().DailyDetailText
             </div>
             <div class="活動DIV">
                 <h2><span class="一條根"> </span><span>活動評價</span></h2>
@@ -296,13 +293,17 @@
                 let descritpionContent = $('#prodctDescriptionHidden').text()
                 descritpionContent = descritpionContent.replace(/#/g,"<br> ● ")
                 $('#prodctDescription').html(descritpionContent)
+                //
+                let descritpionLabel = $(".hiddenInfoNote").text()
+                descritpionLabel = descritpionLabel.replace(/#/g, "<br>")
+                $('#productInfoNote').html(descritpionLabel)
             }
             //點擊加號
             $('#productPlus').click(function () {
                 let currentNum = parseInt($('#productNum').val())
                 currentNum += 1
                 $('#productNum').val(currentNum)
-
+                $("#postProductNum").val($('#productNum').val())
                 $('#totalPrice').text(currentNum * @Model.產品列表.FirstOrDefault().Price)
             });
             //點擊減號
@@ -313,32 +314,16 @@
                     $('#productNum').val(currentNum)
                 }
                 $('#totalPrice').text(currentNum * @Model.產品列表.FirstOrDefault().Price)
-                console.log($('#adultNum').text())
+                $("#postProductNum").val($('#productNum').val())
             });
             //改變數量
             $('#productNum').change(function () {
-                $("#postProductNum").val($('#productNum').val())
+                let currentNum = $('#productNum').val()
+                $("#postProductNum").val(currentNum)
+                $('#totalPrice').text(currentNum * @Model.產品列表.FirstOrDefault().Price)
             })
-            @*$('#addShopping').click(function () {
-                console.log("addShopping")
 
-                let productNum = $('#productNum').val()
-                let productName = $('#productName').text()
-                let productImgUrl = $('.carouselImg')[0].getAttribute("src")
-                let imgIndex = productImgUrl.lastIndexOf("/")
-                let imgUrl = productImgUrl.substring(imgIndex, productImgUrl.length)
-                let productInfo = {
-                    TravelProductId:  @Model.產品列表.FirstOrDefault().TravelProductId,
-                    TravelProductName: productName,
-                    Count: productNum,
-                    /*productPic: imgUrl,*/
-                    Price:  @Model.產品列表.FirstOrDefault().Price
-                }
 
-                console.log("productInfo", productInfo)
-                sessionStorage.removeItem("SK_PURCHASED_PRODUCT");
-                sessionStorage.setItem("SK_PURCHASED_PRODUCT", JSON.stringify(productInfo));
-            })*@
         </script>
     }
 </body>

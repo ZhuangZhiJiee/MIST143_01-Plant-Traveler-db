@@ -42,6 +42,7 @@ namespace MIST143_Traveler.Controllers
                                MapUrl = c.MapUrl,
                                PreparationDescription = c.PreparationDescription,
                                productpictures = c.TravelPictures.ToList(),
+                               Runproductpictures = c.TravelPictures.Where(a => a.PictureStatus ==2).ToList(),
                                DailyDetailText = c.TravelProductDetails.FirstOrDefault().DailyDetailText,
                         }).ToList();
 
@@ -56,7 +57,20 @@ namespace MIST143_Traveler.Controllers
                 CDictionary.SK_PURCHASED_PRODUCT, jsonBurchased);
             return NoContent();
         }
-
+        public IActionResult ShoppingCart()
+        {
+            var shopping = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+            var c = JsonSerializer.Deserialize<CshoppingCartViewModel>(shopping);
+            CTranshoppingCartViewModel tsc = new CTranshoppingCartViewModel()
+            {
+                TravelProductId = c.TravelProductId,
+                TravelProductName = pt.TravelProducts.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().TravelProductName,
+                Count = c.Count,
+                Price = pt.TravelProducts.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().Price,
+                productpicture = pt.TravelPictures.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().TravelPicture1,
+            };
+            return View(tsc);
+        }
         [HttpPost]
         public IActionResult PayData(CPayDataParameterViewModel p)
         {
@@ -128,20 +142,8 @@ namespace MIST143_Traveler.Controllers
             };
             pt.OrderDetails.Add(odd);
             pt.SaveChanges();
-            return RedirectToAction("Index","Home");
-        }
-        public IActionResult ShoppingCart()
-        {
-            var shopping = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
-            var c = JsonSerializer.Deserialize<CshoppingCartViewModel>(shopping);
-            CTranshoppingCartViewModel tsc = new CTranshoppingCartViewModel()
-            {
-                TravelProductId = c.TravelProductId,
-                TravelProductName = pt.TravelProducts.Where(a =>a.TravelProductId == c.TravelProductId).FirstOrDefault().TravelProductName,
-                Count = c.Count,
-                Price = pt.TravelProducts.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().Price,
-            };
-            return View(tsc);
+            System.Threading.Thread.Sleep(3000);
+            return RedirectToAction("Index", "Home");
         }
     }
 }
