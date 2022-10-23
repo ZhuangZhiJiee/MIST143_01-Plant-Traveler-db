@@ -61,16 +61,12 @@ namespace MIST143_Traveler.MViewModel
             get { return _member.Email; }
             set { _member.Email = value; }
         }
-        public string Gender1
+        public string Gender
         {
             get { return _member.Gender; }
             set { _member.Gender = value; }
         }
-        public string Gender2
-        {
-            get { return _member.Gender; }
-            set { _member.Gender = value; }
-        }
+      
         public int CityId
         {
             get { return _member.CityId; }

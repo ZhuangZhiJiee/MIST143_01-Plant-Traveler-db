@@ -30,7 +30,11 @@ namespace MIST143_Traveler.Controllers
         {
             return PartialView();
         }
-
+        public IActionResult Logout()
+        {
+           HttpContext.Session.Remove(CDictionary.SK_Login);
+           return RedirectToAction("Index", "Home");
+        }
 
         public IActionResult newLoginpag()
         {
@@ -243,8 +247,6 @@ namespace MIST143_Traveler.Controllers
 
             if (Cus != null)
             {
-
-                //Cus.CityId = ccc.CityId;
                 Cus.Address = inCus.Address;
                 Cus.Password = inCus.Password;
                 Cus.MemberName = inCus.MemberName;
@@ -356,7 +358,54 @@ namespace MIST143_Traveler.Controllers
         {
             return View();
         }
+        //==========================================在網頁加到我的最愛==================================
+        public IActionResult toMyFavorites(CtoMyFavorites PMID)
+        {
+            if (PMID != null)
+            { 
+            Member Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == PMID.MembersId);
+                if (Cus != null)
+                {
+                    var mf = _PlanetTravelContext.Myfavorites.Where(a => a.TravelProductId == PMID.TravelProductId).ToList();
+                    if (mf.Count > 0)
+                    {
+                       return Json(new { Res = false});
+                    }
+                    Myfavorite fa = PMID.myfavorite;
+                    _PlanetTravelContext.Add(fa);
+                    _PlanetTravelContext.SaveChanges();
+                    return Json(new { Res = true });
+                }
+                return Json(new { Res = false });
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        //==============================檢視會員中心的我最愛==============================
+        public IActionResult LMyFavorites(int MembersId)
+        {
+            if (MembersId != 0)
+            {
+                會員中心檢視最愛 CP = new 會員中心檢視最愛();
+                //List<最愛商品> LOVE = new List<最愛商品>();
+                CP.商品列表 = (from fa in _PlanetTravelContext.Myfavorites.Where(a => a.MembersId == MembersId)
+                               from pid in _PlanetTravelContext.TravelProducts.Where(c=>c.TravelProductId==fa.TravelProductId)
+                           select new 最愛商品
+                           {
+                               TravelProductId=pid.TravelProductId,
+                               TravelProductName=pid.TravelProductName
+                               
+                           }
+                         ).ToList();
+                
+                if (CP.商品列表.Count > 0)
+                {
+                    return ViewComponent("MyFavorites", CP);
+                }
+            }
+            return PartialView("Myfavorites");
+        }
 
+        //==========================================加到我的最愛==================================
 
         public IActionResult City(int id)
         {
