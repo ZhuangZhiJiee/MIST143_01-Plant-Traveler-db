@@ -55,6 +55,7 @@
   color: #ff5b00;
   padding: 16px;
   padding-top: 0;
+  padding-right:0;
  }
 .payContainer .infoTitle{
  font-size: 30px;
@@ -126,7 +127,8 @@
 }
 
 .payInfoRow.checkout .right{
-  width: 200px
+  width: 200px;
+  text-align:right;
 }
 
 .payInfoRow.checkout .right a{
@@ -350,6 +352,6 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-#prodctDescriptionHidden{
+#prodctDescriptionHidden,.hiddenEle{
     display:none;
 }
