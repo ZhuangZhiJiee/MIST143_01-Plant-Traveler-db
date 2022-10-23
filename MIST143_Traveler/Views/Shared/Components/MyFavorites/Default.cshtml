@@ -1,0 +1,107 @@
+﻿@model MIST143_Traveler.MViewModel.會員中心檢視最愛
+@{
+    ViewData["Title"] = "Myfavorites";
+}
+@section Styles{
+
+}
+<link href="~/css/會員中心/我的最愛卡片.css" rel="stylesheet" />
+<link href="~/css/客戶中心訂單內容物.css" rel="stylesheet" />
+<link href="~/css/客服中心.css" rel="stylesheet" />
+
+
+
+<body>
+
+    <article>
+        <h3>我的最愛</h3>
+        <div class="row row-cols-1">
+            <div class="col-12 上面空間 d-flex justify-content-start">
+                <div class='asdqwr'>
+                    @{
+                        var i = 0;
+                        List<string> Dow = new List<string>();
+                        foreach (var ab in Model.商品列表)//有錢字號才能用{}取得值 如果用MODEL.出來的物件不能用@會跟RAZOR混亂 所以用AB變數
+                        {
+                            Dow.Add($@" 
+                                  <div class='card'>
+                                <img class='card-img-top' src='../Images/ProductListPageImages/landscape_101.jpg' alt='Card image cap'>
+                                    <div class='card-body'>
+                                 <a href='https://localhost:44302/ProductPage/Index'>
+                                 <h3 class='activity-card-title'> 
+                                    {ab.TravelProductName} 
+                                   </h3>
+                                    </a>
+                                   <div class='page-activity-recommend-score'>
+                                    <span class='page-activity-recommend-score-number'>
+                                        <svg width='12' height='12' class='svg-icon'></svg>
+                                        <span class='score-rate'>4.7</span>
+                                    </span>
+                                    <span class='page-activity-recommend-review-number'>
+                                        (
+                                        <span class='review-number'>30K+ 則評價</span>
+                                        )
+                                    </span>
+                                </div>
+                                <div class='activity-card-bottom'>
+                                    <div>
+                                        <div class='activity-card-price-box home-activity-card_price small-card'>
+                                            <span class='activity-card-price-box__sell-price dynamic-width-price'>NT$300</span>
+                                            <span class='activity-card-price-box__underline-price dynamic-width-price'>NT$600</span>
+                                            <div id='cancel'>
+                                             <i id='heart{i}' onclick='love({i})' class='bi bi-heart'></i>
+                                             
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='tagging-wrap bottom-tag small-style'>
+                                    <div class='tagging-box'>
+                                        <div text='最優價格保證' color='#FF5B00' backgroundcolor='rgba(255, 240, 229, 255)' bordercolor='#FFF0E5' borderradius='4px' maxwidth='auto' class='tagging-tag small-style'>
+                                            <div class='tagging-tag_custom' style='max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;'>最優價格保證</div>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+
+                               </div>
+                      
+                                                ");
+                            i++;
+                        }
+                        @foreach (var g in Dow)//重複執行Dow內的資料
+                        {
+
+                            @Html.Raw(g);//將帶有HTML字串轉換成HTML輸出
+
+                        }
+
+                    }
+                </div>
+
+
+
+
+
+                </div>
+            </div>
+    </article>
+</body>
+<script>
+    
+    $(function () {//document.ready(JQ寫法)等HTML的原件都讀取完才執行
+        /* $("#cancel").load*/
+    })
+    function love(i) {
+        var c = $("#heart"+i).attr('class')
+        if (c == 'bi bi-heart') {
+            $("#heart" + i).toggleClass("bi bi-heart-fill")
+        }
+        else
+            $("#heart" + i).toggleClass("bi bi-heart")
+    }
+        /*< i class="bi bi-heart-fill" ></i >*///實心
+
+</script>
+
+

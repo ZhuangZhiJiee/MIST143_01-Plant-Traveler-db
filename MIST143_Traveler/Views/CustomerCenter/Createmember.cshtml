@@ -91,13 +91,13 @@
                         <div class="inputs p-2 flex-fill">
                             <header>生理性別</header>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="Gender" value="男" id="Man" checked>
+                                <input class="form-check-input" type="radio" name="Gender" value="男" id="sex" checked>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     男
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="Gender" value="女" id="Won">
+                                <input class="form-check-input" type="radio" name="Gender" value="女" id="sex">
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     女
                                 </label>
@@ -201,8 +201,7 @@
             Cityname: $(".Ccity").val(),
             Address: $("#address").val(),
             BirthDay: $("#BirthDay").val(),
-            Gender1: $("#Man").val(),
-            Gender2: $("#Won").val(),
+            Gender: $("input[type=radio][name=Gender]:checked").val(),
         }
         $.ajax({
             url: '@Url.Action("Createmember", "CustomerCenter")',

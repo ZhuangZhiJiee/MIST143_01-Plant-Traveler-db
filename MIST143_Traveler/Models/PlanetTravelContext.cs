@@ -262,13 +262,9 @@ namespace MIST143_Traveler.Models
             {
                 entity.HasKey(e => e.MyfavoritesId);
 
-                entity.Property(e => e.MyfavoritesId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("MyfavoritesID");
+                entity.Property(e => e.MyfavoritesId).HasColumnName("MyfavoritesID");
 
                 entity.Property(e => e.MembersId).HasColumnName("MembersID");
-
-                entity.Property(e => e.PhotoPath).IsRequired();
 
                 entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
 
