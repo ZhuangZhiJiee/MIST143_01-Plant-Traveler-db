@@ -28,5 +28,9 @@ namespace MIST143_Traveler.MViewModel
         public List<TravelPicture> productpictures { get; set; }
         public List<TravelPicture> Runproductpictures { get; set; }
         public string DailyDetailText { get; set; }
+        public string FImagePath { get; set; }
+
+
+
     }
 }

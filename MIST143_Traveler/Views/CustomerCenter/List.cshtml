@@ -26,7 +26,7 @@
                     <div class="col-12 col-md-3">
                   
                         <div class="card" style="width: 18rem;">
-                            <label class="btn" for="file">
+                            <label class="btn">
                                 <input type="file" name="photo" class="form-control" onchange="uploadImg()" id="file"style="display:none" accept="image/*">
                                 <img src="~/Images/客戶大頭貼/@Model.PhotoPath" id="avatarShow" style="width:240px;height:240px;border-radius:50%" />
                             </label>
@@ -94,8 +94,6 @@
                                         <option selected>@Model.Cityname</option>
                                     </select>
                                 </div>
-
-
                                 <div class="inputs p-2 flex-grow-1">
                                     <header>地址</header>
                                     <input class="form-control" type="text" asp-for="Address" id="Address" placeholder="北投區111號" aria-label="default input example" name="Address">
@@ -124,6 +122,7 @@
 
 @section Scripts{
     <script>
+
         const cont = document.querySelector("#cont")
         const Btnsave = document.querySelector("#send")
         //==============測試AJAX圖片上傳================
@@ -134,7 +133,6 @@
 
             var formData = new FormData();
             formData.append("files", $("#file")[0].files[0]);
-            
             $.ajax({
                 url: "/CustomerCenter/FileUpLoad",
                 type: "Post",
@@ -279,7 +277,7 @@
 
 
     $('#btnlove').click(function () {
-        $('#cont').load('@Url.Action("CommentList", "CustomerCenter",new {v.MembersId})')
+        $('#cont').load('@Url.Action("LMyFavorites", "CustomerCenter",new {v.MembersId})')
         $(this).addClass("btn btn-outline-warning 按鈕顏色2 active")
         $('#btnorder').removeClass("active")
         $('#btnreview').removeClass("active")
