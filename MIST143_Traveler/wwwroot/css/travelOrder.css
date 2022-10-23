@@ -334,3 +334,22 @@
 #creditCardBlock{
     display:none;
 }
+
+.addshoppingCart{
+    text-align: right;
+}
+.productNumber {
+    width: 30px;
+    border: none;
+    text-align:center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#prodctDescriptionHidden{
+    display:none;
+}

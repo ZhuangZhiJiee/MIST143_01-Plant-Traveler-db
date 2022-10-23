@@ -94,8 +94,6 @@
                                         <option selected>@Model.Cityname</option>
                                     </select>
                                 </div>
-
-
                                 <div class="inputs p-2 flex-grow-1">
                                     <header>地址</header>
                                     <input class="form-control" type="text" asp-for="Address" id="Address" placeholder="北投區111號" aria-label="default input example" name="Address">
@@ -135,7 +133,6 @@
 
             var formData = new FormData();
             formData.append("files", $("#file")[0].files[0]);
-
             $.ajax({
                 url: "/CustomerCenter/FileUpLoad",
                 type: "Post",

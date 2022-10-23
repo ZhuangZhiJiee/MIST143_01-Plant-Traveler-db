@@ -204,18 +204,21 @@
 
                         </div>
                         <div class="show-all">
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#loginmodal"  class="klk-button klk-button-outlined klk-button-small klk-button-block">
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#loginmodal" class="klk-button klk-button-outlined klk-button-small klk-button-block">
                                 <span>
                                     查看全部
-                                </span>                                
+                                </span>
                             </button>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
-
+            <div class="search-result-activity-containe as">
+                @await Component.InvokeAsync("Productlistpagi2")
+            </div>
             <div class="search-result-activity-containe asd" id="ans">
+
                 @for (int i = 0; i < ViewBag.Count; i++)
                 {
                     @await Component.InvokeAsync("Productlistpagi", new { tr = Model[i] })
@@ -226,53 +229,55 @@
 
     </div>
     <div class="modal fade" id="loginmodal">
-    <div class="modal-dialog klk-modal-wrapper" z-index:2000; >
-        <div class="modal-content klk-modal klk-modal-scrollable klk-fade klk-modal-large klk-modal-overflow-y" @*style="padding-bottom: 0px; width: 900px; max-height: 457px;"*@>
-            <i class="klk-modal-close klk-icon klk-icon-icon_navigation_close klk-modal-close" aria-lable="Close">
-                <svg>
-                    <line x1="0" x2="20" y1="0" y2="20" style="stroke: white; stroke-width: 2">                   
-                    <use xlink:href="#klk-icon-icon_navigation_close"></use></line>                                    
-                    <line x1="0" x2="20" y1="20" y2="0" style="stroke: white; stroke-width: 2"></line>
-                </svg>
-            </i>
-            <div class="modal-body klk-modal-body">
-                <div class="search">
-                    <div class="search-input-desktop">
-                        <input class="search" type="text" placeholder="搜尋目的地" />  
-                        <span class="bi-search"></span>
+        <div class="modal-dialog klk-modal-wrapper" z-index:2000;>
+            <div class="modal-content klk-modal klk-modal-scrollable klk-fade klk-modal-large klk-modal-overflow-y" @*style="padding-bottom: 0px; width: 900px; max-height: 457px;"*@>
+                <i class="klk-modal-close klk-icon klk-icon-icon_navigation_close klk-modal-close" aria-lable="Close">
+                    <svg>
+                        <line x1="0" x2="20" y1="0" y2="20" style="stroke: white; stroke-width: 2">
+                            <use xlink:href="#klk-icon-icon_navigation_close"></use>
+                        </line>
+                        <line x1="0" x2="20" y1="20" y2="0" style="stroke: white; stroke-width: 2"></line>
+                    </svg>
+                </i>
+                <div class="modal-body klk-modal-body">
+                    <div class="search">
+                        <div class="search-input-desktop">
+                            <input class="search" type="text" placeholder="搜尋目的地" />
+                            <span class="bi-search"></span>
+                        </div>
                     </div>
-                </div>
-                <div class="tree">
-                    <div data-spm-module="DestinationFilter?trg=manual&ext={"country_id":"","city_id":"19"}" class="js-range-tree-spm" >
-                        <div class="klk-tree-node">
-                            <div class="klk-tree klk-tree-checkable klk-tree-multiple">
-                                <div class="accordion" id="accordionPanelsStayOpenExample">
-                                    <div class="accordion-item d-flex aitemhi">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width:30px;height:30px">
-                                        <button class="accordion-button aitem" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">東亞
-                                        </button>
-                                        <h2 class="accordion-header" id="panelsStayOpen-headingOne"> </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                            <div class="accordion-body">
-                                                <strong></strong>
+                    <div class="tree">
+                        <div data-spm-module="DestinationFilter?trg=manual&ext={" country_id":"","city_id":"19"}" class="js-range-tree-spm">
+                            <div class="klk-tree-node">
+                                <div class="klk-tree klk-tree-checkable klk-tree-multiple">
+                                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                                        <div class="accordion-item d-flex aitemhi">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width:30px;height:30px">
+                                            <button class="accordion-button aitem" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                                東亞
+                                            </button>
+                                            <h2 class="accordion-header" id="panelsStayOpen-headingOne"> </h2>
+                                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                                <div class="accordion-body">
+                                                    <strong></strong>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
-                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-              <div class="footer js-tree-modal-confirm">
-                  <button class="klk-button klk-button-primary" color="primary" data-spm-item="__default">
-                      <span>確認</span>
-                  </button>
-              </div>
+                <div class="modal-footer">
+                    <div class="footer js-tree-modal-confirm">
+                        <button class="klk-button klk-button-primary" color="primary" data-spm-item="__default">
+                            <span>確認</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </article>

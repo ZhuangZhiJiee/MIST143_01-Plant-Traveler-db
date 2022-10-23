@@ -33,15 +33,15 @@
                 </div>
                 <div class="carousel-inner 照片的包皮">
                     <div class="carousel-item active">
-                        <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block" alt="...">
+                        <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block carouselImg" " alt="...">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block" alt="...">
+                        <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block carouselImg" " alt="...">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block" alt="...">
+                        <img src="https://localhost:44338/images/TravelProductPictures/@Model.產品列表.FirstOrDefault().productpictures.FirstOrDefault().TravelPicture1" class="d-block carouselImg" " alt="...">
                     </div>
 
                 </div>
@@ -63,18 +63,10 @@
                     <li class="breadcrumb-item active" aria-current="page">101</li>
                 </ol>
             </nav>
-            <div class="卡片">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">NT$ @Model.產品列表.FirstOrDefault().Price.ToString("###,###,##0")</h5>
-                        <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#joinModal">選擇方案</a>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="標題">
-            <h3>@Model.產品列表.FirstOrDefault().TravelProductName</h3>
+            <h3 id="productName">@Model.產品列表.FirstOrDefault().TravelProductName</h3>
         </div>
         <div class="小介紹">
             <div class="評價">
@@ -103,12 +95,9 @@
             </div>
         </div>
         <br />
-        <div class="小介紹">
-
-            @Model.產品列表.FirstOrDefault().Description
-
-        </div>
-        <form method="post" action="PayData">
+        <div class="小介紹" id="prodctDescriptionHidden">@Model.產品列表.FirstOrDefault().Description</div>
+        <div class="小介紹" id="prodctDescription"></div>
+     
             <article class="payContainer choose">
                 <div class="payContainerInner">
                     <div>
@@ -121,18 +110,18 @@
                                         <button type="button" class="btn btn-outline-primary mx-3">清除全部</button>
                                     </div>
                                     @*<div class="subInfoText ps-3">請選擇參加日期</div>
-                                        <div class="selectInput ps-3">
-                                            <input type="date" id="start" name="trip-start" class="form-control" value="2022-10-11"
-                                                   min="2022-10-11" max="2022-12-31">
-                                        </div>
+        <div class="selectInput ps-3">
+            <input type="date" id="start" name="trip-start" class="form-control" value="2022-10-11"
+                   min="2022-10-11" max="2022-12-31">
+        </div>
 
-                                        <div class="subInfoText ps-3">請選擇時間</div>
-                                        <div class="selectInput ps-3">
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>09:00 上午 NT$ @Model.Price.ToString("###,###,##0")</option>
-                                                <option value="1">01:00 下午 NT$ 300</option>
-                                            </select>
-                                        </div>*@
+        <div class="subInfoText ps-3">請選擇時間</div>
+        <div class="selectInput ps-3">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>09:00 上午 NT$ @Model.Price.ToString("###,###,##0")</option>
+                <option value="1">01:00 下午 NT$ 300</option>
+            </select>
+        </div>*@
 
                                     <div class="subInfoText ps-3">方案類型</div>
                                     <div class="payUserRow ps-3">
@@ -147,14 +136,14 @@
                                                 每人
                                             </div>
                                             <div class="chooseNumberBlock">
-                                                <button type="button" id="adultMinus"
+                                                <button type="button" id="productMinus"
                                                         class="btn btn-outline-secondary">
                                                     -
                                                 </button>
                                                 <div class="number" id="adultNum">
                                                     <input type="number" class="productNumber" name="Count" value="0" />
                                                 </div>
-                                                <button type="button" id="adultPlus"
+                                                <button type="button" id="productPlus"
                                                         class="btn btn-outline-secondary">
                                                     +
                                                 </button>
@@ -172,17 +161,29 @@
                                                 <a class="buttonInnderA">加入購物車</a>
                                             </button>
 
-                                            <input type="hidden" name="TravelProductId" value="@Model.產品列表.FirstOrDefault().TravelProductId" />
-                                            <input type="submit" value="立即預定" class="btn btn-main ms-3" />
+                                                <input type="hidden" name="TravelProductId" value="@Model.產品列表.FirstOrDefault().TravelProductId" />
+                                                <input type="submit" value="  立即預定  " class="btn btn-main ms-3" />
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
+                                    <form method="post" action="AddToSession" class="addshoppingCart">
+                                        <input type="hidden" name="TravelProductId" value="@Model.產品列表.FirstOrDefault().TravelProductId" />
+                                        <input type="hidden" name="Count" value="1" id="postProductNum"/>
+                                        <input type="submit" value="加入購物車" class="btn btn-main mx-3" />
+                                    </form>
+
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="leftSide grey p-3">
+                                    <div class="titleFontStyle">已選方案詳情</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </article>
-        </form>
+      
         <div class="下面一包">
             <div class="活動DIV">
                 <h2><span class="一條根"> </span><span>活動介紹</span></h2>

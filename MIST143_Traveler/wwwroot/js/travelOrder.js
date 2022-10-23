@@ -37,6 +37,13 @@ $(function () {
     $('#flexRadioDefault2').click(function () {
         $('#creditCardBlock').hide()
     });
+    //ÂIÀ»½T»{¥I´Ú
+    $('#clickPayBtn').click(function () {
+        let payType = $('input[name=flexRadioDefault]:checked', "#payType").val()
+        console.log("payType", payType)
+        $("input[name=PaymethodId]").val(payType)
+        console.log("dsfasdfasdf", $("input[name=PaymethodId]").val())
+    })
 
     //creditCardBlock
 });

@@ -1,4 +1,4 @@
-﻿
+﻿@model MIST143_Traveler.ShoppingViewModel.CTranshoppingCartViewModel
 @{
     ViewData["Title"] = "ShoppingCart";
 }
@@ -32,17 +32,13 @@
                                 </div>
                                 <div class="infoBox ms-1 px-3">
                                     <div class="titleFontStyle">
-                                        【領券現折100】Klook獨家優惠｜台北101觀景台門票｜萬聖節搗蛋派對｜高空Sky Lounge百萬夜景
-                                    </div>
-                                    <div class="subInfoText">
-                                        方案類型:【台北101觀景台】最High夜景-搗蛋派對星光票
-
+                                        @Model.TravelProductName
                                     </div>
                                 </div>
-                                <div class="subInfoText">
+                                @*<div class="subInfoText">
                                     2022年10月11日 10:00AM<br>
                                     當地時間
-                                </div>
+                                </div>*@
                                 <div class="chooseNumber ps-1">
                                     <div class="subtext">每人</div>
                                     <div class="chooseNumberBlock">
@@ -50,7 +46,7 @@
                                                 class="btn btn-outline-secondary">
                                             -
                                         </button>
-                                        <div class="number" id="childNum">1</div>
+                                        <div class="number" id="childNum">@Model.Count</div>
                                         <button type="button" id="childPlus"
                                                 class="btn btn-outline-secondary">
                                             +
@@ -64,14 +60,14 @@
                                     <a class="buttonA" href="./travelPayCheckout.html">編輯</a> |
                                     <a class="buttonA">刪除</a>
                                 </div>
-                                <div class="titleFontStyle">NT$ <span id="shoppingCartTotalPrice">300</span></div>
+                                <div class="titleFontStyle">NT$ <span id="shoppingCartTotalPrice"></span></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-3 ">
                         <div class="rightSide ">
                             <div class="subInfoText">1件總計 <i class="bi bi-caret-down"></i></div>
-                            <div class="titleFontStyle">NT$ <span id="totalPayPrice">300</span></div>
+                            <div class="titleFontStyle">NT$ <span id="totalPayPrice"><input type="text" name="Total Price" value=""</span></div>
                             <button type="button" class="btn btn-main my-3 fullSize" id="goPayBtn">
                                 <a class="buttonInnderA" href="../Shopping/PayData">結帳</a>
                             </button>
