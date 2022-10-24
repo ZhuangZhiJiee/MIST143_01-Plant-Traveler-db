@@ -170,8 +170,10 @@
                                     </form>
                                     <form method="post" action="AddToSession" class="addshoppingCart">
                                         <input type="hidden" name="TravelProductId" value="@Model.產品列表.FirstOrDefault().TravelProductId" />
+                                        <input type="hidden" name="TravelProductName" value="@Model.產品列表.FirstOrDefault().TravelProductName" />
                                         <input type="hidden" name="Count" value="1" id="postProductNum" />
-                                        <input type="submit" value="加入購物車"  data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3" />
+                                        <input type="hidden" name="Price" value="@Model.產品列表.FirstOrDefault().Price" />
+                                        <input type="submit" value="加入購物車" data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3" />
                                     </form>
 
                                 </div>
@@ -299,7 +301,6 @@
     </div>
     @section Scripts{
 
-      
         <script src="~/js/travelOrder.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>

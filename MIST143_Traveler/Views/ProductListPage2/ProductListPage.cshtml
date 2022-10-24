@@ -4,22 +4,7 @@
     <link href="@Url.Content("~/css/ProductListPage2.css")" rel="stylesheet" />
 }
 
-@section Scripts{
-    <script>
 
-
-        $("#btn").click(function () {
-            var qq = $("#text").val()
-            var url = "@Url.Content("~/ProductListPage2/filter")"
-            var name = `?keyword=` + qq
-            $("#ans").load(url + name)
-        })
-        function show(){
-            var content = document.getElementById("text");
-            document.getElementById("txt").textContent = content.value;
-        }
-    </script>
-}
 
 
 @*<vc:productlistpagi page="5"></vc:productlistpagi>*@
@@ -54,6 +39,9 @@
     </div>
     <div class="main-content search-main-content">
         <p class="search-result-title">以下是與「 <a id="txt"></a>」的體驗</p>
+
+
+
         <div class="category-tree-and-activity-list js-category-tree-and-activity-list">
             <div class="destinations-category-tree">
                 <div class="contain containerp">
@@ -214,19 +202,25 @@
                     </div>
                 </div>
             </div>
-            <div class="search-result-activity-containe as">
-                @await Component.InvokeAsync("Productlistpagi2")
-            </div>
-            <div class="search-result-activity-containe asd" id="ans">
+            <div class="section-right-head ">
 
-                @for (int i = 0; i < ViewBag.Count; i++)
-                {
-                    @await Component.InvokeAsync("Productlistpagi", new { tr = Model[i] })
-                }
-            </div>
+                <div class="basic-filter section-filter" style="width:800px;">
+                    <div class="basic-filter-left">
+                        @await Component.InvokeAsync("Productlistpagi2")
+                    </div>
 
+
+                </div>
+                <div class="search-result-activity-containe asd" id="ans">
+
+                    @for (int i = 0; i < ViewBag.Count; i++)
+                    {
+                        @await Component.InvokeAsync("Productlistpagi", new { tr = Model[i] })
+                    }
+                </div>
+
+            </div>
         </div>
-
     </div>
     <div class="modal fade" id="loginmodal">
         <div class="modal-dialog klk-modal-wrapper" z-index:2000;>
@@ -240,9 +234,9 @@
                     </svg>
                 </i>
                 <div class="modal-body klk-modal-body">
-                    <div class="search">
+                    <div class="search" style="width:97%;">
                         <div class="search-input-desktop">
-                            <input class="search" type="text" placeholder="搜尋目的地" />
+                            <input class="search" style="width:95%" placeholder="搜尋目的地" />
                             <span class="bi-search"></span>
                         </div>
                     </div>
@@ -252,16 +246,16 @@
                                 <div class="klk-tree klk-tree-checkable klk-tree-multiple">
                                     <div class="accordion" id="accordionPanelsStayOpenExample">
                                         <div class="accordion-item d-flex aitemhi">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width:30px;height:30px">
-                                            <button class="accordion-button aitem" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                                東亞
-                                            </button>
-                                            <h2 class="accordion-header" id="panelsStayOpen-headingOne"> </h2>
-                                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                                <div class="accordion-body">
-                                                    <strong></strong>
-                                                </div>
-                                            </div>
+
+                                            @*<button class="accordion-button aitem" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOn" aria-expanded="true" aria-controls="panelsStayOpen-collapseOn">
+                                                    東亞
+                                                </button>
+                                                <h2 class="accordion-header" id="panelsStayOpen-headingOn"> </h2>
+                                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOn">
+                                                    <div class="accordion-body">
+                                                        <strong></strong>
+                                                    </div>
+                                                </div>*@
                                         </div>
 
                                     </div>
@@ -280,4 +274,41 @@
             </div>
         </div>
     </div>
+
+
+    @section Scripts{
+        @*<script src="http://code.jquery.com/jquery-3.3.0.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
+        <script>
+
+        $("#showw").click(function () {
+            var aa = $("#start123123").val();
+            var url = "@Url.Content("~/ProductListPage2/selecter")"
+            var day = `?date=${aa}`;
+            console.log(aa);
+            $("#aeio").load(url + day);
+
+        })
+        </script>
+
+        <script>
+
+
+        $("#btn").click(function () {
+            var qq = $("#text").val()
+            var url = "@Url.Content("~/ProductListPage2/filter")"
+            var name = `?keyword=` + qq
+            $("#ans").load(url + name)
+        })
+        function show(){
+            var content = document.getElementById("text");
+            document.getElementById("txt").textContent = content.value;
+        }
+
+
+
+        </script>
+
+    }
+
 </article>

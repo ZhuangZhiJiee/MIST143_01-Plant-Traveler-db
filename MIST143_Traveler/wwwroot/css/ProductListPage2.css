@@ -968,7 +968,7 @@ div {
 }
 
 input {
-    width: 97%;
+
     /* font-size: 20px; */
     font-weight: 500;
     color: #212121;
@@ -1044,6 +1044,8 @@ input {
     padding: 2px;
 }
 
-.as {
-    width: 13%;
+
+
+.basic-filter {
+    width: 53%;
 }
