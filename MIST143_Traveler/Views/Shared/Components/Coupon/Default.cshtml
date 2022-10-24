@@ -1,0 +1,95 @@
+﻿@model MIST143_Traveler.MViewModel.會員中心檢視優惠券
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@{
+    ViewData["Title"] = "Coupon";
+}
+
+
+
+<link href="~/css/客服中心.css" rel="stylesheet" />
+<link href="~/css/客戶中心訂單內容物.css" rel="stylesheet" />
+<link href="~/css/會員中心/優惠券樣式.css" rel="stylesheet" />
+<body>
+    <div class="col-12 上面空間">
+        <h3>優惠券</h3>
+        <div class="input-group mb-3">
+           @{ 
+               var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+               var v = JsonSerializer.Deserialize<Member>(OBJ);
+           }
+            <input hidden id="idid" value="@v.MembersId" />
+            
+
+            <input type="text" class="form-control" name="GiftKey" id="Giftnum" placeholder="請輸入優惠碼" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-warning 按鈕顏色" onclick="Gift()" type="button" id="button-addon2">兌換</button>
+        </div>
+
+
+        <div class="container row row-2">
+            <!--優惠券-->
+            @{
+                List<string> Coupon = new List<string>();
+                foreach (var co in Model.優惠券列表)
+                {
+                    Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
+                            <div class='coupon-info coupon-info-right-dashed'>
+                                <div class='coupon-store'>{co.CouponName}</div>
+                                <div class='coupon-price'>折扣{co.Discount}<span>優惠券</span></div>
+                                <div class='coupon-description'>訂單限滿{co.Condition}使用</div>
+                            </div>
+                            <div class='coupon-get'>
+                                <div class='coupon-desc'>副券</div>
+                                <div class='coupon-expiry-date'>到期日{co.ExDate}</div>
+                            </div>
+                        </div>");
+                }
+            }
+            @foreach (var g in Coupon)
+            {
+                @Html.Raw(g);
+            }
+            <!--優惠券-->
+        </div>
+    </div>
+</body>
+
+
+
+    <script>
+        const Gift = () => {
+            var Giftdata =
+            {
+                GiftKey: $("#Giftnum").val(),
+                MembersId:$("#idid").val(),
+            }
+            console.log(Giftdata)
+        $.ajax({
+            url: '@Url.Action("Giftkey", "CustomerCenter")',
+            method: 'Post',
+            dataType: 'Json',
+            data: { Cou: Giftdata },
+            success: function (datas) {
+                if (!datas.res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '輸入錯誤',
+                        text: datas.msg,
+
+                    })
+                    return;
+                }
+                Swal.fire(
+                    '您的變更已儲存!',
+                    '讚啦!',
+                    'success'
+                )
+            }
+
+        })
+        };
+
+    </script>
+
+    @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
