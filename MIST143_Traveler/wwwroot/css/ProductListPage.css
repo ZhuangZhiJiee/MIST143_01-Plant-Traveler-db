@@ -528,7 +528,9 @@ img {
     font-weight: 400;
     /*line-height: 16.1px;*/
 }
-
+.search {
+width:500px;
+}
 .rwd-header-search-box-desktop {
     margin-top: 20px;
 }
@@ -849,3 +851,10 @@ b, strong {
 .myMOUSE {
     cursor: pointer;
 }
+.basic-filter {
+    width: 80%;
+}
+.section-right-head {
+    width:30%
+}
+
