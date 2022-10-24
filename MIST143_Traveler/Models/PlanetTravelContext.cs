@@ -23,6 +23,7 @@ namespace MIST143_Traveler.Models
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Coupon> Coupons { get; set; }
+        public virtual DbSet<CouponList> CouponLists { get; set; }
         public virtual DbSet<Hotel> Hotels { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<MemberMessage> MemberMessages { get; set; }
@@ -151,11 +152,42 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.CouponId).HasColumnName("CouponID");
 
+                entity.Property(e => e.Condition).HasMaxLength(50);
+
                 entity.Property(e => e.CouponName)
                     .IsRequired()
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Discount).HasColumnType("decimal(18, 1)");
+
+                entity.Property(e => e.ExDate).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<CouponList>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("CouponList");
+
+                entity.Property(e => e.CouponId).HasColumnName("CouponID");
+
+                entity.Property(e => e.CouponListId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("CouponListID");
+
+                entity.Property(e => e.MembersId).HasColumnName("MembersID");
+
+                entity.HasOne(d => d.Coupon)
+                    .WithMany()
+                    .HasForeignKey(d => d.CouponId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CouponList_Coupon");
+
+                entity.HasOne(d => d.Members)
+                    .WithMany()
+                    .HasForeignKey(d => d.MembersId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CouponList_Members");
             });
 
             modelBuilder.Entity<Hotel>(entity =>
@@ -192,6 +224,8 @@ namespace MIST143_Traveler.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.CityId).HasColumnName("CityID");
+
+                entity.Property(e => e.CouponId).HasColumnName("CouponID");
 
                 entity.Property(e => e.Email)
                     .IsRequired()

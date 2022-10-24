@@ -42,8 +42,8 @@ namespace MIST143_Traveler.Controllers
                                MapUrl = c.MapUrl,
                                PreparationDescription = c.PreparationDescription,
                                productpictures = c.TravelPictures.ToList(),
-                               Runproductpictures = c.TravelPictures.Where(a => a.PictureStatus ==2).ToList(),
-                               DailyDetailText = c.TravelProductDetails.FirstOrDefault().DailyDetailText,
+                            Runproductpictures = c.TravelPictures.Where(a => a.PicturePurpose == 2).ToList(),
+                            DailyDetailText = c.TravelProductDetails.FirstOrDefault().DailyDetailText,
                         }).ToList();
 
             return View(vmp);

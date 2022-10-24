@@ -308,7 +308,7 @@
         })
 
         $('#btncop').click(function () {
-        $('#cont').load('@Url.Content("~/CustomerCenter/Coupon")')
+        $('#cont').load('@Url.Action("VIEWCoupon", "CustomerCenter", new { v.MembersId })')
             $(this).addClass("btn btn-outline-warning 按鈕顏色2 active") //優惠券按鈕
             $('#btnorder').removeClass("active")
             $('#btnlove').removeClass("active")

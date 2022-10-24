@@ -209,10 +209,31 @@ namespace MIST143_Traveler.Controllers
         {
             return PartialView();
         }
-        public IActionResult Coupon()
+
+        public IActionResult VIEWCoupon(int MembersId)
         {
-            return PartialView();
+            會員中心檢視優惠券 Coup = new 會員中心檢視優惠券();
+            if (MembersId != 0)
+            {
+                
+                Coup.優惠券列表 = (from Cuu in _PlanetTravelContext.Members.Where(a => a.MembersId == MembersId)
+                                  from Cup in _PlanetTravelContext.Coupons.Where(s=>s.CouponId==Cuu.CouponId)
+                              select new 我的優惠券
+                              {
+                                 CouponId= Cup.CouponId,
+                                 CouponName= Cup.CouponName,
+                                 Condition= Cup.Condition,
+                                 Discount= Cup.Discount,
+                                 ExDate= Cup.ExDate,
+                              }
+                            ).ToList();
+            }
+            return ViewComponent("Coupon", Coup);
         }
+        //public IActionResult Coupon()
+        //{
+        //    return PartialView();
+        //}
         public IActionResult Star()
         {
             return PartialView();
@@ -389,11 +410,14 @@ namespace MIST143_Traveler.Controllers
                 //List<最愛商品> LOVE = new List<最愛商品>();
                 CP.商品列表 = (from fa in _PlanetTravelContext.Myfavorites.Where(a => a.MembersId == MembersId)
                                from pid in _PlanetTravelContext.TravelProducts.Where(c=>c.TravelProductId==fa.TravelProductId)
+                           //from image in _PlanetTravelContext.TravelPictures.Where(m => m.TravelPictureId == pid.TravelProductId)
                            select new 最愛商品
                            {
                                TravelProductId=pid.TravelProductId,
-                               TravelProductName=pid.TravelProductName
-                               
+                               TravelProductName=pid.TravelProductName,
+                               TravelProductURL = "/shopping/List?TravelProductId=",
+                               Price =pid.Price,
+                               TravelPicturePath = pid.TravelPictures.FirstOrDefault().TravelPicture1,
                            }
                          ).ToList();
                 

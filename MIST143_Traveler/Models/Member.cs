@@ -26,7 +26,8 @@ namespace MIST143_Traveler.Models
         public string BirthDay { get; set; }
         public string PhotoPath { get; set; }
         public int MemberStatusId { get; set; }
-        
+        public int? CouponId { get; set; }
+
         public virtual City City { get; set; }
         public virtual MemberStatus MemberStatus { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

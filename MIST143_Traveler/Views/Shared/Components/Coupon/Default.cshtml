@@ -1,4 +1,4 @@
-﻿
+﻿@model MIST143_Traveler.MViewModel.會員中心檢視優惠券
 @{
     ViewData["Title"] = "Coupon";
 }
@@ -21,16 +21,16 @@
             <!--優惠券-->
             <div class="coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient">
                 <div class="coupon-info coupon-info-right-dashed">
-                    <div class="coupon-store">XXXXXX旗舰店</div>
+                    <div class="coupon-store">@Model.優惠券列表.FirstOrDefault().CouponName</div>
                     <div class="coupon-price">¥5.00<span>优惠券</span></div>
-                    <div class="coupon-description">订单满50.00元</div>
+                    <div class="coupon-description">訂單滿'@Model.優惠券列表.FirstOrDefault().Condition</div>
                 </div>
                 <div class="coupon-get">
                     <div class="coupon-desc">副券</div>
                     <div class="coupon-expiry-date">2019.10.01<br />2019.10.30</div>
                 </div>
             </div>
-         <!--優惠券-->
+            <!--優惠券-->
         </div>
     </div>
 </body>
