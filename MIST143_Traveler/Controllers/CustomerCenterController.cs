@@ -177,6 +177,9 @@ namespace MIST143_Traveler.Controllers
 
                 if (cust.Password.Equals(vModel.Password))
                 {
+
+
+
                     string jsonUser = JsonSerializer.Serialize(cust);
                     HttpContext.Session.SetString(
                         CDictionary.SK_Login, jsonUser);
@@ -209,18 +212,19 @@ namespace MIST143_Traveler.Controllers
         {
             return PartialView();
         }
-
+        //============================檢視優惠券頁==============================
         public IActionResult VIEWCoupon(int MembersId)
         {
             會員中心檢視優惠券 Coup = new 會員中心檢視優惠券();
             if (MembersId != 0)
             {
                 
-                Coup.優惠券列表 = (from Cuu in _PlanetTravelContext.Members.Where(a => a.MembersId == MembersId)
+                Coup.優惠券列表= (from Cuu in _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId)
                                   from Cup in _PlanetTravelContext.Coupons.Where(s=>s.CouponId==Cuu.CouponId)
                               select new 我的優惠券
                               {
-                                 CouponId= Cup.CouponId,
+                                 MembersId = MembersId,
+                                 CouponId = Cup.CouponId,
                                  CouponName= Cup.CouponName,
                                  Condition= Cup.Condition,
                                  Discount= Cup.Discount,
@@ -228,12 +232,37 @@ namespace MIST143_Traveler.Controllers
                               }
                             ).ToList();
             }
-            return ViewComponent("Coupon", Coup);
+          
+                return ViewComponent("Coupon", Coup);
         }
-        //public IActionResult Coupon()
-        //{
-        //    return PartialView();
-        //}
+
+        public IActionResult Giftkey(會員中心檢視優惠券 Cou)
+        {
+
+             var q = _PlanetTravelContext.Coupons.FirstOrDefault(a => a.GiftKey == Cou.GiftKey);
+                if (q != null)
+                {
+                    var use = _PlanetTravelContext.CouponLists.FirstOrDefault(s =>s.MembersId==Cou.MembersId&&s.CouponId==q.CouponId);
+                if (use == null) { 
+                    CouponList li = new CouponList
+                    {
+                        CouponId = q.CouponId,
+                        CouponStatus=true,
+                        MembersId=Cou.MembersId,
+                    };
+                    _PlanetTravelContext.CouponLists.Add(li);
+                    _PlanetTravelContext.SaveChanges();
+                return Json(new { Res = true, Msg = "成功" });
+                }
+                return Json(new { Res = false, Msg = "已經使用過" });
+            }
+            return Json(new { Res = false, Msg = "無效的優惠" });
+        }
+        //============================檢視優惠券頁==============================
+        public IActionResult Coupon()
+        {
+            return PartialView();
+        }
         public IActionResult Star()
         {
             return PartialView();

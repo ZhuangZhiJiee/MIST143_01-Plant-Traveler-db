@@ -161,30 +161,32 @@ namespace MIST143_Traveler.Models
                 entity.Property(e => e.Discount).HasColumnType("decimal(18, 1)");
 
                 entity.Property(e => e.ExDate).HasMaxLength(50);
+
+                entity.Property(e => e.GetDate).HasMaxLength(50);
+
+                entity.Property(e => e.GiftKey)
+                    .IsRequired()
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<CouponList>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("CouponList");
 
-                entity.Property(e => e.CouponId).HasColumnName("CouponID");
+                entity.Property(e => e.CouponListId).HasColumnName("CouponListID");
 
-                entity.Property(e => e.CouponListId)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("CouponListID");
+                entity.Property(e => e.CouponId).HasColumnName("CouponID");
 
                 entity.Property(e => e.MembersId).HasColumnName("MembersID");
 
                 entity.HasOne(d => d.Coupon)
-                    .WithMany()
+                    .WithMany(p => p.CouponLists)
                     .HasForeignKey(d => d.CouponId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CouponList_Coupon");
 
                 entity.HasOne(d => d.Members)
-                    .WithMany()
+                    .WithMany(p => p.CouponLists)
                     .HasForeignKey(d => d.MembersId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CouponList_Members");
@@ -224,8 +226,6 @@ namespace MIST143_Traveler.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.CityId).HasColumnName("CityID");
-
-                entity.Property(e => e.CouponId).HasColumnName("CouponID");
 
                 entity.Property(e => e.Email)
                     .IsRequired()

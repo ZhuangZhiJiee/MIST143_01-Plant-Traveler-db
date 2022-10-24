@@ -43,6 +43,7 @@ namespace MIST143_Traveler.MViewModel
             get;
             set;
         }
+      
     }
     
 }
