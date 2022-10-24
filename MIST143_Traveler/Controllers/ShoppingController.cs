@@ -30,18 +30,18 @@ namespace MIST143_Traveler.Controllers
                            where c.TravelProductId == (int)TravelProductId
                         select new 產品格式
                            {
-                               TravelProductName = c.TravelProductName,
-                               TravelProductId = c.TravelProductId,
-                               Price = c.Price,
-                               TravelProductTypeId = c.TravelProductTypeId,
-                               Stocks = c.Stocks,
-                               Description = c.Description,
-                               CountryId = c.CountryId,
-                               Cost = c.Cost,
-                               EventIntroduction = c.EventIntroduction,
-                               MapUrl = c.MapUrl,
-                               PreparationDescription = c.PreparationDescription,
-                               productpictures = c.TravelPictures.ToList(),
+                            TravelProductName = c.TravelProductName,
+                            TravelProductId = c.TravelProductId,
+                            Price = c.Price,
+                            TravelProductTypeId = c.TravelProductTypeId,
+                            Stocks = c.Stocks,
+                            Description = c.Description,
+                            CountryId = c.CountryId,
+                            Cost = c.Cost,
+                            EventIntroduction = c.EventIntroduction,
+                            MapUrl = c.MapUrl,
+                            PreparationDescription = c.PreparationDescription,
+                            productpictures = c.TravelPictures.ToList(),
                             Runproductpictures = c.TravelPictures.Where(a => a.PicturePurpose == 2).ToList(),
                             DailyDetailText = c.TravelProductDetails.FirstOrDefault().DailyDetailText,
                         }).ToList();
@@ -53,8 +53,7 @@ namespace MIST143_Traveler.Controllers
         public IActionResult AddToSession(CAddToSessionViewModel s) 
         {
             string jsonBurchased = JsonSerializer.Serialize(s);
-            HttpContext.Session.SetString(
-                CDictionary.SK_PURCHASED_PRODUCT, jsonBurchased);
+            HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonBurchased);
             return NoContent();
         }
         public IActionResult ShoppingCart()
