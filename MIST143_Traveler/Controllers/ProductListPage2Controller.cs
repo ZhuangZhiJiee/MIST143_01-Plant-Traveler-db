@@ -54,9 +54,12 @@ namespace MIST143_Traveler.Controllers
             //return View();
             return ViewComponent("Productlistpagi", q.ToList());
         }
-        public IActionResult selecter()
+        public IActionResult selecter(string date)
         {
-            return View();
+            var q = (from p in _planet.TravelProductDetails
+                    where p.Date == date
+                    select p).ToList();
+            return View(q);
         }
     }
 }
