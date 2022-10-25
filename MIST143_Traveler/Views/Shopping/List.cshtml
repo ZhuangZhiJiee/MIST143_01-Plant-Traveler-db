@@ -34,13 +34,13 @@
                     </div>
 
                     <div class="carousel-inner 照片的包皮">
-                        @foreach (var item in Model.產品列表.FirstOrDefault().Runproductpictures)
+                        @*@foreach (var item in Model.產品列表.FirstOrDefault().Runproductpictures)
                         {
                             <div class="carousel-item active">
                                 <img src="https://localhost:44338/images/TravelProductPictures/@item.TravelPicture1" class="d-block carouselImg" alt="...">
                             </div>
 
-                        }
+                        }*@
 
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -126,7 +126,7 @@
                                         {
                                             foreach (var item2 in item.Date)
                                             {
-                                                <br />@item2
+                                                @item2<br />
                                             }
                                         }
                                     </div>
@@ -135,6 +135,7 @@
                                     <div class="selectInput ps-3">
                                         @Model.產品列表.FirstOrDefault().HotelName
                                     </div>
+                                    <br />
                                     <form method="post" action="PayData">
                                         <div class="subInfoText ps-3">數量</div>
                                         <div class="py-3">
@@ -160,7 +161,7 @@
 
                                         <div class="px-3 totalRow">
                                             <div class="my-3">
-                                                <div class="titleFontStyle">NT$ <span id="totalPrice">0</span></div>
+                                                <div class="titleFontStyle">NT$ <span id="totalPrice"></span></div>
                                                 <div class="subInfoText">完成所有必填選項</div>
                                                 <div class="subInfoText">剩餘:  @Model.產品列表.FirstOrDefault().Stocks 個位置</div>
                                             </div>
@@ -176,7 +177,7 @@
                                         <input type="hidden" name="TravelProductName" value="@Model.產品列表.FirstOrDefault().TravelProductName" />
                                         <input type="hidden" name="Count" value="1" id="postProductNum" />
                                         <input type="hidden" name="Price" value="@Model.產品列表.FirstOrDefault().Price" />
-                                        <input type="hidden" name="Productpicture" value="@Model.產品列表.FirstOrDefault().Runproductpictures.FirstOrDefault().TravelPicture1" />
+                                        @*<input type="hidden" name="Productpicture" value="@Model.產品列表.FirstOrDefault().Runproductpictures.FirstOrDefault().TravelPicture1" />*@
                                         <input type="submit" value="加入購物車" data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3" />
                                     </form>
 
@@ -190,7 +191,7 @@
                                     {
                                         foreach (var item2 in item.DailyDetailText)
                                         {
-                                           <br />@item2
+                                           @item2<br />
                                         }
                                         
                                     }
@@ -203,89 +204,90 @@
                 </div>
             </article>
       
-        <div class="下面一包">
-            <div class="活動DIV">
-                <h2><span class="一條根"> </span><span>活動介紹</span></h2>
-            </div>
-            <div class="小介紹">
-                @Model.產品列表.FirstOrDefault().EventIntroduction
-            </div>
-            @foreach (var item in Model.產品列表.FirstOrDefault().productpictures)
-            {
-                <img src="https://localhost:44338/images/TravelProductPictures/@item.TravelPicture1" class="下圖" />
-                <figcaption class="下圖小字">@item.TravelPictureText</figcaption>
-            }
+            <div class="下面一包">
+                <div class="活動DIV">
+                    <h2><span class="一條根"> </span><span>活動介紹</span></h2>
+                </div>
+                <div class="小介紹">
+                    @Model.產品列表.FirstOrDefault().EventIntroduction
+                </div>
+                @foreach (var item in Model.產品列表.FirstOrDefault().productpictures)
+                {
+                    <img src="https://localhost:44338/images/TravelProductPictures/@item.TravelPicture1" class="下圖" />
+                    <figcaption class="下圖小字">@item.TravelPictureText</figcaption>
+                }
 
-            <div class="活動DIV">
-                <h2><span class="一條根"> </span><span>地點</span></h2>
-            </div>
-            <iframe src="@Model.產品列表.FirstOrDefault().MapUrl" width="850" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            <div class="活動DIV">
-                <h2><span class="一條根"> </span><span>行前準備</span></h2>
-            </div>
-            <div class="小介紹">
-                @Model.產品列表.FirstOrDefault().PreparationDescription
-            </div>
-            <div class="活動DIV">
-                <h2><span class="一條根"> </span><span>活動評價</span></h2>
-                <div class="評論">
-                    <div class="card mb-3" style="max-width: 850px;">
-                        <div class="row g-0">
+                <div class="活動DIV">
+                    <h2><span class="一條根"> </span><span>地點</span></h2>
+                </div>
+                <iframe src="@Model.產品列表.FirstOrDefault().MapUrl" width="850" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="活動DIV">
+                    <h2><span class="一條根"> </span><span>行前準備</span></h2>
+                </div>
+                <div class="小介紹 hiddenPreparationDescription hiddenEle">
+                    @Model.產品列表.FirstOrDefault().PreparationDescription
+                </div>
+                <div class="小介紹 preparationDescription"></div>
+                <div class="活動DIV">
+                    <h2><span class="一條根"> </span><span>活動評價</span></h2>
+                    <div class="評論">
+                        <div class="card mb-3" style="max-width: 850px;">
+                            <div class="row g-0">
 
-                            <div class="col-md-1">
-                                <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
-                            </div>
+                                <div class="col-md-1">
+                                    <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
+                                </div>
 
-                            <div class="col-md-10">
-                                <div class="card-body">
-                                    <h5 class="card-title">恆佑</h5>
-                                    <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
-                                    <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
-                                    <p class="card-text"><small class="text-muted">2022/5/35</small></p>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <h5 class="card-title">恆佑</h5>
+                                        <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
+                                        <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
+                                        <p class="card-text"><small class="text-muted">2022/5/35</small></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="card mb-3" style="max-width: 850px;">
-                        <div class="row g-0">
+                        <div class="card mb-3" style="max-width: 850px;">
+                            <div class="row g-0">
 
-                            <div class="col-md-1">
-                                <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
-                            </div>
+                                <div class="col-md-1">
+                                    <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
+                                </div>
 
-                            <div class="col-md-10">
-                                <div class="card-body">
-                                    <h5 class="card-title">恆佑</h5>
-                                    <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
-                                    <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
-                                    <p class="card-text"><small class="text-muted">2022/5/35</small></p>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <h5 class="card-title">恆佑</h5>
+                                        <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
+                                        <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
+                                        <p class="card-text"><small class="text-muted">2022/5/35</small></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="card mb-3" style="max-width: 850px;">
-                        <div class="row g-0">
+                        <div class="card mb-3" style="max-width: 850px;">
+                            <div class="row g-0">
 
-                            <div class="col-md-1">
-                                <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
-                            </div>
+                                <div class="col-md-1">
+                                    <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
+                                </div>
 
-                            <div class="col-md-10">
-                                <div class="card-body">
-                                    <h5 class="card-title">恆佑</h5>
-                                    <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
-                                    <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
-                                    <p class="card-text"><small class="text-muted">2022/5/35</small></p>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <h5 class="card-title">恆佑</h5>
+                                        <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
+                                        <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
+                                        <p class="card-text"><small class="text-muted">2022/5/35</small></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
     <!-- 已加入購物車訊息彈窗 -->
     <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -317,9 +319,18 @@
                 $('#totalPrice').text( @Model.產品列表.FirstOrDefault().Price)
                 //調整描述 換行 加圓點
                 let descritpionContent = $('#prodctDescriptionHidden').text()
+                if (descritpionContent[descritpionContent.length - 1] === '#') {
+                    descritpionContent = descritpionContent.slice(0, descritpionContent.length - 1)
+                }
                 descritpionContent = descritpionContent.replace(/#/g,"<br> ● ")
                 $('#prodctDescription').html(descritpionContent)
-                //
+                //換行 加圓點
+                let preparationDescription = $('.hiddenPreparationDescription').text()
+                if (preparationDescription[preparationDescription.length - 1] === '#') {
+                    preparationDescription = preparationDescription.slice(0, preparationDescription.length - 1)
+                }
+                preparationDescription = preparationDescription.replace(/#/g, "<br> ● ")
+                $('.preparationDescription').html(descritpionContent)
                 let descritpionLabel = $(".hiddenInfoNote").text()
                 descritpionLabel = descritpionLabel.replace(/#/g, "<br>")
                 $('#productInfoNote').html(descritpionLabel)
