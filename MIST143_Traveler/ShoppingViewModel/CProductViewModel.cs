@@ -27,10 +27,10 @@ namespace MIST143_Traveler.MViewModel
         public int count { get; set; }
         public List<TravelPicture> productpictures { get; set; }
         public List<TravelPicture> Runproductpictures { get; set; }
-        public string DailyDetailText { get; set; }
+        public List<string> DailyDetailText { get; set; }
         public string FImagePath { get; set; }
-
-
-
+        public List<string> Date { get; set; }
+        public List<string> View { get; set; }
+        public List<string> HotelName { get; set; }
     }
 }
