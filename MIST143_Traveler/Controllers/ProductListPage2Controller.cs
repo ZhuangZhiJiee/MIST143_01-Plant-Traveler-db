@@ -40,26 +40,57 @@ namespace MIST143_Traveler.Controllers
             return View(q.ToList());
 
         }
-        public IActionResult filter(string keyword)
+        public IActionResult filter(string[] keyword)
         {
-            var q = from p in _planet.TravelProducts
-                    where p.TravelProductName.Contains(keyword) || p.Description.Contains(keyword)
-                    select p;
-            if (q.Count() <= 0)
+            //Cproductlist suisei = new Cproductlist();
+            //suisei.隨便啦 = (from p in _planet.TravelProducts
+            //              where p.TravelProductName == (string)keyword || p.Description == (string)keyword
+            //              select new 好麻煩
+            //              {
+            //                  TravelProductName = p.TravelProductName,
+            //                  TravelProductId = p.TravelProductId,
+            //                  Price=p.Price,
+            //                  Description=p.Description,
+            //                  TravelPicture1=p.TravelPictures.FirstOrDefault().TravelPicture1,Date=p.TravelProductDetails.FirstOrDefault().Date,
+            //              }).ToList();
+            //if (suisei.隨便啦.Count() <= 0)
+            //{
+            //    suisei.隨便啦 = from p in _planet.TravelProducts
+            //                 select p;
+
+            //}
+            //ViewBag.Count = suisei.隨便啦.Count();
+            //return ViewComponent("Productlistpagi",suisei.隨便啦);
+           var a =new List<TravelProduct>();
+            if (keyword.Length != 0)
             {
-                q = from p in _planet.TravelProducts
-                    select p;
+                foreach (var item in keyword)
+                {
+                    var q = from p in _planet.TravelProducts
+                            where p.TravelProductName.Contains(item) || p.Description.Contains(item)
+                            select p;
+                    a.AddRange(q);
+                }
             }
-            ViewBag.Count = q.Count();
+            ViewBag.Count = a.Count();
             //return View();
-            return ViewComponent("Productlistpagi", q.ToList());
+            return ViewComponent("Productlistpagi", a);
         }
         public IActionResult selecter(string date)
         {
-            var q = (from p in _planet.TravelProductDetails
-                    where p.Date == date
-                    select p).ToList();
-            return View(q);
+            //var q = (from p in _planet.TravelProductDetails
+            //        where p.Date == date
+            //        select p).ToList();
+            //return View(q);
+            //Cproductlist datas = null;
+            var a = DateTime.Parse(date);
+            //var z = DateTime.Parse(date2);
+            var qw = _planet.TravelProducts.ToList();
+            var qq =_planet.TravelProductDetails.ToList()
+                .Where(w =>Convert.ToDateTime(w.Date) > a).Select(q=>q.TravelProduct).ToList();
+
+
+            return ViewComponent("Productlistpagi",qq);
         }
     }
 }
