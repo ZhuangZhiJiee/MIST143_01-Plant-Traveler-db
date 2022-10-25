@@ -152,9 +152,7 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.CouponId).HasColumnName("CouponID");
 
-                entity.Property(e => e.Condition)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.Condition).HasMaxLength(50);
 
                 entity.Property(e => e.CouponName)
                     .IsRequired()
@@ -162,9 +160,9 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.Discount).HasColumnType("decimal(18, 1)");
 
-                entity.Property(e => e.ExDate)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.ExDate).HasMaxLength(50);
+
+                entity.Property(e => e.GetDate).HasMaxLength(50);
 
                 entity.Property(e => e.GiftKey)
                     .IsRequired()

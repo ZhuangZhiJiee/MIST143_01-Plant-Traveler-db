@@ -19,7 +19,7 @@ namespace MIST143_Traveler.Models
         public decimal Discount { get; set; }
         public string ExDate { get; set; }
         public string Condition { get; set; }
-        public bool Useful { get; set; }
+        public string GetDate { get; set; }
 
         public virtual ICollection<CouponList> CouponLists { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
