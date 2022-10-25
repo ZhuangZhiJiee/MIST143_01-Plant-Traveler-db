@@ -1,11 +1,16 @@
-﻿
+﻿@model IEnumerable<MIST143_Traveler.ShoppingViewModel.CshoppingCartViewModel>
+
 @{
     ViewData["Title"] = "testPage";
 }
 
 <h1>testPage</h1>
-<form method="post" action="testPagee">
-    <input type="text" name="TravelProductId" value="1" />
-    <input type="text" name="TravelProductName" value="名字" />
-    <input type="submit" value="立即預定" class="btn btn-main ms-3" />
-</form>
+
+@foreach (var item in Model)
+{
+    <h3>@item.TravelProductId</h3>
+    <h3>@item.TravelProductName</h3>
+    <h3>@item.Count</h3>
+    <h3>@item.Price</h3>
+    <h3>@item.Productpicture</h3>
+}

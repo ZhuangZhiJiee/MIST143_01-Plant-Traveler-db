@@ -36,27 +36,38 @@
         @foreach (var item in Model.訂單)
         {
 
-            <tr class="樣式">
+        <tr class="樣式">
+            <td>
+                @Html.DisplayFor(modelItem => item.訂單編號)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.商品名稱)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.訂購日期)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.購買金額)
+            </td>
+            <td class="statuss" id="stat" value="@item.訂單狀態">
+                @Html.DisplayFor(modelItem => item.訂單狀態)
+            </td>
+            @{ 
+                if (item.訂單狀態 == "處理中"|| item.訂單狀態 == "已付款")
+                {
                 <td>
-                    @Html.DisplayFor(modelItem => item.訂單編號)
+                    <a class="btn btn-outline-danger Cancel" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("OrderCancel","CustomerCenter",new {@item.orderId},Context.Request.Scheme)',null)">申請取消</a>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.商品名稱)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.訂購日期)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.購買金額)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.訂單狀態)
-                </td>
-                <td>
-                    <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"onclick="OrderCancel('@Url.Action("OrderCancel","CustomerCenter",new {@item.orderId},Context.Request.Scheme)',null)">申請取消</a>
-                    
-                </td>
-            </tr>
+            }
+            else 
+            {
+            <td>
+
+            </td>
+            }
+            }
+
+        </tr>
         }
     </tbody>
 
@@ -337,10 +348,10 @@
                 "thousands": ","
             },
             "autoWidth": true,
-        });
+        }); CC()
     });
-
-
+    
+  
 
 </script>
 

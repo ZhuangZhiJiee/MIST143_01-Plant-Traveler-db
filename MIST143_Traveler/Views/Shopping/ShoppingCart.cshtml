@@ -11,7 +11,7 @@
 }
 @{
     decimal TotalPrice = Model.Price * Model.Count;
- }
+}
 <body>
     <article class="payContainer">
         <form method="post" action="PayData">
@@ -41,9 +41,9 @@
                                         </div>
                                     </div>
                                     @*<div class="subInfoText">
-                                        2022年10月11日 10:00AM<br>
-                                        當地時間
-                                    </div>*@
+                                            2022年10月11日 10:00AM<br>
+                                            當地時間
+                                        </div>*@
                                     <div class="chooseNumber ps-1">
                                         <div class="subtext">每人</div>
                                         <div class="chooseNumberBlock">
@@ -78,9 +78,6 @@
                                 <input type="hidden" name="TravelProductId" value="@Model.TravelProductId" />
                                 <input type="submit" class="btn btn-main my-3 fullSize" id="goPayBtn" value="結帳" />
 
-                                @*<button type="button" class="btn btn-main my-3 fullSize" id="goPayBtn">
-                                    <a class="buttonInnderA" href="../Shopping/PayData">結帳</a>
-                                </button>*@
                             </div>
                         </div>
                     </div>
@@ -132,5 +129,3 @@
     }
 
 </body>
-
-

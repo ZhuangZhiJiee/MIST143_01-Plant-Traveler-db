@@ -25,9 +25,9 @@
                         {
                             Dow.Add($@" 
                                   <div class='card'>
-                                <img class='card-img-top' src='../Images/ProductListPageImages/landscape_101.jpg' alt='Card image cap'>
+                                <img class='card-img-top' src='https://localhost:44338/images/TravelProductPictures/{ab.TravelPicturePath}' alt='Card image cap'>
                                     <div class='card-body'>
-                                 <a href='https://localhost:44302/ProductPage/Index'>
+                                 <a href='{ab.TravelProductURL}+{i+1}'>
                                  <h3 class='activity-card-title'> 
                                     {ab.TravelProductName} 
                                    </h3>
@@ -46,8 +46,7 @@
                                 <div class='activity-card-bottom'>
                                     <div>
                                         <div class='activity-card-price-box home-activity-card_price small-card'>
-                                            <span class='activity-card-price-box__sell-price dynamic-width-price'>NT$300</span>
-                                            <span class='activity-card-price-box__underline-price dynamic-width-price'>NT$600</span>
+                                            <span class='activity-card-price-box__sell-price dynamic-width-price'>NT${ab.Price}</span>
                                             <div id='cancel'>
                                              <i id='heart{i}' onclick='love({i})' class='bi bi-heart'></i>
                                              

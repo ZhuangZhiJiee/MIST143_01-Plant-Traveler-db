@@ -1,0 +1,136 @@
+﻿@model IEnumerable<MIST143_Traveler.ShoppingViewModel.CshoppingCartViewModel>
+
+@{
+    ViewData["Title"] = "ShoppingCartSession";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/travelOrder.css" />
+}
+@{
+    decimal TotalPrice = Model.FirstOrDefault().Price * Model.FirstOrDefault().Count;
+}
+<body>
+    <article class="payContainer">
+        @*<form method="post" action="PayData">*@
+            <div class="payContainerInner">
+                <h3 class="subTitle py-3">購物車</h3>
+                <div>
+                    <div class="row">
+                        <div class="col-9">
+                            <div class="leftSide p-3 paddingMore">
+                                <input class="form-check-input mt-0 " type="checkbox" value=""
+                                       aria-label="Checkbox for following text input">
+                                <span class="ms-2">全選</span>
+                                <a class="ms-3 buttonA">刪除選中活動</a>
+                            </div>
+                            @foreach (var item in Model)
+                            {
+                                <div class="leftSide p-3 paddingMore">
+                                    <div class="shoppingCartInfoRow">
+                                        <input class="form-check-input mt-0 " type="checkbox" value=""
+                                               aria-label="Checkbox for following text input">
+                                        <div class="imgBox ms-3">
+                                            <img src="https://localhost:44338/images/TravelProductPictures/@item.Productpicture" class="rounded float-start"
+                                                 alt="...">
+                                        </div>
+                                        <div class="infoBox ms-1 px-3">
+                                            <div class="titleFontStyle">
+                                                @item.TravelProductName
+                                            </div>
+                                        </div>
+                                        @*<div class="subInfoText">
+                                        2022年10月11日 10:00AM<br>
+                                        當地時間
+                                        </div>*@
+                                        <div class="chooseNumber ps-1">
+                                            <div class="subtext">每人</div>
+                                            <div class="chooseNumberBlock">
+                                                <button type="button" id="productMinus"
+                                                        class="btn btn-outline-secondary">
+                                                    -
+                                                </button>
+                                                <input type="number" class="productNumber" id="productNum" name="Count" value="1" />
+                                                <input type="hidden" id="productNumHidden" value="@item.Count" />
+                                                <button type="button" id="productPlus"
+                                                        class="btn btn-outline-secondary">
+                                                    +
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border-bottom-line my-3"></div>
+                                    <div class="shoppingCartInfoRowbottomRow">
+                                        <div>
+                                            <a class="buttonA" href="./travelPayCheckout.html">編輯</a> |
+                                            <a class="buttonA">刪除</a>
+                                        </div>
+                                        <div class="titleFontStyle"> NT$ <span id="totalPrice"></span></div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="col-3 ">
+                            <div class="rightSide ">
+                                <div class="subInfoText">1件總計 <i class="bi bi-caret-down"></i></div>
+                                <div class="titleFontStyle">NT$ <span id="totalPayPrice"></span></div>
+                                <form action="PayTest" method="post">
+                                    @foreach (var item in Model)
+                                    {
+                                        <input type="text" asp-for="FirstOrDefault()._CtestViewModel.TravelProductId" value="@item.TravelProductId" />
+                                    }
+
+                                    <input type="submit" class="btn btn-main my-3 fullSize" id="goPayBtn" value="結帳" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @*</form>*@
+    </article>
+    @section Scripts{
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.1.js"
+                integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+        <script src="~/js/travelOrder.js"></script>
+        <script>
+            window.onload = function () {
+                //頁面載入時初始總價
+                let num = $('#productNumHidden').val()
+                $('#productNum').val(num)
+                $('#totalPrice').text(num * @Model.FirstOrDefault().Price)
+                $('#totalPayPrice').text(num * @Model.FirstOrDefault().Price)
+
+            }
+            //點擊加號
+            $('#productPlus').click(function () {
+                let currentNum = parseInt($('#productNum').val())
+                currentNum += 1
+                $('#productNum').val(currentNum)
+                $('#totalPrice').text(currentNum * @Model.FirstOrDefault().Price)
+                $('#totalPayPrice').text(currentNum * @Model.FirstOrDefault().Price)
+            });
+            //點擊減號
+            $('#productMinus').click(function () {
+                let currentNum = parseInt($('#productNum').val())
+                if (currentNum > 1) {
+                    currentNum -= 1
+                    $('#productNum').val(currentNum)
+                }
+                $('#totalPrice').text(currentNum * @Model.FirstOrDefault().Price)
+                $('#totalPayPrice').text(currentNum * @Model.FirstOrDefault().Price)
+            });
+            //改變數量
+            $('#productNum').change(function () {
+                let currentNum = $('#productNum').val()
+                $("#postProductNum").val(currentNum)
+                $('#totalPayPrice').text(currentNum * @Model.FirstOrDefault().Price)
+            })
+
+        </script>
+
+    }
+
+</body>

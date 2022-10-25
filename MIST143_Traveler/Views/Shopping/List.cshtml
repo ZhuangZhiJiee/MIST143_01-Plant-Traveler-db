@@ -109,25 +109,31 @@
                                         <div class="infoTitle mt-4">選擇日期及方案組合</div>
                                         <button type="button" class="btn btn-outline-primary mx-3">清除全部</button>
                                     </div>
-                                    @*<div class="subInfoText ps-3">請選擇參加日期</div>
-        <div class="selectInput ps-3">
+                                    @*<div class="subInfoText ps-3">請選擇參加日期</div>*@
+                                    @*<div class="selectInput ps-3">
             <input type="date" id="start" name="trip-start" class="form-control" value="2022-10-11"
                    min="2022-10-11" max="2022-12-31">
-        </div>
-
-        <div class="subInfoText ps-3">請選擇時間</div>
-        <div class="selectInput ps-3">
-            <select class="form-select" aria-label="Default select example">
-                <option selected>09:00 上午 NT$ @Model.Price.ToString("###,###,##0")</option>
-                <option value="1">01:00 下午 NT$ 300</option>
-            </select>
         </div>*@
-
                                     <div class="subInfoText ps-3">方案類型</div>
                                     <div class="payUserRow ps-3">
                                         <div class="payUser active">
                                             @Model.產品列表.FirstOrDefault().TravelProductName
                                         </div>
+                                    </div>
+                                    <div class="subInfoText ps-3">時間</div>
+                                    <div class="selectInput ps-3">
+                                        @foreach (var item in Model.產品列表)
+                                        {
+                                            foreach (var item2 in item.Date)
+                                            {
+                                                <br />@item2
+                                            }
+                                        }
+                                    </div>
+                                    <br />
+                                    <div class="subInfoText ps-3">住宿飯店</div>
+                                    <div class="selectInput ps-3">
+                                        @Model.產品列表.FirstOrDefault().HotelName
                                     </div>
                                     <form method="post" action="PayData">
                                         <div class="subInfoText ps-3">數量</div>
@@ -159,9 +165,6 @@
                                                 <div class="subInfoText">剩餘:  @Model.產品列表.FirstOrDefault().Stocks 個位置</div>
                                             </div>
                                             <div class="rightBtns">
-                                                @*<button type="button" class="btn btn-main" data-bs-toggle="modal" data-bs-target="#joinModal" id="addShopping">
-                        <a class="buttonInnderA" >加入購物車</a>
-                    </button>*@
 
                                                 <input type="hidden" name="TravelProductId" value="@Model.產品列表.FirstOrDefault().TravelProductId" />
                                                 <input type="submit" value="  立即預定  " class="btn btn-main ms-3" />
@@ -170,8 +173,11 @@
                                     </form>
                                     <form method="post" action="AddToSession" class="addshoppingCart">
                                         <input type="hidden" name="TravelProductId" value="@Model.產品列表.FirstOrDefault().TravelProductId" />
+                                        <input type="hidden" name="TravelProductName" value="@Model.產品列表.FirstOrDefault().TravelProductName" />
                                         <input type="hidden" name="Count" value="1" id="postProductNum" />
-                                        <input type="submit" value="加入購物車"  data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3" />
+                                        <input type="hidden" name="Price" value="@Model.產品列表.FirstOrDefault().Price" />
+                                        <input type="hidden" name="Productpicture" value="@Model.產品列表.FirstOrDefault().Runproductpictures.FirstOrDefault().TravelPicture1" />
+                                        <input type="submit" value="加入購物車" data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3" />
                                     </form>
 
                                 </div>
@@ -179,7 +185,16 @@
                             <div class="col-4">
                                 <div class="leftSide grey p-3">
                                     <div class="titleFontStyle">行程明細</div>
-                                    <div class="hiddenInfoNote hiddenEle" >@Model.產品列表.FirstOrDefault().DailyDetailText</div>
+                                    <div class="hiddenInfoNote hiddenEle" >
+                                    @foreach (var item in Model.產品列表)
+                                    {
+                                        foreach (var item2 in item.DailyDetailText)
+                                        {
+                                           <br />@item2
+                                        }
+                                        
+                                    }
+                                    </div>
                                     <div id="productInfoNote"></div>
                                 </div>
                             </div>
@@ -269,11 +284,6 @@
                     </div>
 
                 </div>
-
-                <div class="活動DIV">
-                    <h2><span class="一條根"> </span><span>常見問題</span></h2>
-                </div>
-
             </div>
         </div>
     </div>
@@ -299,9 +309,6 @@
     </div>
     @section Scripts{
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.1.js"
-                integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
         <script src="~/js/travelOrder.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
@@ -346,6 +353,14 @@
 
             const toMyFavorites = () =>
             {
+                //function love(i) {
+                //    var c = $("#heart" + i).attr('class')
+                //    if (c == 'bi bi-heart') {
+                //        $("#heart" + i).toggleClass("bi bi-heart-fill")
+                //    }
+                //    else
+                //        $("#heart" + i).toggleClass("bi bi-heart")
+                //}
 
                 var Tofa = {
                     TravelProductId:$("#PID").val(),

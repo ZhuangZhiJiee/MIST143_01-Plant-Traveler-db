@@ -222,8 +222,9 @@
                     '註冊成功!',
                     '讚啦!',
                     'success'
-
-                )
+                ).then(function (result) {
+                    window.location.href = "@Url.ActionLink("newLoginpag","CustomerCenter")";
+                })
             }
         })
                 /*form.submit();*/

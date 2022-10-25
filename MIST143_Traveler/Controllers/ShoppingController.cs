@@ -18,43 +18,61 @@ namespace MIST143_Traveler.Controllers
         {
             pt = q;
         }
-        public IActionResult testPage()
-        {
-            return View();
-        }
         public IActionResult List(int? TravelProductId)
         {
             CProductViewModel vmp = new CProductViewModel();
 
             vmp.產品列表 = (from c in pt.TravelProducts
-                           where c.TravelProductId == (int)TravelProductId
+                        where c.TravelProductId == (int)TravelProductId
                         select new 產品格式
-                           {
-                               TravelProductName = c.TravelProductName,
-                               TravelProductId = c.TravelProductId,
-                               Price = c.Price,
-                               TravelProductTypeId = c.TravelProductTypeId,
-                               Stocks = c.Stocks,
-                               Description = c.Description,
-                               CountryId = c.CountryId,
-                               Cost = c.Cost,
-                               EventIntroduction = c.EventIntroduction,
-                               MapUrl = c.MapUrl,
-                               PreparationDescription = c.PreparationDescription,
-                               productpictures = c.TravelPictures.ToList(),
-                               //Runproductpictures = c.TravelPictures.Where(a => a.PictureStatus ==2).ToList(),
-                               DailyDetailText = c.TravelProductDetails.FirstOrDefault().DailyDetailText,
+                        {
+                            TravelProductName = c.TravelProductName,
+                            TravelProductId = c.TravelProductId,
+                            Price = c.Price,
+                            TravelProductTypeId = c.TravelProductTypeId,
+                            Stocks = c.Stocks,
+                            Description = c.Description,
+                            CountryId = c.CountryId,
+                            Cost = c.Cost,
+                            EventIntroduction = c.EventIntroduction,
+                            MapUrl = c.MapUrl,
+                            PreparationDescription = c.PreparationDescription,
+                            productpictures = c.TravelPictures.ToList(),
+                            Runproductpictures = c.TravelPictures.Where(a => a.PicturePurpose == 2).ToList(),
+                            Date = c.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
+                            //HotelName = c.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).FirstOrDefault().Hotel.HotelName.ToList(),
+                            //View = pt.TravelProductDetails.Where(p=>p.TravelProductId==c.TravelProductId).FirstOrDefault().ProductToViews.Where(p=>p.ViewId==p.View.ViewId).Select(p=>p.View.ViewName).ToList(),
+                            DailyDetailText = c.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a =>a.DailyDetailText).ToList(),
                         }).ToList();
-
             return View(vmp);
-
         }
         [HttpPost]
         public IActionResult AddToSession(CAddToSessionViewModel s) 
         {
+            //string jsonCart = "";
+            //List<CshoppingCartViewModel> list = null;
+            //if (!HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
+            //    list = new List<CshoppingCartViewModel>();
+            //else
+            //{
+            //    jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+            //    list = JsonSerializer.Deserialize<List<CshoppingCartViewModel>>(jsonCart);
+            //}
+            //CshoppingCartViewModel item = new CshoppingCartViewModel()
+            //{
+            //    TravelProductId = s.TravelProductId,
+            //    TravelProductName = s.TravelProductName,
+            //    Count = s.Count,
+            //    Price = s.Price,
+            //    Productpicture = s.Productpicture,
+            //};
+            //list.Add(item);
+            //jsonCart = JsonSerializer.Serialize(list);
+            //HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonCart);
+
+
             string jsonBurchased = JsonSerializer.Serialize(s);
-            HttpContext.Session.SetString(
-                CDictionary.SK_PURCHASED_PRODUCT, jsonBurchased);
+            HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonBurchased);
             return NoContent();
         }
         public IActionResult ShoppingCart()
@@ -70,6 +88,17 @@ namespace MIST143_Traveler.Controllers
                 productpicture = pt.TravelPictures.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().TravelPicture1,
             };
             return View(tsc);
+        }
+        public IActionResult ShoppingCartSession()
+        {
+            if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
+            {
+                string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+                List<CshoppingCartViewModel> cart = JsonSerializer.Deserialize<List<CshoppingCartViewModel>>(jsonCart);
+                return View(cart);
+            }
+            else
+                return View();
         }
         [HttpPost]
         public IActionResult PayData(CPayDataParameterViewModel p)
@@ -144,6 +173,23 @@ namespace MIST143_Traveler.Controllers
             pt.SaveChanges();
             System.Threading.Thread.Sleep(3000);
             return RedirectToAction("Index", "Home");
+        }
+        public IActionResult testPage()
+        {
+            if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
+            {
+                string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+                List<CshoppingCartViewModel> cart = JsonSerializer.Deserialize<List<CshoppingCartViewModel>>(jsonCart);
+                return View(cart);
+            }
+            else
+                return View();
+        }
+        [HttpPost]
+        public IActionResult PayTest(CshoppingCartViewModel t)
+        {
+            var data = t;
+            return View(data);
         }
     }
 }

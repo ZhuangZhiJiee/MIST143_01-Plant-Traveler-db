@@ -3,11 +3,11 @@
     ViewData["Title"] = "Coupon";
 }
 
-@*//ASASASAS*@
+
 
 <link href="~/css/客服中心.css" rel="stylesheet" />
 <link href="~/css/客戶中心訂單內容物.css" rel="stylesheet" />
-
+<link href="~/css/會員中心/優惠券樣式.css" rel="stylesheet" />
 <body>
     <div class="col-12 上面空間">
         <h3>優惠券</h3>
@@ -15,28 +15,22 @@
             <input type="text" class="form-control" placeholder="請輸入優惠碼" aria-label="Recipient's username" aria-describedby="button-addon2">
             <button class="btn btn-warning 按鈕顏色" type="button" id="button-addon2">兌換</button>
         </div>
+
+
         <div class="container row row-2">
-            <div class="card bg-success text-white mb-3" style="max-width: 18rem;">@*//設定一個ID111準備存入優惠券位置*@
-                <div class="card-header"><h3>500元</h3></div>
-                <div class="card-body">
-                    <h5 class="card-title">加入會員優惠券</h5>
-                    <p class="card-text">折抵條件:消費1000元</p>
-                    <p class="card-text">到期日期:2023/6/14</p>
+            <!--優惠券-->
+            <div class="coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient">
+                <div class="coupon-info coupon-info-right-dashed">
+                    <div class="coupon-store">XXXXXX旗舰店</div>
+                    <div class="coupon-price">¥5.00<span>优惠券</span></div>
+                    <div class="coupon-description">订单满50.00元</div>
                 </div>
-                <div class="mborder"></div>
-            </div>
-            <div class="col-6">
-                <div class="card bg-success text-white mb-3" style="max-width: 18rem;">
-                    <div class="card-header"><h3>300元</h3></div>
-                    <div class="card-body">
-                        <h5 class="card-title">春節優惠券</h5>
-                        <p class="card-text">折抵條件:消費1000元</p>
-                        <p class="card-text">到期日期:2023/6/14</p>
-                    </div>
-                    <div class="mborder"></div>
+                <div class="coupon-get">
+                    <div class="coupon-desc">副券</div>
+                    <div class="coupon-expiry-date">2019.10.01<br />2019.10.30</div>
                 </div>
-                
             </div>
+         <!--優惠券-->
         </div>
     </div>
 </body>
