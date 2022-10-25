@@ -1,0 +1,183 @@
+﻿@model IEnumerable<MIST143_Traveler.Models.TravelProduct>
+
+@{
+    ViewData["Title"] = "testt";
+}
+@section Styles{
+    <link href="@Url.Content("~/css/ProductListPageTP.css")" rel="stylesheet" />
+}
+
+
+<script>
+    function OpenModal() {
+        $('#overlay').show();
+    }
+    function CloseModal() {
+        $('#overlay').hide();
+    }
+
+</script>
+<article>
+
+    <div class="article-test">
+        <div style=" background: url('../Images/ProductListPageImages/category.jpg'); background-size: cover; height: 350px; ">
+            <div class="rwd-experience-header-main-container">
+                <div class="rwd-header-container">
+                    <div class="experience-title-and-location-button">
+                        <div class="experiences-title">
+                            <span class="experiences-title-text">玩樂</span>
+                        </div>
+                        <h1 class="experiences-tips">
+                            探索景點、行程等
+                        </h1>
+                        <div class="location-select-button desktop">
+                            <div class="location-select-button_main">
+                                <div class="location-select-button_main-select">
+                                    <div>
+                                        <img src="../Images/ProductListPageImages/maps.jpg" class="svg-icon">
+                                        <span class="experiences-title-text">世界各地</span>
+                                        <img src="../Images/ProductListPageImages/down.jpg" class="svg-icon">
+                                    </div>
+                                </div>
+                                <div class="destination-tips-popup-new">
+                                    <div class="destination-tips-new">
+                                        <span class="destination-tips_title">想尋找<span style="color:#FF5B00;font-weight:bold;">台灣</span>人氣玩樂？</span><div class="destination-tips_buttons">
+                                            <button data-v-0eaa3c40="" type="button" class="destination-tips_link klk-button klk-button-primary klk-button-mini">
+                                                <!----> <!----> <span>
+                                                    Go
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="banner-search-box ban-sea-box">
+                        <span class="bi-search"></span>
+                        <input type="search"
+                               name=""
+                               id=""
+                               placeholder="探索全球目的地/活動" />
+                        <button type="button" onclick="location.href='@Url.Action("ProductListPage", "ProductListPage2")'">搜尋</button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div>
+            <div class="expend_test">
+
+                <div class="expend_test">
+
+
+                </div>
+            </div>
+
+            <div>
+                <div class="asdqwr">
+                    <div class="card" style="width: 148px;height:117px;">
+                        <div class="cardsize">
+                            <img src="../Images/ProductListPageImages/icon_all.jpg" class="cardimg-top" alt="...">
+                            <span class="experience-menu-name">總覽</span>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 148px;height:117px;">
+                        <div class="cardsize">
+                            <img src="../Images/ProductListPageImages/icon_theme_water_parks.jpg" class="cardimg-top" alt="...">
+                            <span class="experience-menu-name">樂園</span>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 148px;height:117px;">
+                        <div class="cardsize">
+                            <img src="../Images/ProductListPageImages/icon_camping_glamping.jpg" class="cardimg-top" alt="...">
+                            <span class="experience-menu-name">露營</span>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 148px;height:117px;">
+                        <div class="cardsize">
+                            <img src="../Images/ProductListPageImages/icon_boat_tours_cruises_yachts.jpg" class="cardimg-top" alt="...">
+                            <span class="experience-menu-name">觀光</span>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 148px;height:117px;">
+                        <div class="cardsize">
+                            <img src="../Images/ProductListPageImages/icon_museums_exhibitions.jpg" class="cardimg-top" alt="...">
+                            <span class="experience-menu-name">藝術</span>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 148px;height:117px;">
+                        <div class="cardsize">
+                            <img src="../Images/ProductListPageImages/icon_spa_massages.jpg" class="cardimg-top" alt="...">
+                            <span class="experience-menu-name">SPA</span>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 148px;height:117px;">
+                        <div class="cardsize">
+                            <img src="../Images/ProductListPageImages/icon_thrill_seeking_activities.jpg" class="cardimg-top" alt="...">
+                            <span class="experience-menu-name">運動</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<h1>搜尋結果</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                產品名稱
+            </th>
+            <th>
+                價格
+            </th>
+            <th>
+                介紹
+            </th>
+            <th>
+                描述
+            </th>
+            <th>
+                行前準備
+            </th>
+            <th>
+                商品狀態
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TravelProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventIntroduction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PreparationDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductStatus)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

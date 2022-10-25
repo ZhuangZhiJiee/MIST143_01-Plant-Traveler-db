@@ -1,0 +1,20 @@
+﻿@model MIST143_Traveler.Models.TravelPicture
+@{
+    ViewData["Title"] = "testTravelPic";
+}
+
+<h1>testTravelPic</h1>
+<form action="~/TransportationPage/testHotel " method="post">
+    <input asp-for="TravelPictureId " value="text" />
+    <input asp-for="TravelPicture1 " value="text" />
+    <input asp-for="TravelPictureText " value="text" />
+    <input asp-for="TravelProductId " value="text" />
+    <input type="submit" value="搜尋" />
+</form>
+<hr />
+@{
+    if (Model != null)
+    {
+        <h3>@Model.TravelPictureId.@Model.TravelPicture1 @Model.TravelPictureText @Model.TravelProductId </h3>
+    }
+}

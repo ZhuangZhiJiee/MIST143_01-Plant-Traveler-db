@@ -1,4 +1,4 @@
-﻿
+﻿@model List<MIST143_Traveler.Models.TravelProduct>
 @{
     ViewData["Title"] = "TransportationHomePage";
 }
@@ -27,7 +27,7 @@
 </head>
 
 <body>
-   
+
     <!-- <div class="header">
            <a href="#" class="logo"><img src="
                https://picsum.photos/80/40?random=1" alt="網站名稱"></a>
@@ -46,12 +46,13 @@
         <img src="~/images/macImg/658e718b-d83c-41a5-a1cc-a28daf93ff9a.jpg">
 
     </div>
-    <form method="post">
-        <input name="要傳的字串" value="台北" /> 
-        <input type="submit" />
-    </form>
-
-    <div class="research">
+    <form action="~/TransportationPage/TransportationHomePage" method="post">
+        
+        <div>
+            <input type="text" name="keyword" placeholder="請輸入國家目的地"/>
+            <input type="submit" class="btn btn-warning" value="搜尋" onsubmit="myButton()" />
+        </div>
+        <!--<div class="research">
         <div class="wrap">
             <div class="a">
                 <input type="radio" name="鐵路">
@@ -74,74 +75,83 @@
                     <div>
                         <p>出發站</p>
                         <div>
-                            <select>
+                            <select >
                                 <!-- onclick="clickTapei"台北轉運站 -->
-                                <option>南港站</option>
-                                <option>台北站</option>
-                                <option>台中站</option>
-                                <option>台南站</option>
-                                <option>嘉義站</option>
-                                <option>左營站</option>
-                                <option>彰化站</option>
-                                <option>新竹站</option>
-                                <option>板橋站</option>
-                                <option>桃園站</option>
-                                <option>苗栗站</option>
-                                <option>雲林站</option>
-                                </ul>
-                            </select>
-                            <span style="margin-left: 120px;">
-                                <img src="~/Images/macImg/1372789.png" input type="button" width="25px" height="25px" />
-                               
-                            </span>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="c">
-                            <p>目的地</p>
-                            <div>
-                                <select>
-                                    <!-- onclick="clickTapei"台北轉運站 -->
-                                    <option>南港站</option>
-                                    <option>台北站</option>
-                                    <option>台中站</option>
-                                    <option>台南站</option>
-                                    <option>嘉義站</option>
-                                    <option>左營站</option>
-                                    <option>彰化站</option>
-                                    <option>新竹站</option>
-                                    <option>板橋站</option>
-                                    <option>桃園站</option>
-                                    <option>苗栗站</option>
-                                    <option>雲林站</option>
-                                    </ul>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="b">
-                    <div>
-                        <p>出發日期</p>
-                        <p>日期：<input type="text" id="datepicker"></p>
-                    </div>
+        <!--<option>南港站</option>
+                <option>台北站</option>
+                <option>台中站</option>
+                <option>台南站</option>
+                <option>嘉義站</option>
+                <option>左營站</option>
+                <option>彰化站</option>
+                <option>新竹站</option>
+                <option>板橋站</option>
+                <option>桃園站</option>
+                <option>苗栗站</option>
+                <option>雲林站</option>
 
-                    <div class="d">
-                        <div>
-                            <p>回程日期</p>
-                            <p>日期：<input type="text" id="datepicker"></p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <button type="button" class="btn btn-warning">搜尋</button>
+            </select>
+            <span style="margin-left: 120px;">
+                <img src="~/Images/macImg/1372789.png" input type="button" width="25" height="25" />
+
+            </span>
+        </div>
+    </div>
+    <div>
+        <div class="c">
+            <p>目的地</p>
+            <div>
+                <select >-->
+        <!-- onclick="clickTapei"台北轉運站 -->
+        <!--<option>南港站</option>
+                        <option>台北站</option>
+                        <option>台中站</option>
+                        <option>台南站</option>
+                        <option>嘉義站</option>
+                        <option>左營站</option>
+                        <option>彰化站</option>
+                        <option>新竹站</option>
+                        <option>板橋站</option>
+                        <option>桃園站</option>
+                        <option>苗栗站</option>
+                        <option>雲林站</option>
+
+                    </select>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    </div>
-    </div>
+    <div class="b">
+        <div>
+            <p>出發日期</p>
+            <input type="text" class="date-input" id="dateBeging" name="myDateBeging" required>
+        </div>
+
+        <div class="d">
+            <div>
+                <p>回程日期</p>
+                <p>日期：<input type="text" id="datepicker"></p>
+            </div>
+        </div>
+    </div>-->
+        @*<div>
+            <button type="button" >搜尋</button>
+        </div>*@
+
+        @*</div>
+            </div>
+        </div>*@
+    </form>
+
+    
+    <hr />
+    @{
+        if (Model != null)
+        {
+            <h3>@Model.</h3>
+        }
+    }
+
     <!-- <div class="research">
         <table style="width: 100%; border:solid">
             <tr>
@@ -172,8 +182,8 @@
             </div>
             <div class="item">
                 <span style="font-weight:bold" ;>高鐵8折起 多樣組合任你搭</span>
-                </br>
-                </br>
+                <br>
+                <br>
                 <p>計程車 / 全台景點 / 在地體驗 最高省1252元</p>
             </div>
 
@@ -182,8 +192,8 @@
             </div>
             <div class="item">
                 <span style="font-weight:bold" ;>立即升級大禮包會員 享13倍優惠</span>
-                </br>
-                </br>
+                <br>
+                <br>
                 <p>高鐵新戶 KTHSR50 折50 再送美食飲品優惠</p>
             </div>
             <div class="item">
@@ -191,8 +201,8 @@
             </div>
             <div class="item">
                 <span style="font-weight:bold" ;>線上取票免排隊直入閘</span>
-                </br>
-                </br>
+                <br>
+                <br>
                 <p>高鐵 T-EX App 取票 防疫安心搭</p>
             </div>
             <div class="item">
@@ -200,16 +210,16 @@
             </div>
             <div class="item">
                 <span style="font-weight:bold" ;>高鐵會員 TGo 點數雙重送</span>
-                </br>
-                </br>
+                </>
+                <br>
                 <p>TGo / Klook 點數一起累積 再抽免費搭</p>
             </div>
         </div>
     </div>
-    </br>
-    </br>
-    </br>
-    <hr size="2px" width="960px">
+    <br>
+    <br>
+    <br>
+    <hr size="2" width="960px">
 
 
 
@@ -261,19 +271,19 @@
         </p>
         <div class="wrap">
             <div class="item pic">
-                <img src="~/images/macImg/4.jpg" height="200px" width="200px">
+                <img src="~/images/macImg/4.jpg" height="200" width="200">
                 <h3>阿里山小火車</h3>
                 <p>
                     台灣阿里山一日遊或多日遊行程，漫步林間，沿途享受芬多精的洗禮,下山的小火車路線為奮起湖車站至嘉義火車站，和上山全路段的火車相比，不會有額外的交通車接駁費用支出，價格上較上山阿里山火車路線便宜，提供給想要簡單體驗阿里山小火車的遊客！
                 </p>
             </div>
             <div class="item text">
-                <img src="~/images/macImg/20180319231557_36-1024x683.jpg" height="200px" width="200px">
+                <img src="~/images/macImg/20180319231557_36-1024x683.jpg" height="200" width="200">
                 <h3>自強號</h3>
                 <p>強烈推介使用五天特級票券，普悠瑪停站少較快，自強號比莒光號班次多。乘搭火車，輕鬆舒適地將台灣的美景一覽無遺。你會看到丘陵環抱盆地，綿延山脈，蔚藍大海也能看到有設計感現代建築，具有民國氣息的小巷。</p>
             </div>
             <div class="item">
-                <img src="~/images/macImg/img-58ad2b69bf8af.jpg" height="200px" width="200px">
+                <img src="~/images/macImg/img-58ad2b69bf8af.jpg" height="200" width="200">
                 <h3>淡海輕軌</h3>
                 <p>
                     淡海輕軌車輛「行武者號」專門為淡水地區氣候和地理環境量身打造，水藍色波浪紋塗裝，每列車可容納265人。第一期路網全長9.55公里，設14個車站，預定107年底完工，是北台灣第一個輕軌系統，也是台灣首例執行「國車國造」的重要計畫，培養軌道專業人才，扶植國內軌道工業，讓國輕軌系統朝向單純化、最佳化、本土化目標前進。
@@ -287,7 +297,7 @@
     <div class="products">
         <div class="wrap">
             <div class="item">
-                <img src="~/images/macImg/heighway.jpg" height="300px" width="200px">
+                <img src="~/images/macImg/heighway.jpg" height="300" width="200">
             </div>
             <div class="item">
                 <h3>台灣高鐵國旅聯票線上訂票，訂高鐵票Klook一指搞定！</h3>
@@ -368,7 +378,7 @@
 
         </div>
     </div>
-    
+
     <!-- 結束 -->
     <!-- //收折頁 -->
     <!-- JQUERY -->

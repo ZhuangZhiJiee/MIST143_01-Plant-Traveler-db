@@ -17,28 +17,62 @@ namespace MIST143_Traveler.Controllers
         {
             ptc = q;
         }
+        //[HttpGet]
+        //public IActionResult testHotel()
+        //{
+        //    return View();
+            
+        //}
+        //[HttpPost]
+        //public IActionResult testHotel(Hotel hotel)
+        //{
+        //    Hotel _hotel = ptc.Hotels.Find(hotel.HotelId);
 
-        public IActionResult Index()
-        {
-            var datas = from p in ptc.TravelProducts
-                        where p.Country.CountryName=="台灣"
-                        select p;
-            return View(datas);
-        }
+        //    return View(_hotel);
+
+        //}
+        //public IActionResult testTravelPic()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public IActionResult testTravelPic(TravelPicture travelPicture)
+        //{
+        //    TravelPicture _travelPicture = ptc.TravelPictures.Find(travelPicture.TravelPictureId);
+
+        //    return View(_travelPicture);
+        //}
+        //public IActionResult Index()
+        //{
+        //    var datas = from p in ptc.TravelProducts
+        //                where p.Country.CountryName=="台灣"
+        //                select p;
+        //    return View(datas);
+        //}
         public IActionResult TransportationHomePage()
         {
             return View();
             //1234
         }
         [HttpPost]
-        public IActionResult TransportationHomePage(CLocationKeyWordViewModel 參數名稱)
+        public IActionResult TransportationHomePage(string keyword/*CLocationKeyWordViewModel 參數名稱*/)
         {
-            return RedirectToAction("showTransportationHomePage", 參數名稱);
+            List<TravelProduct> _travelProduct = ptc.TravelProducts.Where(p=>p.Country.CountryName== keyword).ToList();
+
+            return View("testt", _travelProduct);
             //1234
         }
-        public IActionResult showTransportationHomePage(CLocationKeyWordViewModel 傳入的資料)
+        //public IActionResult showTransportationHomePage(List<TravelProduct> _travelProduct)
+        //{
+        //    //寫一串LINQ查詢資料庫
+        //    //回傳查詢出來的結果到view
+        //    return View(_travelProduct);
+        //}
+        public IActionResult testt(List<TravelProduct> _travelProduct)
         {
-            return View(傳入的資料);
+            //寫一串LINQ查詢資料庫
+            //回傳查詢出來的結果到view
+            return View(_travelProduct);
         }
     }
 }
