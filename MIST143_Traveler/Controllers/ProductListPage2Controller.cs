@@ -40,7 +40,7 @@ namespace MIST143_Traveler.Controllers
             return View(q.ToList());
 
         }
-        public IActionResult filter(string[] keyword)
+        public IActionResult filter(string[] keyword,int number)
         {
             //Cproductlist suisei = new Cproductlist();
             //suisei.隨便啦 = (from p in _planet.TravelProducts
@@ -64,13 +64,54 @@ namespace MIST143_Traveler.Controllers
            var a =new List<TravelProduct>();
             if (keyword.Length != 0)
             {
-                foreach (var item in keyword)
+                if (number == 0)
                 {
-                    var q = from p in _planet.TravelProducts
-                            where p.TravelProductName.Contains(item) || p.Description.Contains(item)
-                            select p;
-                    a.AddRange(q);
+                    foreach (var item in keyword)
+                    {
+                        var q = from p in _planet.TravelProducts
+                                where p.TravelProductName.Contains(item) || p.Description.Contains(item)
+                                select p;
+                        a.AddRange(q);
+                    }
                 }
+               else if(number==1)
+                {
+                    foreach (var item in keyword)
+                    {
+                        var q = from p in _planet.TravelProducts
+                                where p.TravelProductName.Contains(item) || p.Description.Contains(item)
+                                orderby p.Price descending
+                                select p;
+                        a.AddRange(q);
+                    }
+                }
+                else if (number == 2)
+                {
+                    foreach (var item in keyword)
+                    {
+                        var q = from p in _planet.TravelProducts
+                                where p.TravelProductName.Contains(item) || p.Description.Contains(item)
+                                orderby p.Stocks
+                                select p;
+                        a.AddRange(q);
+                    }
+                }
+                else if (number == 3)
+                {
+                    foreach (var item in keyword)
+                    {
+                        var q = from p in _planet.TravelProducts
+                                where (from o in p.TravelProductDetails
+                                       where p.TravelProductName.Contains(item) || p.Description.Contains(item)
+                                       orderby o.Date descending
+                                       select o).Any()
+                                select p;
+                        a.AddRange(q);
+                    }
+                }
+               
+
+
             }
             ViewBag.Count = a.Count();
             //return View();
