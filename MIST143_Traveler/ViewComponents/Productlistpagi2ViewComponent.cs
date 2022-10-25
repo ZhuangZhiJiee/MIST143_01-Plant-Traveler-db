@@ -9,11 +9,7 @@ namespace MIST143_Traveler.ViewComponents
 {
     public class Productlistpagi2ViewComponent : Microsoft.AspNetCore.Mvc.ViewComponent
     {
-        public readonly PlanetTravelContext _planet;
-        public Productlistpagi2ViewComponent(PlanetTravelContext planet)
-    {
-        _planet = planet;
-    }
+   
         public async Task<IViewComponentResult> InvokeAsync(List<TravelProduct> pr)
         {
 
