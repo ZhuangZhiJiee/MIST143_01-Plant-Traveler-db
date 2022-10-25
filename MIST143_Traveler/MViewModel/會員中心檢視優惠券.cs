@@ -50,10 +50,10 @@ namespace MIST143_Traveler.MViewModel
             get { return _cp.Condition; }
             set { _cp.Condition = value; }
         }
-        public string GetDate
+        public bool Useful
         {
-            get { return _cp.GetDate; }
-            set { _cp.GetDate = value; }
+            get { return _cp.Useful; }
+            set { _cp.Useful = value; }
         }
         public int MembersId
         {
