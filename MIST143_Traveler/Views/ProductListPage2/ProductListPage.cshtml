@@ -225,8 +225,7 @@
                                         <option value="1">最推薦</option>
                                         <option value="2">最低價</option>
                                         <option value="3">最熱賣</option>
-                                        <option value="4">新上架</option>
-                                        <option value="5">高評價</option>
+                                        <option value="4">新上架</option>                     
                                     </select>
                                 </div>
                             @*<div id="aeio">
@@ -316,10 +315,18 @@
             $("#ans").load(url + day);
 
         })
+        
+
         </script>
 
         <script>
-
+            const sel = document.querySelector("#choise");
+            var url = "@Url.Content("~/ProductListPage2/filter")"
+            var num = `?number=${sel.selectedIndex}`;
+            sel.addEventListener("change", () => {
+                console.log(sel.selectedIndex);
+                $("#ans").load(url + num);
+            })
 
         $("#btn").click(function () {
             var qq = $("#text").val()
