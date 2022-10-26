@@ -20,31 +20,54 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult List(int? TravelProductId)
         {
-            CProductViewModel vmp = new CProductViewModel();
-
-            vmp.產品列表 = (from c in pt.TravelProducts
-                        where c.TravelProductId == (int)TravelProductId
-                        select new 產品格式
-                        {
-                            TravelProductName = c.TravelProductName,
-                            TravelProductId = c.TravelProductId,
-                            Price = c.Price,
-                            TravelProductTypeId = c.TravelProductTypeId,
-                            Stocks = c.Stocks,
-                            Description = c.Description,
-                            CountryId = c.CountryId,
-                            Cost = c.Cost,
-                            EventIntroduction = c.EventIntroduction,
-                            MapUrl = c.MapUrl,
-                            PreparationDescription = c.PreparationDescription,
-                            productpictures = c.TravelPictures.ToList(),
-                            Runproductpictures = c.TravelPictures.Where(a => a.PicturePurpose == 2).ToList(),
-                            Date = c.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
-                            //HotelName = c.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).FirstOrDefault().Hotel.HotelName.ToList(),
-                            //View = pt.TravelProductDetails.Where(p=>p.TravelProductId==c.TravelProductId).FirstOrDefault().ProductToViews.Where(p=>p.ViewId==p.View.ViewId).Select(p=>p.View.ViewName).ToList(),
-                            DailyDetailText = c.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a =>a.DailyDetailText).ToList(),
-                        }).ToList();
-            return View(vmp);
+            //CProductViewModel vmp = new CProductViewModel();
+            //vmp.產品列表 = (from c in pt.TravelProducts
+            //            where c.TravelProductId == (int)TravelProductId
+            //            select new 產品格式
+            //            {
+            //                TravelProductName = c.TravelProductName,
+            //                TravelProductId = c.TravelProductId,
+            //                Price = c.Price,
+            //                TravelProductTypeId = c.TravelProductTypeId,
+            //                Stocks = c.Stocks,
+            //                Description = c.Description,
+            //                CountryId = c.CountryId,
+            //                Cost = c.Cost,
+            //                EventIntroduction = c.EventIntroduction,
+            //                MapUrl = c.MapUrl,
+            //                PreparationDescription = c.PreparationDescription,
+            //                productpictures = c.TravelPictures.ToList(),
+            //                Runproductpictures = c.TravelPictures.Where(a => a.PicturePurpose == 2).ToList(),
+            //                Date = c.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
+            //                HotelName = c.TravelProductDetails.Where(p => p.TravelProductId == c.TravelProductId).Select(p => p.Hotel.HotelName).ToList(),
+            //                //View = pt.TravelProductDetails.Where(p => p.TravelProductId == c.TravelProductId).FirstOrDefault().ProductToViews.Where(p => p.ViewId == p.View.ViewId).Select(p => p.View.ViewName).ToList(),
+            //                //View = c.TravelProductDetails.Where(p => p.TravelProductDetailId == p.ProductToViews.First().TravelProductDetailId).First()
+            //                //                                           .ProductToViews.Where(p => p.ViewId == p.View.ViewId).First()
+            //                //                                           .View.ViewName.ToList(),
+            //                //View = c.TravelProductDetails.Where(p => p.TravelProductId == c.TravelProductId).Select(a =>a.ProductToViews.)
+            //                 DailyDetailText = c.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
+            //                 }).ToList();
+            CProductViewModel prod = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
+                .Select(s => new CProductViewModel
+                {
+                    TravelProductName = s.TravelProductName,
+                    TravelProductId = s.TravelProductId,
+                    Price = s.Price,
+                    Stocks = s.Stocks,
+                    Description = s.Description,
+                    EventIntroduction = s.EventIntroduction,
+                    MapUrl = s.MapUrl,
+                    PreparationDescription = s.PreparationDescription,
+                    productpictures = s.TravelPictures.ToList(),
+                    Date = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
+                    HotelName = s.TravelProductDetails.Where(p => p.TravelProductId == s.TravelProductId).Select(p => p.Hotel.HotelName).ToList(),
+                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
+                    _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
+                    {
+                        ViewName = p.ProductToViews.Select(v => v.View.ViewName).ToList(),
+                    }).ToList(),
+                }).FirstOrDefault();
+            return View(prod);
         }
         [HttpPost]
         public IActionResult AddToSession(CAddToSessionViewModel s) 
