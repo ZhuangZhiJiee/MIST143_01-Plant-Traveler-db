@@ -10,10 +10,13 @@
 @{
     <div class="experience-activity-card-section j-experience-activity-card-section desktop">
         @foreach (var item in Model)
-        {
+            {
+
+                string imgurl = item.TravelPictures.Select(p => p.TravelPicture1).FirstOrDefault();
+
             <div class="asdqwr asd">
                 <div class="card" style="">
-                    <img class="card-img-top" src="../Images/ProductListPageImages/landscape_101.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="https://localhost:44338/images/TravelProductPictures/@imgurl" alt="Card image cap">
                     <div class="card-body">
                         <a href="@Url.Action("List" ,"shopping", new {TravelProductId=item.TravelProductId})">
                             <h3 class="activity-card-title">

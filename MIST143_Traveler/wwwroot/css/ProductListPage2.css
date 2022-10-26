@@ -87,7 +87,7 @@
 }
 
     .secondary-nav-container li {
-        display: inline;
+       /* display: inline;*/
         padding: 10px 0.8em;
         border-radius: 15px;
         font-size: 16px;
@@ -135,7 +135,7 @@
     .default-footer_links ul,
     .default-footer_links li {
         margin: 0px;
-        padding: 10px 0 0 0;
+      /*  padding: 10px 0 0 0;*/
     }
 
 .footer_label {

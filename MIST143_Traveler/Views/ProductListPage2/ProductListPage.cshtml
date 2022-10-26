@@ -51,6 +51,7 @@
                             <div class="klk-tree klk-tree-checkable klk-tree-multiple">
 
                                 <div class="accordion" id="accordionPanelsStayOpenExample">
+
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                                             <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
@@ -84,12 +85,8 @@
                                             <div class="accordion-body">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"name="info[]" value="" id="flexCheckDefault">
-                                                    <label>新加坡</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox"name="info[]" value="" id="flexCheckDefault">
-                                                    <label>泰國</label>
-                                                </div>
+                                                    <label>越南</label>
+                                                </div>                                             
                                             </div>
                                         </div>
                                     </div>
@@ -320,12 +317,31 @@
         </script>
 
         <script>
-            const sel = document.querySelector("#choise");
-            var url = "@Url.Content("~/ProductListPage2/filter")"
-            var num = `?number=${sel.selectedIndex}`;
+
+            @*const select = document.querySelector("#choise");
             sel.addEventListener("change", () => {
-                console.log(sel.selectedIndex);
-                $("#ans").load(url + num);
+
+                var url = "@Url.Content("~/ProductListPage2/selecter")"
+                var aa = $("#start123123").val()
+                var nme = `&date=` + aa
+                var index = sel.selectedIndex
+                var day = `?number=${index}`;
+                $("#ans").load(url + day + nme);
+
+            })*@
+
+
+
+            const sel = document.querySelector("#choise");
+            sel.addEventListener("change", () => {
+
+                var url = "@Url.Content("~/ProductListPage2/filter")"
+                var qq = $("#text").val()
+                var name = `&keyword=` + qq
+                var index = sel.selectedIndex
+                var num = `?number=${index}`;
+                $("#ans").load(url + num + name);
+
             })
 
         $("#btn").click(function () {

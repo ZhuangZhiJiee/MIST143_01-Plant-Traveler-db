@@ -14,11 +14,19 @@ namespace MIST143_Traveler.Controllers
         public ProductListPage2Controller(PlanetTravelContext planet)
         {
             _planet = planet;
+            _planet.TravelPictures.ToList();
+            _planet.TravelProducts.ToList();
         }
         public IActionResult Index()
         {
 
             return View();
+        }
+        public IActionResult longeee(int? TravelProductId) {
+            Cproductlist asd = new Cproductlist();
+            asd.productpicture = _planet.TravelPictures.Where(p => p.TravelProductId == TravelProductId).Select(p => p.TravelPicture1).ToList();
+            return ViewComponent("Productlistpagi",asd);
+        
         }
         public IActionResult ProductListPage(string keyword)
         {
@@ -34,9 +42,11 @@ namespace MIST143_Traveler.Controllers
             //      datas =( from i in _planet.TravelProducts
             //              where i.TravelProductId == Convert.ToInt32(keyword) || i.TravelProductName.Contains(keyword) || i.Description.Contains(keyword)
             //              select i).ToList();
-            var q = from p in _planet.TravelProducts
-                    where p.TravelProductName.Contains(keyword) || p.Description.Contains(keyword)
-                    select p;
+            Cproductlist plist = new Cproductlist();
+            var q = (from p in _planet.TravelProducts
+                     where p.TravelProductName.Contains(keyword) || p.Description.Contains(keyword)
+                     select p);/*.ToList();*/
+            //plist.travelProduct = q;
             return View(q.ToList());
 
         }
@@ -61,13 +71,16 @@ namespace MIST143_Traveler.Controllers
             //}
             //ViewBag.Count = suisei.隨便啦.Count();
             //return ViewComponent("Productlistpagi",suisei.隨便啦);
-           var a =new List<TravelProduct>();
+           
+
+            var a =new List<TravelProduct>();
             if (keyword.Length != 0)
             {
                 if (number == 0)
                 {
                     foreach (var item in keyword)
                     {
+
                         var q = from p in _planet.TravelProducts
                                 where p.TravelProductName.Contains(item) || p.Description.Contains(item)
                                 select p;
@@ -80,7 +93,7 @@ namespace MIST143_Traveler.Controllers
                     {
                         var q = from p in _planet.TravelProducts
                                 where p.TravelProductName.Contains(item) || p.Description.Contains(item)
-                                orderby p.Price descending
+                                orderby p.Price
                                 select p;
                         a.AddRange(q);
                     }
@@ -101,18 +114,18 @@ namespace MIST143_Traveler.Controllers
                     foreach (var item in keyword)
                     {
                         var q = from p in _planet.TravelProducts
-                                where (from o in p.TravelProductDetails
-                                       where p.TravelProductName.Contains(item) || p.Description.Contains(item)
-                                       orderby o.Date descending
-                                       select o).Any()
+                                where p.TravelProductName.Contains(item) || p.Description.Contains(item)
+                                orderby p.TravelProductId descending
                                 select p;
                         a.AddRange(q);
                     }
                 }
+                
                
 
 
             }
+ 
             ViewBag.Count = a.Count();
             //return View();
             return ViewComponent("Productlistpagi", a);
@@ -128,7 +141,7 @@ namespace MIST143_Traveler.Controllers
             //var z = DateTime.Parse(date2);
             var qw = _planet.TravelProducts.ToList();
             var qq =_planet.TravelProductDetails.ToList()
-                .Where(w =>Convert.ToDateTime(w.Date) > a).Select(q=>q.TravelProduct).ToList();
+                .Where(w =>Convert.ToDateTime(w.Date) > a).Select(q=>q.TravelProduct).Distinct().ToList();
 
 
             return ViewComponent("Productlistpagi",qq);
