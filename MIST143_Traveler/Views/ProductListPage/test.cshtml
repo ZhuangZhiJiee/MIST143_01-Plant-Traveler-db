@@ -1,0 +1,15 @@
+﻿@model MIST143_Traveler.MViewModel.Ctestlass
+
+@{
+    ViewData["Title"] = "test";
+}
+
+<h1>test</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@foreach (string picName in Model.productpicture)
+{
+<img src="https://localhost:44338/images/TravelProductPictures/@picName">
+}
