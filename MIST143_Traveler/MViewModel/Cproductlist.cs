@@ -38,7 +38,7 @@ namespace MIST143_Traveler.MViewModel
         }
         public int TravelProductTypeId
         {
-            get { return _travelProduct.TravelProductTypeId; }
+            //get { return _travelProduct.TravelProductTypeId; }
             set { _travelProduct.TravelProductTypeId = value; }
         }
         public int Stocks

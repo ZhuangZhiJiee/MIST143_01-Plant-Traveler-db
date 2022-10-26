@@ -99,7 +99,7 @@
                                         <form>
                                             <div class="mb-3">
                                                 <label class="col-form-label">卡號:</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" id="cardNumberInput" class="form-control">
                                             </div>
 
                                             <div class="mb-3">
@@ -114,13 +114,13 @@
 
                                                 <div class="row">
                                                     <div class="col-4">
-                                                        <input type="text" class="form-control" placeholder="MM">
+                                                        <input type="text" class="form-control" id="validMonthInput" placeholder="MM">
                                                     </div>
                                                     <div class="col-4">
-                                                        <input type="text" class="form-control" placeholder="YYYY">
+                                                        <input type="text" class="form-control" id="validYearInput" placeholder="YYYY">
                                                     </div>
                                                     <div class="col-4">
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control"  id="securityNumberInput">
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,6 +128,7 @@
                                         <input class="form-check-input mt-0 " type="checkbox" value=""
                                                aria-label="Checkbox for following text input">
                                         <span>儲存卡片資料至我的帳户，方便下次預訂</span>
+                                        <button type="button" class="btn btn-main"id="creditCardDemoBtn">DEMO</button>
                                     </div>
                                 </div>
                             </div>
@@ -211,6 +212,16 @@
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/travelOrder.js"></script>
+    <script>
+        $('#creditCardDemoBtn').click(function () {
+            console.log("demo")
+            $("#cardNumberInput").val("5537-0058-9950-3383")
+            $("#validMonthInput").val("12")
+            $("#validYearInput").val("2025")
+            $("#securityNumberInput").val("367")
+            
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
