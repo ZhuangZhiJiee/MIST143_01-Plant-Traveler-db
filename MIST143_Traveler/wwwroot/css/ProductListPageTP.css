@@ -431,7 +431,10 @@ img {
     color: #fff;
     width: 1160px;
 }
-
+.置中 {
+    text-align: center;
+    display:flex;
+}
     .rwd-experience-header-main-container .rwd-header-container {
         position: absolute;
         left: 0;
