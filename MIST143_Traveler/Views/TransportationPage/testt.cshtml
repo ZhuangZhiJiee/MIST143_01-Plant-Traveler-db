@@ -124,60 +124,59 @@
         </div>
     </div>
 </article>
+<div class="置中">
+    <h1>搜尋結果</h1>
+</div>
 
-<h1>搜尋結果</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-
-            <th>
-                產品名稱
-            </th>
-            <th>
-                價格
-            </th>
-            <th>
-                介紹
-            </th>
-            <th>
-                描述
-            </th>
-            <th>
-                行前準備
-            </th>
-            <th>
-                商品狀態
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+@*<p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
+<body>
+    @{
+        var count = 0;
+        foreach (var item in Model)
         {
-            <tr>
+            count++;
+            string productLink = Url.Content("~/Item?Index");
+            <br />
+            <br />
+            <br />
+            <div class="d-flex">
+                <div class="card mb-md-auto" style="width:1000px">
+                    <a href="@Url.Action("List" ,"shopping", new {TravelProductId=item.TravelProductId})">
+                        <img src="@Url.Content("https://localhost:44338/images/TravelProductPictures/0dbe81dc-240c-43f6-9fa1-2676d80d5e5a.jpg")" style="height:150px" class="card-img-top">
+                    </a>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.TravelProductName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EventIntroduction)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PreparationDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductStatus)
-                </td>
-            </tr>
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.TravelProductName)</h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                        @*<p class="card-text"><small class="text-muted">@Html.DisplayFor(modelItem => item.PreparationDescription)</small></p>*@
+                        <br />
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+
+            </div>
+
         }
-    </tbody>
-</table>
+    }
+
+    <br />
+    <br />
+    <br />
+    <h5 class="置中">哎呀！已到頁面底部</h5>
+    <div class="置中">
+        <nav aria-label="...">
+            <ul class="pagination pagination-sm">
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link">1</span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
