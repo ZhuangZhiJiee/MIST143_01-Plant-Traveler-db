@@ -243,6 +243,7 @@ namespace MIST143_Traveler.Controllers
                 if (q != null)
                 {
                     var use = _PlanetTravelContext.CouponLists.FirstOrDefault(s =>s.MembersId==Cou.MembersId&&s.CouponId==q.CouponId);
+               
                 if (use == null) { 
                     CouponList li = new CouponList
                     {
@@ -250,9 +251,18 @@ namespace MIST143_Traveler.Controllers
                         CouponStatus=true,
                         MembersId=Cou.MembersId,
                     };
+                    會員中心檢視優惠券 動態 = new 會員中心檢視優惠券
+                    {
+                        CouponId=q.CouponId,
+                        Condition=q.Condition,
+                        ExDate=q.ExDate,
+                        Useful=q.Useful,
+                        Discount=q.Discount,
+                        CouponName=q.CouponName
+                    };
                     _PlanetTravelContext.CouponLists.Add(li);
                     _PlanetTravelContext.SaveChanges();
-                return Json(new { Res = true, Msg = "成功" });
+                return Json(new { Res = true, Msg = "成功",data= 動態 });
                 }
                 return Json(new { Res = false, Msg = "已經使用過" });
             }
@@ -341,12 +351,36 @@ namespace MIST143_Traveler.Controllers
             return ViewComponent("ProductManage");
         }
         //===================================客戶取消訂單光箱================================
-        public IActionResult OrderCancel(int orderId)
+        public IActionResult OrderCancel(int id)
         {
-
-            return View();
+            OrderCancel idd = new OrderCancel();
+            idd.OrderId = id;
+            return View(idd);
         }
-        
+
+        [HttpPost]
+        public IActionResult OrderCancel(OrderCancel inD)
+        {
+            OrderCancel co = null;
+            if (inD != null)
+            {
+
+                co = _PlanetTravelContext.Orders.Where(a => a.OrderId == inD.OrderId).Select(s => new OrderCancel
+                {
+                    OrderId = inD.OrderId,
+                    Titel = inD.Titel,
+                    CancaelContent = inD.CancaelContent,
+
+                }).FirstOrDefault();
+
+
+                _PlanetTravelContext.OrderCancels.Add(co);
+                _PlanetTravelContext.SaveChanges();
+                return Json(new { Res = true, Msg = "成功" });
+            };
+            return Json(new { Res = false, Msg = "失敗" });
+        }
+
 
         //===================================註冊頁面=======================================
 

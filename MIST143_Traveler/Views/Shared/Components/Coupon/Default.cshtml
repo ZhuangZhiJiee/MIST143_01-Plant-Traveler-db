@@ -27,8 +27,9 @@
         </div>
 
 
-        <div class="container row row-2">
+        <div class="container row row-2" id="COCO">
             <!--優惠券-->
+          
             @{
                 List<string> Coupon = new List<string>();
                 foreach (var co in Model.優惠券列表)
@@ -64,13 +65,13 @@
                 GiftKey: $("#Giftnum").val(),
                 MembersId:$("#idid").val(),
             }
-            console.log(Giftdata)
         $.ajax({
             url: '@Url.Action("Giftkey", "CustomerCenter")',
             method: 'Post',
             dataType: 'Json',
             data: { Cou: Giftdata },
             success: function (datas) {
+                
                 if (!datas.res) {
                     Swal.fire({
                         icon: 'error',
@@ -80,19 +81,30 @@
                     })
                     return;
                 }
-                Swal.fire({
-                    title: 'Custom width, padding, color, background.',
-                    width: 600,
-                    padding: '3em',
-                    color: '#716add',
-                    background: '#fff url(/images/trees.png)',
-                    backdrop: `
-                              rgba(0,0,123,0.4)
-                               url("/images/gift.gif")
-                            left top
-                            no-repeat
-                                `
-                })
+                console.log(datas.data)
+                let htmldatas =
+                `
+                            <div class='coupon-info coupon-info-right-dashed'>
+                                <div class='coupon-store'>${datas.data.couponName}</div>
+                                <div class='coupon-price'>折扣${datas.data.discount}<span>優惠券</span></div>
+                                <div class='coupon-description'>訂單限滿${datas.data.condition}使用</div>
+                            </div>
+                            <div class='coupon-get'>
+                                <div class='coupon-desc'>副券</div>
+                                <div class='coupon-expiry-date'>到期日${datas.data.exDate}</div>
+                            </div>
+                       `
+                let cc = document.createElement("div")
+                cc.className = 'coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'
+                let co = document.querySelector("#COCO");
+                cc.innerHTML = htmldatas;
+                co.append(cc);
+                  
+                Swal.fire(
+                    '兌換成功',
+                    '',
+                    'success'
+                )
             }
 
         })

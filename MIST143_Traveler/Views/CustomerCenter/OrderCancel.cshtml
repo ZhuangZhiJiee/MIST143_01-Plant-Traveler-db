@@ -1,0 +1,74 @@
+﻿@model MIST143_Traveler.Models.OrderCancel
+
+@{
+    ViewData["Title"] = "LOrderCancel";
+    Layout = null;
+}
+
+
+<!--修改光箱-->
+<div>
+    
+    <form>
+        <div class="mb-3">
+            <input id="idd" hidden value="@Model.OrderId" />
+            <select id="sel" class="form-select" aria-label="Default select example">
+                
+                <option selected value="行程規畫不佳">行程規畫不佳</option>
+                <option value="價格較貴">價格較貴</option>
+                <option value="沒有如期收到票券">沒有如期收到票券</option>
+                <option value="服務不佳">服務不佳</option>
+                <option value="其他">其他</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="text"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="se()">Send message</button>
+        </div>
+    </form>
+</div>
+<!--修改光箱-->
+<script>
+    function se() {
+        
+            var pData = {
+                
+                Titel: $("#sel").val(),
+                CancaelContent: $("#text").val(),
+                OrderId:$("#idd").val(),
+            };
+        console.log(pData)
+        
+         $.ajax({
+            url: '@Url.Action("OrderCancel", "CustomerCenter")',
+            method: 'Post',
+            dataType: 'Json',
+            data: { inD: pData },
+            success: function (datas) {
+                if (!datas.res) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '輸入錯誤',
+                        text: datas.msg,
+
+                    })
+                    return;
+                }
+                Swal.fire(
+                    '已送出資料!',
+                    '請等待審核~謝謝!',
+                    'success'
+                )
+            }
+        }) 
+    }
+    
+
+</script>
+@*@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@

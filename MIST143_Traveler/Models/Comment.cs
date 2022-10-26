@@ -13,6 +13,7 @@ namespace MIST143_Traveler.Models
         public string CommentText { get; set; }
         public int Star { get; set; }
         public string CommentDate { get; set; }
+        public bool? CommentStatus { get; set; }
 
         public virtual Member Members { get; set; }
         public virtual TravelProduct TravelProduct { get; set; }

@@ -30,6 +30,7 @@ namespace MIST143_Traveler.Models
         public virtual DbSet<MemberStatus> MemberStatuses { get; set; }
         public virtual DbSet<Myfavorite> Myfavorites { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderCancel> OrderCancels { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
@@ -152,7 +153,9 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.CouponId).HasColumnName("CouponID");
 
-                entity.Property(e => e.Condition).HasMaxLength(50);
+                entity.Property(e => e.Condition)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.CouponName)
                     .IsRequired()
@@ -160,9 +163,9 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.Discount).HasColumnType("decimal(18, 1)");
 
-                entity.Property(e => e.ExDate).HasMaxLength(50);
-
-                entity.Property(e => e.GetDate).HasMaxLength(50);
+                entity.Property(e => e.ExDate)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.GiftKey)
                     .IsRequired()
@@ -348,6 +351,25 @@ namespace MIST143_Traveler.Models
                     .HasForeignKey(d => d.PaymentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Order_Payment");
+            });
+
+            modelBuilder.Entity<OrderCancel>(entity =>
+            {
+                entity.ToTable("OrderCancel");
+
+                entity.Property(e => e.OrderCancelId).HasColumnName("OrderCancelID");
+
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.Titel)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.OrderCancels)
+                    .HasForeignKey(d => d.OrderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OrderCancel_Order");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
