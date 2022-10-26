@@ -34,13 +34,13 @@
                     </div>
 
                     <div class="carousel-inner 照片的包皮">
-                        @*@foreach (var item in Model.產品列表.FirstOrDefault().Runproductpictures)
+                        @foreach (var item in Model.productpictures)
                         {
                             <div class="carousel-item active">
                                 <img src="https://localhost:44338/images/TravelProductPictures/@item.TravelPicture1" class="d-block carouselImg" alt="...">
                             </div>
 
-                        }*@
+                        }
 
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -66,7 +66,7 @@
         </div>
 
         <div class="標題">
-            <h3 id="productName">@Model.產品列表.FirstOrDefault().TravelProductName</h3>
+            <h3 id="productName">@Model.TravelProductName</h3>
         </div>
         <div class="小介紹">
             <div class="評價">
@@ -81,7 +81,7 @@
                                 <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
                             </svg>*@
                             <div>
-                                <input type="hidden" id="PID" name="TravelProductId" value="@Model.產品列表.FirstOrDefault().TravelProductId" />
+                                <input type="hidden" id="PID" name="TravelProductId" value="@Model.TravelProductId" />
                                 <input type="hidden" id="MID" name="MembersId" value="@v.MembersId" />
                                 <label class="btn">
                                     <i class="bi bi-heart" onclick=toMyFavorites()>加入我的最愛</i>
@@ -95,7 +95,7 @@
             </div>
         </div>
         <br />
-        <div class="小介紹" id="prodctDescriptionHidden">@Model.產品列表.FirstOrDefault().Description</div>
+        <div class="小介紹" id="prodctDescriptionHidden">@Model.Description</div>
         <div class="小介紹" id="prodctDescription"></div>
      
             <article class="payContainer choose">
@@ -117,14 +117,22 @@
                                     <div class="subInfoText ps-3">方案類型</div>
                                     <div class="payUserRow ps-3">
                                         <div class="payUser active">
-                                            @Model.產品列表.FirstOrDefault().TravelProductName
+                                            @Model.TravelProductName
                                         </div>
                                     </div>
                                     <div class="subInfoText ps-3">時間</div>
                                     <div class="selectInput ps-3">
-                                        @foreach (var item in Model.產品列表)
+                                        @foreach (var item in Model.Date)
                                         {
-                                            foreach (var item2 in item.Date)
+                                            @item<br />
+                                        }
+                                    </div>
+                                    <br />
+                                    <div class="subInfoText ps-3">景點</div>
+                                    <div class="selectInput ps-3">
+                                        @foreach (var item in Model._CProductDetailViewModel)
+                                        {
+                                            @foreach (var item2 in item.ViewName)
                                             {
                                                 @item2<br />
                                             }
@@ -133,7 +141,12 @@
                                     <br />
                                     <div class="subInfoText ps-3">住宿飯店</div>
                                     <div class="selectInput ps-3">
-                                        @Model.產品列表.FirstOrDefault().HotelName
+                                        @foreach (var item in Model.HotelName)
+                                        {
+                                            @if (@item != null)
+                                            {@item<br />}
+
+                                        }
                                     </div>
                                     <br />
                                     <form method="post" action="PayData">
@@ -163,20 +176,20 @@
                                             <div class="my-3">
                                                 <div class="titleFontStyle">NT$ <span id="totalPrice"></span></div>
                                                 <div class="subInfoText">完成所有必填選項</div>
-                                                <div class="subInfoText">剩餘:  @Model.產品列表.FirstOrDefault().Stocks 個位置</div>
+                                                <div class="subInfoText">剩餘:  @Model.Stocks 個位置</div>
                                             </div>
                                             <div class="rightBtns">
 
-                                                <input type="hidden" name="TravelProductId" value="@Model.產品列表.FirstOrDefault().TravelProductId" />
+                                                <input type="hidden" name="TravelProductId" value="@Model.TravelProductId" />
                                                 <input type="submit" value="  立即預定  " class="btn btn-main ms-3" />
                                             </div>
                                         </div>
                                     </form>
                                     <form method="post" action="AddToSession" class="addshoppingCart">
-                                        <input type="hidden" name="TravelProductId" value="@Model.產品列表.FirstOrDefault().TravelProductId" />
-                                        <input type="hidden" name="TravelProductName" value="@Model.產品列表.FirstOrDefault().TravelProductName" />
+                                        <input type="hidden" name="TravelProductId" value="@Model.TravelProductId" />
+                                        <input type="hidden" name="TravelProductName" value="@Model.TravelProductName" />
                                         <input type="hidden" name="Count" value="1" id="postProductNum" />
-                                        <input type="hidden" name="Price" value="@Model.產品列表.FirstOrDefault().Price" />
+                                        <input type="hidden" name="Price" value="@Model.Price" />
                                         @*<input type="hidden" name="Productpicture" value="@Model.產品列表.FirstOrDefault().Runproductpictures.FirstOrDefault().TravelPicture1" />*@
                                         <input type="submit" value="加入購物車" data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3" />
                                     </form>
@@ -187,13 +200,9 @@
                                 <div class="leftSide grey p-3">
                                     <div class="titleFontStyle">行程明細</div>
                                     <div class="hiddenInfoNote hiddenEle" >
-                                    @foreach (var item in Model.產品列表)
+                                    @foreach (var item in Model.DailyDetailText)
                                     {
-                                        foreach (var item2 in item.DailyDetailText)
-                                        {
-                                           @item2<br />
-                                        }
-                                        
+                                        @item
                                     }
                                     </div>
                                     <div id="productInfoNote"></div>
@@ -209,9 +218,9 @@
                     <h2><span class="一條根"> </span><span>活動介紹</span></h2>
                 </div>
                 <div class="小介紹">
-                    @Model.產品列表.FirstOrDefault().EventIntroduction
+                    @Model.EventIntroduction
                 </div>
-                @foreach (var item in Model.產品列表.FirstOrDefault().productpictures)
+                @foreach (var item in Model.productpictures)
                 {
                     <img src="https://localhost:44338/images/TravelProductPictures/@item.TravelPicture1" class="下圖" />
                     <figcaption class="下圖小字">@item.TravelPictureText</figcaption>
@@ -220,12 +229,12 @@
                 <div class="活動DIV">
                     <h2><span class="一條根"> </span><span>地點</span></h2>
                 </div>
-                <iframe src="@Model.產品列表.FirstOrDefault().MapUrl" width="850" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="@Model.MapUrl" width="850" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 <div class="活動DIV">
                     <h2><span class="一條根"> </span><span>行前準備</span></h2>
                 </div>
                 <div class="小介紹 hiddenPreparationDescription hiddenEle">
-                    @Model.產品列表.FirstOrDefault().PreparationDescription
+                    @Model.PreparationDescription
                 </div>
                 <div class="小介紹 preparationDescription"></div>
                 <div class="活動DIV">
@@ -316,7 +325,7 @@
         <script>
             window.onload = function () {
                 //頁面載入時初始總價
-                $('#totalPrice').text( @Model.產品列表.FirstOrDefault().Price)
+                $('#totalPrice').text( @Model.Price)
                 //調整描述 換行 加圓點
                 let descritpionContent = $('#prodctDescriptionHidden').text()
                 if (descritpionContent[descritpionContent.length - 1] === '#') {
@@ -341,7 +350,7 @@
                 currentNum += 1
                 $('#productNum').val(currentNum)
                 $("#postProductNum").val($('#productNum').val())
-                $('#totalPrice').text(currentNum * @Model.產品列表.FirstOrDefault().Price)
+                $('#totalPrice').text(currentNum * @Model.Price)
             });
             //點擊減號
             $('#productMinus').click(function () {
@@ -350,14 +359,14 @@
                     currentNum -= 1
                     $('#productNum').val(currentNum)
                 }
-                $('#totalPrice').text(currentNum * @Model.產品列表.FirstOrDefault().Price)
+                $('#totalPrice').text(currentNum * @Model.Price)
                 $("#postProductNum").val($('#productNum').val())
             });
             //改變數量
             $('#productNum').change(function () {
                 let currentNum = $('#productNum').val()
                 $("#postProductNum").val(currentNum)
-                $('#totalPrice').text(currentNum * @Model.產品列表.FirstOrDefault().Price)
+                $('#totalPrice').text(currentNum * @Model.Price)
             })
 
             //=============================存入我的最愛================================
