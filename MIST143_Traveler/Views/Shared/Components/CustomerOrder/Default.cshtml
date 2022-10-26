@@ -6,14 +6,19 @@
     ViewData["Title"] = "Default";
 
 }
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
 <link href="~/css/會員中心/Table.css" rel="stylesheet" />
+<!--RWD CSS-->
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css" />
 
 
-<table id="table_id">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<table id="table_id" class="display responsive nowrap">
     <thead>
         <tr>
-            <th>
+            <th style="width:90px">
                 訂單編號
             </th>
             <th>
@@ -22,13 +27,13 @@
             <th>
                 訂購日期
             </th>
-            <th>
+            <th style="width:100px">
                 購買金額
             </th>
-            <th>
+            <th style="width:100px">
                 訂單狀態
             </th>
-            <th>
+            <th style="width:113px">
             </th>
         </tr>
     </thead>
@@ -37,7 +42,7 @@
         {
 
         <tr class="樣式">
-            <td>
+            <td id="訂單編號">
                 @Html.DisplayFor(modelItem => item.訂單編號)
             </td>
             <td>
@@ -52,28 +57,26 @@
             <td class="statuss" id="stat" value="@item.訂單狀態">
                 @Html.DisplayFor(modelItem => item.訂單狀態)
             </td>
-            @{ 
-                if (item.訂單狀態 == "處理中"|| item.訂單狀態 == "已付款")
+            @{
+                if (item.訂單狀態 == "處理中" || item.訂單狀態 == "已付款")
                 {
-                <td>
-                    <a class="btn btn-outline-danger Cancel" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("OrderCancel","CustomerCenter",new {@item.orderId},Context.Request.Scheme)',null)">申請取消</a>
-                </td>
+                    <td>
+                        <a class="btn btn-outline-danger Cancel" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("OrderCancel", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">申請取消</a>
+                    </td>
+                                                                                                                                                    }
+                else
+                        {
+                    <td>
+                    </td>
+                }
             }
-            else 
-            {
-            <td>
-
-            </td>
-            }
-            }
-
+            
         </tr>
         }
     </tbody>
 
 </table>
 @*<button class="delete" value="@item.orderId">取消</button>*@
-
 <!--修改光箱-->
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -84,27 +87,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                        <input type="text" class="form-control" id="recipient-name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
-                    </div>
-                </form>
+               
+
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
-            </div>
+          
         </div>
     </div>
 </div>
 <!--修改光箱-->
 
+
+
 <script>
+
+   
     $(document).ready(function () {
         $('#table_id').DataTable({
             //中文化
@@ -348,20 +344,21 @@
                 "thousands": ","
             },
             "autoWidth": true,
-        }); CC()
+        });
     });
-    
-  
+
+
 
 </script>
 
 @section Scripts{
     <script>
 
-    @{
-        var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
-        var v = JsonSerializer.Deserialize<Member>(OBJ);
-    }
+        @{
+    var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+    var v = JsonSerializer.Deserialize<Member>(OBJ);
+}
+
     $(".delete").click(function () {
     const orderId = $(this)/*.closest("td").siblings().find(".OId")*/.val();
         $('#cont').load("@Url.Content("~/CustomerCenter/Order")" + `?MembersId=${@v.MembersId}&OrderId=${orderId}`);
@@ -370,7 +367,14 @@
 
 
 
+
+
+
     </script>
 
 }
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+<!--TABLE-->
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+<!--TABLE-->

@@ -9,6 +9,7 @@ namespace MIST143_Traveler.Models
     {
         public Order()
         {
+            OrderCancels = new HashSet<OrderCancel>();
             OrderDetails = new HashSet<OrderDetail>();
         }
 
@@ -21,6 +22,7 @@ namespace MIST143_Traveler.Models
         public virtual Member Members { get; set; }
         public virtual OrderStatus OrderStatus { get; set; }
         public virtual Payment Payment { get; set; }
+        public virtual ICollection<OrderCancel> OrderCancels { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }
