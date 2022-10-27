@@ -74,7 +74,7 @@ namespace MIST143_Traveler.Controllers
 
 
             var a = new List<TravelProduct>();
-            if (keyword.Length != 0)
+            if (keyword.FirstOrDefault() != null)
             {
                 if (number == 0)
                 {
@@ -125,7 +125,49 @@ namespace MIST143_Traveler.Controllers
 
 
             }
+            else { 
+            if (number == 0)
+                {
+                    
 
+                        var q = from p in _planet.TravelProducts
+                                where p.ProductStatus == "已上架"
+                                select p;
+                        a.AddRange(q);
+                   
+                }
+                else if (number == 1)
+                {
+                   
+                        var q = from p in _planet.TravelProducts
+                                where p.ProductStatus == "已上架"
+                                orderby p.Price
+                                select p;
+                        a.AddRange(q);
+                   
+                }
+                else if (number == 2)
+                {
+                  
+                        var q = from p in _planet.TravelProducts
+                                where p.ProductStatus == "已上架"
+                                orderby p.Stocks
+                                select p;
+                        a.AddRange(q);
+                   
+                }
+                else if (number == 3)
+                {
+                    
+                        var q = from p in _planet.TravelProducts
+                                where p.ProductStatus == "已上架"
+                                orderby p.TravelProductId descending
+                                select p;
+                        a.AddRange(q);
+                    
+                }
+            
+            }
             ViewBag.Count = a.Count();
             //return View();
             return ViewComponent("Productlistpagi", a);
@@ -141,10 +183,23 @@ namespace MIST143_Traveler.Controllers
             //var z = DateTime.Parse(date2);
             var qw = _planet.TravelProducts.ToList();
             var qq =_planet.TravelProductDetails.ToList()
-                .Where(w =>Convert.ToDateTime(w.Date) > a).Select(q=>q.TravelProduct).Distinct().ToList();
+                .Where(w =>Convert.ToDateTime(w.Date) > a &&w.TravelProduct.ProductStatus=="已上架").Select(q=>q.TravelProduct).Distinct().ToList();
 
 
             return ViewComponent("Productlistpagi",qq);
         }
+        //public IActionResult see(string contry)
+        //{
+        //    //var q = (from p in _planet.TravelProductDetails
+        //    //        where p.Date == date
+        //    //        select p).ToList();
+        //    //return View(q);
+        //    //Cproductlist datas = null;
+ 
+        //    //var z = DateTime.Parse(date2);
+        //    var qq = _planet.TravelPictures.ToList();
+        //    var pp = _planet.Countries.ToList().Where(e => e.CountryName == contry).Select(bb => bb.CountryId).ToList();
+        //    return ViewComponent("Productlistpagi", pp);
+        //}
     }
 }
