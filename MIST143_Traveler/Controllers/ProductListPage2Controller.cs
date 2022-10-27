@@ -183,7 +183,7 @@ namespace MIST143_Traveler.Controllers
             //var z = DateTime.Parse(date2);
             var qw = _planet.TravelProducts.ToList();
             var qq =_planet.TravelProductDetails.ToList()
-                .Where(w =>Convert.ToDateTime(w.Date) > a &&w.TravelProduct.ProductStatus=="已上架").Select(q=>q.TravelProduct).Distinct().ToList();
+                .Where(w =>Convert.ToDateTime(w.Date) > a &&w.TravelProduct.ProductStatus=="已上架").OrderBy(o=>Convert.ToDateTime(o.Date)).Select(q=>q.TravelProduct).Distinct().ToList();
 
 
             return ViewComponent("Productlistpagi",qq);
