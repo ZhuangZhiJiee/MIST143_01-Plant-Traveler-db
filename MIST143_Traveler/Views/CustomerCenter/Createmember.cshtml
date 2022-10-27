@@ -156,9 +156,12 @@
                     required: true,
                 },
                 Password: {
+                    minlength: 8,
+                    maxlength: 16,
                     required: true,
                 },
                 Password2: {
+              
                     equalTo:"#Password1",
                     required: true,
                 },
@@ -183,9 +186,12 @@
                     required: '必填',
                 },
                 Password: {
+                    minlength: '不得少於8位',
+                    maxlength: '不得大於16位',
                     required: '必填',
                 },
                 Password2: {
+                  
                     required: '必填',
                     equalTo:"密碼輸入不一致",
                 },

@@ -16,7 +16,9 @@
         @{
         var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
         var v = JsonSerializer.Deserialize<Member>(OBJ);
-    }
+
+
+}
 </script>
 <body>
     @*<form asp-action="/CustomerCenter/uploadImg" method="post" enctype="multipart/form-data">*@
@@ -26,16 +28,33 @@
                     <div class="col-12 col-md-3">
                   
                         <div class="card" style="width: 18rem;">
-                            <label class="btn">
-                                <input type="file" name="photo" class="form-control" onchange="uploadImg()" id="file"style="display:none" accept="image/*">
-                                <img src="~/Images/客戶大頭貼/@Model.PhotoPath" id="avatarShow" style="width:240px;height:240px;border-radius:50%" />
-                            </label>
-                            <input id="avatar" type="hidden" name="avatar" />
-                           
+                            @{
+                                if (Model.PhotoPath != null)
+                                {
+                                    <label class="btn">
+                                        <input type="file" name="photo" class="form-control" onchange="uploadImg()" id="file" style="display:none" accept="image/*">
+                                        <img src="~/Images/客戶大頭貼/@Model.PhotoPath" id="avatarShow" style="width:240px;height:240px;border-radius:50%" />
+                                    </label>
+                                    <input id="avatar" type="hidden" name="avatar" />
+                                }
+                                else
+                                {
+                                    
+                                    <label class="btn">
+                                        <input type="file" name="photo" class="form-control" onchange="uploadImg()" id="file" style="display:none" accept="image/*">
+                                        <img src="~/Images/contact/300.png" id="avatarShow" style="width:240px;height:240px;border-radius:50%" />
+                                    </label>
+                                    <input id="avatar" type="hidden" name="avatar" />
+                                }
+
+                            }
+
+
+
 
                             <div class="card-body mb-3">
                                 @*<input type="file" name="photo" class="form-control" onchange="uploadImg()" id="file">*@
-                                
+
                                 @*<input type="submit" value="開始上傳" />*@
                             </div>
 
@@ -59,7 +78,7 @@
 
 
                         <div class="row row-cols-1">
-                            <div class="col 上面空間">
+                            <div class="col 上面空間 mb-5">
 
                                 <h3>個人資訊</h3>
                                 <p>以下資訊僅用於幫助你在付款時自動填寫你的個人資料，你的資料將會安全地保存且不會公開</p>

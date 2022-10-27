@@ -37,7 +37,7 @@
                     Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
                             <div class='coupon-info coupon-info-right-dashed'>
                                 <div class='coupon-store'>{co.CouponName}</div>
-                                <div class='coupon-price'>折扣{co.Discount}<span>優惠券</span></div>
+                                <div class='coupon-price'>折扣{(int)co.Discount}<span>優惠券</span></div>
                                 <div class='coupon-description'>訂單限滿{co.Condition}使用</div>
                             </div>
                             <div class='coupon-get'>
