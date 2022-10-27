@@ -9,8 +9,8 @@
 .border-bottom-line {
   border-bottom: 2px solid rgba(225, 221, 221, 0.622);
   border-bottom: 2px solid rgba(225, 221, 221, 0.622);
-}
-/* header的css範圍 */
+} 
+/* header的css範圍 */ 
 .main-header .container {
   background-color: rgb(255, 255, 255);
   display: flex;

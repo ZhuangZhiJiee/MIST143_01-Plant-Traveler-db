@@ -71,9 +71,9 @@ namespace MIST143_Traveler.Controllers
             //}
             //ViewBag.Count = suisei.隨便啦.Count();
             //return ViewComponent("Productlistpagi",suisei.隨便啦);
-           
 
-            var a =new List<TravelProduct>();
+
+            var a = new List<TravelProduct>();
             if (keyword.Length != 0)
             {
                 if (number == 0)
@@ -82,17 +82,17 @@ namespace MIST143_Traveler.Controllers
                     {
 
                         var q = from p in _planet.TravelProducts
-                                where p.TravelProductName.Contains(item) || p.Description.Contains(item)
+                                where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架"
                                 select p;
                         a.AddRange(q);
                     }
                 }
-               else if(number==1)
+                else if (number == 1)
                 {
                     foreach (var item in keyword)
                     {
                         var q = from p in _planet.TravelProducts
-                                where p.TravelProductName.Contains(item) || p.Description.Contains(item)
+                                where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架"
                                 orderby p.Price
                                 select p;
                         a.AddRange(q);
@@ -103,7 +103,7 @@ namespace MIST143_Traveler.Controllers
                     foreach (var item in keyword)
                     {
                         var q = from p in _planet.TravelProducts
-                                where p.TravelProductName.Contains(item) || p.Description.Contains(item)
+                                where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架"
                                 orderby p.Stocks
                                 select p;
                         a.AddRange(q);
@@ -114,18 +114,18 @@ namespace MIST143_Traveler.Controllers
                     foreach (var item in keyword)
                     {
                         var q = from p in _planet.TravelProducts
-                                where p.TravelProductName.Contains(item) || p.Description.Contains(item)
+                                where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架"
                                 orderby p.TravelProductId descending
                                 select p;
                         a.AddRange(q);
                     }
                 }
-                
-               
+
+
 
 
             }
- 
+
             ViewBag.Count = a.Count();
             //return View();
             return ViewComponent("Productlistpagi", a);
