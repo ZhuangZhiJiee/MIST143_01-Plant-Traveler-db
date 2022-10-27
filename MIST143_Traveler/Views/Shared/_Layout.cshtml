@@ -51,9 +51,20 @@
                         var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
                         var v = JsonSerializer.Deserialize<Member>(OBJ);
 
-                        <button class="btn btn-light dropdown-toggle" style="text-decoration:none;border:none" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                            @v.MemberName
-                        </button>
+                                <button class="btn btn-light dropdown-toggle" style="text-decoration:none;border:none" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @{
+                                        if (v.PhotoPath != null)
+                                        {
+                                            <img src="~/Images/客戶大頭貼/@v.PhotoPath" style="width: 30px; height: 30px; border-radius: 50%" />@v.MemberName
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Images/contact/300.png" id="avatarShow" style="width:30px;height:30px;border-radius:50%" />@v.MemberName
+                                        }
+                                    }
+
+
+                                </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="color:white;text-decoration:none">
                             <li><a href="@Url.ActionLink("List","CustomerCenter",new {v.MembersId})" class="dropdown-item bi bi-people" type="button">會員專區</a></li>
 
