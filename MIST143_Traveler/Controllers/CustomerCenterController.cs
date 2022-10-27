@@ -331,15 +331,15 @@ namespace MIST143_Traveler.Controllers
             {
                 COrderDetail Cord = new COrderDetail();
                 Cord.訂單 = (from od in _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId)
-                            from p in od.OrderDetails.Where(a=>a.OrderId==od.OrderId)
+                           from p in od.OrderDetails.Where(a => a.OrderId == od.OrderId)
                            select new 訂單管理
                            {
-                               orderId=od.OrderId,
-                               訂單編號=od.OrderId,
-                               商品名稱=p.TravelProduct.TravelProductName,
-                               訂單狀態=od.OrderStatus.OrderStatusName,
-                               訂購日期=od.OrderDate,
-                               購買金額=p.UnitPrice,
+                               orderId = od.OrderId,
+                               訂單編號 = od.OrderId,
+                               商品名稱 = p.TravelProduct.TravelProductName,
+                               訂單狀態 = od.OrderStatus.OrderStatusName,
+                               訂購日期 = od.OrderDate,
+                               購買金額 = p.UnitPrice,
                            }).ToList();
                 if (Cord.訂單.Count > 0)
                 {
@@ -349,8 +349,9 @@ namespace MIST143_Traveler.Controllers
 
             }
             return ViewComponent("ProductManage");
+            //}
+            //===================================客戶取消訂單光箱================================
         }
-        //===================================客戶取消訂單光箱================================
         public IActionResult OrderCancel(int id)
         {
             OrderCancel idd = new OrderCancel();
@@ -447,11 +448,13 @@ namespace MIST143_Traveler.Controllers
         {
             if (PMID != null)
             { 
-            Member Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == PMID.MembersId);
+            var Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == PMID.MembersId);
                 if (Cus != null)
                 {
-                    var mf = _PlanetTravelContext.Myfavorites.Where(a => a.TravelProductId == PMID.TravelProductId).ToList();
-                    if (mf.Count > 0)
+
+                    var cc = _PlanetTravelContext.Myfavorites.Where(s => s.MembersId == PMID.MembersId&&s.TravelProductId == PMID.TravelProductId).ToList();
+                    
+                    if (cc.Count > 0)
                     {
                        return Json(new { Res = false});
                     }

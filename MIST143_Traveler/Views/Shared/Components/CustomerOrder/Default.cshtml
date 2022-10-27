@@ -15,6 +15,7 @@
 
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<h3 class="mb-5">我的訂單</h3>
 <table id="table_id" class="display responsive nowrap">
     <thead>
         <tr>
@@ -58,12 +59,12 @@
                 @Html.DisplayFor(modelItem => item.訂單狀態)
             </td>
             @{
-                if (item.訂單狀態 == "處理中" || item.訂單狀態 == "已付款")
+                if (item.訂單狀態 == "訂單完成")
                 {
                     <td>
                         <a class="btn btn-outline-danger Cancel" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("OrderCancel", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">申請取消</a>
                     </td>
-                                                                                                                                                    }
+                 }
                 else
                         {
                     <td>
