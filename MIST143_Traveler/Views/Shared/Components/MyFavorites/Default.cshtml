@@ -1,4 +1,8 @@
 ﻿@model MIST143_Traveler.MViewModel.會員中心檢視最愛
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@using MIST143_Traveler.ViewComponents
 @{
     ViewData["Title"] = "Myfavorites";
 }
@@ -23,51 +27,51 @@
                         List<string> Dow = new List<string>();
                         foreach (var ab in Model.商品列表)//有錢字號才能用{}取得值 如果用MODEL.出來的物件不能用@會跟RAZOR混亂 所以用AB變數
                         {
-                            Dow.Add($@" 
-                                  <div class='card'>
-                                <img class='card-img-top' src='https://localhost:44338/images/TravelProductPictures/{ab.TravelPicturePath}' alt='Card image cap'>
-                                    <div class='card-body'>
-                                 <a href='/shopping/List?TravelProductId={ab.TravelProductId}'>
-                                 <h3 class='activity-card-title'> 
-                                    {ab.TravelProductName} 
-                                   </h3>
-                                    </a>
-                                   <div class='page-activity-recommend-score'>
-                                    <span class='page-activity-recommend-score-number'>
-                                        <svg width='12' height='12' class='svg-icon'></svg>
-                                        <span class='score-rate'>4.7</span>
-                                    </span>
-                                    <span class='page-activity-recommend-review-number'>
-                                        (
-                                        <span class='review-number'>30K+ 則評價</span>
-                                        )
-                                    </span>
-                                </div>
-                                <div class='activity-card-bottom'>
-                                    <div>
-                                        <div class='activity-card-price-box home-activity-card_price small-card'>
-                                            <span class='activity-card-price-box__sell-price dynamic-width-price'>NT${Convert.ToInt32(ab.Price)}</span>
-                                            <div id='cancel'>
-                                             
-                                             <button class='btn btn-warning' favC()>移除收藏</button>
+                            Dow.Add($@"
+                                              <div class='card'>
+                                            <img class='card-img-top' src='https://localhost:44338/images/TravelProductPictures/{ab.TravelPicturePath}' alt='Card image cap'>
+                                                <div class='card-body'>
+                                             <a href='/shopping/List?TravelProductId={ab.TravelProductId}'>
+                                             <h3 class='activity-card-title'>
+                                                {ab.TravelProductName}
+                                               </h3>
+                                                </a>
+                                               <div class='page-activity-recommend-score'>
+                                                <span class='page-activity-recommend-score-number'>
+                                                    <svg width='12' height='12' class='svg-icon'></svg>
+                                                    <span class='score-rate'>4.7</span>
+                                                </span>
+                                                <span class='page-activity-recommend-review-number'>
+                                                    (
+                                                    <span class='review-number'>30K+ 則評價</span>
+                                                    )
+                                                </span>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class='tagging-wrap bottom-tag small-style'>
-                                    <div class='tagging-box'>
-                                        <div text='最優價格保證' color='#FF5B00' backgroundcolor='rgba(255, 240, 229, 255)' bordercolor='#FFF0E5' borderradius='4px' maxwidth='auto' class='tagging-tag small-style'>
-                                            <div class='tagging-tag_custom' style='max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;'>最優價格保證</div>
-                                           
-                                        </div>
-                                      
-                                    </div>
-                                </div>
-                              </div>
+                                            <div class='activity-card-bottom'>
+                                                <div>
+                                                    <div class='activity-card-price-box home-activity-card_price small-card'>
+                                                        <span class='activity-card-price-box__sell-price dynamic-width-price'>NT${Convert.ToInt32(ab.Price)}</span>
+                                                        <div id='cancel'>
 
-                               </div>
-                      
-                                                ");
+                                                         <button class='btn btn-warning' onclick='favC({ab.MyfavoritesID})'>移除收藏</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class='tagging-wrap bottom-tag small-style'>
+                                                <div class='tagging-box'>
+                                                    <div text='最優價格保證' color='#FF5B00' backgroundcolor='rgba(255, 240, 229, 255)' bordercolor='#FFF0E5' borderradius='4px' maxwidth='auto' class='tagging-tag small-style'>
+                                                        <div class='tagging-tag_custom' style='max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;'>最優價格保證</div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                          </div>
+
+                                           </div>
+
+                                                            ");
                             i++;
                         }
                         @foreach (var g in Dow)//重複執行Dow內的資料
@@ -84,26 +88,43 @@
 
 
 
-                </div>
             </div>
+        </div>
     </article>
 </body>
 <script>
-    
+     @{
+        var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+        var v = JsonSerializer.Deserialize<Member>(OBJ);
+
+
+}
     $(function () {//document.ready(JQ寫法)等HTML的原件都讀取完才執行
         /* $("#cancel").load*/
     })
     function love(i) {
         var c = $("#heart"+i).attr('class')
         if (c == 'bi bi-heart') {
-            $("#heart" + i).toggleClass("bi bi-heart-fill") 
+            $("#heart" + i).toggleClass("bi bi-heart-fill")
         }
-        
+
         else
             $("#heart" + i).toggleClass("bi bi-heart")
     }
+    function favC(id)
+    {
+        $.ajax({
+            url: '@Url.Action("LMyFavorites", "CustomerCenter")',
+            method: 'Post',
+            data:{id:id},
 
-    
+        }).then(function () {
+            
+            $('#cont').load('@Url.Action("LMyFavorites", "CustomerCenter",new {v.MembersId})')
+        })
+
+    }
+
         /*< i class="bi bi-heart-fill" ></i >*///實心
    /* <i id='heart{i}' onclick='love({i})' class='bi bi-heart'></i>*/
 </script>

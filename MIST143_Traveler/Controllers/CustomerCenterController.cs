@@ -468,9 +468,9 @@ namespace MIST143_Traveler.Controllers
             return RedirectToAction("Index", "Home");
         }
         //==============================檢視會員中心的我最愛==============================
-        public IActionResult LMyFavorites(int MembersId)
+        public IActionResult LMyFavorites(int MembersId,int id)
         {
-            if (MembersId != 0)
+            if (MembersId != 0||id!=0)
             {
                 會員中心檢視最愛 CP = new 會員中心檢視最愛();
                 //List<最愛商品> LOVE = new List<最愛商品>();
@@ -481,21 +481,31 @@ namespace MIST143_Traveler.Controllers
                            {
                                TravelProductId=pid.TravelProductId,
                                TravelProductName=pid.TravelProductName,
-                               TravelProductURL = "/shopping/List?TravelProductId=",
+                               MyfavoritesID = fa.MyfavoritesId,
                                Price =pid.Price,
                                TravelPicturePath = pid.TravelPictures.FirstOrDefault().TravelPicture1,
                            }
                          ).ToList();
-                
+
+                if (id != 0)
+                {
+                    var c = _PlanetTravelContext.Myfavorites.FirstOrDefault(a => a.MyfavoritesId == id);
+                    _PlanetTravelContext.Remove(c);
+                    _PlanetTravelContext.SaveChanges();
+
+                }
+
+
                 if (CP.商品列表.Count > 0)
                 {
                     return ViewComponent("MyFavorites", CP);
                 }
             }
+
             return PartialView("Myfavorites");
         }
 
-        //==========================================加到我的最愛==================================
+        //============================================================================
 
         public IActionResult City(int id)
         {
