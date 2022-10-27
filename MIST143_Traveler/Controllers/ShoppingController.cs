@@ -20,33 +20,6 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult List(int? TravelProductId)
         {
-            //CProductViewModel vmp = new CProductViewModel();
-            //vmp.產品列表 = (from c in pt.TravelProducts
-            //            where c.TravelProductId == (int)TravelProductId
-            //            select new 產品格式
-            //            {
-            //                TravelProductName = c.TravelProductName,
-            //                TravelProductId = c.TravelProductId,
-            //                Price = c.Price,
-            //                TravelProductTypeId = c.TravelProductTypeId,
-            //                Stocks = c.Stocks,
-            //                Description = c.Description,
-            //                CountryId = c.CountryId,
-            //                Cost = c.Cost,
-            //                EventIntroduction = c.EventIntroduction,
-            //                MapUrl = c.MapUrl,
-            //                PreparationDescription = c.PreparationDescription,
-            //                productpictures = c.TravelPictures.ToList(),
-            //                Runproductpictures = c.TravelPictures.Where(a => a.PicturePurpose == 2).ToList(),
-            //                Date = c.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
-            //                HotelName = c.TravelProductDetails.Where(p => p.TravelProductId == c.TravelProductId).Select(p => p.Hotel.HotelName).ToList(),
-            //                //View = pt.TravelProductDetails.Where(p => p.TravelProductId == c.TravelProductId).FirstOrDefault().ProductToViews.Where(p => p.ViewId == p.View.ViewId).Select(p => p.View.ViewName).ToList(),
-            //                //View = c.TravelProductDetails.Where(p => p.TravelProductDetailId == p.ProductToViews.First().TravelProductDetailId).First()
-            //                //                                           .ProductToViews.Where(p => p.ViewId == p.View.ViewId).First()
-            //                //                                           .View.ViewName.ToList(),
-            //                //View = c.TravelProductDetails.Where(p => p.TravelProductId == c.TravelProductId).Select(a =>a.ProductToViews.)
-            //                 DailyDetailText = c.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
-            //                 }).ToList();
             CProductViewModel prod = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
                 .Select(s => new CProductViewModel
                 {
@@ -72,30 +45,30 @@ namespace MIST143_Traveler.Controllers
         [HttpPost]
         public IActionResult AddToSession(CAddToSessionViewModel s) 
         {
-            //string jsonCart = "";
-            //List<CshoppingCartViewModel> list = null;
-            //if (!HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
-            //    list = new List<CshoppingCartViewModel>();
-            //else
-            //{
-            //    jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
-            //    list = JsonSerializer.Deserialize<List<CshoppingCartViewModel>>(jsonCart);
-            //}
-            //CshoppingCartViewModel item = new CshoppingCartViewModel()
-            //{
-            //    TravelProductId = s.TravelProductId,
-            //    TravelProductName = s.TravelProductName,
-            //    Count = s.Count,
-            //    Price = s.Price,
-            //    Productpicture = s.Productpicture,
-            //};
-            //list.Add(item);
-            //jsonCart = JsonSerializer.Serialize(list);
-            //HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonCart);
+            string jsonCart = "";
+            List<CshoppingCartViewModel> list = null;
+            if (!HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
+                list = new List<CshoppingCartViewModel>();
+            else
+            {
+                jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+                list = JsonSerializer.Deserialize<List<CshoppingCartViewModel>>(jsonCart);
+            }
+            CshoppingCartViewModel item = new CshoppingCartViewModel()
+            {
+                TravelProductId = s.TravelProductId,
+                TravelProductName = s.TravelProductName,
+                Count = s.Count,
+                Price = s.Price,
+                Productpicture = s.Productpicture,
+            };
+            list.Add(item);
+            jsonCart = JsonSerializer.Serialize(list);
+            HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonCart);
 
 
-            string jsonBurchased = JsonSerializer.Serialize(s);
-            HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonBurchased);
+            //string jsonBurchased = JsonSerializer.Serialize(s);
+            //HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonBurchased);
             return NoContent();
         }
         public IActionResult ShoppingCart()
