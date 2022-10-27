@@ -1,11 +1,11 @@
-﻿@model IEnumerable<MIST143_Traveler.ShoppingViewModel.CtestViewModel>
+﻿@model MIST143_Traveler.ShoppingViewModel.CshoppingCartViewModel
 @*@model MIST143_Traveler.ShoppingViewModel.CtestViewModel*@
 
 @{
     ViewData["Title"] = "PayTest";
 }
 
-@foreach(var item in Model)
- {
-<h3>@item.TravelProductId</h3>
+@foreach(var item in Model._CtestViewModel.TravelProductId)
+{
+    @item;<br />
 }
