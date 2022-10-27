@@ -223,21 +223,21 @@
     border-radius: 4px;
 }
 
-.asdqwr {
+.asd {
     display: flex;
-    align-content: center;
+    /*align-content: center;*/
     flex-wrap: wrap;
     max-width: 1200px;
-    padding: 40px;
+    /*padding: 40px;*/
     border:20px;
     border-block-color:aquamarine;
     
 }
 
 .card {
-    margin: 0 auto;
+   /* margin: 0 auto;*/
     width: 210px;
-    height: 310px;
+  /*  height: 310px;*/
 }
 
 img {

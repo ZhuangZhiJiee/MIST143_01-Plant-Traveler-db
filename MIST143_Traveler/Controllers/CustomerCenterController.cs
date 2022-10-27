@@ -61,7 +61,7 @@ namespace MIST143_Traveler.Controllers
         //    return Json(new { Res = false, Msg = "失敗" });
         //}
 
-        //====================================測試AJAX上傳圖片=========================
+        //====================================AJAX上傳圖片=========================
         public IActionResult FileUpLoad(IFormFile files)
         {
             var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
@@ -593,5 +593,6 @@ namespace MIST143_Traveler.Controllers
             //客戶評論 ================================================
         }
     }
+
 }
 

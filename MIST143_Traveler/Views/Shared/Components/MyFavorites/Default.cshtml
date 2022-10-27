@@ -15,9 +15,9 @@
 
     <article>
         <h3>我的最愛</h3>
-        <div class="row row-cols-1">
+        <div class="container row row-row-4">
             <div class="col-12 上面空間 d-flex justify-content-start">
-                <div class='asdqwr'>
+                <div class='asd row'>
                     @{
                         var i = 0;
                         List<string> Dow = new List<string>();
@@ -27,7 +27,7 @@
                                   <div class='card'>
                                 <img class='card-img-top' src='https://localhost:44338/images/TravelProductPictures/{ab.TravelPicturePath}' alt='Card image cap'>
                                     <div class='card-body'>
-                                 <a href='{ab.TravelProductURL}+{i+1}'>
+                                 <a href='/shopping/List?TravelProductId={ab.TravelProductId}'>
                                  <h3 class='activity-card-title'> 
                                     {ab.TravelProductName} 
                                    </h3>
@@ -48,8 +48,8 @@
                                         <div class='activity-card-price-box home-activity-card_price small-card'>
                                             <span class='activity-card-price-box__sell-price dynamic-width-price'>NT${Convert.ToInt32(ab.Price)}</span>
                                             <div id='cancel'>
-                                             <i id='heart{i}' onclick='love({i})' class='bi bi-heart'></i>
                                              
+                                             <button class='btn btn-warning' favC()>移除收藏</button>
                                             </div>
                                         </div>
                                     </div>
@@ -58,7 +58,9 @@
                                     <div class='tagging-box'>
                                         <div text='最優價格保證' color='#FF5B00' backgroundcolor='rgba(255, 240, 229, 255)' bordercolor='#FFF0E5' borderradius='4px' maxwidth='auto' class='tagging-tag small-style'>
                                             <div class='tagging-tag_custom' style='max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;'>最優價格保證</div>
+                                           
                                         </div>
+                                      
                                     </div>
                                 </div>
                               </div>
@@ -94,13 +96,16 @@
     function love(i) {
         var c = $("#heart"+i).attr('class')
         if (c == 'bi bi-heart') {
-            $("#heart" + i).toggleClass("bi bi-heart-fill")
+            $("#heart" + i).toggleClass("bi bi-heart-fill") 
         }
+        
         else
             $("#heart" + i).toggleClass("bi bi-heart")
     }
-        /*< i class="bi bi-heart-fill" ></i >*///實心
 
+    
+        /*< i class="bi bi-heart-fill" ></i >*///實心
+   /* <i id='heart{i}' onclick='love({i})' class='bi bi-heart'></i>*/
 </script>
 
 
