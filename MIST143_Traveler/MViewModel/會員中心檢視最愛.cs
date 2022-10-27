@@ -38,7 +38,7 @@ namespace MIST143_Traveler.MViewModel
                 get;
                 set;
             }
-        public string TravelProductURL
+        public int MyfavoritesID
         {
             get;
             set;
