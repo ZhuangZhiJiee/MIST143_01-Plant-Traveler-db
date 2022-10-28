@@ -8,15 +8,7 @@
 
 <body>
 
-    <script>
-        function OpenModal() {
-            $('#overlay').show();
-        }
-        function CloseModal() {
-            $('#overlay').hide();
-        }
 
-    </script>
     <article>
 
         <div class="article-test">
@@ -42,7 +34,7 @@
                                     <div class="destination-tips-popup-new">
                                         <div class="destination-tips-new">
                                             <span class="destination-tips_title">想尋找<span style="color:#FF5B00;font-weight:bold;">台灣</span>人氣玩樂？</span><div class="destination-tips_buttons">
-                                                <button data-v-0eaa3c40=""onclick="location.href='@Url.Action("ProductListPage", "ProductListPage2")'" type="button" class="destination-tips_link klk-button klk-button-primary klk-button-mini">
+                                                <button data-v-0eaa3c40="" onclick="location.href='@Url.Action("ProductListPage", "ProductListPage2")'" type="button" class="destination-tips_link klk-button klk-button-primary klk-button-mini">
                                                     <!----> <!----> <span>
                                                         Go
                                                     </span>
@@ -56,10 +48,10 @@
                         <div class="banner-search-box ban-sea-box">
                             <span class="bi-search"></span>
                             <input type="search"
-                                   name=""
-                                   id=""
+                                   name="text"
+                                   id="text"
                                    placeholder="探索全球目的地/活動" />
-                            <button type="button" onclick="location.href='@Url.Action("ProductListPage", "ProductListPage2")'">搜尋</button>
+                            <button type="button" id="butn">搜尋</button>
 
                         </div>
                     </div>
@@ -672,4 +664,32 @@
         </div>
 
     </article>
+    @section scripts{
+        <script>
+        //function OpenModal() {
+        //    $('#overlay').show();
+        //}
+        //function CloseModal() {
+        //    $('#overlay').hide();
+        //}
+            $("#butn").click(function () {
+                var qq = $("#text").val()
+                @*console.log(qq);
+                var url = "@Url.Content("~/ProductListPage2/filter")"
+                var name = `?keyword=` + qq
+                var q = (url + name)*@
+                $.ajax({
+                    url: '@Url.Content("~/ProductListPage2/kkkkk")' + `?rest=${qq}`,
+                    type: "GET",
+                }).done(function (data) {
+                    window.location.href = "@Url.Content("~/ProductListPage2/ProductListPage")" + `?keyword=${data}`;
+                }).fail(function () {
+                    alert(error.status + ":" + error.statusText);
+                });
+
+            })
+
+
+        </script>
+    }
 </body>
