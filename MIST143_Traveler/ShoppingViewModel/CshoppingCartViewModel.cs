@@ -17,6 +17,7 @@ namespace MIST143_Traveler.ShoppingViewModel
         public int Count { get; set; }
         public string Productpicture { get; set; }
         public TravelProduct product { get; set; }
-        public CShoppingCartDetailViewModel _CShoppingCartDetailViewModel { get; set; }
+        public List <CShoppingCartDetailViewModel> _CShoppingCartDetailViewModel { get; set; }
+        
     }
 }

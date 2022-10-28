@@ -8,13 +8,12 @@ namespace MIST143_Traveler.ShoppingViewModel
 {
     public class CShoppingCartDetailViewModel
     {
-        //public List<TravelProduct> TravelProductId { get; set; }
-        public List<int> TravelProductId { get; set; }
-        public List<int> Count { get; set; }
-        public List<string> TravelProductName { get; set; }
-        public List<int> Productpicture { get; set; }
-        public List<decimal> Price { get; set; }
-        public List<decimal> TotalPrice { get; set; }
+        public int TravelProductId { get; set; }
+        public int Count { get; set; }
+        public string TravelProductName { get; set; }
+        public int Productpicture { get; set; }
+        public decimal Price { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 
 

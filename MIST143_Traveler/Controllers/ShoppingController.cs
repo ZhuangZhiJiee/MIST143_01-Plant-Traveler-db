@@ -196,6 +196,12 @@ namespace MIST143_Traveler.Controllers
             else
                 return View();
         }
+        public IActionResult test(CshoppingCartViewModel p)
+        {
+            List<CshoppingCartViewModel> list = new();
+            list.Add(p);
+                return View(list);
+        }
         [HttpPost]
         public IActionResult PayData(CshoppingCartViewModel p)
         {
@@ -260,7 +266,7 @@ namespace MIST143_Traveler.Controllers
 
                 int total = 0;
                 string ItemName = "";
-
+                //只買一組的寫法，多組要改掉
                 int price = (int)p.UnitPrice;
                 total += ((int)(p.Quantity) * price);
                 ItemName += $"{ProductName} NT$ {Convert.ToInt32(p.UnitPrice).ToString("0")}元 x {p.Quantity}組#";
