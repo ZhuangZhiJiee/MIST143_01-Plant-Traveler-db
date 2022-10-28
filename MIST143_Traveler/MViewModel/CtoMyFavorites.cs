@@ -30,5 +30,10 @@ namespace MIST143_Traveler.MViewModel
             get { return _CtoMyFavorites.MembersId; }
             set { _CtoMyFavorites.MembersId = value; }
         }
+        public int MyfavoritesId
+        {
+            get { return _CtoMyFavorites.MyfavoritesId; }
+            set { _CtoMyFavorites.MyfavoritesId = value; }
+        }
     }
 }

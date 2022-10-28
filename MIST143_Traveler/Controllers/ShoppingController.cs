@@ -18,8 +18,10 @@ namespace MIST143_Traveler.Controllers
         {
             pt = q;
         }
-        public IActionResult List(int? TravelProductId)
+           
+        public IActionResult List(int? TravelProductId,int? MembersId)
         {
+
             CProductViewModel prod = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
                 .Select(s => new CProductViewModel
                 {
@@ -35,13 +37,107 @@ namespace MIST143_Traveler.Controllers
                     Date = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
                     HotelName = s.TravelProductDetails.Where(p => p.TravelProductId == s.TravelProductId).Select(p => p.Hotel.HotelName).ToList(),
                     DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
-                    _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
+                      _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
                     {
                         ViewName = p.ProductToViews.Select(v => v.View.ViewName).ToList(),
                     }).ToList(),
                 }).FirstOrDefault();
+           
+            if (MembersId != null)
+            {
+                var d = pt.Members.FirstOrDefault(a => a.MembersId == MembersId);
+                var myid = pt.Myfavorites.FirstOrDefault(a => a.MembersId == MembersId);
+                if (myid != null)
+                {
+                    CProductViewModel myfaid = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
+               .Select(s => new CProductViewModel
+               {
+
+                   TravelProductName = s.TravelProductName,
+                   TravelProductId = s.TravelProductId,
+                   Price = s.Price,
+                   Stocks = s.Stocks,
+                   Description = s.Description,
+                   EventIntroduction = s.EventIntroduction,
+                   MapUrl = s.MapUrl,
+                   PreparationDescription = s.PreparationDescription,
+                   productpictures = s.TravelPictures.ToList(),
+                   Date = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
+                   HotelName = s.TravelProductDetails.Where(p => p.TravelProductId == s.TravelProductId).Select(p => p.Hotel.HotelName).ToList(),
+                   DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
+                   MembersId = d.MembersId,
+                   MyfavoritesID= s.Myfavorites.Where(w => w.MembersId == MembersId && s.TravelProductId == myid.TravelProductId).Any(),
+                    _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
+                   {
+                       ViewName = p.ProductToViews.Select(v => v.View.ViewName).ToList(),
+                   }).ToList(),
+               }).FirstOrDefault();
+                 
+                    return View(myfaid);
+                }
+
+                CProductViewModel prMid = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
+               .Select(s => new CProductViewModel
+               {
+
+                   TravelProductName = s.TravelProductName,
+                   TravelProductId = s.TravelProductId,
+                   Price = s.Price,
+                   Stocks = s.Stocks,
+                   Description = s.Description,
+                   EventIntroduction = s.EventIntroduction,
+                   MapUrl = s.MapUrl,
+                   PreparationDescription = s.PreparationDescription,
+                   productpictures = s.TravelPictures.ToList(),
+                   Date = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
+                   HotelName = s.TravelProductDetails.Where(p => p.TravelProductId == s.TravelProductId).Select(p => p.Hotel.HotelName).ToList(),
+                   DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
+                   MembersId = d.MembersId,
+                  
+                   _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
+                   {
+                       ViewName = p.ProductToViews.Select(v => v.View.ViewName).ToList(),
+                   }).ToList(),
+               }).FirstOrDefault();
+                return View(prMid);
+            }
             return View(prod);
+            
         }
+        [HttpPost]
+        public IActionResult List(CtoMyFavorites iid)
+        {
+
+            var cc = pt.Myfavorites.FirstOrDefault(s => s.MembersId == iid.myfavorite.MembersId && s.TravelProductId == iid.TravelProductId);
+            Myfavorite ss = iid.myfavorite;
+            pt.Myfavorites.Remove(cc);
+            pt.SaveChanges();
+            return Json(new {Res=true});
+        }
+        public IActionResult toMyFavorites(CtoMyFavorites PMID)
+        {
+            if (PMID != null)
+            {
+                var Cus = pt.Members.FirstOrDefault(a => a.MembersId == PMID.MembersId);
+                if (Cus != null)
+                {
+
+                    var cc = pt.Myfavorites.Where(s => s.MembersId == PMID.MembersId && s.TravelProductId == PMID.TravelProductId).ToList();
+
+                    if (cc.Count > 0)
+                    {
+                        return Json(new { Res = false });
+                    }
+                    Myfavorite fa = PMID.myfavorite;
+                    pt.Add(fa);
+                    pt.SaveChanges();
+                    return Json(new { Res = true });
+                }
+                return Json(new { Res = false });
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost]
         public IActionResult AddToSession(CAddToSessionViewModel s) 
         {

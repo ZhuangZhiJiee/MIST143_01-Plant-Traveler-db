@@ -20,6 +20,12 @@ namespace MIST143_Traveler.MViewModel
         public string MapUrl { get; set; }
         public string PreparationDescription { get; set; }
         public int count { get; set; }
+        public bool MyfavoritesID
+        {
+            get;
+            set;
+        }
+        public int MembersId { get; set; }
         public List<TravelPicture> productpictures { get; set; }
         public List<string> DailyDetailText { get; set; }
         public List<string> Date { get; set; }
