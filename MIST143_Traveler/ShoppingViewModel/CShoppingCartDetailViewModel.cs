@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MIST143_Traveler.ShoppingViewModel
 {
-    public class CtestViewModel
+    public class CShoppingCartDetailViewModel
     {
         //public List<TravelProduct> TravelProductId { get; set; }
         public List<int> TravelProductId { get; set; }
