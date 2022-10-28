@@ -124,11 +124,11 @@
         </div>
     </div>
 </article>
-<div class="置中">
-    <h1>搜尋結果</h1>
+<div class="d-flex justify-content-center" >
+    <div class="置中">
+        <h1>搜尋結果</h1>
+    </div>
 </div>
-
-
 @*<p>
         <a asp-action="Create">Create New</a>
     </p>*@
@@ -139,13 +139,14 @@
         {
             count++;
             string productLink = Url.Content("~/Item?Index");
+
             <br />
             <br />
             <br />
             <div class="d-flex">
                 <div class="card mb-md-auto" style="width:1000px">
                     <a href="@Url.Action("List" ,"shopping", new {TravelProductId=item.TravelProductId})">
-                        <img src="@Url.Content("https://localhost:44338/images/TravelProductPictures/0dbe81dc-240c-43f6-9fa1-2676d80d5e5a.jpg")" style="height:150px" class="card-img-top">
+                        <img src="https://localhost:44338/images/TravelProductPictures/e60fb2ed-0262-47eb-ac0a-64a169626f9a.jpg" style="height:150px" class="card-img-top">
                     </a>
 
                     <div class="card-body">
@@ -158,24 +159,27 @@
                 <br />
                 <br />
                 <br />
-
             </div>
-
         }
     }
-
     <br />
     <br />
     <br />
-    <h5 class="置中">哎呀！已到頁面底部</h5>
-    <div class="置中">
+    <div class="d-flex justify-content-center">
+        <div class="置中">
+            <h5>哎呀！已到頁面底部</h5>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="d-flex justify-content-center">
         <nav aria-label="...">
             <ul class="pagination pagination-sm">
                 <li class="page-item active" aria-current="page">
                     <span class="page-link">1</span>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">TOP</a></li>
             </ul>
         </nav>
     </div>
