@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace MIST143_Traveler.ShoppingViewModel
 {
-    public class CtestViewModel
+    public class CShoppingCartDetailViewModel
     {
         //public List<TravelProduct> TravelProductId { get; set; }
         public List<int> TravelProductId { get; set; }
+        public List<int> Count { get; set; }
+        public List<string> TravelProductName { get; set; }
+        public List<int> Productpicture { get; set; }
+        public List<decimal> Price { get; set; }
+        public List<decimal> TotalPrice { get; set; }
     }
+
 
 }

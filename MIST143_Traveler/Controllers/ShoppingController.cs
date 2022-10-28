@@ -97,12 +97,13 @@ namespace MIST143_Traveler.Controllers
                 return View();
         }
         [HttpPost]
-        public IActionResult PayData(CPayDataParameterViewModel p)
+        public IActionResult PayData(CshoppingCartViewModel p)
         {
             var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
             var v = JsonSerializer.Deserialize<Member>(Name);
     
             CProductMemberViewModel pmv = new CProductMemberViewModel();
+            
 
             pmv.產品會員 = (from c in pt.TravelProducts
                         where c.TravelProductId == p.TravelProductId
@@ -121,7 +122,7 @@ namespace MIST143_Traveler.Controllers
 
         }
         [HttpPost]
-        public IActionResult PayCheckout(CPayDataParameterViewModel p)
+        public IActionResult PayCheckout(CshoppingCartViewModel p)
         {
             var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
             var v = JsonSerializer.Deserialize<Member>(Name);
@@ -169,23 +170,6 @@ namespace MIST143_Traveler.Controllers
             pt.SaveChanges();
             System.Threading.Thread.Sleep(3000);
             return RedirectToAction("Index", "Home");
-        }
-        public IActionResult testPage()
-        {
-            if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
-            {
-                string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
-                List<CshoppingCartViewModel> cart = JsonSerializer.Deserialize<List<CshoppingCartViewModel>>(jsonCart);
-                return View(cart);
-            }
-            else
-                return View();
-        }
-        [HttpPost]
-        public IActionResult PayTest(CshoppingCartViewModel t)
-        {
-            var data = t;
-            return View(data);
         }
     }
 }
