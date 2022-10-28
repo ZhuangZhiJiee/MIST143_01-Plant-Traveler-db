@@ -170,7 +170,7 @@ namespace MIST143_Traveler.Controllers
         [HttpPost]
         public IActionResult newLoginpag(CLogin vModel)
         {
-            Member cust = new PlanetTravelContext().Members.FirstOrDefault
+            Member cust = _PlanetTravelContext.Members.FirstOrDefault
               (c => c.Email.Equals(vModel.Email));
             if (cust != null)
             {

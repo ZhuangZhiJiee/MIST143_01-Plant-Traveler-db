@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.Text.Json;
 using MIST143_Traveler.ShoppingViewModel;
+using System.Collections.Specialized;
+using System.Web;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MIST143_Traveler.Controllers
 {
@@ -243,6 +247,75 @@ namespace MIST143_Traveler.Controllers
         [HttpPost]
         public IActionResult PayEnd(CPayViewModel p)
         {
+            //歐付寶範圍
+            if (p.PaymethodId == 4)
+            {
+                string ProductName = pt.TravelProducts.FirstOrDefault(c => c.TravelProductId == p.TravelProductId).TravelProductName;
+                #region 金流支付
+                string tradeNo = Guid.NewGuid().ToString();
+                tradeNo = tradeNo.Substring(tradeNo.Length - 12, 12);
+                ViewBag.tradeNo = tradeNo;
+                string timenow = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                ViewBag.timenow = timenow;
+
+                int total = 0;
+                string ItemName = "";
+
+                int price = (int)p.UnitPrice;
+                total += ((int)(p.Quantity) * price);
+                ItemName += $"{ProductName} NT$ {Convert.ToInt32(p.UnitPrice).ToString("0")}元 x {p.Quantity}組#";
+
+                //ViewModel的屬性改成List後再用迴圈一個個取出
+                //foreach (var item in inProd.Datas)
+                //{
+                //    int price = (int)item.Price;
+                //    total += ((int)(item.quantity) * price);
+                //    ItemName += $"{item.ProductName} NT${Convert.ToInt32(item.Price).ToString("0")}X{item.quantity}#";
+                //}
+
+                //有優惠再去扣除優惠額
+                //total = total - discountmoney;
+                //if (total < 1200) { total = total + 100; }
+
+                ItemName = ItemName.Substring(0, ItemName.Length - 1);
+
+                ViewBag.Total = total;
+                ViewBag.ItemName = ItemName;
+
+                NameValueCollection parameters = HttpUtility.ParseQueryString(string.Empty);
+
+                parameters["HashKey"] = "5294y06JbISpM5x9";
+                parameters["ChoosePayment"] = "Credit";
+                parameters["ClientBackURL"] = $"{Request.Scheme}://{Request.Host}/Home/Index";    //完成後跳回去的頁面
+                parameters["CreditInstallment"] = "";
+                parameters["EncryptType"] = "1";
+                parameters["InstallmentAmount"] = "";
+                parameters["ItemName"] = ItemName;
+                parameters["MerchantID"] = "2000132";
+                parameters["MerchantTradeDate"] = timenow;
+                parameters["MerchantTradeNo"] = tradeNo;
+                parameters["PaymentType"] = "aio";
+                parameters["Redeem"] = "";
+                parameters["ReturnURL"] = "https://developers.opay.tw/AioMock/MerchantReturnUrl";
+                parameters["StoreID"] = "";
+                parameters["TotalAmount"] = total.ToString();
+                parameters["TradeDesc"] = "建立信用卡測試訂單";
+                parameters["HashIV"] = "v77hoKGq4kWxNNIS";
+
+                ViewBag.ClientBackURL = $"{Request.Scheme}://{Request.Host}/Home/Index";
+
+                string checkMacValue = parameters.ToString();
+
+                checkMacValue = checkMacValue.Replace("=", "%3d").Replace("&", "%26");
+
+                using var hash = SHA256.Create();
+                var byteArray = hash.ComputeHash(Encoding.UTF8.GetBytes(checkMacValue.ToLower()));
+                checkMacValue = Convert.ToHexString(byteArray).ToUpper();
+                ViewBag.checkMacValue = checkMacValue;
+                #endregion
+                return View();
+            }
+
             var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
             var v = JsonSerializer.Deserialize<Member>(Name);
             Order od = new Order()
