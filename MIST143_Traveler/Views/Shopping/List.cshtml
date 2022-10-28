@@ -76,6 +76,7 @@
                 @{
                     if (Accessor.HttpContext.Session.Keys.Contains(CDictionary.SK_Login))
                     {
+
                         var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
                         var v = JsonSerializer.Deserialize<Member>(OBJ);
                         <div class="我的最愛">
@@ -85,12 +86,27 @@
                             <div>
                                 <input type="hidden" id="PID" name="TravelProductId" value="@Model.TravelProductId" />
                                 <input type="hidden" id="MID" name="MembersId" value="@v.MembersId" />
+                                
                                 <label class="btn">
-                                    <i class="bi bi-heart" onclick=toMyFavorites()>加入我的最愛</i>
+                                @{
+
+                                    if (Model.MyfavoritesID)
+                                    {
+                                        <input hidden value="true" id="ch" />
+                                        <i id='heart' onclick="love(true)" class='bi bi-heart-fill'>加入我的最愛</i>
+                                    }
+                                    else
+                                    {
+                                        <input hidden value="false" id="ch" />
+                                        <i id='heart' onclick="love(false)" class='bi bi-heart'>加入我的最愛</i>
+                                    }
+                                }
                                 </label>
                                 @*@Html.ActionLink("加入我的最愛", null, null, null, null)*@
+                                @*onclick=toMyFavorites()*@
                             </div>
                         </div>
+                        
                     }
 
                 }
@@ -357,7 +373,7 @@
                 $('#productInfoNote').html(descritpionLabel)
                 $('.carousel-item')[0].classList.add("active")
                 $('.carouselExampleIndicators')[0].classList.add("active")
-                
+
             }
             //點擊加號
             $('#productPlus').click(function () {
@@ -385,6 +401,53 @@
             })
 
             //=============================存入我的最愛================================
+
+            $(function () {//document.ready(JQ寫法)等HTML的原件都讀取完才執行
+                /* $("#cancel").load*/
+            })
+         
+            function love(i) {
+                console.log(i)
+                var ppid =
+                {
+                   TravelProductId: $("#PID").val(),
+                   MembersId: $("#MID").val(),
+                }
+               
+                var c = $("#heart").attr('class')
+                if (c == 'bi bi-heart-fill') {
+
+                    $.ajax({
+                        url: "@Url.Action("List", "Shopping")",
+                        method: "Post",
+                        data: { iid: ppid },
+                        success: function (datas) {
+                            if (datas) {
+                                $("#heart").toggleClass("bi bi-heart")
+                            }
+                        }
+                    })
+
+                }
+
+                else
+                    var Tofa = {
+                        TravelProductId: $("#PID").val(),
+                        MembersId: $("#MID").val(),
+                    }
+                    $("#heart").toggleClass("bi bi-heart")
+                $.ajax({
+                    url: "@Url.Action("toMyFavorites", "Shopping")",
+                    method: "Post",
+                    data: { PMID: Tofa },
+                    success: function (datas) {
+                        if (datas) {
+                            $("#heart").toggleClass("bi bi-heart-fill")
+                        }
+                    }
+                })
+
+            }
 
             const toMyFavorites = () =>
             {
