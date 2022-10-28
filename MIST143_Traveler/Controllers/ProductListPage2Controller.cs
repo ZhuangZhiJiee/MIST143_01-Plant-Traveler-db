@@ -47,6 +47,7 @@ namespace MIST143_Traveler.Controllers
                      where p.TravelProductName.Contains(keyword) || p.Description.Contains(keyword)
                      select p);/*.ToList();*/
             //plist.travelProduct = q;
+            ViewBag.keyword = keyword;
             return View(q.ToList());
 
         }
@@ -179,6 +180,9 @@ namespace MIST143_Traveler.Controllers
             //        select p).ToList();
             //return View(q);
             //Cproductlist datas = null;
+            if (date == null){
+                return View();
+            }
             var a = DateTime.Parse(date);
             //var z = DateTime.Parse(date2);
             var qw = _planet.TravelProducts.ToList();
@@ -188,18 +192,30 @@ namespace MIST143_Traveler.Controllers
 
             return ViewComponent("Productlistpagi",qq);
         }
-        //public IActionResult see(string contry)
-        //{
-        //    //var q = (from p in _planet.TravelProductDetails
-        //    //        where p.Date == date
-        //    //        select p).ToList();
-        //    //return View(q);
-        //    //Cproductlist datas = null;
- 
-        //    //var z = DateTime.Parse(date2);
-        //    var qq = _planet.TravelPictures.ToList();
-        //    var pp = _planet.Countries.ToList().Where(e => e.CountryName == contry).Select(bb => bb.CountryId).ToList();
-        //    return ViewComponent("Productlistpagi", pp);
-        //}
+        public IActionResult see(string contry)
+        {
+            //var q = (from p in _planet.TravelProductDetails
+            //        where p.Date == date
+            //        select p).ToList();
+            //return View(q);
+            //Cproductlist datas = null;
+
+            //var z = DateTime.Parse(date2);
+            if (contry == null) {
+                var q = from p in _planet.TravelProducts                        
+                        select p;
+                return ViewComponent("Productlistpagi", q.ToList());
+            }
+            string[] aaaa = contry.Split(",");
+
+            var pp = _planet.TravelProducts.Where(e => aaaa.Contains(e.Country.CountryName)).Select(bb => bb).ToList();
+            return ViewComponent("Productlistpagi", pp);
+        }
+        public IActionResult kkkkk(string rest)
+        {
+            return Content(rest);
+        }
+
     }
+
 }
