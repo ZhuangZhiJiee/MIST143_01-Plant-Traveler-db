@@ -34,7 +34,10 @@ footer, header, hgroup, menu, nav, section {
     border-bottom: 2px solid rgba(225, 221, 221, 0.622);
     border-bottom: 2px solid rgba(225, 221, 221, 0.622);
   }
-  
+.置中 {
+    text-align: center;
+    display: flex;
+}
 body {
 	line-height: 1;
 }
