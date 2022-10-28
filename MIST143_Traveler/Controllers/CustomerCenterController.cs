@@ -473,7 +473,6 @@ namespace MIST143_Traveler.Controllers
             if (MembersId != 0||id!=0)
             {
                 會員中心檢視最愛 CP = new 會員中心檢視最愛();
-                //List<最愛商品> LOVE = new List<最愛商品>();
                 CP.商品列表 = (from fa in _PlanetTravelContext.Myfavorites.Where(a => a.MembersId == MembersId)
                                from pid in _PlanetTravelContext.TravelProducts.Where(c=>c.TravelProductId==fa.TravelProductId)
                            //from image in _PlanetTravelContext.TravelPictures.Where(m => m.TravelPictureId == pid.TravelProductId)
@@ -484,6 +483,7 @@ namespace MIST143_Traveler.Controllers
                                MyfavoritesID = fa.MyfavoritesId,
                                Price =pid.Price,
                                TravelPicturePath = pid.TravelPictures.FirstOrDefault().TravelPicture1,
+                               MembersId=MembersId,
                            }
                          ).ToList();
 
@@ -515,7 +515,7 @@ namespace MIST143_Traveler.Controllers
         }
 
 
-        //客戶評論================================================
+        //客戶評論檢視頁================================================
 
         public IActionResult CommentList(int MembersId)
         {
@@ -540,7 +540,13 @@ namespace MIST143_Traveler.Controllers
             }
             return PartialView("Review");
         }
+        //新增評論=============================
+        public IActionResult CommentCreate(int? MembersID) 
+        {
 
+            return View();
+        }
+        //評論修改檢視頁
         public IActionResult CommentEdit(int? CommentID)
         {
             if (CommentID != 0)
@@ -559,6 +565,7 @@ namespace MIST143_Traveler.Controllers
             }
             return RedirectToAction("CommentList");
         }
+        //評論修改
         [HttpPost]
         public IActionResult CommentEdit(CCommentList inComli)
         {
@@ -600,7 +607,7 @@ namespace MIST143_Traveler.Controllers
             }
             return PartialView("Review");
 
-            //客戶評論 ================================================
+            //客戶評論 END================================================
         }
     }
 

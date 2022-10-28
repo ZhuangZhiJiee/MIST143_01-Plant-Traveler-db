@@ -62,7 +62,7 @@
                 if (item.訂單狀態 == "訂單完成")
                 {
                         <td>
-                            <a class="btn btn-outline-success" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("OrderCancel", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">我要評論</a>
+                            <a class="btn btn-outline-success" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("CommentCreate", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">我要評論</a>
                             <a class="btn btn-outline-danger Cancel" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("OrderCancel", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">申請取消</a>
                         </td>
                  }

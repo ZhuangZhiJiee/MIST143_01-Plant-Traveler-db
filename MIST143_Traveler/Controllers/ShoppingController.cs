@@ -50,7 +50,7 @@ namespace MIST143_Traveler.Controllers
             if (MembersId != null)
             {
                 var d = pt.Members.FirstOrDefault(a => a.MembersId == MembersId);
-                var myid = pt.Myfavorites.FirstOrDefault(a => a.MembersId == MembersId);
+                var myid = pt.Myfavorites.FirstOrDefault(a => a.MembersId == MembersId&&a.TravelProductId== TravelProductId);
                 if (myid != null)
                 {
                     CProductViewModel myfaid = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
