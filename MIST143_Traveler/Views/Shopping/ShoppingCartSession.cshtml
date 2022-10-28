@@ -79,6 +79,11 @@
                                     @foreach (var item in Model)
                                     {
                                         <input type="text" asp-for="FirstOrDefault()._CtestViewModel.TravelProductId" value="@item.TravelProductId" />
+                                        <input type="text" asp-for="FirstOrDefault()._CtestViewModel.TravelProductName" value="@item.TravelProductName" />
+                                        <input type="text" asp-for="FirstOrDefault()._CtestViewModel.Count" value="@item.Count" />
+                                        <input type="text" asp-for="FirstOrDefault()._CtestViewModel.Price" value="@item.Price" />
+                                        <input type="text" asp-for="FirstOrDefault()._CtestViewModel.TotalPrice" value="@TotalPrice" />
+                                        <input type="text" asp-for="FirstOrDefault()._CtestViewModel.Productpicture" value="@item.Productpicture" />
                                     }
 
                                     <input type="submit" class="btn btn-main my-3 fullSize" id="goPayBtn" value="結帳" />
