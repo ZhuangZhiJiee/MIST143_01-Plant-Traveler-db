@@ -93,17 +93,15 @@
                                     if (Model.MyfavoritesID)
                                     {
                                         <input hidden value="true" id="ch" />
-                                        <i id='heart' onclick="love(true)" class='bi bi-heart-fill'>加入我的最愛</i>
+                                        <i id='heart' onclick="love(@Model.TravelProductId)" class='bi bi-heart-fill'>加入我的最愛</i>
                                     }
                                     else
                                     {
                                         <input hidden value="false" id="ch" />
-                                        <i id='heart' onclick="love(false)" class='bi bi-heart'>加入我的最愛</i>
+                                        <i id='heart' onclick="love(@Model.TravelProductId)" class='bi bi-heart'>加入我的最愛</i>
                                     }
                                 }
                                 </label>
-                                @*@Html.ActionLink("加入我的最愛", null, null, null, null)*@
-                                @*onclick=toMyFavorites()*@
                             </div>
                         </div>
                         
@@ -427,19 +425,14 @@
                             }
                         }
                     })
-
                 }
-
                 else
-                    var Tofa = {
-                        TravelProductId: $("#PID").val(),
-                        MembersId: $("#MID").val(),
-                    }
+                
                     $("#heart").toggleClass("bi bi-heart")
                 $.ajax({
                     url: "@Url.Action("toMyFavorites", "Shopping")",
                     method: "Post",
-                    data: { PMID: Tofa },
+                    data: { PMID: ppid },
                     success: function (datas) {
                         if (datas) {
                             $("#heart").toggleClass("bi bi-heart-fill")
@@ -448,42 +441,6 @@
                 })
 
             }
-
-            const toMyFavorites = () =>
-            {
-                //function love(i) {
-                //    var c = $("#heart" + i).attr('class')
-                //    if (c == 'bi bi-heart') {
-                //        $("#heart" + i).toggleClass("bi bi-heart-fill")
-                //    }
-                //    else
-                //        $("#heart" + i).toggleClass("bi bi-heart")
-                //}
-
-                var Tofa = {
-                    TravelProductId:$("#PID").val(),
-                    MembersId:$("#MID").val(),
-                }
-                console.log(Tofa)
-                $.ajax({
-                    url: '@Url.Action("toMyFavorites", "CustomerCenter")',
-                    method: 'Post',
-                    dataType: 'Json',
-                    data: { PMID: Tofa },
-                    success: function (datas) {
-                        if (!datas.res) {
-                            Swal.fire('已經在我的最愛囉!')
-                            return;
-                        }
-                        Swal.fire(
-                            'Good job!',
-                            '加入我的最愛囉!',
-                            'success'
-                        )
-                    }
-                })
-            }
-
         </script>
     }
 </body>

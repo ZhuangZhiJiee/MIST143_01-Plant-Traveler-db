@@ -43,6 +43,11 @@ namespace MIST143_Traveler.MViewModel
             get;
             set;
         }
+        public int MembersId
+        {
+            get;
+            set;
+        }
       
     }
     

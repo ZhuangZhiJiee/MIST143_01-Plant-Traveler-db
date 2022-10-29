@@ -243,7 +243,7 @@
 img {
     margin-bottom: 8px;
     max-width: 100%;
-   
+    
 }
 
 .activity-card-title {
@@ -406,6 +406,7 @@ img {
     margin: 0 auto;
     position: absolute;
     display: flex;
+    
 }
 
 .cardsize {
