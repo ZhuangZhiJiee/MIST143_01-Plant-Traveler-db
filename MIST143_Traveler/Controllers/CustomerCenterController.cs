@@ -40,26 +40,27 @@ namespace MIST143_Traveler.Controllers
         {
             return View();
         }
-        //會員中心變更保存資料
-        //[HttpPost]
-        //public IActionResult SaveCusInfo(CMemberView inCus)
-        //{
-        //    Member Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == inCus.MembersId);
+        //========================訂單明細顯示=======================
+        public IActionResult OrderDE(int id)
+        {
+            OrderDetail od = _PlanetTravelContext.OrderDetails.FirstOrDefault(a => a.OrderId == id);
+            COrderDetail co = new COrderDetail();
+            co.訂單 = (from a in _PlanetTravelContext.OrderDetails.Where(a => a.OrderId == id)
+                     from b in _PlanetTravelContext.TravelProducts.Where(a => a.TravelProductTypeId == a.TravelProductId)
+                     from c in _PlanetTravelContext.TravelPictures.Where(a => a.TravelProductId == b.TravelProductId)
+                     select new 訂單管理
+                     {
+                         訂單編號=a.OrderId,
+                         商品名稱=b.TravelProductName,
+                         數量=a.Quantity,
+                         購買金額=a.UnitPrice,
+                         訂購日期=a.Order.OrderDate,
+                         FImagePath=c.TravelPicture1,
+                         優惠券=a.Coupon.CouponName,
+                     }).ToList();
 
-        //    if (Cus != null)
-        //    {
-
-        //        //Cus.CityId = ccc.CityId;
-        //        Cus.Address = inCus.Address;
-        //        //Cus.Password = inCus.Password;
-        //        Cus.MemberName = inCus.MemberName;
-        //        Cus.Phone = inCus.Phone;
-        //        Cus.CityId = _PlanetTravelContext.Cities.FirstOrDefault(a => a.CityName == inCus.Cityname).CityId;
-        //        _PlanetTravelContext.SaveChanges();
-        //        return Json(new { Res = true, Msg = "成功" });
-        //    }
-        //    return Json(new { Res = false, Msg = "失敗" });
-        //}
+            return View(co);
+        }
 
         //====================================AJAX上傳圖片=========================
         public IActionResult FileUpLoad(IFormFile files)
@@ -85,6 +86,7 @@ namespace MIST143_Traveler.Controllers
             }
             return Json(new { Res = false, Msg = "失敗" });
         }
+
         [HttpPost]
         public IActionResult SaveCusInfo(CMemberView inCus)
         {
@@ -338,7 +340,7 @@ namespace MIST143_Traveler.Controllers
                                訂單編號 = od.OrderId,
                                商品名稱 = p.TravelProduct.TravelProductName,
                                訂單狀態 = od.OrderStatus.OrderStatusName,
-                               訂購日期 = od.OrderDate,
+                               訂購日期 = DateTime.Parse(od.OrderDate).ToString("yyyy-MM-dd"),
                                購買金額 = p.UnitPrice,
                            }).ToList();
                 if (Cord.訂單.Count > 0)
@@ -530,7 +532,8 @@ namespace MIST143_Traveler.Controllers
                                 產品名稱 = li.TravelProduct.TravelProductName,
                                 內容 = li.CommentText,
                                 分數 = li.Star,
-                                日期 = li.CommentDate
+                                日期 = li.CommentDate,
+                                //DateTime.Parse(od.OrderDate).ToString("yyyy-MM-dd"),
                             }).ToList();
                 if (Comli.評論.Count > 0)
                 {
@@ -541,10 +544,33 @@ namespace MIST143_Traveler.Controllers
             return PartialView("Review");
         }
         //新增評論=============================
-        public IActionResult CommentCreate(int? MembersID) 
+       
+        public IActionResult CommentCreate(int id)
         {
-
-            return View();
+            C新增評論 cc = new C新增評論();
+            cc = (from a in _PlanetTravelContext.Orders.Where(s => s.OrderId == id)
+                  from b in _PlanetTravelContext.Members.Where(d => d.MembersId == a.MembersId)
+                  from c in _PlanetTravelContext.OrderDetails.Where(e => e.OrderId == a.OrderId)
+                  select new C新增評論
+                  {
+                    CMembersId=b.MembersId,
+                    CTravelProductID=c.TravelProductId,
+                  }).FirstOrDefault();
+            
+            return View(cc);
+        }
+        [HttpPost]
+        public IActionResult CommentCreate(Comment comm) 
+        {
+            //var c = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == comm.CMembersId);
+            //if (c != null)
+            //{
+                comm.CommentDate = DateTime.Now.ToString();
+                _PlanetTravelContext.Comments.Add(comm);
+                _PlanetTravelContext.SaveChanges();
+                
+            //}
+            return Json(new { Res=true});
         }
         //評論修改檢視頁
         public IActionResult CommentEdit(int? CommentID)

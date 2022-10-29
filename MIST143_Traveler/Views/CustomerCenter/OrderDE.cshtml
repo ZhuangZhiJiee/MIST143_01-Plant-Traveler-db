@@ -1,0 +1,48 @@
+﻿@model MIST143_Traveler.MViewModel.COrderDetail
+
+@{
+    ViewData["Title"] = "OrderDE";
+    Layout = null;
+}
+
+
+
+<div>
+    <h4>COrderDetail</h4>
+    <hr />
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    商品名稱
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.訂單)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.商品名稱)
+                    </td>
+                </tr>
+               
+
+            }
+        </tbody>
+
+           
+
+        
+    </table>
+
+</div>
+
+    <dl class="row">
+    </dl>
+</div>
+<div>
+   
+    <a asp-action="Index">Back to List</a>
+</div>

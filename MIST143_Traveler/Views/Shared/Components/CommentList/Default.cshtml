@@ -54,7 +54,7 @@
                     @Html.DisplayFor(modelItem => item.日期)
                 </td>
                 <td>
-                    <a class="btn btn-outline-warning" onclick="showmodal('@Url.Action("CommentEdit","CustomerCenter",new {@item.CommentID},Context.Request.Scheme)',null)">編輯</a>
+                    <a class="btn btn-outline-warning" onclick="OrderCancel('@Url.Action("CommentEdit","CustomerCenter",new {@item.CommentID},Context.Request.Scheme)',null)">編輯</a>
                 </td>
                 <td>
                     <button class="delete btn btn-outline-dark" onclick="del()" value="@item.CommentID">刪除</button>
@@ -66,25 +66,43 @@
 </table>
 <!--修改光箱-->
 
-<div class="modal fade" id="newstaticBackdrop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                
 
-            </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send 11message</button>
+
             </div>
 
         </div>
     </div>
 </div>
+
+
+@*<div class="modal fade" id="newstaticBackdrop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send 11message</button>
+                </div>
+
+            </div>
+        </div>
+    </div>*@
 <!--修改光箱-->
 
 <script>
@@ -92,7 +110,7 @@
         var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
         var v = JsonSerializer.Deserialize<Member>(OBJ);
     }
-   
+
     $(document).ready(function () {
         $('#table_idd').DataTable({
             //中文化
@@ -346,12 +364,12 @@
        });
 
 
-   
+
 </script>
 
 @section Scripts{
     <script>
-      
+
     </script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 }
