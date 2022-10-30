@@ -7,6 +7,14 @@
 @section Styles{
     <link rel="stylesheet" href="~/css/travelOrder.css" />
 }
+@{ 
+    decimal FinallyPrice = 0;
+    //for (int i = 0; i <= Model._CShoppingCartDetailViewModel.Count; i++)
+    //{
+    //    FinallyPrice += Model._CShoppingCartDetailViewModel[i].TotalPrice;
+    //}
+    FinallyPrice = Model._CShoppingCartDetailViewModel[0].TotalPrice + Model._CShoppingCartDetailViewModel[1].TotalPrice;
+}
 <nav>
     <div class="secondary-nav payTimeLine">
         <div class="icon">
@@ -170,7 +178,7 @@
                     <div class="rightSide ">
                         <div class="infoRow">
                             <div class="subInfoText">總價</div>
-                            <div class="titleFontStyle"></div>
+                            <div class="titleFontStyle">@FinallyPrice.ToString("###,###,##0")</div>
                         </div>
                     </div>
                         </div>

@@ -166,25 +166,9 @@ namespace MIST143_Traveler.Controllers
             jsonCart = JsonSerializer.Serialize(list);
             HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonCart);
 
-
-            //string jsonBurchased = JsonSerializer.Serialize(s);
-            //HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonBurchased);
             return NoContent();
         }
-        //public IActionResult ShoppingCart()
-        //{
-        //    var shopping = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
-        //    var c = JsonSerializer.Deserialize<CshoppingCartViewModel>(shopping);
-        //    CTranshoppingCartViewModel tsc = new CTranshoppingCartViewModel()
-        //    {
-        //        TravelProductId = c.TravelProductId,
-        //        TravelProductName = pt.TravelProducts.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().TravelProductName,
-        //        Count = c.Count,
-        //        Price = pt.TravelProducts.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().Price,
-        //        productpicture = pt.TravelPictures.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().TravelPicture1,
-        //    };
-        //    return View(tsc);
-        //}
+
         public IActionResult ShoppingCartSession()
         {
             var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
