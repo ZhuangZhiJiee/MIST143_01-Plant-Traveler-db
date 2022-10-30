@@ -4,32 +4,98 @@
     ViewData["Title"] = "OrderDE";
     Layout = null;
 }
-
+<link href="~/css/會員中心/訂單明細.css" rel="stylesheet" />
 
 
 <div>
-    <h4>COrderDetail</h4>
+    <h4>訂單明細</h4>
     <hr />
     <table>
         <thead>
             <tr>
                 <th>
+                    編號
+                </th>
+                <th>
+                    景點
+                </th>
+                <th style="width:280px">
                     商品名稱
                 </th>
+                <th>
+                    單價
+                </th>
+                <th>
+                    數量
+                </th>
+                <th>
+                    付款方式
+                </th>
+                <th>
+                    優惠券
+                </th>
+                <th>
+                    小計
+                </th>
+                <th>
+                    購買日期
+                </th>
+
             </tr>
         </thead>
         <tbody>
-
-            @foreach (var item in Model.訂單)
-            {
+            @{
+                foreach (var item in Model.訂單)
+                {
+              
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.商品名稱)
+                        @item.訂單編號
                     </td>
-                </tr>
-               
+                    <td>
+                       <img style="width:100px" src="https://localhost:44338/images/TravelProductPictures/@item.FImagePath.FirstOrDefault()" />
+                    </td>
+                    <td class="ctd">
+                        @item.商品名稱
+                    </td>
+                    <td>
+                        @item.購買金額.ToString("###,##0")
+                    </td>
+                    <td>
+                        @item.數量
+                    </td>
+                    <td>
+                        @item.付款方式
+                    </td>
 
+                    @{
+                        if (item.優惠券 == null)
+                        {
+                            <td>
+                                無
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.優惠券
+                            </td>
+                        }
+
+
+                    }
+                    <td>
+                        @(item.數量* item.購買金額)
+                    </td>
+                    <td>
+                        @item.訂購日期
+                    </td>
+
+                </tr>
+                        }
             }
+
+
         </tbody>
 
            
@@ -41,8 +107,3 @@
 
     <dl class="row">
     </dl>
-</div>
-<div>
-   
-    <a asp-action="Index">Back to List</a>
-</div>

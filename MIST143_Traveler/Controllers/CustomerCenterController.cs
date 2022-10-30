@@ -43,22 +43,31 @@ namespace MIST143_Traveler.Controllers
         //========================訂單明細顯示=======================
         public IActionResult OrderDE(int id)
         {
+           
             OrderDetail od = _PlanetTravelContext.OrderDetails.FirstOrDefault(a => a.OrderId == id);
             COrderDetail co = new COrderDetail();
-            co.訂單 = (from a in _PlanetTravelContext.OrderDetails.Where(a => a.OrderId == id)
-                     from b in _PlanetTravelContext.TravelProducts.Where(a => a.TravelProductTypeId == a.TravelProductId)
-                     from c in _PlanetTravelContext.TravelPictures.Where(a => a.TravelProductId == b.TravelProductId)
+            co.訂單 = (from q in _PlanetTravelContext.Orders.Where(w=>w.OrderId==id)
+                     from a in _PlanetTravelContext.OrderDetails.Where(a => a.OrderId == id)
+                     from b in _PlanetTravelContext.TravelProducts.Where(s => s.TravelProductId == a.TravelProductId)
+                    
                      select new 訂單管理
                      {
+                         TravelProductId=b.TravelProductId,
                          訂單編號=a.OrderId,
                          商品名稱=b.TravelProductName,
                          數量=a.Quantity,
-                         購買金額=a.UnitPrice,
+                         購買金額=(int)a.UnitPrice,
                          訂購日期=a.Order.OrderDate,
-                         FImagePath=c.TravelPicture1,
-                         優惠券=a.Coupon.CouponName,
+                         優惠券 =a.Coupon.CouponName,
+                         付款方式=q.Payment.PaymentName
+                         
                      }).ToList();
-
+            foreach (var item in co.訂單)
+            {
+                item.FImagePath = _PlanetTravelContext.TravelPictures.Where(a => a.TravelProductId == item.TravelProductId).Select(s => s.TravelPicture1).ToList(); 
+            }
+            
+            
             return View(co);
         }
 
@@ -342,6 +351,7 @@ namespace MIST143_Traveler.Controllers
                                訂單狀態 = od.OrderStatus.OrderStatusName,
                                訂購日期 = DateTime.Parse(od.OrderDate).ToString("yyyy-MM-dd"),
                                購買金額 = p.UnitPrice,
+                               數量=p.Quantity,
                            }).ToList();
                 if (Cord.訂單.Count > 0)
                 {

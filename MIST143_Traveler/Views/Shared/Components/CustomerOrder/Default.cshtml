@@ -11,76 +11,80 @@
 <!--RWD CSS-->
 
 @*<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css" />*@
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css" />*@
+
 
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
-    <h3 class="mb-5">我的訂單</h3>
-    <table id="table_id" class="display responsive nowrap">
-        <thead>
-            <tr>
-                <th>
-                    編號
-                </th>
-                <th>
-                    商品名稱
-                </th>
-                <th>
-                    訂購日期
-                </th>
-                <th>
-                    購買金額
-                </th>
-                <th>
-                    訂單狀態
-                </th>
-                <th>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.訂單)
-            {
 
-                <tr class="樣式">
-                    <td id="訂單編號">
-                        @Html.DisplayFor(modelItem => item.訂單編號)
-                    </td>
-                    <td>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("OrderDE", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">@Html.DisplayFor(modelItem => item.商品名稱)</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.訂購日期)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.購買金額)
-                    </td>
-                    <td class="statuss" id="stat" value="@item.訂單狀態">
-                        @Html.DisplayFor(modelItem => item.訂單狀態)
-                    </td>
-                    @{
-                        if (item.訂單狀態 == "訂單完成")
-                        {
-                            <td>
-                                <a class="btn btn-outline-success" id="Create" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("CommentCreate", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">我要評論</a>
-                                <a class="btn btn-outline-danger Cancel" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("OrderCancel", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">申請取消</a>
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                            </td>
-                        }
+<h3 class="mb-5">我的訂單</h3>
+<table id="table_id" class="display responsive nowrap">
+    <thead>
+        <tr>
+            <th>
+                編號
+            </th>
+            <th>
+                商品名稱
+            </th>
+            <th>
+                訂購日期
+            </th>
+            <th>
+                購買金額
+            </th>
+            <th>
+                訂單狀態
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.訂單)
+        {
+
+            <tr class="樣式">
+                <td id="訂單編號">
+                    @Html.DisplayFor(modelItem => item.訂單編號)
+                </td>
+                <td>
+                    <a type="button" data-bs-toggle="modal" data-bs-target="#ORD" onclick="Odd('@Url.Action("OrderDE", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">@Html.DisplayFor(modelItem => item.商品名稱)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.訂購日期)
+                </td>
+                <td>
+
+                    @Convert.ToInt32(item.購買金額 * item.數量)
+                </td>
+                <td class="statuss" id="stat" value="@item.訂單狀態">
+                    @Html.DisplayFor(modelItem => item.訂單狀態)
+                </td>
+                @{
+                    if (item.訂單狀態 == "訂單完成")
+                    {
+                        <td>
+                            <a class="btn btn-outline-success" id="Create" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("CommentCreate", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">我要評論</a>
+                            <a class="btn btn-outline-danger Cancel" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("OrderCancel", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">申請取消</a>
+                        </td>
                     }
+                    else
+                    {
+                        <td>
+                        </td>
+                    }
+                }
 
-                </tr>
-            }
-        </tbody>
+            </tr>
+        }
+    </tbody>
 
-    </table>
+</table>
 
-@*<button class="delete" value="@item.orderId">取消</button>*@
+@*評論用*@
+
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -91,16 +95,46 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-               
+
+
 
 
             </div>
-          
+
         </div>
     </div>
 </div>
 
+@*訂單明細用*@
+@*<div class="modal fade" id="ORD" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content d-flex justify-content-center" style="width:1000px">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="selectTree" class="ztree" style="height:300px;overflow:auto; ">
 
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>*@
+<div id="ORD" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="newstaticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width:1000px">
+            <div id="_modalDialog_body" class="modal-body">
+                <div id="selectTree" class="ztree" style="height:300px;overflow:auto; ">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     @{
@@ -367,7 +401,7 @@
             Star: $("#Star").text(),
         }
 
-        
+
         console.log(Cdata)
         $.ajax({
             url: '@Url.Action("CommentCreate", "CustomerCenter")',
@@ -382,7 +416,7 @@
                         '',
                         'success')
                     $('#exampleModal').modal('hide')
-                    
+
                     $('#cont').load('@Url.Action("Order", "CustomerCenter",new {v.MembersId})')
                 }
             }

@@ -22,3 +22,14 @@ OrderCancel = (url, title) => {
         }
     })
 }
+Odd = (url, title) => {
+    $.ajax({
+        type: "GET",
+        url: url,
+        success: function (res) {
+            $("#ORD .modal-body").html(res);
+            $("#ORD .modal-title").html(title);
+            $("#ORD").modal('show');
+        }
+    })
+}
