@@ -9,11 +9,11 @@ namespace MIST143_Traveler.ShoppingViewModel
     public class CShoppingCartDetailViewModel
     {
         public int TravelProductId { get; set; }
-        public int Count { get; set; }
         public string TravelProductName { get; set; }
-        public int Productpicture { get; set; }
+        public int Count { get; set; }
         public decimal Price { get; set; }
-        public decimal TotalPrice { get; set; }
+        public decimal TotalPrice { get { return this.Count * this.Price; } }
+        public string Productpicture { get; set; }
     }
 
 
