@@ -37,7 +37,7 @@ namespace MIST143_Traveler.Controllers
                     EventIntroduction = s.EventIntroduction,
                     MapUrl = s.MapUrl,
                     PreparationDescription = s.PreparationDescription,
-                    productpictures = s.TravelPictures.ToList(),
+                    Productpictures = s.TravelPictures.ToList(),
                     Date = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
                     HotelName = s.TravelProductDetails.Where(p => p.TravelProductId == s.TravelProductId).Select(p => p.Hotel.HotelName).ToList(),
                     DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
@@ -65,7 +65,7 @@ namespace MIST143_Traveler.Controllers
                    EventIntroduction = s.EventIntroduction,
                    MapUrl = s.MapUrl,
                    PreparationDescription = s.PreparationDescription,
-                   productpictures = s.TravelPictures.ToList(),
+                   Productpictures = s.TravelPictures.ToList(),
                    Date = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
                    HotelName = s.TravelProductDetails.Where(p => p.TravelProductId == s.TravelProductId).Select(p => p.Hotel.HotelName).ToList(),
                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
@@ -92,7 +92,7 @@ namespace MIST143_Traveler.Controllers
                    EventIntroduction = s.EventIntroduction,
                    MapUrl = s.MapUrl,
                    PreparationDescription = s.PreparationDescription,
-                   productpictures = s.TravelPictures.ToList(),
+                   Productpictures = s.TravelPictures.ToList(),
                    Date = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
                    HotelName = s.TravelProductDetails.Where(p => p.TravelProductId == s.TravelProductId).Select(p => p.Hotel.HotelName).ToList(),
                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
@@ -146,15 +146,15 @@ namespace MIST143_Traveler.Controllers
         public IActionResult AddToSession(CAddToSessionViewModel s) 
         {
             string jsonCart = "";
-            List<CshoppingCartViewModel> list = null;
+            List<CShoppingCartDetailViewModel> list = null;
             if (!HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
-                list = new List<CshoppingCartViewModel>();
+                list = new List<CShoppingCartDetailViewModel>();
             else
             {
                 jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
-                list = JsonSerializer.Deserialize<List<CshoppingCartViewModel>>(jsonCart);
+                list = JsonSerializer.Deserialize<List<CShoppingCartDetailViewModel>>(jsonCart);
             }
-            CshoppingCartViewModel item = new CshoppingCartViewModel()
+            CShoppingCartDetailViewModel item = new CShoppingCartDetailViewModel()
             {
                 TravelProductId = s.TravelProductId,
                 TravelProductName = s.TravelProductName,
@@ -171,84 +171,46 @@ namespace MIST143_Traveler.Controllers
             //HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonBurchased);
             return NoContent();
         }
-        public IActionResult ShoppingCart()
-        {
-            var shopping = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
-            var c = JsonSerializer.Deserialize<CshoppingCartViewModel>(shopping);
-            CTranshoppingCartViewModel tsc = new CTranshoppingCartViewModel()
-            {
-                TravelProductId = c.TravelProductId,
-                TravelProductName = pt.TravelProducts.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().TravelProductName,
-                Count = c.Count,
-                Price = pt.TravelProducts.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().Price,
-                productpicture = pt.TravelPictures.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().TravelPicture1,
-            };
-            return View(tsc);
-        }
+        //public IActionResult ShoppingCart()
+        //{
+        //    var shopping = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+        //    var c = JsonSerializer.Deserialize<CshoppingCartViewModel>(shopping);
+        //    CTranshoppingCartViewModel tsc = new CTranshoppingCartViewModel()
+        //    {
+        //        TravelProductId = c.TravelProductId,
+        //        TravelProductName = pt.TravelProducts.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().TravelProductName,
+        //        Count = c.Count,
+        //        Price = pt.TravelProducts.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().Price,
+        //        productpicture = pt.TravelPictures.Where(a => a.TravelProductId == c.TravelProductId).FirstOrDefault().TravelPicture1,
+        //    };
+        //    return View(tsc);
+        //}
         public IActionResult ShoppingCartSession()
         {
-            if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
+            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+            var v = JsonSerializer.Deserialize<Member>(Name);
+            string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+            CShoppingCartViewModel scv = new CShoppingCartViewModel()
             {
-                string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
-                List<CshoppingCartViewModel> cart = JsonSerializer.Deserialize<List<CshoppingCartViewModel>>(jsonCart);
-                return View(cart);
-            }
-            else
-                return View();
-        }
-        public IActionResult test(CshoppingCartViewModel p)
-        {
-            List<CshoppingCartViewModel> list = new();
-            list.Add(p);
-                return View(list);
+                MemberName = v.MemberName,
+                Email = v.Email,
+                Phone = v.Phone,
+                _CShoppingCartDetailViewModel = JsonSerializer.Deserialize<List<CShoppingCartDetailViewModel>>(jsonCart),
+            };
+
+            return View(scv);
         }
         [HttpPost]
-        public IActionResult PayData(CshoppingCartViewModel p)
+        public IActionResult PayData(CShoppingCartViewModel p)
         {
-            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
-            var v = JsonSerializer.Deserialize<Member>(Name);
-    
-            CProductMemberViewModel pmv = new CProductMemberViewModel();
+            return View(p);
+
+        }
+        [HttpPost]
+        public IActionResult PayCheckout(CShoppingCartViewModel p)
+        {
             
-
-            pmv.產品會員 = (from c in pt.TravelProducts
-                        where c.TravelProductId == p.TravelProductId
-                        select new 產品會員
-                        {
-                            MemberName = v.MemberName,
-                            Email = v.Email,
-                            Phone = v.Phone,
-                            TravelProductId = c.TravelProductId,
-                            TravelProductName = c.TravelProductName,
-                            Price = c.Price,
-                            productpictures = c.TravelPictures.ToList(),
-                            Count = p.Count,
-                        }).ToList();
-            return View(pmv);
-
-        }
-        [HttpPost]
-        public IActionResult PayCheckout(CshoppingCartViewModel p)
-        {
-            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
-            var v = JsonSerializer.Deserialize<Member>(Name);
-
-            CProductMemberViewModel pmv = new CProductMemberViewModel();
-
-            pmv.產品會員 = (from c in pt.TravelProducts
-                        where c.TravelProductId == p.TravelProductId
-                        select new 產品會員
-                        {
-                            MemberName = v.MemberName,
-                            Email = v.Email,
-                            Phone = v.Phone,
-                            TravelProductId = c.TravelProductId,
-                            TravelProductName = c.TravelProductName,
-                            Price = c.Price,
-                            productpictures = c.TravelPictures.ToList(),
-                            Count = p.Count,
-                        }).ToList();
-            return View(pmv);
+            return View(p);
         }
         [HttpPost]
         public IActionResult PayEnd(CPayViewModel p)

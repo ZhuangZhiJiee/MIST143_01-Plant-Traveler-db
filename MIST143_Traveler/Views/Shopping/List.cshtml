@@ -1,4 +1,4 @@
-﻿@model MIST143_Traveler.MViewModel.CProductViewModel
+﻿@model MIST143_Traveler.ShoppingViewModel.CProductViewModel
 @using Microsoft.AspNetCore.Http
 @using System.Text.Json;
 @inject IHttpContextAccessor Accessor
@@ -28,7 +28,7 @@
             <div class="activity-page-container">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                     <div class="carousel-indicators">
-                        @for (int i = 0; i < Model.productpictures.Count; i++)
+                        @for (int i = 0; i < Model.Productpictures.Count; i++)
                         {
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="carouselExampleIndicators"  aria-current="true" aria-label="幻燈片 1"></button>
                         }
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="carousel-inner 照片的包皮">
-                        @foreach (var item in Model.productpictures)
+                        @foreach (var item in Model.Productpictures)
                         {
                             <div class="carousel-item">
                                 <img src="https://localhost:44338/images/TravelProductPictures/@item.TravelPicture1" class="d-block carouselImg" alt="...">
@@ -206,7 +206,7 @@
                                         <input type="hidden" name="TravelProductName" value="@Model.TravelProductName" />
                                         <input type="hidden" name="Count" value="1" id="postProductNum" />
                                         <input type="hidden" name="Price" value="@Model.Price" />
-                                        <input type="hidden" name="Productpicture" value="@Model.productpictures.FirstOrDefault().TravelPicture1" />
+                                        <input type="hidden" name="Productpicture" value="@Model.Productpictures.FirstOrDefault().TravelPicture1" />
                                         <input type="submit" value="加入購物車" data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3" />
                                     </form>
 
@@ -240,7 +240,7 @@
                 <div class="小介紹">
                     @Model.EventIntroduction
                 </div>
-                @foreach (var item in Model.productpictures)
+                @foreach (var item in Model.Productpictures)
                 {
                     <img src="https://localhost:44338/images/TravelProductPictures/@item.TravelPicture1" class="下圖" />
                     <figcaption class="下圖小字">@item.TravelPictureText</figcaption>
