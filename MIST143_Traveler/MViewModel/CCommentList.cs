@@ -14,18 +14,11 @@ namespace MIST143_Traveler.MViewModel
 
         public int CommentID { get; set; }
     }
-    //public List<int> CommentID11 { get; set; }
-
-    //public List<string> 產品名稱11 { get; set; }
-
- 
-
-    //public List<string> 日期11 { get; set; }
+   
 
     public class 會員評論
     {
 
-        
         public int CommentID { get; set; }
 
         public string 產品名稱 { get; set; }

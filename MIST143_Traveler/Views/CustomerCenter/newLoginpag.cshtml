@@ -102,23 +102,21 @@
         pas.value = "a1234567";
     }
         //登入開始
-        const BtnLogin = () => {
+        const BtnLogin = () => {//ONCLICK事件
 
-        var postData = {
-            Email: $("#Actemail").val(),
+        var postData = {//把要取欄位的值轉成JSON物件
+            Email: $("#Actemail").val(),//EMIL跟PASSWORD名子要跟VIEWMODEL一樣
             Password: $("#Pas").val()
             };
 
-          console.log(123)
-
         $.ajax({
-            url: '@Url.Action("newLoginpag","CustomerCenter")',
-            method: 'POST',
+            url: '@Url.Action("newLoginpag","CustomerCenter")',//傳遞值
+            method: 'POST',//對應左邊的HTTPPOST
             dataType: 'JSON',//前端給後端
-            data: { vModel: postData },
-            success: function (datas) {//從後端傳回前端的動作
+            data: { vModel: postData },//看左邊對應vModel名子要一樣
+            success: function (datas) {//datas是傳回的資料.下面開始操作後續的動作
 
-                if (!datas.res) {
+                if (!datas.res) {//看左邊 如果DATAS傳回失敗的話
                     Swal.fire({
                         icon: 'error',
                         title: '輸入錯誤',
@@ -127,13 +125,12 @@
                     })
                     return;
                 }
-                //todo 顯示剩下訂單
-                //$('cont').load( partialview)
+           
 
-                window.location = "/Home/Index";
+                window.location = "/Home/Index";//成功的話導向首頁
 
             },
-            error: function (err) {
+            error: function (err) {//其他錯誤 代表沒有輸入值
                 Swal.fire('請輸入資料');
             },
 

@@ -1,0 +1,121 @@
+﻿@model MIST143_Traveler.MViewModel.C新增評論
+
+@{
+    ViewData["Title"] = "CommentCreate";
+    Layout = null;
+}
+
+<style>
+
+    ﻿body {
+    }
+
+    .star img {
+        filter: grayscale(1);
+    }
+
+        .star img.active {
+            filter: grayscale(0);
+        }
+</style>
+<h4>評論</h4>
+<hr />
+<div class="row">
+    <div class="col-12">
+        <form asp-action="CommentCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="star">
+                <img src="~/Images/contact/star2.png" />
+                <img src="~/Images/contact/star2.png" />
+                <img src="~/Images/contact/star2.png" />
+                <img src="~/Images/contact/star2.png" />
+                <img src="~/Images/contact/star2.png" />
+                @*<input asp-for="Star" id="Star" value="@Model.Star" class="form-control" />*@
+                <p id="Star"></p>
+
+            </div>
+
+            @*<div class="form-group">
+                <label asp-for="Star" class="control-label"></label>
+                <input asp-for="Star" id="Star" class="form-control" />
+                <span asp-validation-for="Star" class="text-danger"></span>
+            </div>*@
+
+            <div class="form-group">
+
+                <input asp-for="@Model.CMembersId" id="CMembersId" class="form-control" hidden />
+                <span asp-validation-for="@Model.CMembersId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <input asp-for="@Model.CTravelProductID" id="CTravelProductID" class="form-control" hidden />
+                <span asp-validation-for="@Model.CTravelProductID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label"></label>
+                <textarea asp-for="CommentText" id="CommentText" class="form-control"></textarea> 
+                <span asp-validation-for="CommentText" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="CommentDate" class="form-control" hidden />
+                <span asp-validation-for="CommentDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-4 d-flex justify-content-end" >
+                <input value="Create" onclick="COOM()" class="btn btn-warning" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    /*function str() {*/
+
+
+        
+        //可用css("proName","value")來做修改
+
+        $(".star img").mouseenter(function () {
+            /*console.log($(this).index());*/
+            $(this).prevAll("img").addClass("active").end().addClass("active");
+            let score = ($(this).index()) + 1
+            $(this).parent().children("p").text(`${score}`);
+            //console.log($(this).nextAll("p").text());
+        })
+
+        $(".star img").on("mouseleave", function () {
+            $(this).prevAll("img").removeClass("active").end().removeClass("active");
+        })
+
+    $(".star img").click(function () {
+        let isClicked = false;
+            $(this).siblings("img").off("mouseenter").end().off("mouseenter");
+            $(this).siblings("img").off("mouseleave").end().off("mouseleave");
+            isClicked = true;
+       
+
+        $(".star img").dblclick(function () {
+            if (isClicked) {
+                $(this).parent().children("p").text(``);
+                $(this).prevAll("img").removeClass("active").end().removeClass("active");
+                $(this).parent().children("img").on({
+                    mouseenter: function () {
+                        $(this).prevAll("img").addClass("active").end().addClass("active");
+                        let score = ($(this).index()) + 1
+                        $(this).parent().children("p").text(`${score}`);
+                    },
+                    mouseleave: function () {
+                        $(this).prevAll("img").removeClass("active").end().removeClass("active");
+                    }
+                })
+            }
+
+        })
+    })
+    /*}*/
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
