@@ -197,12 +197,12 @@ namespace MIST143_Traveler.Controllers
             return View(p);
         }
         [HttpPost]
-        public IActionResult PayEnd(CPayViewModel p)
+        public IActionResult PayEnd(CShoppingCartViewModel p)
         {
             //歐付寶範圍
             if (p.PaymethodId == 4)
             {
-                string ProductName = pt.TravelProducts.FirstOrDefault(c => c.TravelProductId == p.TravelProductId).TravelProductName;
+                //string ProductName = "";
                 #region 金流支付
                 string tradeNo = Guid.NewGuid().ToString();
                 tradeNo = tradeNo.Substring(tradeNo.Length - 12, 12);
@@ -213,17 +213,18 @@ namespace MIST143_Traveler.Controllers
                 int total = 0;
                 string ItemName = "";
                 //只買一組的寫法，多組要改掉
-                int price = (int)p.UnitPrice;
-                total += ((int)(p.Quantity) * price);
-                ItemName += $"{ProductName} NT$ {Convert.ToInt32(p.UnitPrice).ToString("0")}元 x {p.Quantity}組#";
+                //int price = (int)p.UnitPrice;
+                //total += ((int)(p.Quantity) * price);
+                //ItemName += $"{ProductName} NT$ {Convert.ToInt32(p.UnitPrice).ToString("0")}元 x {p.Quantity}組#";
 
                 //ViewModel的屬性改成List後再用迴圈一個個取出
-                //foreach (var item in inProd.Datas)
-                //{
-                //    int price = (int)item.Price;
-                //    total += ((int)(item.quantity) * price);
-                //    ItemName += $"{item.ProductName} NT${Convert.ToInt32(item.Price).ToString("0")}X{item.quantity}#";
-                //}
+                foreach (var item in p._CPayViewModel)
+                {
+                    //ProductName += pt.TravelProducts.FirstOrDefault(c => c.TravelProductId == item.TravelProductId).TravelProductName;
+                    int price = (int)item.Price;
+                    total += ((int)(item.Count) * price);
+                    ItemName += $"{item.TravelProductName} NT${Convert.ToInt32(item.Price).ToString("0")}元 x {item.Count}組#";
+                }
 
                 //有優惠再去扣除優惠額
                 //total = total - discountmoney;
@@ -267,7 +268,7 @@ namespace MIST143_Traveler.Controllers
                 #endregion
                 return View();
             }
-
+            //========================結帳頁面=========================================================
             var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
             var v = JsonSerializer.Deserialize<Member>(Name);
             Order od = new Order()
@@ -279,15 +280,17 @@ namespace MIST143_Traveler.Controllers
             };
             pt.Orders.Add(od);
             pt.SaveChanges();
-
-            OrderDetail odd = new OrderDetail()
+            for (int i = 0; i < p._CPayViewModel.Count; i++) 
             {
-                OrderId = pt.Orders.OrderBy(e => e.OrderId).LastOrDefault().OrderId,
-                TravelProductId = p.TravelProductId,
-                UnitPrice = p.UnitPrice,
-                Quantity =p.Quantity,
-            };
-            pt.OrderDetails.Add(odd);
+                OrderDetail odd = new OrderDetail()
+                {
+                    OrderId = pt.Orders.OrderBy(e => e.OrderId).LastOrDefault().OrderId,
+                    TravelProductId = p._CPayViewModel[i].TravelProductId,
+                    Quantity = p._CPayViewModel[i].Count,
+                    UnitPrice = p._CPayViewModel[i].Price,
+                };
+                pt.OrderDetails.Add(odd);
+            }
             pt.SaveChanges();
             System.Threading.Thread.Sleep(3000);
             return RedirectToAction("Index", "Home");

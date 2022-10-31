@@ -1,4 +1,4 @@
-﻿@model MIST143_Traveler.MViewModel.CProductMemberViewModel
+﻿@model MIST143_Traveler.ShoppingViewModel.CShoppingCartViewModel
 
 @{
     ViewData["Title"] = "PayCheckout";
@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="~/css/travelOrder.css" />
 }
 @{
-    decimal TotalPrice = Model.產品會員.FirstOrDefault().Price * Model.產品會員.FirstOrDefault().Count;
+    decimal FinallyPrice = 0;
+    for (int i = 0; i <= Model._CShoppingCartDetailViewModel.Count - 1; i++)
+    {
+        FinallyPrice += Model._CShoppingCartDetailViewModel[i].TotalPrice;
+    }
 }
 <!-- 從這邊開始複製header跟nav，上面引用的css位置注意一下-->
 <nav>
@@ -32,8 +36,14 @@
 <!-- 複製到這邊，下面article刪掉測試用內容，寫入自己的html。注意class名稱不要汙染到全域的html標籤 -->
 <article class="payContainer">
     <form method="post" action="PayEnd" id="payType">
-        <input type="hidden" name="TravelProductId" value="@Model.產品會員.FirstOrDefault().TravelProductId" />
         <input type="hidden" name="PaymethodId" value="1" />
+        @for (int i = 0; i < Model._CShoppingCartDetailViewModel.Count; i++)
+        {
+            <input type="hidden" asp-for="_CPayViewModel[i].TravelProductId" value="@Model._CShoppingCartDetailViewModel[i].TravelProductId" />
+            <input type="hidden" asp-for="_CPayViewModel[i].TravelProductName" value="@Model._CShoppingCartDetailViewModel[i].TravelProductName" />
+            <input type="hidden" asp-for="_CPayViewModel[i].Count" value="@Model._CShoppingCartDetailViewModel[i].Count" />
+            <input type="hidden" asp-for="_CPayViewModel[i].Price" value="@Model._CShoppingCartDetailViewModel[i].Price" />
+        }
         <div class="payContainerInner">
             <div>
                 <div class="row">
@@ -109,38 +119,39 @@
                                 </div>
                                 <div class="p-3" id="creditCardBlock">
                                     <div class="creditCardInfo">
-                                        <form>
-                                            <div class="mb-3">
-                                                <label class="col-form-label">卡號:</label>
-                                                <input type="text" id="cardNumberInput" class="form-control">
-                                            </div>
+                                        @*<form>*@
+                                        <div class="mb-3">
+                                            <label class="col-form-label">卡號:</label>
+                                            <input type="text" id="cardNumberInput" class="form-control">
+                                        </div>
 
-                                            <div class="mb-3">
-                                                <div class="row">
-                                                    <div class="col-8">
-                                                        <label class="col-form-label">有效日期:</label>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <label class="col-form-label">安全碼:</label>
-                                                    </div>
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <label class="col-form-label">有效日期:</label>
                                                 </div>
-
-                                                <div class="row">
-                                                    <div class="col-4">
-                                                        <input type="text" class="form-control" id="validMonthInput" placeholder="MM">
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <input type="text" class="form-control" id="validYearInput" placeholder="YYYY">
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <input type="text" class="form-control" id="securityNumberInput">
-                                                    </div>
+                                                <div class="col-4">
+                                                    <label class="col-form-label">安全碼:</label>
                                                 </div>
                                             </div>
-                                        </form>
+
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <input type="text" class="form-control" id="validMonthInput" placeholder="MM">
+                                                </div>
+                                                <div class="col-4">
+                                                    <input type="text" class="form-control" id="validYearInput" placeholder="YYYY">
+                                                </div>
+                                                <div class="col-4">
+                                                    <input type="text" class="form-control" id="securityNumberInput">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*</form>*@
                                         <input class="form-check-input mt-0 " type="checkbox" value=""
                                                aria-label="Checkbox for following text input">
                                         <span>儲存卡片資料至我的帳户，方便下次預訂</span>
+                                        <br />
                                         <button type="button" class="btn btn-main" id="creditCardDemoBtn">DEMO</button>
                                     </div>
                                 </div>
@@ -164,36 +175,39 @@
                             <div class="payInfoRow checkout  p-3">
                                 <div class="left">點擊「確認付款方式」即表示確認訂單與右方總金額無誤，且同意<a>平台服務條款</a>、<a>退改政策</a></div>
                                 <div class="right">
-                                    <div class="mainTitle">NT$ @TotalPrice.ToString("###,###,##0")</div>
-                                    <input type="submit" class="btn btn-main" value="確認付款" id="clickPayBtn"data-bs-toggle="modal" data-bs-target="#joinModal" />
-                                    @*<button type="button" class="btn btn-main" data-bs-toggle="modal" data-bs-target="#joinModal">確認付款</button>*@
+                                    <div class="mainTitle">NT$ @FinallyPrice.ToString("###,###,##0")</div>
+                                    <input type="submit" class="btn btn-main" value="確認付款" id="clickPayBtn" data-bs-toggle="modal" data-bs-target="#joinModal" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-4 ">
+                        @foreach (var item in Model._CShoppingCartDetailViewModel)
+                        {
+
+                            <div class="rightSide ">
+                                <div class="titleFontStyle">@item.TravelProductName</div>
+                                <div class="border-bottom-line"></div>
+                                <div class="infoRow">
+                                    <div class="subInfoText">數量</div>
+                                    <div>@item.Count x 成人</div>
+                                </div>
+                                <div class="border-bottom-line"></div>
+                                <div class="infoRow">
+                                    <div class="subInfoText">單價</div>
+                                    <div class="titleFontStyle">NT$ @item.Price.ToString("###,###,##0")</div>
+                                </div>
+                                <div class="border-bottom-line"></div>
+                                <div class="infoRow">
+                                    <div class="subInfoText">總價</div>
+                                    <div class="titleFontStyle">NT$ @item.TotalPrice.ToString("###,###,##0")</div>
+                                </div>
+                            </div>
+                        }
                         <div class="rightSide ">
-                            <div class="titleFontStyle">@Model.產品會員.FirstOrDefault().TravelProductName</div>
-                            <div class="border-bottom-line"></div>
-                            @*<div class="infoRow">
-            <div class="subInfoText">日期</div>
-            <div>2022年10月11日 10:00 上午</div>
-        </div>*@
-                            <div class="infoRow">
-                                <div class="subInfoText">數量</div>
-                                <div>@Model.產品會員.FirstOrDefault().Count x 成人</div>
-                                <input type="hidden" name="Quantity" value="@Model.產品會員.FirstOrDefault().Count" />
-                            </div>
-                            <div class="border-bottom-line"></div>
-                            <div class="infoRow">
-                                <div class="subInfoText">單價</div>
-                                <div class="titleFontStyle">NT$ @Model.產品會員.FirstOrDefault().Price.ToString("###,###,##0")</div>
-                                <input type="hidden" name="UnitPrice" value="@Model.產品會員.FirstOrDefault().Price.ToString("###,###,##0")" />
-                            </div>
-                            <div class="border-bottom-line"></div>
                             <div class="infoRow">
                                 <div class="subInfoText">總價</div>
-                                <div class="titleFontStyle">NT$ @TotalPrice.ToString("###,###,##0")</div>
+                                <div class="titleFontStyle">NT$ @FinallyPrice.ToString("###,###,##0")</div>
                             </div>
                         </div>
                     </div>
@@ -232,7 +246,7 @@
             $("#validMonthInput").val("12")
             $("#validYearInput").val("2025")
             $("#securityNumberInput").val("367")
-            
+
         });
     </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
