@@ -30,10 +30,6 @@ namespace MIST143_Traveler.MViewModel
         public decimal 購買金額 { get; set; }
         public string 訂單狀態 { get; set; }
 
-        //public string FImagePath
-        //{
-        //    get;set;
-        //}
        public int 數量
         {
             get;set;
@@ -41,6 +37,8 @@ namespace MIST143_Traveler.MViewModel
         public string 優惠券 { get; set; }
 
         public string 付款方式 { get; set; }
+
+        public int 評論狀態 { get; set; }
 
     }
 }

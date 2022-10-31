@@ -347,6 +347,7 @@ namespace MIST143_Traveler.Controllers
                 COrderDetail Cord = new COrderDetail();
                 Cord.訂單 = (from od in _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId)
                            from p in od.OrderDetails.Where(a => a.OrderId == od.OrderId)
+                           
                            select new 訂單管理
                            {
                                orderId = od.OrderId,
@@ -356,7 +357,9 @@ namespace MIST143_Traveler.Controllers
                                訂購日期 = DateTime.Parse(od.OrderDate).ToString("yyyy-MM-dd"),
                                購買金額 = p.UnitPrice,
                                數量=p.Quantity,
-                           }).ToList();
+                               評論狀態 =p.TravelProduct.Comments.Where(a=>a.MembersId==od.MembersId&&a.OrderId==p.OrderId).Count()
+                           }
+                           ).ToList();
                 if (Cord.訂單.Count > 0)
                 {
                     return ViewComponent("CustomerOrder", Cord);
@@ -630,6 +633,7 @@ namespace MIST143_Traveler.Controllers
                   from c in _PlanetTravelContext.OrderDetails.Where(e => e.OrderId == a.OrderId)
                   select new C新增評論
                   {
+                    OrderId=id,
                     CMembersId=b.MembersId,
                     CTravelProductID=c.TravelProductId,
                   }).FirstOrDefault();
@@ -640,18 +644,12 @@ namespace MIST143_Traveler.Controllers
         public IActionResult CommentCreate(Ccomment comm) 
         {
             
-
-            var q = _PlanetTravelContext.Members.Where(a => a.MembersId == comm.MembersId);
             comm.CommentDate = DateTime.Now.ToString();
             comm.CommentStatus = true;
             Comment ss = comm.comment;
-                
-                
-             
                 _PlanetTravelContext.Comments.Add(ss);
                 _PlanetTravelContext.SaveChanges();
-                
-           
+
             return Json(new { Res=true});
         }
         //評論修改檢視頁

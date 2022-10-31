@@ -1,5 +1,7 @@
 ﻿@model MIST143_Traveler.Models.OrderCancel
-
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
 @{
     ViewData["Title"] = "LOrderCancel";
     Layout = null;
@@ -8,12 +10,12 @@
 
 <!--修改光箱-->
 <div>
-    
+
     <form>
         <div class="mb-3">
             <input id="idd" hidden value="@Model.OrderId" />
             <select id="sel" class="form-select" aria-label="Default select example">
-                
+
                 <option selected value="行程規畫不佳">行程規畫不佳</option>
                 <option value="價格較貴">價格較貴</option>
                 <option value="沒有如期收到票券">沒有如期收到票券</option>
@@ -33,16 +35,21 @@
 </div>
 <!--修改光箱-->
 <script>
+     @{
+        var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+        var v = JsonSerializer.Deserialize<Member>(OBJ);
+
+    }
     function se() {
-        
+
             var pData = {
-                
+
                 Titel: $("#sel").val(),
                 CancaelContent: $("#text").val(),
                 OrderId:$("#idd").val(),
             };
         console.log(pData)
-        
+
          $.ajax({
             url: '@Url.Action("OrderCancel", "CustomerCenter")',
             method: 'Post',
@@ -63,12 +70,15 @@
                     '請等待審核~謝謝!',
                     'success'
                 )
+                $('#exampleModal').modal('hide')
+
+                $('#cont').load('@Url.Action("Order", "CustomerCenter",new {v.MembersId})')
             }
-        }) 
+        })
     }
-    
+
 
 </script>
 @*@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}*@
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@

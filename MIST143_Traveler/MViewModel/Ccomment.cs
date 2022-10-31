@@ -57,7 +57,13 @@ namespace MIST143_Traveler.MViewModel
             set { _commment.CommentStatus = value; }
         }
 
-        public int orderId { get; set; }
+
+        public int? OrderId
+        {
+            get { return _commment.OrderId; }
+            set { _commment.OrderId = value; }
+        }
+       
     }
 }
        

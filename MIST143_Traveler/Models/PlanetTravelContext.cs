@@ -125,6 +125,8 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.MembersId).HasColumnName("MembersID");
 
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
                 entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
 
                 entity.HasOne(d => d.Members)

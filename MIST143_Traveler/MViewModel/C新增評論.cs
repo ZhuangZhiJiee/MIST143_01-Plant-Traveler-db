@@ -9,7 +9,7 @@ namespace MIST143_Traveler.MViewModel
     {
         public int CTravelProductID { get; set; }
         public int CMembersId { get; set; }
-
+        public int OrderId { get; set; }
         public string CommentText { get; set; }
         public int Star { get; set; }
         public string CommentDate { get; set; }

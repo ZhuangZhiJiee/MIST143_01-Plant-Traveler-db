@@ -1,12 +1,12 @@
 ﻿/* 開始複製，注意一開始*{}代表全部margin、padding歸0 */
 
 
-.card {
+/*.card {
     margin: 0 auto;
     margin: 2px;
     border-radius: 4px;
 }
-
+*/
 .asd {
     display: flex;
     align-content: center;
