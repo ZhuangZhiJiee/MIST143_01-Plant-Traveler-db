@@ -23,6 +23,7 @@ namespace MIST143_Traveler.ShoppingViewModel
         public List<string> Date { get; set; }
         public List<string> HotelName { get; set; }
         public List<TravelPicture> Productpictures { get; set; }
+        public List<CShoppingCartDetailViewModel> _CShoppingCartDetailViewModel { get; set; }
         public int MembersId { get; set; }
         public bool MyfavoritesID { get; set; }
     }

@@ -9,11 +9,10 @@
 }
 @{ 
     decimal FinallyPrice = 0;
-    //for (int i = 0; i <= Model._CShoppingCartDetailViewModel.Count; i++)
-    //{
-    //    FinallyPrice += Model._CShoppingCartDetailViewModel[i].TotalPrice;
-    //}
-    FinallyPrice = Model._CShoppingCartDetailViewModel[0].TotalPrice + Model._CShoppingCartDetailViewModel[1].TotalPrice;
+    for (int i = 0; i <= Model._CShoppingCartDetailViewModel.Count - 1; i++)
+    {
+        FinallyPrice += Model._CShoppingCartDetailViewModel[i].TotalPrice;
+    }
 }
 <nav>
     <div class="secondary-nav payTimeLine">
@@ -178,7 +177,7 @@
                     <div class="rightSide ">
                         <div class="infoRow">
                             <div class="subInfoText">總價</div>
-                            <div class="titleFontStyle">@FinallyPrice.ToString("###,###,##0")</div>
+                            <div class="titleFontStyle">NT$ @FinallyPrice.ToString("###,###,##0")</div>
                         </div>
                     </div>
                         </div>
