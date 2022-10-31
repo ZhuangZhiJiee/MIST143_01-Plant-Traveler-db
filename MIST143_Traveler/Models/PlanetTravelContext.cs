@@ -543,6 +543,7 @@ namespace MIST143_Traveler.Models
                 entity.HasOne(d => d.TravelProductType)
                     .WithMany(p => p.TravelProducts)
                     .HasForeignKey(d => d.TravelProductTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_TravelProduct_TravelProductType");
             });
 
