@@ -11,13 +11,10 @@ namespace MIST143_Traveler.ShoppingViewModel
         public string MemberName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        
-        //public int TravelProductId { get; set; }
-        //public string TravelProductName { get; set; }
-        //public decimal Price { get; set; }
-        //public int Count { get; set; }
-        //public string Productpicture { get; set; }
+        public int PaymethodId { get; set; }
         public List<CShoppingCartDetailViewModel> _CShoppingCartDetailViewModel { get; set; }
+        public List<CCouponViewModel> _CCouponViewModel { get; set; }
+        public List<CPayViewModel> _CPayViewModel { get; set; }
 
     }
 }
