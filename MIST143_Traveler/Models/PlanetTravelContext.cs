@@ -43,14 +43,14 @@ namespace MIST143_Traveler.Models
         public virtual DbSet<TravelProductType> TravelProductTypes { get; set; }
         public virtual DbSet<View> Views { get; set; }
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=PlanetTravel;Integrated Security=True");
-//            }
-//        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=PlanetTravel;Integrated Security=True");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -118,6 +118,10 @@ namespace MIST143_Traveler.Models
                 entity.Property(e => e.CommentDate)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.CommentStatus)
+                    .IsRequired()
+                    .HasDefaultValueSql("('1')");
 
                 entity.Property(e => e.MembersId).HasColumnName("MembersID");
 
@@ -324,6 +328,8 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
+                entity.Property(e => e.CouponId).HasColumnName("CouponID");
+
                 entity.Property(e => e.MembersId).HasColumnName("MembersID");
 
                 entity.Property(e => e.OrderDate)
@@ -333,6 +339,11 @@ namespace MIST143_Traveler.Models
                 entity.Property(e => e.OrderStatusId).HasColumnName("OrderStatusID");
 
                 entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
+
+                entity.HasOne(d => d.Coupon)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.CouponId)
+                    .HasConstraintName("FK_Order_Coupon");
 
                 entity.HasOne(d => d.Members)
                     .WithMany(p => p.Orders)
@@ -378,18 +389,11 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.OrderDetailId).HasColumnName("OrderDetailID");
 
-                entity.Property(e => e.CouponId).HasColumnName("CouponID");
-
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
                 entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
 
                 entity.Property(e => e.UnitPrice).HasColumnType("money");
-
-                entity.HasOne(d => d.Coupon)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.CouponId)
-                    .HasConstraintName("FK_OrderDetail_Coupon");
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetails)

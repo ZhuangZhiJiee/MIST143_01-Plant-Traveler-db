@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MIST143_Traveler.Models;
 using MIST143_Traveler.Models.miViewModel;
-
+using MimeKit;
+using MailKit.Net.Smtp;
 using MIST143_Traveler.MViewModel;
 
 using System;
@@ -13,6 +14,9 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Protocols;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MIST143_Traveler.Controllers
 {
@@ -58,7 +62,7 @@ namespace MIST143_Traveler.Controllers
                          數量=a.Quantity,
                          購買金額=(int)a.UnitPrice,
                          訂購日期=a.Order.OrderDate,
-                         優惠券 =a.Coupon.CouponName,
+                         優惠券 =q.Coupon.CouponName,
                          付款方式=q.Payment.PaymentName
                          
                      }).ToList();
@@ -449,12 +453,75 @@ namespace MIST143_Traveler.Controllers
             else
                 return Content("", "text/plain");
         }
-
-
+        //=========================忘記密碼============================
         public IActionResult Forgetpas()
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Forgetpas(CLogin Mem)
+        {
+            
+            
+            Member Cust = _PlanetTravelContext.Members.FirstOrDefault(a => a.Email == Mem.Email);
+            if (Cust==null)
+            {
+                return Json(new { Res = false});
+            }
+            // 取出會員信箱
+            string UserEmail = Cust.Email;
+
+
+            //取得系統自定密鑰，在 Web.config 設定
+            //string SecretKey = ConfigurationManager.AppSettings["SecretKey"];
+
+            //產生帳號 + 時間驗證碼
+            string sVerify = Cust.Email + "|" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+            // 將驗證碼使用 3DES 加密
+            //TripleDESCryptoServiceProvider DES = new TripleDESCryptoServiceProvider();
+            //MD5 md5 = new MD5CryptoServiceProvider();
+            ////byte[] buf = Encoding.UTF8.GetBytes(SecretKey);
+            //byte[] result = md5.ComputeHash(buf);
+            //string md5Key = BitConverter.ToString(result).Replace("-", "").ToLower().Substring(0, 24);
+            //DES.Key = UTF8Encoding.UTF8.GetBytes(md5Key);
+            //DES.Mode = CipherMode.ECB;
+            //ICryptoTransform DESEncrypt = DES.CreateEncryptor();
+            //byte[] Buffer = UTF8Encoding.UTF8.GetBytes(sVerify);
+            //sVerify = Convert.ToBase64String(DESEncrypt.TransformFinalBlock(Buffer, 0, Buffer.Length)); // 3DES 加密後驗證碼
+
+            MimeMessage message = new MimeMessage();
+            BodyBuilder builder = new BodyBuilder();
+
+            Random ran = new Random();
+            int rannum = ran.Next(9999) + 1966728;
+            HttpContext.Session.SetInt32(CDictionary.SK_忘記密碼驗證碼, rannum);
+            builder.HtmlBody = $"<p>你好，你的驗證碼為{rannum}</p>" +
+                              $"<div style='border: 2px solid black;text-align: center;'>      </div>" +
+                              $"<p>當前時間:{DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>";
+
+            message.From.Add(new MailboxAddress("PlanetTraveler星球旅遊", "planettravelermsit143@outlook.com"));
+            message.To.Add(new MailboxAddress("親愛的顧客", Mem.Email));
+            message.Subject = "PlanetTraveler星球旅遊:忘記密碼";
+            message.Body = builder.ToMessageBody();
+
+            using (SmtpClient client = new SmtpClient())
+            {
+                client.Connect("smtp.outlook.com", 25, MailKit.Security.SecureSocketOptions.StartTls);
+                client.Authenticate("planettravelermsit143@outlook.com", "gogo1116");
+                client.Send(message);
+                client.Disconnect(true);
+            }
+            return Json(new {Res=true});
+        }
+
+        public IActionResult Resetpas(string email)
+        {
+
+
+            return View(email);
+        }
+
         //==========================================在網頁加到我的最愛==================================
         public IActionResult toMyFavorites(CtoMyFavorites PMID)
         {
@@ -570,16 +637,21 @@ namespace MIST143_Traveler.Controllers
             return View(cc);
         }
         [HttpPost]
-        public IActionResult CommentCreate(Comment comm) 
+        public IActionResult CommentCreate(Ccomment comm) 
         {
-            //var c = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == comm.CMembersId);
-            //if (c != null)
-            //{
-                comm.CommentDate = DateTime.Now.ToString();
-                _PlanetTravelContext.Comments.Add(comm);
+            
+
+            var q = _PlanetTravelContext.Members.Where(a => a.MembersId == comm.MembersId);
+            comm.CommentDate = DateTime.Now.ToString();
+            comm.CommentStatus = true;
+            Comment ss = comm.comment;
+                
+                
+             
+                _PlanetTravelContext.Comments.Add(ss);
                 _PlanetTravelContext.SaveChanges();
                 
-            //}
+           
             return Json(new { Res=true});
         }
         //評論修改檢視頁

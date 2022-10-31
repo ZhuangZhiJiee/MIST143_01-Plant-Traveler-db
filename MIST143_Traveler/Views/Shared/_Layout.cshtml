@@ -67,20 +67,9 @@
                                 </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="color:white;text-decoration:none">
                             <li><a href="@Url.ActionLink("List","CustomerCenter",new {v.MembersId})" class="dropdown-item bi bi-people" type="button">會員專區</a></li>
-
-                            <li><a href="@Url.ActionLink("PayData","Shopping",new {v.MembersId})" class="dropdown-item bi bi-bag" type="button">購物車</a></li>
-                            @*<li><a href="@Url.Content("~/CustomerCenter/Order?MembersID="+i)" class="dropdown-item bi bi-bag" type="button">我的訂單</a></li>*@
-
-                            <li><a href="@Url.ActionLink("Myfavorites","CustomerCenter",new {v.MembersId})" class="dropdown-item bi bi-heart" type="button">我的最愛</a></li>
                             <li><a href="@Url.ActionLink("Coupon","CustomerCenter",new {v.MembersId})" class="dropdown-item bi bi-wallet2" type="button">優惠券</a></li>
-                            <li><a href="@Url.ActionLink("Review","CustomerCenter",new {v.MembersId})" class="dropdown-item bi bi-chat-left-text" type="button">我的評論</a></li>
-                            <li><a href="@Url.ActionLink("Star","CustomerCenter",new {v.MembersId})" class="dropdown-item bi bi-star" type="button">STAR積分</a></li>
                             <li><a href="@Url.ActionLink("Logout","CustomerCenter")" class="dropdown-item bi bi-star" type="button">登出</a></li>
                         </ul>
-
-
-
-                        @*<a class="btn btn-outline-light" href="@Url.Content("~/Home/Index")">登出</a>*@
                     }
                     else
                     {
