@@ -41,12 +41,12 @@
             </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="訂單編號">
         @foreach (var item in Model.訂單)
         {
 
             <tr class="樣式">
-                <td id="訂單編號">
+                <td>
                     @Html.DisplayFor(modelItem => item.訂單編號)
                 </td>
                 <td>
@@ -66,7 +66,7 @@
                     if (item.訂單狀態 == "訂單完成")
                     {
                         <td>
-                            <a class="btn btn-outline-success" id="Create" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("CommentCreate", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">我要評論</a>
+                            <a class="btn btn-outline-success" id="@item.訂單編號" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("CommentCreate", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">我要評論</a>
                             <a class="btn btn-outline-danger Cancel" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("OrderCancel", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">申請取消</a>
                         </td>
                     }
@@ -126,7 +126,7 @@
 </div>*@
 <div id="ORD" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="newstaticBackdrop" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="width:1000px">
+        <div class="modal-content" style="width:1180px">
             <div id="_modalDialog_body" class="modal-body">
                 <div id="selectTree" class="ztree" style="height:300px;overflow:auto; ">
 
@@ -394,7 +394,8 @@
     function COOM()
     {
         var Cdata=
-            {
+        {
+            orderId: $("#訂單編號").find("td:eq(0)").text(),
             TravelProductId: $("#CTravelProductID").val(),
             MembersId: $("#CMembersId").val(),
             CommentText: $("#CommentText").val(),

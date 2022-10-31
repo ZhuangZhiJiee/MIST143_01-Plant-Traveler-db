@@ -13,6 +13,7 @@ namespace MIST143_Traveler.MViewModel
         public int 分數 { get; set; }
 
         public int CommentID { get; set; }
+        
     }
    
 
