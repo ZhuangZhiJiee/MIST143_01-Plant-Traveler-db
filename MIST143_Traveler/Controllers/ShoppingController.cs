@@ -187,6 +187,20 @@ namespace MIST143_Traveler.Controllers
         [HttpPost]
         public IActionResult PayData(CShoppingCartViewModel p)
         {
+            if (HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT) == null)
+            {
+                var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+                var v = JsonSerializer.Deserialize<Member>(Name);
+                CShoppingCartViewModel scv = new CShoppingCartViewModel()
+                {
+                    MemberName = v.MemberName,
+                    Email = v.Email,
+                    Phone = v.Phone,
+                    _CShoppingCartDetailViewModel = p._CShoppingCartDetailViewModel,
+                };
+                return View(scv);
+            }
+            else 
             return View(p);
 
         }
