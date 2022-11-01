@@ -134,6 +134,7 @@
                             </div>
                             <div class="payInfoRow p-3">
                                 <div>點擊「前往付款」，訂單即送出，請於下一步選擇付款方式</div>
+                                <input type="hidden" asp-for="MembersId" value="@Model.MembersId" />
                                 <input type="hidden" asp-for="MemberName" value="@Model.MemberName" />
                                 <input type="hidden" asp-for="Email" value="@Model.Email" />
                                 <input type="hidden" asp-for="Phone" value="@Model.Phone" />
