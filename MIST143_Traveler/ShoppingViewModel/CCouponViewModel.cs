@@ -10,5 +10,7 @@ namespace MIST143_Traveler.ShoppingViewModel
         public int CouponId { get; set; }
         public string CouponName { get; set; }
         public decimal Discount { get; set; }
+        public string Condition { get; set; }
+        public string ExDate { get; set; }
     }
 }

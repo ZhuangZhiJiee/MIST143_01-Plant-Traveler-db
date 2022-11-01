@@ -6,6 +6,8 @@
 
 @section Styles{
     <link rel="stylesheet" href="~/css/travelOrder.css" />
+    <link href="~/css/客戶中心訂單內容物.css" rel="stylesheet" />
+    <link href="~/css/會員中心/優惠券樣式.css" rel="stylesheet" />
 }
 @{
     decimal FinallyPrice = 0;
@@ -38,6 +40,7 @@
     <form method="post" action="PayEnd" id="payType">
         <input type="hidden" name="MembersId" value="@Model.MembersId" />
         <input type="hidden" name="PaymethodId" value="1" />
+        <input type="text" name="CouponId" class="couponIdInput" value="0" />
         @for (int i = 0; i < Model._CShoppingCartDetailViewModel.Count; i++)
         {
             <input type="hidden" asp-for="_CPayViewModel[i].TravelProductId" value="@Model._CShoppingCartDetailViewModel[i].TravelProductId" />
@@ -84,7 +87,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="flexRadioDefault"
                                                id="flexRadioDefault3" value="3">
-                                        <label class="form-check-label" for="flexRadioDefault2">
+                                        <label class="form-check-label" for="flexRadioDefault3">
                                             LINE Pay
                                         </label>
                                     </div>
@@ -96,8 +99,8 @@
                                 <div class="payTypeRow">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                               id="flexRadioDefault3" value="4">
-                                        <label class="form-check-label" for="flexRadioDefault2">
+                                               id="flexRadioDefault4" value="4">
+                                        <label class="form-check-label" for="flexRadioDefault4">
                                             歐付寶
                                         </label>
                                     </div>
@@ -163,11 +166,27 @@
                             <div class="infoBoxOuter">
 
                                 <div class="infoBoxInner">
-                                    <div class="input-group mb-3">
+                                    @*<div class="input-group mb-3">
                                         <input type="text" class="form-control" placeholder="輸入優惠碼"
                                                aria-label="Recipient's username" aria-describedby="button-addon2">
                                         <button class="btn btn-main" type="button" id="button-addon2">使用</button>
-                                    </div>
+                                    </div>*@
+                                    @foreach (var item in Model._CCouponViewModel)
+                                    {
+                                        <input type="text" class="couponIdValue" value="@item.CouponId" />
+                                        <div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
+                                            <div class='coupon-info coupon-info-right-dashed'>
+                                                <div class='coupon-store'>@item.CouponName</div>
+                                                <div class='coupon-price'>折扣 <span class="couponNum">@item.Discount.ToString("###,###,##0")</span> <span>優惠券</span></div>
+                                                <div class='coupon-description'>訂單限滿 @item.Condition 元可使用</div>
+                                            </div>
+                                            <div class='coupon-get'>
+                                                <div class='coupon-desc'>副券</div>
+                                                <div class='coupon-expiry-date'>到期日 @item.ExDate</div>
+                                            </div>
+                                        </div>
+                                    }
+
                                 </div>
                             </div>
                         </div>
@@ -208,8 +227,11 @@
                         <div class="rightSide ">
                             <div class="infoRow">
                                 <div class="subInfoText">總價</div>
-                                <div class="titleFontStyle">NT$ @FinallyPrice.ToString("###,###,##0")</div>
+                                <div class="titleFontStyle">NT$ <span class=" totalPrice">@FinallyPrice.ToString("###,###,##0")</span></div>
                             </div>
+                        </div>
+                        <div class="discountBlock">
+
                         </div>
                     </div>
                 </div>
@@ -241,6 +263,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/travelOrder.js"></script>
     <script>
+        window.onload = function () {
+            $(".coupon").each(function (index) {
+                $(this).on("click", function () {
+                    $(".coupon").each(function (index) {
+                        console.log("conupon index", index)
+                        $(this).removeClass("used")
+                    })
+                    $(this).addClass("used")
+                    let totalPrice = parseInt($('.totalPrice').text().replace(/,/g,""))
+                    let discount = parseInt($('.couponNum').eq(index).text())
+                    $('.discountBlock').html(`<div class="rightSide "> <div class="infoRow"><div class="subInfoText">折扣</div><div class="titleFontStyle">- $ ${discount}</div></div> </div><div class="rightSide "> <div class="infoRow"><div class="subInfoText">總價</div><div class="titleFontStyle">NT$ ${totalPrice - discount}</div></div> </div>`)
+                    $(".couponIdInput").val($(".couponIdValue").eq(index).val())
+                })
+            })
+        }
+
         $('#creditCardDemoBtn').click(function () {
             console.log("demo")
             $("#cardNumberInput").val("5537-0058-9950-3383")
