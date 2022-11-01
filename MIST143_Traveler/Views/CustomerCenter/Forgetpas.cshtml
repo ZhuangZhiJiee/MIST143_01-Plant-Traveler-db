@@ -16,8 +16,11 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" id="fgmail" placeholder="電子郵件地址" aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-warning 按鈕顏色" onclick="fg()" type="button" id="send">送出</button>
+                    
                 </div>
-
+                <div>
+                    <button class="btn btn-success" onclick="demo()" type="button" id="send">DEMO</button>
+                </div>
 
             </div>
 
@@ -29,6 +32,11 @@
 </body>
 @section Scripts{
     <script>
+        function demo()
+        {
+            $("#fgmail").val("planettravelermsit143@outlook.com")
+        }
+
 
     function fg()
     {
