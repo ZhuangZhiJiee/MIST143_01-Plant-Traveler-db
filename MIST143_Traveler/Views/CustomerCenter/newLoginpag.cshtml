@@ -78,6 +78,7 @@
                         <a href="@Url.ActionLink("Forgetpas","CustomerCenter")">Forgot your password?</a>
                     </div>
                     <button type="button" class="btn btn-success" id=" demo" onclick="DemoValue()">Demo</button>
+                    <button type="button" class="btn btn-success" id=" acc" onclick="Demo()">Demo帳號</button>
                 </div>
             </div>
         </div>
@@ -85,10 +86,11 @@
     @*"@Url.ActionLink("Coupon", "CustomerCenter"*@
 
 </body >
-        @*</html>*@
-        @*}*@
-
     <script>
+        function Demo()
+        {
+            $("#Actemail").val("planettravelermsit143@outlook.com")
+        }
 
     const DemoValue = () => {
         let act = document.querySelector("#Actemail");

@@ -25,8 +25,8 @@
 
                         <div class="inputs p-2 flex-fill">
                             @*<header>EMAIL帳號</header>*@
-                            <label asp-for="Email" class="control-label"></label>
-                            <input class="form-control" type="email" for="Email" placeholder="123" aria-label="default input example" name="Email" id="Email" required>
+                            <label class="control-label">Email(登入帳號)</label>
+                            <input class="form-control" type="email" for="Email" placeholder="aaaaa@gmail.com" aria-label="default input example" name="Email" id="Email" required>
                             @*<span asp-validation-for="Email" class="text-danger"></span>*@
                             <div><small id="sm" class="form-text text-muted"></small></div>
                         </div>
@@ -34,12 +34,12 @@
                     </div>
                     <div class="box_body d-flex  mb-2">
                         <div class="inputs p-2 flex-fill">
-                            <label asp-for="MemberName" class="control-label"></label>
+                            <label class="control-label">姓名</label>
                             <input class="form-control" asp-for="MemberName" type="text" placeholder="名稱" aria-label="default input example" name="MemberName" id="Name">
                         </div>
 
                         <div class="inputs p-2 flex-fill">
-                            <label asp-for="Phone" class="control-label"></label>
+                            <label class="control-label">連絡電話</label>
                             <input class="form-control" asp-for="Phone" type="text" placeholder="PHONE" aria-label="default input example" name="Phone" id="Phone">
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                     <div class="box_body d-flex  mb-2">
                         <div class="inputs p-2 flex-fill">
 
-                            <label asp-for="Password" class="control-label"></label>
+                            <label class="control-label">密碼</label>
                             <input class="form-control" asp-for="Password" type="password" placeholder="password" aria-label="default input example" name="Password" id="Password1">
                         </div>
 

@@ -358,6 +358,7 @@ namespace MIST143_Traveler.Controllers
                                購買金額 = p.UnitPrice,
                                數量=p.Quantity,
                                評論狀態 =p.TravelProduct.Comments.Where(a=>a.MembersId==od.MembersId&&a.OrderId==p.OrderId).Count()
+                               
                            }
                            ).ToList();
                 if (Cord.訂單.Count > 0)
@@ -378,23 +379,47 @@ namespace MIST143_Traveler.Controllers
             return View(idd);
         }
 
+        //[HttpPost]
+        //public IActionResult OrderCancel(OrderCancel inD)
+        //{
+        //    OrderCancel co = null;
+        //    if (inD != null)
+        //    {
+
+        //        co = _PlanetTravelContext.Orders.Where(a => a.OrderId == inD.OrderId).Select(s => new OrderCancel
+        //        {
+        //            OrderId = inD.OrderId,
+        //            Titel = inD.Titel,
+        //            CancaelContent = inD.CancaelContent,
+                    
+        //        }).FirstOrDefault();
+
+
+        //        _PlanetTravelContext.OrderCancels.Add(co);
+        //        _PlanetTravelContext.SaveChanges();
+        //        return Json(new { Res = true, Msg = "成功" });
+        //    };
+        //    return Json(new { Res = false, Msg = "失敗" });
+        //}
+
         [HttpPost]
-        public IActionResult OrderCancel(OrderCancel inD)
+        public IActionResult OrderCancel(COrderCancel inD)
         {
-            OrderCancel co = null;
+            _PlanetTravelContext.Orders.ToList();
+            _PlanetTravelContext.OrderStatuses.ToList();
+            OrderCancel CC = new OrderCancel();
+            Order cord = _PlanetTravelContext.Orders.FirstOrDefault(a => a.OrderId == inD.OrderId);
+
             if (inD != null)
             {
 
-                co = _PlanetTravelContext.Orders.Where(a => a.OrderId == inD.OrderId).Select(s => new OrderCancel
-                {
-                    OrderId = inD.OrderId,
-                    Titel = inD.Titel,
-                    CancaelContent = inD.CancaelContent,
-
-                }).FirstOrDefault();
-
-
-                _PlanetTravelContext.OrderCancels.Add(co);
+                
+                CC.Titel = inD.Titel;
+                CC.CancaelContent = inD.CancaelContent;
+                CC.OrderId = inD.OrderId;
+                CC = inD.ordercancel;
+                cord.OrderStatusId =1;
+                _PlanetTravelContext.OrderCancels.Add(CC);
                 _PlanetTravelContext.SaveChanges();
                 return Json(new { Res = true, Msg = "成功" });
             };
@@ -475,35 +500,20 @@ namespace MIST143_Traveler.Controllers
             string UserEmail = Cust.Email;
 
 
-            //取得系統自定密鑰，在 Web.config 設定
-            //string SecretKey = ConfigurationManager.AppSettings["SecretKey"];
-
-            //產生帳號 + 時間驗證碼
-            string sVerify = Cust.Email + "|" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-
-            // 將驗證碼使用 3DES 加密
-            //TripleDESCryptoServiceProvider DES = new TripleDESCryptoServiceProvider();
-            //MD5 md5 = new MD5CryptoServiceProvider();
-            ////byte[] buf = Encoding.UTF8.GetBytes(SecretKey);
-            //byte[] result = md5.ComputeHash(buf);
-            //string md5Key = BitConverter.ToString(result).Replace("-", "").ToLower().Substring(0, 24);
-            //DES.Key = UTF8Encoding.UTF8.GetBytes(md5Key);
-            //DES.Mode = CipherMode.ECB;
-            //ICryptoTransform DESEncrypt = DES.CreateEncryptor();
-            //byte[] Buffer = UTF8Encoding.UTF8.GetBytes(sVerify);
-            //sVerify = Convert.ToBase64String(DESEncrypt.TransformFinalBlock(Buffer, 0, Buffer.Length)); // 3DES 加密後驗證碼
-
             MimeMessage message = new MimeMessage();
             BodyBuilder builder = new BodyBuilder();
 
             Random ran = new Random();
-            int rannum = ran.Next(9999) + 1966728;
+            int rannum = ran.Next(9999) + 54785982;
             HttpContext.Session.SetInt32(CDictionary.SK_忘記密碼驗證碼, rannum);
-            builder.HtmlBody = $"<p>你好，你的驗證碼為{rannum}</p>" +
+            builder.HtmlBody = $"<p>你好，您的新密碼為{rannum}</p>" +
+                              
                               $"<div style='border: 2px solid black;text-align: center;'>      </div>" +
-                              $"<p>當前時間:{DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>";
+                              $"<p>傳送時間:{DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>";
 
-            message.From.Add(new MailboxAddress("PlanetTraveler星球旅遊", "planettravelermsit143@outlook.com"));
+            Cust.Password = rannum.ToString();
+            _PlanetTravelContext.SaveChanges();
+            message.From.Add(new MailboxAddress("PlanetTraveler星球旅遊", "planettravelermsit143@outlook.complanettravelermsit143@outlook.com"));
             message.To.Add(new MailboxAddress("親愛的顧客", Mem.Email));
             message.Subject = "PlanetTraveler星球旅遊:忘記密碼";
             message.Body = builder.ToMessageBody();
@@ -516,6 +526,7 @@ namespace MIST143_Traveler.Controllers
                 client.Disconnect(true);
             }
             return Json(new {Res=true});
+
         }
 
         public IActionResult Resetpas(string email)

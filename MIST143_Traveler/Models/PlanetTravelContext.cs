@@ -330,6 +330,8 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
+                entity.Property(e => e.AccompanyPeople).HasMaxLength(50);
+
                 entity.Property(e => e.CouponId).HasColumnName("CouponID");
 
                 entity.Property(e => e.MembersId).HasColumnName("MembersID");

@@ -30,9 +30,15 @@ namespace MIST143_Traveler.MViewModel
             get { return _co.CancaelContent; }
             set { _co.CancaelContent = value; }
         }
-        public int OrderId
+
+        public int OrderStatusID
         {
             get; set;
+        }
+        public int OrderId
+        {
+            get { return _co.OrderId; }
+            set { _co.OrderId = value; }
         }
     }
 }
