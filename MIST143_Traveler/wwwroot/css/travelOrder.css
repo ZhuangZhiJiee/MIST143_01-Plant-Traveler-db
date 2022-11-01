@@ -355,3 +355,7 @@ input::-webkit-inner-spin-button {
 #prodctDescriptionHidden,.hiddenEle{
     display:none;
 }
+
+.coupon.used {
+    opacity:0.5 !important;
+}

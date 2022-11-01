@@ -253,6 +253,8 @@ namespace MIST143_Traveler.Controllers
                     CouponId = b.Coupon.CouponId,
                     CouponName = b.Coupon.CouponName,
                     Discount = b.Coupon.Discount,
+                    Condition = b.Coupon.Condition,
+                    ExDate = b.Coupon.ExDate,
                 }).ToList(),
             };
             
@@ -331,14 +333,29 @@ namespace MIST143_Traveler.Controllers
                 return View();
             }
             //========================結帳頁面=========================================================
-            Order od = new Order()
+            if (p.CouponId == 0)
             {
-                MembersId = p.MembersId,
-                PaymentId = p.PaymethodId,
-                OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
-                OrderStatusId = 3,
-            };
-            pt.Orders.Add(od);
+                Order odn = new Order()
+                {
+                    MembersId = p.MembersId,
+                    PaymentId = p.PaymethodId,
+                    OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                    OrderStatusId = 3,
+                };
+                pt.Orders.Add(odn);
+            }
+            else 
+            {
+                Order od = new Order()
+                {
+                    MembersId = p.MembersId,
+                    PaymentId = p.PaymethodId,
+                    OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                    CouponId = p.CouponId,
+                    OrderStatusId = 3,
+                };
+                pt.Orders.Add(od);
+            }
             pt.SaveChanges();
             for (int i = 0; i < p._CPayViewModel.Count; i++) 
             {
@@ -348,6 +365,7 @@ namespace MIST143_Traveler.Controllers
                     TravelProductId = p._CPayViewModel[i].TravelProductId,
                     Quantity = p._CPayViewModel[i].Count,
                     UnitPrice = p._CPayViewModel[i].Price,
+                    
                 };
                 pt.OrderDetails.Add(odd);
             }
