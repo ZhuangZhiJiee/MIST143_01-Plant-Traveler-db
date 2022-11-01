@@ -3,9 +3,6 @@
 @using System.Text.Json;
 @inject IHttpContextAccessor Accessor
 
-
-
-
 @{
     ViewData["Title"] = "List";
 
@@ -20,10 +17,8 @@
     <link rel="stylesheet" href="~/css/travelOrder.css" />
 }
 
-
-
 <body class="p-0 m-0 border-0 bd-example">
-    <div class="p-0 m-0 border-0 mx-auto 最大的">
+    @*<div class="p-0 m-0 border-0 mx-auto 最大的">*@
         <div class="col-10">
             <div class="activity-page-container">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
@@ -72,48 +67,58 @@
         </div>
         <div class="小介紹">
             <div class="評價">
-                <img src="~/Images/Product/一顆星.png" /><span>5.0</span>(3則評價) 3人參加過
-                @{
-                    if (Accessor.HttpContext.Session.Keys.Contains(CDictionary.SK_Login))
+                <div class="小介紹">
+                    旅遊景點:
+                    @foreach (var item in Model._CProductDetailViewModel)
                     {
+                        @foreach (var item2 in item.ViewName)
+                        {
+                            @item2
+                        }
+                    }
+                </div>
+                <div class="小介紹">
+                    @{
+                        if (Accessor.HttpContext.Session.Keys.Contains(CDictionary.SK_Login))
+                        {
 
-                        var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
-                        var v = JsonSerializer.Deserialize<Member>(OBJ);
-                        <div class="我的最愛">
-                            @*<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                            var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+                            var v = JsonSerializer.Deserialize<Member>(OBJ);
+                            <div class="我的最愛">
+                                @*<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                                 <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
                             </svg>*@
-                            <div>
-                                <input type="hidden" id="PID" name="TravelProductId" value="@Model.TravelProductId" />
-                                <input type="hidden" id="MID" name="MembersId" value="@v.MembersId" />
-                                
-                                <label class="btn">
-                                @{
+                                <div>
+                                    <input type="hidden" id="PID" name="TravelProductId" value="@Model.TravelProductId" />
+                                    <input type="hidden" id="MID" name="MembersId" value="@v.MembersId" />
 
-                                    if (Model.MyfavoritesID)
-                                    {
-                                        <input hidden value="true" id="ch" />
-                                        <i id='heart' onclick="love(@Model.TravelProductId)" class='bi bi-heart-fill'>加入我的最愛</i>
-                                    }
-                                    else
-                                    {
-                                        <input hidden value="false" id="ch" />
-                                        <i id='heart' onclick="love(@Model.TravelProductId)" class='bi bi-heart'>加入我的最愛</i>
-                                    }
-                                }
-                                </label>
+                                    <label class="btn">
+                                        @{
+
+                                            if (Model.MyfavoritesID)
+                                            {
+                                                <input hidden value="true" id="ch" />
+                                                <i id='heart' onclick="love(@Model.TravelProductId)" class='bi bi-heart-fill'>加入我的最愛</i>
+                                            }
+                                            else
+                                            {
+                                                <input hidden value="false" id="ch" />
+                                                <i id='heart' onclick="love(@Model.TravelProductId)" class='bi bi-heart'>加入我的最愛</i>
+                                            }
+                                        }
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        
-                    }
 
-                }
+                        }
+
+                    }
+                </div>
             </div>
-        </div>
-        <br />
-        <div class="小介紹" id="prodctDescriptionHidden">@Model.Description</div>
-        <div class="小介紹" id="prodctDescription"></div>
-     
+            <br />
+            <div class="小介紹" id="prodctDescriptionHidden">@Model.Description</div>
+            <div class="小介紹" id="prodctDescription"></div>
+
             <article class="payContainer choose">
                 <div class="payContainerInner">
                     <div>
@@ -127,20 +132,20 @@
                                     </div>
                                     @*<div class="subInfoText ps-3">請選擇參加日期</div>*@
                                     @*<div class="selectInput ps-3">
-            <input type="date" id="start" name="trip-start" class="form-control" value="2022-10-11"
-                   min="2022-10-11" max="2022-12-31">
-        </div>*@
+                                    <input type="date" id="start" name="trip-start" class="form-control" value="2022-10-11"
+                                           min="2022-10-11" max="2022-12-31">
+                                </div>*@
                                     <div class="subInfoText ps-3">方案類型</div>
                                     <div class="payUserRow ps-3">
                                         <div class="payUser active">
                                             @Model.TravelProductName
                                         </div>
                                     </div>
-                                    <div class="subInfoText ps-3">時間</div>
+                                    <div class="subInfoText ps-3">日期</div>
                                     <div class="selectInput ps-3">
-                                        @foreach (var item in Model.Date)
+                                        @foreach (var item in Model._CProductDetailViewModel)
                                         {
-                                            @item<br />
+                                            @item.Date<br />
                                         }
                                     </div>
                                     <br />
@@ -157,10 +162,11 @@
                                     <br />
                                     <div class="subInfoText ps-3">住宿飯店</div>
                                     <div class="selectInput ps-3">
-                                        @foreach (var item in Model.HotelName)
+                                        @foreach (var item in Model._CProductDetailViewModel)
                                         {
-                                            @if (@item != null)
-                                            {@item<br />}
+                                            if (item.HotelName != null)
+                                            {
+                                                @item.Date @item.HotelName}<br />
 
                                         }
                                     </div>
@@ -178,7 +184,7 @@
                                                         -
                                                     </button>
                                                     <div class="number">
-                                                        <input type="number" class="productNumber" id="productNum"  asp-for="_CShoppingCartDetailViewModel[0].Count" value="1" />
+                                                        <input type="number" class="productNumber" id="productNum" asp-for="_CShoppingCartDetailViewModel[0].Count" value="1" />
                                                     </div>
                                                     <button type="button" id="productPlus"
                                                             class="btn btn-outline-secondary">
@@ -192,14 +198,14 @@
                                             <div class="my-3">
                                                 <div class="titleFontStyle">NT$ <span id="totalPrice"></span></div>
                                                 <div class="subInfoText">完成所有必填選項</div>
-                                                <div class="subInfoText">剩餘:  @Model.Stocks 個位置</div>
+                                                <div class="subInfoText">剩餘:  @Model.Stocks / @Model.Quantity 個位置</div>
                                             </div>
                                             <div class="rightBtns">
 
                                                 <input type="hidden" asp-for="_CShoppingCartDetailViewModel[0].TravelProductId" value="@Model.TravelProductId" />
-                                                <input type="hidden"  asp-for="_CShoppingCartDetailViewModel[0].TravelProductName" value="@Model.TravelProductName" />
-                                                <input type="hidden"  asp-for="_CShoppingCartDetailViewModel[0].Price" value="@Model.Price" />
-                                                <input type="hidden"  asp-for="_CShoppingCartDetailViewModel[0].Productpicture" value="@Model.Productpictures.FirstOrDefault().TravelPicture1" />
+                                                <input type="hidden" asp-for="_CShoppingCartDetailViewModel[0].TravelProductName" value="@Model.TravelProductName" />
+                                                <input type="hidden" asp-for="_CShoppingCartDetailViewModel[0].Price" value="@Model.Price" />
+                                                <input type="hidden" asp-for="_CShoppingCartDetailViewModel[0].Productpicture" value="@Model.Productpictures.FirstOrDefault().TravelPicture1" />
                                                 <input type="submit" value="  立即預定  " class="btn btn-main ms-3" />
                                             </div>
                                         </div>
@@ -219,7 +225,7 @@
                                 <div class="leftSide grey p-3">
                                     <div class="titleFontStyle">行程明細</div>
                                     <div class="hiddenInfoNote hiddenEle">
-                                    <br />
+                                        <br />
 
                                         @foreach (var item in Model.DailyDetailText)
                                         {
@@ -235,7 +241,7 @@
                     </div>
                 </div>
             </article>
-      
+
             <div class="下面一包">
                 <div class="活動DIV">
                     <h2><span class="一條根"> </span><span>活動介紹</span></h2>
@@ -260,67 +266,37 @@
                     @Model.PreparationDescription
                 </div>
                 <div class="小介紹 preparationDescription"></div>
-                <div class="活動DIV">
-                    <h2><span class="一條根"> </span><span>活動評價</span></h2>
-                    <div class="評論">
-                        <div class="card mb-3" style="max-width: 850px;">
-                            <div class="row g-0">
 
-                                <div class="col-md-1">
-                                    <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
-                                </div>
+                @if (Model._CCommentViewModel != null)
+                {
+                    <div class="活動DIV">
+                        <h2><span class="一條根"> </span><span>活動評價</span></h2>
 
-                                <div class="col-md-10">
-                                    <div class="card-body">
-                                        <h5 class="card-title">恆佑</h5>
-                                        <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
-                                        <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
-                                        <p class="card-text"><small class="text-muted">2022/5/35</small></p>
+                        @foreach (var item in Model._CCommentViewModel)
+                        {
+                            <div class="評論">
+                                <div class="card mb-3" style="max-width: 850px;">
+                                    <div class="row g-0">
+                                        <div class="col-md-1">
+                                            <img src="~/Images/客戶大頭貼/@item.PhotoPath" class="img-fluid rounded-start" alt="...">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="card-body">
+                                                <h5 class="card-title">@item.MemberName</h5>
+                                                <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
+                                                <input type="text" value="@item.Star" />
+                                                <p class="card-text">@item.CommentText。</p>
+                                                <p class="card-text"><small class="text-muted">@item.CommentDate</small></p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="card mb-3" style="max-width: 850px;">
-                            <div class="row g-0">
-
-                                <div class="col-md-1">
-                                    <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
-                                </div>
-
-                                <div class="col-md-10">
-                                    <div class="card-body">
-                                        <h5 class="card-title">恆佑</h5>
-                                        <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
-                                        <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
-                                        <p class="card-text"><small class="text-muted">2022/5/35</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mb-3" style="max-width: 850px;">
-                            <div class="row g-0">
-
-                                <div class="col-md-1">
-                                    <img src="~/Images/Product/_.jpg" class="img-fluid rounded-start" alt="...">
-                                </div>
-
-                                <div class="col-md-10">
-                                    <div class="card-body">
-                                        <h5 class="card-title">恆佑</h5>
-                                        <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
-                                        <p class="card-text">視野極佳很好拍照，風景可讓人放鬆，是不錯的選擇，室內環境很乾淨，可在加購101層票券，第一次體驗88～89樓和101樓層拍照，個人覺得很美很舒適。</p>
-                                        <p class="card-text"><small class="text-muted">2022/5/35</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        }
                     </div>
-                </div>
+                }
             </div>
-    </div>
+        </div>
     <!-- 已加入購物車訊息彈窗 -->
     <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
          style="display: none;">

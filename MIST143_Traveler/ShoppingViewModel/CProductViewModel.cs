@@ -9,10 +9,10 @@ namespace MIST143_Traveler.ShoppingViewModel
 {
     public class CProductViewModel
     {
-        public List<CProductDetailViewModel> _CProductDetailViewModel;
         public int TravelProductId { get; set; }
         public string TravelProductName { get; set; }
         public decimal Price { get; set; }
+        public int Quantity { get; set; }
         public int Stocks { get; set; }
         public string Description { get; set; }
         public string EventIntroduction { get; set; }
@@ -23,7 +23,9 @@ namespace MIST143_Traveler.ShoppingViewModel
         public List<string> Date { get; set; }
         public List<string> HotelName { get; set; }
         public List<TravelPicture> Productpictures { get; set; }
+        public List<CProductDetailViewModel> _CProductDetailViewModel { get; set; }
         public List<CShoppingCartDetailViewModel> _CShoppingCartDetailViewModel { get; set; }
+        public List<CCommentViewModel> _CCommentViewModel { get; set; }
         public int MembersId { get; set; }
         public bool MyfavoritesID { get; set; }
     }

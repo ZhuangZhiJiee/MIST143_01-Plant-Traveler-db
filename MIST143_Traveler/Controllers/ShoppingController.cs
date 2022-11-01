@@ -32,18 +32,27 @@ namespace MIST143_Traveler.Controllers
                     TravelProductName = s.TravelProductName,
                     TravelProductId = s.TravelProductId,
                     Price = s.Price,
+                    Quantity = s.Quentity,
                     Stocks = s.Stocks,
                     Description = s.Description,
                     EventIntroduction = s.EventIntroduction,
                     MapUrl = s.MapUrl,
                     PreparationDescription = s.PreparationDescription,
                     Productpictures = s.TravelPictures.ToList(),
-                    Date = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
-                    HotelName = s.TravelProductDetails.Where(p => p.TravelProductId == s.TravelProductId).Select(p => p.Hotel.HotelName).ToList(),
-                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
-                      _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
+                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),  
+                    _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
                     {
+                        Date = p.Date,
+                        HotelName = p.Hotel.HotelName,
                         ViewName = p.ProductToViews.Select(v => v.View.ViewName).ToList(),
+                    }).ToList(),
+                    _CCommentViewModel = pt.Comments.Where(a => a.TravelProductId == TravelProductId).Select(b => new CCommentViewModel 
+                    {
+                        MemberName = b.Members.MemberName,
+                        PhotoPath = b.Members.PhotoPath,
+                        CommentText = b.CommentText,
+                        Star = b.Star,
+                        CommentDate = b.CommentDate,
                     }).ToList(),
                 }).FirstOrDefault();
            
@@ -60,26 +69,34 @@ namespace MIST143_Traveler.Controllers
                    TravelProductName = s.TravelProductName,
                    TravelProductId = s.TravelProductId,
                    Price = s.Price,
+                   Quantity = s.Quentity,
                    Stocks = s.Stocks,
                    Description = s.Description,
                    EventIntroduction = s.EventIntroduction,
                    MapUrl = s.MapUrl,
                    PreparationDescription = s.PreparationDescription,
                    Productpictures = s.TravelPictures.ToList(),
-                   Date = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
-                   HotelName = s.TravelProductDetails.Where(p => p.TravelProductId == s.TravelProductId).Select(p => p.Hotel.HotelName).ToList(),
                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
                    MembersId = d.MembersId,
                    MyfavoritesID= s.Myfavorites.Where(w => w.MembersId == MembersId && s.TravelProductId == myid.TravelProductId).Any(),
                     _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
                    {
-                       ViewName = p.ProductToViews.Select(v => v.View.ViewName).ToList(),
+                        Date = p.Date,
+                        HotelName = p.Hotel.HotelName,
+                        ViewName = p.ProductToViews.Select(v => v.View.ViewName).ToList(),
+                    }).ToList(),
+                   _CCommentViewModel = pt.Comments.Where(a => a.TravelProductId == TravelProductId).Select(b => new CCommentViewModel
+                   {
+                       MemberName = b.Members.MemberName,
+                       PhotoPath = b.Members.PhotoPath,
+                       CommentText = b.CommentText,
+                       Star = b.Star,
+                       CommentDate = b.CommentDate,
                    }).ToList(),
                }).FirstOrDefault();
                  
                     return View(myfaid);
                 }
-
                 CProductViewModel prMid = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
                .Select(s => new CProductViewModel
                {
@@ -87,20 +104,29 @@ namespace MIST143_Traveler.Controllers
                    TravelProductName = s.TravelProductName,
                    TravelProductId = s.TravelProductId,
                    Price = s.Price,
+                   Quantity = s.Quentity,
                    Stocks = s.Stocks,
                    Description = s.Description,
                    EventIntroduction = s.EventIntroduction,
                    MapUrl = s.MapUrl,
                    PreparationDescription = s.PreparationDescription,
                    Productpictures = s.TravelPictures.ToList(),
-                   Date = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.Date).ToList(),
-                   HotelName = s.TravelProductDetails.Where(p => p.TravelProductId == s.TravelProductId).Select(p => p.Hotel.HotelName).ToList(),
                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
                    MembersId = d.MembersId,
                   
                    _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
                    {
+                       Date = p.Date,
+                       HotelName = p.Hotel.HotelName,
                        ViewName = p.ProductToViews.Select(v => v.View.ViewName).ToList(),
+                   }).ToList(),
+                   _CCommentViewModel = pt.Comments.Where(a => a.TravelProductId == TravelProductId).Select(b => new CCommentViewModel
+                   {
+                       MemberName = b.Members.MemberName,
+                       PhotoPath = b.Members.PhotoPath,
+                       CommentText = b.CommentText,
+                       Star = b.Star,
+                       CommentDate = b.CommentDate,
                    }).ToList(),
                }).FirstOrDefault();
                 return View(prMid);
@@ -171,11 +197,16 @@ namespace MIST143_Traveler.Controllers
 
         public IActionResult ShoppingCartSession()
         {
+            if (HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT) == null) 
+            {
+                return NoContent();
+            }
             var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
             var v = JsonSerializer.Deserialize<Member>(Name);
             string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
             CShoppingCartViewModel scv = new CShoppingCartViewModel()
             {
+                MembersId = v.MembersId,
                 MemberName = v.MemberName,
                 Email = v.Email,
                 Phone = v.Phone,
@@ -193,6 +224,7 @@ namespace MIST143_Traveler.Controllers
                 var v = JsonSerializer.Deserialize<Member>(Name);
                 CShoppingCartViewModel scv = new CShoppingCartViewModel()
                 {
+                    MembersId= v.MembersId,
                     MemberName = v.MemberName,
                     Email = v.Email,
                     Phone = v.Phone,
@@ -207,8 +239,24 @@ namespace MIST143_Traveler.Controllers
         [HttpPost]
         public IActionResult PayCheckout(CShoppingCartViewModel p)
         {
+            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+            var v = JsonSerializer.Deserialize<Member>(Name);
+            CShoppingCartViewModel scv = new CShoppingCartViewModel()
+            {
+                MembersId = p.MembersId,
+                MemberName = p.MemberName,
+                Email = p.Email,
+                Phone = p.Phone,
+                _CShoppingCartDetailViewModel = p._CShoppingCartDetailViewModel,
+                _CCouponViewModel = pt.CouponLists.Where(a => a.MembersId == p.MembersId).Select(b => new CCouponViewModel
+                {
+                    CouponId = b.Coupon.CouponId,
+                    CouponName = b.Coupon.CouponName,
+                    Discount = b.Coupon.Discount,
+                }).ToList(),
+            };
             
-            return View(p);
+            return View(scv);
         }
         [HttpPost]
         public IActionResult PayEnd(CShoppingCartViewModel p)
@@ -283,11 +331,9 @@ namespace MIST143_Traveler.Controllers
                 return View();
             }
             //========================結帳頁面=========================================================
-            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
-            var v = JsonSerializer.Deserialize<Member>(Name);
             Order od = new Order()
             {
-                MembersId = v.MembersId,
+                MembersId = p.MembersId,
                 PaymentId = p.PaymethodId,
                 OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
                 OrderStatusId = 3,
@@ -305,6 +351,16 @@ namespace MIST143_Traveler.Controllers
                 };
                 pt.OrderDetails.Add(odd);
             }
+
+            for (int i = 0; i < p._CPayViewModel.Count; i++) 
+            {
+                TravelProduct prod = pt.TravelProducts.FirstOrDefault(t => t.TravelProductId == p._CPayViewModel[i].TravelProductId);
+                if (prod != null)
+                {
+                    prod.Stocks = prod.Stocks - p._CPayViewModel[i].Count;
+                }
+            }
+
             pt.SaveChanges();
             System.Threading.Thread.Sleep(3000);
             return RedirectToAction("Index", "Home");

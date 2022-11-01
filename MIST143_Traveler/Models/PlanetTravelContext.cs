@@ -48,7 +48,7 @@ namespace MIST143_Traveler.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=PlanetTravel;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=192.168.36.26;Initial Catalog=PlanetTravel;User ID=jay;Password=1234");
             }
         }
 
@@ -330,6 +330,8 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
+                entity.Property(e => e.AccompanyPeople).HasMaxLength(50);
+
                 entity.Property(e => e.CouponId).HasColumnName("CouponID");
 
                 entity.Property(e => e.MembersId).HasColumnName("MembersID");
@@ -518,6 +520,8 @@ namespace MIST143_Traveler.Models
 
                 entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
 
+                entity.Property(e => e.AnotherDepartureDate).HasDefaultValueSql("('none')");
+
                 entity.Property(e => e.CountryId).HasColumnName("CountryID");
 
                 entity.Property(e => e.Description).IsRequired();
@@ -529,6 +533,8 @@ namespace MIST143_Traveler.Models
                 entity.Property(e => e.ProductStatus)
                     .IsRequired()
                     .HasDefaultValueSql("('未上架')");
+
+                entity.Property(e => e.Quentity).HasColumnName("quentity");
 
                 entity.Property(e => e.TravelProductName)
                     .IsRequired()
