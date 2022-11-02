@@ -24,7 +24,7 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult longeee(int? TravelProductId) {
             Cproductlist asd = new Cproductlist();
-            asd.productpicture = _planet.TravelPictures.Where(p => p.TravelProductId == TravelProductId).Select(p => p.TravelPicture1).ToList();
+            asd.productpicture = _planet.TravelPictures.Where(p => p.TravelProductId == TravelProductId).Select(p => p.TravelPicture1).FirstOrDefault();
             return ViewComponent("Productlistpagi",asd);
         
         }

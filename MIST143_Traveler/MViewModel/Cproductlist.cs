@@ -87,7 +87,7 @@ namespace MIST143_Traveler.MViewModel
             return time;
         }
 
-        public List<string> productpicture { get; set; }
+        public string productpicture { get; set; }
         public List<string> TravelPictureText { get; set; }
 
 
