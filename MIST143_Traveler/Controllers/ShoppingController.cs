@@ -278,8 +278,6 @@ namespace MIST143_Traveler.Controllers
         [HttpPost]
         public IActionResult PayCheckout(CShoppingCartViewModel p)
         {
-            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
-            var v = JsonSerializer.Deserialize<Member>(Name);
             CShoppingCartViewModel scv = new CShoppingCartViewModel()
             {
                 MembersId = p.MembersId,
@@ -287,9 +285,10 @@ namespace MIST143_Traveler.Controllers
                 Email = p.Email,
                 Phone = p.Phone,
                 _CShoppingCartDetailViewModel = p._CShoppingCartDetailViewModel,
-                _CCouponViewModel = pt.CouponLists.Where(a => a.MembersId == p.MembersId).Select(b => new CCouponViewModel
+                _CCouponViewModel = pt.CouponLists.Where(a => a.MembersId == p.MembersId && a.CouponStatus == true).Select(b => new CCouponViewModel
                 {
                     CouponId = b.Coupon.CouponId,
+                    CouponListId = b.CouponListId,
                     CouponName = b.Coupon.CouponName,
                     Discount = b.Coupon.Discount,
                     Condition = b.Coupon.Condition,
@@ -394,6 +393,11 @@ namespace MIST143_Traveler.Controllers
                     OrderStatusId = 3,
                 };
                 pt.Orders.Add(od);
+                CouponList couponList = pt.CouponLists.FirstOrDefault(t => t.CouponListId == p.CouponListId);
+                if (couponList != null)
+                {
+                    couponList.CouponStatus = false;
+                }
             }
             pt.SaveChanges();
             for (int i = 0; i < p._CPayViewModel.Count; i++) 

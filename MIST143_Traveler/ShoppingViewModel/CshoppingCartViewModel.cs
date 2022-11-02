@@ -15,6 +15,7 @@ namespace MIST143_Traveler.ShoppingViewModel
         public string AccompanyPeople { get; set; }
         public int PaymethodId { get; set; }
         public int? CouponId { get; set; }
+        public int? CouponListId { get; set; }
         public List<CShoppingCartDetailViewModel> _CShoppingCartDetailViewModel { get; set; }
         public List<CCouponViewModel> _CCouponViewModel { get; set; }
         public List<CPayViewModel> _CPayViewModel { get; set; }
