@@ -1,10 +1,16 @@
 ﻿@model MIST143_Traveler.MViewModel.CCommentList
-
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
 @{
     ViewData["Title"] = "CommentEdit";
     Layout = null;
 }
-@*<script src="~/js/site.js"></script>*@
+@{
+    var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+    var v = JsonSerializer.Deserialize<Member>(OBJ);
+
+}
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 <h4>修改評論</h4>
 <hr />
@@ -20,7 +26,7 @@
             <input asp-for="評論.FirstOrDefault().產品名稱" class="form-control" disabled="disabled" />
         </div>
 
-        
+
 
         <div class="form-group">
             <label asp-for="@Model.評論.FirstOrDefault().內容" class="control-label"></label>
@@ -72,6 +78,16 @@
                     '您的變更已儲存!',
                     '讚啦!',
                     'success')
+                window.onload = function () {
+                    $('#exampleModal').on('hide.bs.modal', function () {
+                        $("body").removeClass('modal-open');
+                        $("body").css('padding-right', '0px');
+                    })
+                };
+                $('#exampleModal').modal('hide')
+                $('#cont').load('@Url.Action("CommentList", "CustomerCenter",new {v.MembersId})')
+                
+
             }
         })
      }

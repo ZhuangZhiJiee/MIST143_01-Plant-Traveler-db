@@ -95,5 +95,8 @@ namespace MIST143_Traveler.MViewModel
         }
         public IFormFile photo { get; set; }
         public string Cityname { get; set; }
+
+        public int myfcount { get; set; }
+        public int myccount { get; set; }
     }
 }

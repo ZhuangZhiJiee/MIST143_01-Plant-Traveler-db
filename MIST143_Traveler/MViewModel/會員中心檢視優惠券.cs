@@ -50,7 +50,7 @@ namespace MIST143_Traveler.MViewModel
             get { return _cp.Condition; }
             set { _cp.Condition = value; }
         }
-        public bool Useful
+        public bool? Useful
         {
             get { return _cp.Useful; }
             set { _cp.Useful = value; }

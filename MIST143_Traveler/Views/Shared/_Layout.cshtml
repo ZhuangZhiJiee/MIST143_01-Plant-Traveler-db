@@ -40,7 +40,7 @@
             </form>
 
             <nav class="main-nav">
-               
+                @*<a href="@Url.Content("~/Home/ContactCenter")">客服中心</a>*@
                 <a href="@Url.Content("~/Home/ContactCenter")">客服中心</a>
                 @{if (Accessor.HttpContext.Session.Keys.Contains(CDictionary.SK_PRODUCT))
                     {
@@ -87,7 +87,7 @@
                             @{
                                 if (v.PhotoPath != null)
                                 {
-                                    <img src="~/Images/客戶大頭貼/@v.PhotoPath" style="width: 30px; height: 30px; border-radius: 50%" />@v.MemberName
+                                    <img src="~/Images/客戶大頭貼/@v.PhotoPath" style="width: 30px; height: 30px; border-radius: 50%" id="smimg" />@v.MemberName
                                 }
                                 else
                                 {
@@ -99,7 +99,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="color:white;text-decoration:none">
                             <li><a href="@Url.ActionLink("List","CustomerCenter",new {v.MembersId})" class="dropdown-item bi bi-people" type="button">會員專區</a></li>
-                            <li><a href="@Url.ActionLink("Coupon","CustomerCenter",new {v.MembersId})" class="dropdown-item bi bi-wallet2" type="button">優惠券</a></li>
+
                             <li><a href="@Url.ActionLink("Logout","CustomerCenter")" class="dropdown-item bi bi-star" type="button">登出</a></li>
                         </ul>
                     }

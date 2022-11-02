@@ -35,6 +35,7 @@ namespace MIST143_Traveler.Controllers
 
         public IActionResult ContactCenter()
         {
+            
             return View(); 
         }
 

@@ -23,118 +23,121 @@
 
 <body>
         <article>
+            <from>
+                <div class="p-5">
+                    <div class="row">
+                        <div class="col-12 col-md-3">
 
-            <div class="p-5">
-                <div class="row">
-                    <div class="col-12 col-md-3">
+                            <div class="card" style="width: 18rem;border:0px;">
+                                @{
+                                    if (Model.PhotoPath != null)
+                                    {
+                                        <label class="btn">
+                                            <input type="file" name="photo" class="form-control" onchange="uploadImg()" id="file" style="display:none" accept="image/*">
+                                            <img src="~/Images/客戶大頭貼/@Model.PhotoPath" id="avatarShow" style="width:240px;height:240px;border-radius:50%" />
+                                        </label>
+                                        <input id="avatar" type="hidden" name="avatar" />
+                                    }
+                                    else
+                                    {
 
-                        <div class="card" style="width: 18rem;border:0px;">
-                            @{
-                                if (Model.PhotoPath != null)
-                                {
-                                    <label class="btn">
-                                        <input type="file" name="photo" class="form-control" onchange="uploadImg()" id="file" style="display:none" accept="image/*">
-                                        <img src="~/Images/客戶大頭貼/@Model.PhotoPath" id="avatarShow" style="width:240px;height:240px;border-radius:50%" />
-                                    </label>
-                                    <input id="avatar" type="hidden" name="avatar" />
-                                }
-                                else
-                                {
-
-                                    <label class="btn">
-                                        <input type="file" name="photo" class="form-control" onchange="uploadImg()" id="file" style="display:none" accept="image/*">
-                                        <img src="~/Images/contact/300.png" id="avatarShow" style="width:240px;height:240px;border-radius:50%" />
-                                    </label>
-                                    <input id="avatar" type="hidden" name="avatar" />
-                                }
-
-                            }
+                                        <label class="btn">
+                                            <input type="file" name="photo" class="form-control" onchange="uploadImg()" id="file" style="display:none" accept="image/*">
+                                            <img src="~/Images/contact/300.png" id="avatarShow" style="width:240px;height:240px;border-radius:50%" />
+                                        </label>
+                                        <input id="avatar" type="hidden" name="avatar" />
+                                    }
 
 
 
+}
 
-                            <div class="card-body mb-3">
-                                @*<input type="file" name="photo" class="form-control" onchange="uploadImg()" id="file">*@
 
-                                @*<input type="submit" value="開始上傳" />*@
+
+
+                                <div class="card-body mb-3">
+                                    @*<input type="file" name="photo" class="form-control" onchange="uploadImg()" id="file">*@
+
+                                    @*<input type="submit" value="開始上傳" />*@
+                                </div>
+
+                            </div>
+
+                            <div id="btnlist">
+                                <div><button id="btncus" class="btn btn-outline-warning 按鈕顏色2 active 選單"><span class="bi bi-people 小圖示"></span>個人資訊</button></div>
+        
+                                <div><button id="btnorder" class="btn btn-outline-warning 按鈕顏色2"><span class=" bi bi-bag 小圖示"></span>訂單管理</button></div>
+                                <div><button id="btnreview" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-chat-left-text 小圖示"></span>我的評論</button></div>
+                                <div><button id="btnlove" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-heart 小圖示"></span>我的最愛(<span id="mm">@Model.myfcount</span>)</button></div>
+                                
+                                <div><button id="btncop" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-wallet2 小圖示"></span>優惠票券(<span id="cc">@Model.myccount</span>)</button></div>
+                                <div><button id="btnstar" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-key 小圖示"></span>修改密碼</button></div>
+
+                            </div>
+                        </div>
+
+                        <div id="cont" class="col-9 col-md-9">
+
+
+
+                            <div class="row row-cols-1">
+                                <div class="col 上面空間 mb-5">
+
+                                    <h3>個人資訊</h3>
+                                    <p>以下資訊僅用於幫助你在付款時自動填寫你的個人資料，你的資料將會安全地保存且不會公開</p>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="MembersId" name="MembersId" id="MembersId" value="@Model.MembersId" class="form-control" type="hidden" />
+                                </div>
+                                <div class="box_body d-flex  mb-2">
+                                    <div class="inputs p-2 flex-fill">
+                                        <header>EMAIL</header>
+                                        <input class="form-control" type="email" asp-for="Email" placeholder="123" aria-label="default input example" name="EMAIL" disabled="disabled">
+                                    </div>
+                                </div>
+
+                                <div class="box_body d-flex  mb-2">
+
+                                    <div class="inputs p-2 flex-fill">
+                                        <header>名稱</header>
+                                        <input class="form-control" asp-for="MemberName" type="text" placeholder="名稱" id="MemberName" aria-label="default input example" name="MemberName">
+                                    </div>
+                                    <div class="inputs p-2 flex-fill">
+                                        <header>聯繫電話</header>
+                                        <input class="form-control" type="text" asp-for="Phone" placeholder="PHONE" id="Phone" aria-label="default input example" name="PHONE">
+                                    </div>
+                                </div>
+
+                                <div class="box_body d-flex  mb-2">
+                                    <div class="inputs p-2 ">
+                                        <header>居住縣市</header>
+                                        <input type="hidden" id="cid" value="@Model.CityId" />
+                                        <select class="form-select" aria-label="Default select example" @*asp-for="CityId"*@ id="CityId" name="Cityname">
+                                            <option selected>@Model.Cityname</option>
+                                        </select>
+                                    </div>
+                                    <div class="inputs p-2 flex-grow-1">
+                                        <header>地址</header>
+                                        <input class="form-control" type="text" asp-for="Address" id="Address" placeholder="北投區111號" aria-label="default input example" name="Address">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="d-flex mb-3">
+                                    <div class="me-auto p-2">
+                                        <button type="submit" class="btn btn-warning 按鈕顏色" id="send" onclick="bb()">儲存</button>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
 
-                        <div>
-                            <div><button id="btncus" class="btn btn-outline-warning 按鈕顏色2 active 選單"><span class="bi bi-people 小圖示"></span>個人資訊</button></div>
-                            <div>@*@Html.ActionLink("個人資訊", "List", "CustomerCenter", null, new { @class = "list-group-item list-group-item-action active", aria_current = "true"  })*@</div>
-                            <div><button id="btnorder" class="btn btn-outline-warning 按鈕顏色2"><span class=" bi bi-bag 小圖示"></span>訂單管理</button></div>
 
-                            <div><button id="btnlove" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-heart 小圖示"></span>我的最愛</button></div>
-                            <div><button id="btnreview" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-chat-left-text 小圖示"></span>我的評論</button></div>
-                            <div><button id="btncop" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-wallet2 小圖示"></span>優惠票券</button></div>
-                            <div><button id="btnstar" class="btn btn-outline-warning 按鈕顏色2"><span class="bi bi-key 小圖示"></span>修改密碼</button></div>
 
-                        </div>
                     </div>
-
-                    <div id="cont" class="col-9 col-md-9">
-
-
-
-                        <div class="row row-cols-1">
-                            <div class="col 上面空間 mb-5">
-
-                                <h3>個人資訊</h3>
-                                <p>以下資訊僅用於幫助你在付款時自動填寫你的個人資料，你的資料將會安全地保存且不會公開</p>
-                            </div>
-                            <div class="form-group">
-                                <input asp-for="MembersId" name="MembersId" id="MembersId" value="@Model.MembersId" class="form-control" type="hidden" />
-                            </div>
-                            <div class="box_body d-flex  mb-2">
-                                <div class="inputs p-2 flex-fill">
-                                    <header>EMAIL</header>
-                                    <input class="form-control" type="email" asp-for="Email" placeholder="123" aria-label="default input example" name="EMAIL" disabled="disabled">
-                                </div>
-                            </div>
-
-                            <div class="box_body d-flex  mb-2">
-
-                                <div class="inputs p-2 flex-fill">
-                                    <header>名稱</header>
-                                    <input class="form-control" asp-for="MemberName" type="text" placeholder="名稱" id="MemberName" aria-label="default input example" name="MemberName">
-                                </div>
-                                <div class="inputs p-2 flex-fill">
-                                    <header>聯繫電話</header>
-                                    <input class="form-control" type="text" asp-for="Phone" placeholder="PHONE" id="Phone" aria-label="default input example" name="PHONE">
-                                </div>
-                            </div>
-
-                            <div class="box_body d-flex  mb-2">
-                                <div class="inputs p-2 ">
-                                    <header>居住縣市</header>
-                                    <input type="hidden" id="cid" value="@Model.CityId" />
-                                    <select class="form-select" aria-label="Default select example" @*asp-for="CityId"*@ id="CityId" name="Cityname">
-                                        <option selected>@Model.Cityname</option>
-                                    </select>
-                                </div>
-                                <div class="inputs p-2 flex-grow-1">
-                                    <header>地址</header>
-                                    <input class="form-control" type="text" asp-for="Address" id="Address" placeholder="北投區111號" aria-label="default input example" name="Address">
-                                </div>
-                            </div>
-
-
-
-                            <div class="d-flex mb-3">
-                                <div class="me-auto p-2">
-                                    <button type="submit" class="btn btn-warning 按鈕顏色" id="send" onclick="bb()">儲存</button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-
                 </div>
-            </div>
+            </from>
         </article>
 </body>
 
@@ -152,6 +155,7 @@
 
             var formData = new FormData();
             formData.append("files", $("#file")[0].files[0]);
+            
             $.ajax({
                 url: "/CustomerCenter/FileUpLoad",
                 type: "Post",
@@ -164,6 +168,7 @@
                 success: function (data) {
                     if (data != "") {
                         $("#avatarShow").attr("src", data);
+                        $("#smimg").attr("src",data)
                         Swal.fire(
                             '照片變更已儲存!',
                             '讚啦!',

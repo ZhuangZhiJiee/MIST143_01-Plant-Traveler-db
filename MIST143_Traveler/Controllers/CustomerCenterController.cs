@@ -94,6 +94,12 @@ namespace MIST143_Traveler.Controllers
                     
                 }
                 string p = "/Images/客戶大頭貼/" + pName;
+                string dd = pName;
+                v.PhotoPath = dd;
+                var s = JsonSerializer.Serialize(v);
+                HttpContext.Session.SetString(CDictionary.SK_Login,s);
+
+
                 return Json(p);
                 //return new ObjectResult(new { status = "success" });
             }
@@ -148,8 +154,12 @@ namespace MIST143_Traveler.Controllers
             CMemberView cm = new CMemberView();
             if (MembersId != 0)
             {
+                var c = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId).Count();
+                var q = _PlanetTravelContext.Myfavorites.Where(a => a.MembersId == MembersId).Count();
                 cm = _PlanetTravelContext.Members.Where(a => a.MembersId == MembersId).Select(a => new CMemberView
                 {
+                    myccount=c,
+                    myfcount= q,
                     member = a,
                     Cityname = a.City.CityName,
 
@@ -271,7 +281,7 @@ namespace MIST143_Traveler.Controllers
                         CouponId=q.CouponId,
                         Condition=q.Condition,
                         ExDate=q.ExDate,
-                        Useful=q.Useful,
+                        Useful=(bool)q.Useful,
                         Discount=q.Discount,
                         CouponName=q.CouponName
                     };
@@ -338,40 +348,80 @@ namespace MIST143_Traveler.Controllers
 
             return View();
         }
-      
+
         //============================找出客戶訂單=============================
-        public IActionResult Order(int MembersId)
-        {
-            if (MembersId != 0)
+        //public IActionResult Order(int MembersId)
+        //{
+        //    if (MembersId != 0)
+        //    {
+        //        COrderDetail Cord = new COrderDetail();
+        //        Cord.訂單 = (from od in _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId)
+        //                   from p in od.OrderDetails.Where(a => a.OrderId == od.OrderId)
+
+        //                   select new 訂單管理
+        //                   {
+        //                       orderId = od.OrderId,
+        //                       訂單編號 = od.OrderId,
+        //                       商品名稱 = p.TravelProduct.TravelProductName,
+        //                       訂單狀態 = od.OrderStatus.OrderStatusName,
+        //                       訂購日期 = DateTime.Parse(od.OrderDate).ToString("yyyy-MM-dd"),
+        //                       購買金額 = p.UnitPrice,
+        //                       數量 = p.Quantity,
+        //                       評論狀態 = p.TravelProduct.Comments.Where(a => a.MembersId == od.MembersId && a.OrderId == p.OrderId).Count()
+
+        //                   }
+        //                   ).ToList();
+        //        if (Cord.訂單.Count > 0)
+        //        {
+        //            return ViewComponent("CustomerOrder", Cord);
+        //        }
+
+
+        //    }
+        //    return ViewComponent("ProductManage");
+        //}
+    public IActionResult Order(int MembersId)
             {
-                COrderDetail Cord = new COrderDetail();
-                Cord.訂單 = (from od in _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId)
-                           from p in od.OrderDetails.Where(a => a.OrderId == od.OrderId)
-                           
-                           select new 訂單管理
-                           {
-                               orderId = od.OrderId,
-                               訂單編號 = od.OrderId,
-                               商品名稱 = p.TravelProduct.TravelProductName,
-                               訂單狀態 = od.OrderStatus.OrderStatusName,
-                               訂購日期 = DateTime.Parse(od.OrderDate).ToString("yyyy-MM-dd"),
-                               購買金額 = p.UnitPrice,
-                               數量=p.Quantity,
-                               評論狀態 =p.TravelProduct.Comments.Where(a=>a.MembersId==od.MembersId&&a.OrderId==p.OrderId).Count()
-                               
-                           }
-                           ).ToList();
-                if (Cord.訂單.Count > 0)
+                if (MembersId != 0)
                 {
-                    return ViewComponent("CustomerOrder", Cord);
+                    var q = _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId);
+                    List<Corderview> Cord = new List<Corderview>();
+                Cord = (from od in _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId)
+                             from p in od.OrderDetails.Where(a => a.OrderId == od.OrderId)
+                             select new Corderview
+                             {
+                                 orderId = od.OrderId,
+                                 訂單編號 = od.OrderId,
+                                 商品名稱 = p.TravelProduct.TravelProductName,
+                                 訂單狀態 = od.OrderStatus.OrderStatusName,
+                                 訂購日期 = DateTime.Parse(od.OrderDate).ToString("yyyy-MM-dd"),
+                                 購買金額 = p.UnitPrice,
+                                 評論狀態 = p.TravelProduct.Comments.Where(a => a.MembersId == od.MembersId && a.OrderId == p.OrderId).Count(),
+                                 數量 = p.Quantity,
+                             }).ToList();
+                
+                var data = (from a in Cord
+                            group a by a.訂單編號 into g
+                            where g.Count() > 1
+                            select g.Key
+                            ).ToList().Distinct();
+                Cord[0].dbb = new List<int>();
+                foreach (var item in data)
+                {
+                    Cord[0].dbb.Add(item);
                 }
+                
+                    if (Cord.Count > 0)
+                    {
+                        return ViewComponent("CustomerOrder", Cord);
+                    }
 
 
+                }
+                return ViewComponent("ProductManage");
             }
-            return ViewComponent("ProductManage");
-            //}
             //===================================客戶取消訂單光箱================================
-        }
+        
         public IActionResult OrderCancel(int id)
         {
             OrderCancel idd = new OrderCancel();
@@ -565,6 +615,7 @@ namespace MIST143_Traveler.Controllers
         {
             if (MembersId != 0||id!=0)
             {
+                var q = _PlanetTravelContext.Myfavorites.Where(a => a.MembersId == MembersId).Count();
                 會員中心檢視最愛 CP = new 會員中心檢視最愛();
                 CP.商品列表 = (from fa in _PlanetTravelContext.Myfavorites.Where(a => a.MembersId == MembersId)
                                from pid in _PlanetTravelContext.TravelProducts.Where(c=>c.TravelProductId==fa.TravelProductId)
@@ -577,6 +628,7 @@ namespace MIST143_Traveler.Controllers
                                Price =pid.Price,
                                TravelPicturePath = pid.TravelPictures.FirstOrDefault().TravelPicture1,
                                MembersId=MembersId,
+                               myfcount=q,
                            }
                          ).ToList();
 
@@ -597,7 +649,17 @@ namespace MIST143_Traveler.Controllers
 
             return PartialView("Myfavorites");
         }
+        public IActionResult Fcount(int MembersId)
+        {
+            var q = _PlanetTravelContext.Myfavorites.Where(a => a.MembersId == MembersId).Count().ToString();
+            return Content(q, "text/plain", System.Text.Encoding.UTF8);
+        }
 
+        public IActionResult Ccount(int MembersId)
+        {
+            var q = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId).Count().ToString();
+            return Content(q, "text/plain", System.Text.Encoding.UTF8);
+        }
         //============================================================================
 
         public IActionResult City(int id)
