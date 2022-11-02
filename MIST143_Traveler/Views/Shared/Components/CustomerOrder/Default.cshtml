@@ -1,4 +1,5 @@
-﻿@model MIST143_Traveler.MViewModel.COrderDetail
+﻿@*@model MIST143_Traveler.MViewModel.COrderDetail*@
+@model List<MIST143_Traveler.MViewModel.Corderview>
 @using Microsoft.AspNetCore.Http
 @using System.Text.Json;
 @inject IHttpContextAccessor Accessor
@@ -9,7 +10,6 @@
 
 <link href="~/css/會員中心/Table.css" rel="stylesheet" />
 <!--RWD CSS-->
-
 @*<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css" />*@
 
@@ -18,7 +18,17 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
 
-<h3 class="mb-5">我的訂單</h3>
+<h3 class="mb-2">我的訂單</h3>
+<div class="dropdown mb-3 d-flex justify-content-end">
+    <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        訂單
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" id="全部">全部</a></li>
+        <li><a class="dropdown-item" id="訂單完成">訂單完成</a></li>
+        <li><a class="dropdown-item" id="訂單取消">訂單取消</a></li>
+    </ul>
+</div>
 <table id="table_id" class="display responsive nowrap">
     <thead>
         <tr>
@@ -45,52 +55,55 @@
         </tr>
     </thead>
     <tbody id="訂單編號">
-        @foreach (var item in Model.訂單)
+        @foreach (var item in Model)
         {
+
+
+
+<tr class="樣式">
+                <td>
             
-        <tr class="樣式">
-            <td>
-                @Html.DisplayFor(modelItem => item.訂單編號)
-            </td>
-            <td>
-                <a type="button" data-bs-toggle="modal" data-bs-target="#ORD" onclick="Odd('@Url.Action("OrderDE", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">@Html.DisplayFor(modelItem => item.商品名稱)</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.訂購日期)
-            </td>
-            <td>
+                    @Html.DisplayFor(modelItem => item.訂單編號)
+                </td>
+                <td>
+                    <a type="button" data-bs-toggle="modal" data-bs-target="#ORD" onclick="Odd('@Url.Action("OrderDE", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">@Html.DisplayFor(modelItem => item.商品名稱)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.訂購日期)
+                </td>
+                <td>
 
-                @Convert.ToInt32(item.購買金額 * item.數量)
-            </td>
-            <td class="statuss" id="stat" value="@item.訂單狀態">
-                @Html.DisplayFor(modelItem => item.訂單狀態)
-            </td>
-            @{
-                if (item.訂單狀態 == "訂單完成" && item.評論狀態 <= 0)
-                {
-                    <td>
-                        <a class="btn btn-outline-success rv" id="@item.訂單編號" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("CommentCreate", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">我要評論</a>
-                    </td>
+                    @Convert.ToInt32(item.購買金額 * item.數量)
+                </td>
+                <td class="statuss" id="stat" value="@item.訂單狀態">
+                    @Html.DisplayFor(modelItem => item.訂單狀態)
+                </td>
+                @{
+                    if (item.訂單狀態 == "訂單完成" && item.評論狀態 <= 0)
+                    {
+                        <td>
+                            <a class="btn btn-outline-success rv" id="@item.訂單編號" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("CommentCreate", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">我要評論</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                        </td>
+                    }
+                    if (item.訂單狀態 == "訂單完成")
+                    {
+                        <td>
+                            <a class="btn btn-outline-danger Cancel" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("OrderCancel", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">申請取消</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                        </td>
+                    }
                 }
-                else
-                {
-                    <td>
-                    </td>
-                }
-                if (item.訂單狀態 == "訂單完成")
-                {
-                    <td>
-                        <a class="btn btn-outline-danger Cancel" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("OrderCancel", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">申請取消</a>
-                    </td>
-                }
-                else
-                {
-                    <td>
-                    </td>
-                }
-            }
 
-        </tr>
+            </tr>
         }
     </tbody>
 
@@ -138,7 +151,17 @@
 
     }
 
-
+    $(function () {
+        $('#訂單取消').on('click', function () {
+            $('.dataTables_filter [type=search]').val("訂單取消").keyup();
+        });
+        $('#訂單完成').on('click', function () {
+            $('.dataTables_filter [type=search]').val("訂單完成").keyup();
+        });
+        $('#全部').on('click', function () {
+            $('.dataTables_filter [type=search]').val("").keyup();
+        });
+    })
 
     $(document).ready(function () {
         $('#table_id').DataTable({
@@ -386,12 +409,12 @@
         });
     });
 
-   
-    
+
+
 
     function COOM()
     {
-        
+
         var Cdata=
         {
             OrderId: $("#jaba").val(),
@@ -414,7 +437,7 @@
                         '',
                         'success')
                     $('#exampleModal').modal('hide')
-                    
+
                     $('#cont').load('@Url.Action("Order", "CustomerCenter",new {v.MembersId})')
                 }
             }
@@ -422,7 +445,7 @@
 
     }
 
-    
+
 
 </script>
 

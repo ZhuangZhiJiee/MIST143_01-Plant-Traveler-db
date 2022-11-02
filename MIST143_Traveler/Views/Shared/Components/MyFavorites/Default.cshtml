@@ -112,18 +112,26 @@
         else
             $("#heart" + i).toggleClass("bi bi-heart")
     }
-    function favC(id)
+    async function favC(id)
     {
-        $.ajax({
-            url: '@Url.Action("LMyFavorites", "CustomerCenter")',
+     await $.ajax({//等待awit做完再執行下面的GET
+            url:'@Url.Action("LMyFavorites", "CustomerCenter")',
             method: 'Post',
             data:{id:id},
 
         }).then(function () {
 
-            $('#cont').load('@Url.Action("LMyFavorites", "CustomerCenter",new {v.MembersId})')
+        $('#cont').load('@Url.Action("LMyFavorites", "CustomerCenter",new {v.MembersId})')
+
         })
 
+         $.get('@Url.Action("Fcount", "CustomerCenter",new {v.MembersId})',
+           function (data) {
+               $('#mm').text(data)
+                console.log(data)
+            }
+           
+         )
     }
 
         /*< i class="bi bi-heart-fill" ></i >*///實心

@@ -40,6 +40,7 @@
             </form>
 
             <nav class="main-nav">
+                @*<a href="@Url.Content("~/Home/ContactCenter")">客服中心</a>*@
                 <a href="@Url.Content("~/Home/ContactCenter")">客服中心</a>
                 <a href="@Url.Content("~/ProductListPage/ProductListHomePage")">最近逛過</a>
 
@@ -51,23 +52,23 @@
                         var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
                         var v = JsonSerializer.Deserialize<Member>(OBJ);
 
-                                <button class="btn btn-light dropdown-toggle" style="text-decoration:none;border:none" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                    @{
-                                        if (v.PhotoPath != null)
-                                        {
-                                            <img src="~/Images/客戶大頭貼/@v.PhotoPath" style="width: 30px; height: 30px; border-radius: 50%" />@v.MemberName
-                                        }
-                                        else
-                                        {
-                                            <img src="~/Images/contact/300.png" id="avatarShow" style="width:30px;height:30px;border-radius:50%" />@v.MemberName
-                                        }
-                                    }
+                        <button class="btn btn-light dropdown-toggle" style="text-decoration:none;border:none" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                            @{
+                                if (v.PhotoPath != null)
+                                {
+                                    <img src="~/Images/客戶大頭貼/@v.PhotoPath" style="width: 30px; height: 30px; border-radius: 50%" id="smimg" />@v.MemberName
+                                }
+                                else
+                                {
+                                    <img src="~/Images/contact/300.png" id="avatarShow" style="width:30px;height:30px;border-radius:50%" />@v.MemberName
+                                }
+                            }
 
 
-                                </button>
+                        </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="color:white;text-decoration:none">
                             <li><a href="@Url.ActionLink("List","CustomerCenter",new {v.MembersId})" class="dropdown-item bi bi-people" type="button">會員專區</a></li>
-                            <li><a href="@Url.ActionLink("Coupon","CustomerCenter",new {v.MembersId})" class="dropdown-item bi bi-wallet2" type="button">優惠券</a></li>
+
                             <li><a href="@Url.ActionLink("Logout","CustomerCenter")" class="dropdown-item bi bi-star" type="button">登出</a></li>
                         </ul>
                     }
@@ -84,7 +85,7 @@
 
 
 
-               
+
             </nav>
             <div class="border-bottom-line"></div>
         </div>

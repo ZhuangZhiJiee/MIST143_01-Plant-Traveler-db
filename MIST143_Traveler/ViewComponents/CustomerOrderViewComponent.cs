@@ -11,8 +11,8 @@ namespace MIST143_Traveler.ViewComponents
     [Microsoft.AspNetCore.Mvc.ViewComponent]
     public class CustomerOrderViewComponent : Microsoft.AspNetCore.Mvc.ViewComponent
     {
-     
-        public async Task<IViewComponentResult> InvokeAsync(COrderDetail Cord)
+
+        public async Task<IViewComponentResult> InvokeAsync(List<Corderview> Cord)
         {
             return View(Cord);
         }
