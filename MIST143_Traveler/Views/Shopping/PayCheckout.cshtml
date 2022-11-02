@@ -41,6 +41,7 @@
         <input type="hidden" name="MembersId" value="@Model.MembersId" />
         <input type="hidden" name="PaymethodId" value="1" />
         <input type="text" name="CouponId" class="couponIdInput" value="0" />
+        <input type="text" name="CouponListId" class="couponIdInput" value="0" />
         @for (int i = 0; i < Model._CShoppingCartDetailViewModel.Count; i++)
         {
             <input type="hidden" asp-for="_CPayViewModel[i].TravelProductId" value="@Model._CShoppingCartDetailViewModel[i].TravelProductId" />
@@ -260,7 +261,6 @@
 <!-- 複製footer的範圍 -->
 <!-- 結束 -->
 @section Scripts{
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/travelOrder.js"></script>
     <script>
         window.onload = function () {
