@@ -42,7 +42,38 @@
             <nav class="main-nav">
                 @*<a href="@Url.Content("~/Home/ContactCenter")">客服中心</a>*@
                 <a href="@Url.Content("~/Home/ContactCenter")">客服中心</a>
-                <a href="@Url.Content("~/ProductListPage/ProductListHomePage")">最近逛過</a>
+                @{if (Accessor.HttpContext.Session.Keys.Contains(CDictionary.SK_PRODUCT))
+                    {
+                        var ASD = Accessor.HttpContext.Session.GetString(CDictionary.SK_PRODUCT);
+                        var a = JsonSerializer.Deserialize<List<MIST143_Traveler.MViewModel.Cproductlist>>(ASD);
+
+                        <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">最近逛過</a>
+                        <ul class="dropdown-menu box wrapper">
+
+                            @{
+                                foreach (var item in a)
+                                {
+
+                                    <li>
+                                        <a class=" ellipsis klsdjfi" href="@Url.Action("List", "shopping", new {TravelProductId=item.TravelProductId })">
+                                            <img src="https://localhost:44338/images/TravelProductPictures/@item.productpicture" class="image" />
+                                            <div class="infoo">
+                                                <h4 class="titlle">@item.TravelProductName</h4>
+                                                <ul class="price">
+                                                    <li>
+                                                        NT: @item.Price.ToString("###,###,##0")
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+
+                            }
+
+                        </ul>
+                    }
+                }
 
                 <a href="@Url.Content("~/Shopping/ShoppingCartSession")">購物車</a>
 

@@ -25,6 +25,45 @@ namespace MIST143_Traveler.Controllers
            
         public IActionResult List(int? TravelProductId,int? MembersId)
         {
+            //---------------------------------------------------------
+            List<Cproductlist> tp = new List<Cproductlist>();
+            var pro = HttpContext.Session.GetString(CDictionary.SK_PRODUCT);
+            var plk = pt.TravelProducts.FirstOrDefault(o => o.TravelProductId == TravelProductId);
+            var q = pt.TravelPictures.Where(o => o.TravelProductId == TravelProductId).Select(i => new Cproductlist
+            {
+                travelProduct = i.TravelProduct,
+                productpicture = i.TravelPicture1,
+            }).FirstOrDefault();
+            //var q1 = pt.TravelPictures.Where(i=>i.TravelProduct.TravelProductType)
+            if (pro != null) 
+            {
+                var poi = JsonSerializer.Deserialize<List<Cproductlist>>(pro);
+                bool ch = true;
+                foreach (var i in poi)
+                {
+                    if (i.TravelProductId == TravelProductId)
+                    {
+                        ch = false;
+
+                    }                   
+                }
+                if (ch) 
+                { 
+                    poi.Add(q);
+                    var tye = JsonSerializer.Serialize(poi);
+                    HttpContext.Session.SetString(CDictionary.SK_PRODUCT, tye);
+                }
+            }
+            else
+            {
+                tp.Add(q);
+                var dfy = JsonSerializer.Serialize(tp);
+                HttpContext.Session.SetString(CDictionary.SK_PRODUCT, dfy);
+            }
+
+
+            //-----------------------------------------------
+
 
             CProductViewModel prod = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
                 .Select(s => new CProductViewModel
@@ -239,8 +278,6 @@ namespace MIST143_Traveler.Controllers
         [HttpPost]
         public IActionResult PayCheckout(CShoppingCartViewModel p)
         {
-            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
-            var v = JsonSerializer.Deserialize<Member>(Name);
             CShoppingCartViewModel scv = new CShoppingCartViewModel()
             {
                 MembersId = p.MembersId,
@@ -248,9 +285,10 @@ namespace MIST143_Traveler.Controllers
                 Email = p.Email,
                 Phone = p.Phone,
                 _CShoppingCartDetailViewModel = p._CShoppingCartDetailViewModel,
-                _CCouponViewModel = pt.CouponLists.Where(a => a.MembersId == p.MembersId).Select(b => new CCouponViewModel
+                _CCouponViewModel = pt.CouponLists.Where(a => a.MembersId == p.MembersId && a.CouponStatus == true).Select(b => new CCouponViewModel
                 {
                     CouponId = b.Coupon.CouponId,
+                    CouponListId = b.CouponListId,
                     CouponName = b.Coupon.CouponName,
                     Discount = b.Coupon.Discount,
                     Condition = b.Coupon.Condition,
@@ -355,6 +393,11 @@ namespace MIST143_Traveler.Controllers
                     OrderStatusId = 3,
                 };
                 pt.Orders.Add(od);
+                CouponList couponList = pt.CouponLists.FirstOrDefault(t => t.CouponListId == p.CouponListId);
+                if (couponList != null)
+                {
+                    couponList.CouponStatus = false;
+                }
             }
             pt.SaveChanges();
             for (int i = 0; i < p._CPayViewModel.Count; i++) 

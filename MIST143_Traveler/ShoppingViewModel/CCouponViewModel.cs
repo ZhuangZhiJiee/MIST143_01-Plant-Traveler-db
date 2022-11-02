@@ -8,6 +8,7 @@ namespace MIST143_Traveler.ShoppingViewModel
     public class CCouponViewModel
     {
         public int CouponId { get; set; }
+        public int CouponListId { get; set; }
         public string CouponName { get; set; }
         public decimal Discount { get; set; }
         public string Condition { get; set; }
