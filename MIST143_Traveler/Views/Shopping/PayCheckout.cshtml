@@ -41,7 +41,7 @@
         <input type="hidden" name="MembersId" value="@Model.MembersId" />
         <input type="hidden" name="PaymethodId" value="1" />
         <input type="text" name="CouponId" class="couponIdInput" value="0" />
-        <input type="text" name="CouponListId" class="couponIdInput" value="0" />
+        <input type="text" name="CouponListId" class="couponListId" value="0" />
         @for (int i = 0; i < Model._CShoppingCartDetailViewModel.Count; i++)
         {
             <input type="hidden" asp-for="_CPayViewModel[i].TravelProductId" value="@Model._CShoppingCartDetailViewModel[i].TravelProductId" />
@@ -168,13 +168,14 @@
 
                                 <div class="infoBoxInner">
                                     @*<div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="輸入優惠碼"
-                                               aria-label="Recipient's username" aria-describedby="button-addon2">
-                                        <button class="btn btn-main" type="button" id="button-addon2">使用</button>
-                                    </div>*@
+            <input type="text" class="form-control" placeholder="輸入優惠碼"
+                   aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-main" type="button" id="button-addon2">使用</button>
+        </div>*@
                                     @foreach (var item in Model._CCouponViewModel)
                                     {
                                         <input type="text" class="couponIdValue" value="@item.CouponId" />
+                                        <input type="text" class="couponListIdValue" value="@item.CouponListId" />
                                         <div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
                                             <div class='coupon-info coupon-info-right-dashed'>
                                                 <div class='coupon-store'>@item.CouponName</div>
@@ -196,7 +197,7 @@
                             <div class="payInfoRow checkout  p-3">
                                 <div class="left">點擊「確認付款方式」即表示確認訂單與右方總金額無誤，且同意<a>平台服務條款</a>、<a>退改政策</a></div>
                                 <div class="right">
-                                    <div class="mainTitle">NT$ @FinallyPrice.ToString("###,###,##0")</div>
+                                    <div class="mainTitle totalBottomPrice">NT$ @FinallyPrice.ToString("###,###,##0")</div>
                                     <input type="submit" class="btn btn-main" value="確認付款" id="clickPayBtn" data-bs-toggle="modal" data-bs-target="#joinModal" />
                                 </div>
                             </div>
@@ -273,8 +274,10 @@
                     $(this).addClass("used")
                     let totalPrice = parseInt($('.totalPrice').text().replace(/,/g,""))
                     let discount = parseInt($('.couponNum').eq(index).text())
-                    $('.discountBlock').html(`<div class="rightSide "> <div class="infoRow"><div class="subInfoText">折扣</div><div class="titleFontStyle">- $ ${discount}</div></div> </div><div class="rightSide "> <div class="infoRow"><div class="subInfoText">總價</div><div class="titleFontStyle">NT$ ${totalPrice - discount}</div></div> </div>`)
+                    $('.discountBlock').html(`<div class="rightSide "> <div class="infoRow"><div class="subInfoText">折扣</div><div class="titleFontStyle redColor">- $ ${discount}</div></div> </div><div class="rightSide "> <div class="infoRow"><div class="subInfoText">總價</div><div class="titleFontStyle">NT$ ${totalPrice - discount}</div></div> </div>`)
                     $(".couponIdInput").val($(".couponIdValue").eq(index).val())
+                    $(".couponListId").val($(".couponListIdValue").eq(index).val())
+                    $(".totalBottomPrice").text(`NT${totalPrice - discount}`)
                 })
             })
         }

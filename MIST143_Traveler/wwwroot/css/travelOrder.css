@@ -352,10 +352,22 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
 #prodctDescriptionHidden,.hiddenEle{
     display:none;
 }
 
 .coupon.used {
     opacity:0.5 !important;
+}
+.redColor{
+    color:red !important;
+}
+.payUserBlock {
+    display: flex;
+    flex-wrap: wrap;
 }
