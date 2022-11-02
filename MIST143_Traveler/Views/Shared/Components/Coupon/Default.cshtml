@@ -34,7 +34,9 @@
                 List<string> Coupon = new List<string>();
                 foreach (var co in Model.優惠券列表)
                 {
-                    Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
+                    if (co.CouponStatus == true)
+                    {
+                        Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
                                 <div class='coupon-info coupon-info-right-dashed'>
                                     <div class='coupon-store'>{co.CouponName}</div>
                                     <div class='coupon-price'>折扣{(int)co.Discount}<span>優惠券</span></div>
@@ -45,6 +47,8 @@
                                     <div class='coupon-expiry-date'>到期日{co.ExDate}</div>
                                 </div>
                             </div>");
+                    }
+
                 }
             }
             @foreach (var g in Coupon)
@@ -71,17 +75,14 @@
             dataType: 'Json',
             data: { Cou: Giftdata },
             success: function (datas) {
-
                 if (!datas.res) {
                     Swal.fire({
                         icon: 'error',
                         title: '輸入錯誤',
                         text: datas.msg,
-
                     })
                     return;
                 }
-                console.log(datas.data)
                 let htmldatas =
                 `
                             <div class='coupon-info coupon-info-right-dashed'>
@@ -105,12 +106,19 @@
                     '',
                     'success'
                 )
-            }
+               }
 
-             })
-          
+        })
+
+
         };
-
+    @*.then(function () {
+            $.get('@Url.Action("Ccount", "CustomerCenter",new {v.MembersId})',
+           function (data) {
+               $('#cc').text(data)
+                console.log(data)
+                       })
+        })*@
 </script>
 
 @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
