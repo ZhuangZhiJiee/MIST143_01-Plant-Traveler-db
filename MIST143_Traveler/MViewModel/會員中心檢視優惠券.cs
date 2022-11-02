@@ -61,8 +61,7 @@ namespace MIST143_Traveler.MViewModel
             set;
         }
 
-
-
+    
 
 
     }
@@ -85,5 +84,11 @@ namespace MIST143_Traveler.MViewModel
             get;
             set;
         }
+        public bool? CouponStatus
+        {
+            get;
+            set;
+        }
+
     }
 }

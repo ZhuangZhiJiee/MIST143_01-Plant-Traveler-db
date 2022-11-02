@@ -161,7 +161,7 @@
                     required: true,
                 },
                 Password2: {
-              
+
                     equalTo:"#Password1",
                     required: true,
                 },
@@ -191,7 +191,7 @@
                     required: '必填',
                 },
                 Password2: {
-                  
+
                     required: '必填',
                     equalTo:"密碼輸入不一致",
                 },
@@ -224,11 +224,33 @@
                     })
                     return;
                 }
-                Swal.fire(
+                @*Swal.fire(
                     '註冊成功!',
-                    '讚啦!',
+                    '將導入登入畫面',
                     'success'
                 ).then(function (result) {
+                    window.location.href = "@Url.ActionLink("newLoginpag","CustomerCenter")";
+                })*@
+
+                let timerInterval
+                Swal.fire({
+                    
+                    title: '註冊成功!',
+                    html: '即將導入登入畫面',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            b.textContent = Swal.getTimerLeft()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        
+                    }
+                }).then(function (result) {
                     window.location.href = "@Url.ActionLink("newLoginpag","CustomerCenter")";
                 })
             }

@@ -154,7 +154,8 @@ namespace MIST143_Traveler.Controllers
             CMemberView cm = new CMemberView();
             if (MembersId != 0)
             {
-                var c = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId).Count();
+                var c = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId&&a.CouponStatus==true).Count();
+                
                 var q = _PlanetTravelContext.Myfavorites.Where(a => a.MembersId == MembersId).Count();
                 cm = _PlanetTravelContext.Members.Where(a => a.MembersId == MembersId).Select(a => new CMemberView
                 {
@@ -246,6 +247,7 @@ namespace MIST143_Traveler.Controllers
                 
                 Coup.優惠券列表= (from Cuu in _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId)
                                   from Cup in _PlanetTravelContext.Coupons.Where(s=>s.CouponId==Cuu.CouponId)
+                                  
                               select new 我的優惠券
                               {
                                  MembersId = MembersId,
@@ -254,6 +256,7 @@ namespace MIST143_Traveler.Controllers
                                  Condition= Cup.Condition,
                                  Discount= Cup.Discount,
                                  ExDate= Cup.ExDate,
+                                CouponStatus=Cuu.CouponStatus,
                               }
                             ).ToList();
             }
@@ -657,7 +660,7 @@ namespace MIST143_Traveler.Controllers
 
         public IActionResult Ccount(int MembersId)
         {
-            var q = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId).Count().ToString();
+            var q = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId&&a.CouponStatus==true).Count().ToString();
             return Content(q, "text/plain", System.Text.Encoding.UTF8);
         }
         //============================================================================
