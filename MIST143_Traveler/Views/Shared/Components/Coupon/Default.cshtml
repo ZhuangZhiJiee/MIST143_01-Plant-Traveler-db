@@ -63,28 +63,32 @@
 
 
 <script>
-        const Gift = () => {
+    @{
+        var OBaJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+        var vc = JsonSerializer.Deserialize<Member>(OBaJ);}
+    
+       async function Gift(){
             var Giftdata =
             {
                 GiftKey: $("#Giftnum").val(),
                 MembersId:$("#idid").val(),
             }
-        $.ajax({
-            url: '@Url.Action("Giftkey", "CustomerCenter")',
-            method: 'Post',
-            dataType: 'Json',
-            data: { Cou: Giftdata },
-            success: function (datas) {
-                if (!datas.res) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: '輸入錯誤',
-                        text: datas.msg,
-                    })
-                    return;
-                }
-                let htmldatas =
-                `
+           await $.ajax({
+                url: '@Url.Action("Giftkey", "CustomerCenter")',
+                method: 'Post',
+                dataType: 'Json',
+                data: { Cou: Giftdata },
+                success: function (datas) {
+                    if (!datas.res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '輸入錯誤',
+                            text: datas.msg,
+                        })
+                        return;
+                    }
+                    let htmldatas =
+                        `
                             <div class='coupon-info coupon-info-right-dashed'>
                                 <div class='coupon-store'>${datas.data.couponName}</div>
                                 <div class='coupon-price'>折扣${datas.data.discount}<span>優惠券</span></div>
@@ -95,23 +99,27 @@
                                 <div class='coupon-expiry-date'>到期日${datas.data.exDate}</div>
                             </div>
                        `
-                let cc = document.createElement("div")
-                cc.className = 'coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'
-                let co = document.querySelector("#COCO");
-                cc.innerHTML = htmldatas;
-                co.append(cc);
+                    let cc = document.createElement("div")
+                    cc.className = 'coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'
+                    let co = document.querySelector("#COCO");
+                    cc.innerHTML = htmldatas;
+                    co.append(cc);
 
-                Swal.fire(
-                    '兌換成功',
-                    '',
-                    'success'
-                )
-               }
+                    Swal.fire(
+                        '兌換成功',
+                        '',
+                        'success'
+                    )
+                }
+            });
+           $.get('@Url.Action("Ccount", "CustomerCenter",new {vc.MembersId})',
+           function (data) {
+               $('#cc').text(data)
+                console.log(data)
+            })
 
-        })
 
-
-        };
+       }
     @*.then(function () {
             $.get('@Url.Action("Ccount", "CustomerCenter",new {v.MembersId})',
            function (data) {

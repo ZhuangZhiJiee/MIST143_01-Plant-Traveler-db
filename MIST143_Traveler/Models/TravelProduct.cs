@@ -20,7 +20,7 @@ namespace MIST143_Traveler.Models
         public string TravelProductName { get; set; }
         public decimal Price { get; set; }
         public int TravelProductTypeId { get; set; }
-        public int Quentity { get; set; }
+        public int Quantity { get; set; }
         public int Stocks { get; set; }
         public string Description { get; set; }
         public int CountryId { get; set; }
