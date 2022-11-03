@@ -352,37 +352,7 @@ namespace MIST143_Traveler.Controllers
             return View();
         }
 
-        //============================找出客戶訂單=============================
-        //public IActionResult Order(int MembersId)
-        //{
-        //    if (MembersId != 0)
-        //    {
-        //        COrderDetail Cord = new COrderDetail();
-        //        Cord.訂單 = (from od in _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId)
-        //                   from p in od.OrderDetails.Where(a => a.OrderId == od.OrderId)
-
-        //                   select new 訂單管理
-        //                   {
-        //                       orderId = od.OrderId,
-        //                       訂單編號 = od.OrderId,
-        //                       商品名稱 = p.TravelProduct.TravelProductName,
-        //                       訂單狀態 = od.OrderStatus.OrderStatusName,
-        //                       訂購日期 = DateTime.Parse(od.OrderDate).ToString("yyyy-MM-dd"),
-        //                       購買金額 = p.UnitPrice,
-        //                       數量 = p.Quantity,
-        //                       評論狀態 = p.TravelProduct.Comments.Where(a => a.MembersId == od.MembersId && a.OrderId == p.OrderId).Count()
-
-        //                   }
-        //                   ).ToList();
-        //        if (Cord.訂單.Count > 0)
-        //        {
-        //            return ViewComponent("CustomerOrder", Cord);
-        //        }
-
-
-        //    }
-        //    return ViewComponent("ProductManage");
-        //}
+        
     public IActionResult Order(int MembersId)
             {
                 if (MembersId != 0)
@@ -390,30 +360,19 @@ namespace MIST143_Traveler.Controllers
                     var q = _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId);
                     List<Corderview> Cord = new List<Corderview>();
                 Cord = (from od in _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId)
-                             from p in od.OrderDetails.Where(a => a.OrderId == od.OrderId)
-                             select new Corderview
+                        //from p in od.OrderDetails.Where(a => a.OrderId == od.OrderId)
+                        select new Corderview
                              {
                                  orderId = od.OrderId,
                                  訂單編號 = od.OrderId,
-                                 商品名稱 = p.TravelProduct.TravelProductName,
+                                 商品名稱 = od.OrderDetails.Select(a=>a.TravelProduct.TravelProductName).FirstOrDefault(),
                                  訂單狀態 = od.OrderStatus.OrderStatusName,
                                  訂購日期 = DateTime.Parse(od.OrderDate).ToString("yyyy-MM-dd"),
-                                 購買金額 = p.UnitPrice,
-                                 評論狀態 = p.TravelProduct.Comments.Where(a => a.MembersId == od.MembersId && a.OrderId == p.OrderId).Count(),
-                                 數量 = p.Quantity,
+                                 購買金額 = od.OrderDetails.Select(a=>a.UnitPrice).FirstOrDefault(),
+                            評論狀態 =od.Members.Comments.Where(a => a.MembersId == od.MembersId && a.OrderId == od.OrderId).Count(),
+                            數量 = od.OrderDetails.Select(a=>a.Quantity).FirstOrDefault(),
                              }).ToList();
-                
-                var data = (from a in Cord
-                            group a by a.訂單編號 into g
-                            where g.Count() > 1
-                            select g.Key
-                            ).ToList().Distinct();
-                Cord[0].dbb = new List<int>();
-                foreach (var item in data)
-                {
-                    Cord[0].dbb.Add(item);
-                }
-                
+               
                     if (Cord.Count > 0)
                     {
                         return ViewComponent("CustomerOrder", Cord);

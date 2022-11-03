@@ -90,8 +90,12 @@ namespace MIST143_Traveler.MViewModel
         public string productpicture { get; set; }
         public List<string> TravelPictureText { get; set; }
 
-
-
+        public int count
+        {
+            get;
+            set;
+        }
+        public string coutryname { get; set; }
     }
 
 }

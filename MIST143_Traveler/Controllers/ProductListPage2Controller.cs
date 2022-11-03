@@ -45,11 +45,21 @@ namespace MIST143_Traveler.Controllers
             Cproductlist plist = new Cproductlist();
             var q = (from p in _planet.TravelProducts
                      where p.TravelProductName.Contains(keyword) || p.Description.Contains(keyword)
-                     select p);/*.ToList();*/
+                     select p).ToList();
             //plist.travelProduct = q;
             ViewBag.keyword = keyword;
-            return View(q.ToList());
+            return View(q);
+        }
+        public IActionResult getcount()
+        {
+            var q = _planet.TravelProducts.GroupBy(a=>a.Country.CountryName).Select(a => new Cproductlist
+            {
+                coutryname = a.Key,
+                count=a.Count(),
 
+
+            }).ToList();
+            return Json(q);
         }
         public IActionResult filter(string[] keyword,int number)
         {
