@@ -26,36 +26,40 @@
             <button class="btn btn-warning 按鈕顏色" onclick="Gift()" type="button" id="button-addon2">兌換</button>
         </div>
 
+        <div>
+            <a type="button" onclick="all()">全部</a><span>|</span><a>可使用</a><span>|</span><a>將逾期</a><span>|</span><a type="button" onclick="exp()">已失效</a>
+        </div>
+        <div class="container col-6 d-flex" id="COCO">
+            <div class="row row-2">
+                <!--優惠券-->
 
-        <div class="container row row-2" id="COCO">
-            <!--優惠券-->
-
-            @{
-                List<string> Coupon = new List<string>();
-                foreach (var co in Model.優惠券列表)
-                {
-                    if (co.CouponStatus == true)
+                @{
+                    List<string> Coupon = new List<string>();
+                    foreach (var co in Model.優惠券列表)
                     {
-                        Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
-                                <div class='coupon-info coupon-info-right-dashed'>
-                                    <div class='coupon-store'>{co.CouponName}</div>
-                                    <div class='coupon-price'>折扣{(int)co.Discount}<span>優惠券</span></div>
-                                    <div class='coupon-description'>訂單限滿{co.Condition}使用</div>
-                                </div>
-                                <div class='coupon-get'>
-                                    <div class='coupon-desc'>副券</div>
-                                    <div class='coupon-expiry-date'>到期日{co.ExDate}</div>
-                                </div>
-                            </div>");
-                    }
+                        if (co.CouponStatus == true)
+                        {
+                            Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
+                                        <div class='coupon-info coupon-info-right-dashed'>
+                                            <div class='coupon-store'>{co.CouponName}</div>
+                                            <div class='coupon-price'>折扣{(int)co.Discount}<span>優惠券</span></div>
+                                            <div class='coupon-description'>訂單限滿{co.Condition}使用</div>
+                                        </div>
+                                        <div class='coupon-get'>
+                                            <div class='coupon-desc'>副券</div>
+                                            <div class='coupon-expiry-date'>到期日{co.ExDate}</div>
+                                        </div>
+                                    </div>");
+                        }
 
+                    }
                 }
-            }
-            @foreach (var g in Coupon)
-            {
-                @Html.Raw(g);
-            }
-            <!--優惠券-->
+                @foreach (var g in Coupon)
+                {
+                    @Html.Raw(g);
+                }
+                <!--優惠券-->
+            </div>
         </div>
     </div>
 </body>
@@ -66,7 +70,7 @@
     @{
         var OBaJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
         var vc = JsonSerializer.Deserialize<Member>(OBaJ);}
-    
+
        async function Gift(){
             var Giftdata =
             {
@@ -119,8 +123,17 @@
             })
 
 
-       }
-    
+    }
+    function all()
+    {
+        $('#COCO').load('@Url.Action("VIEWCoupon", "CustomerCenter",new {vc.MembersId})')
+    }
+     function exp()
+     {
+
+         $('#COCO').load('@Url.Action("LMyFavorites", "CustomerCenter",new {vc.MembersId})')
+    }
+
 </script>
 
 @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
