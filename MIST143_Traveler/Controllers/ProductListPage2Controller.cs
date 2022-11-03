@@ -44,7 +44,7 @@ namespace MIST143_Traveler.Controllers
             //              select i).ToList();
             Cproductlist plist = new Cproductlist();
             var q = (from p in _planet.TravelProducts
-                     where p.TravelProductName.Contains(keyword) || p.Description.Contains(keyword)
+                     where p.TravelProductName.Contains(keyword)&&p.ProductStatus=="已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架"
                      select p).ToList();
             //plist.travelProduct = q;
             ViewBag.keyword = keyword;
@@ -52,11 +52,11 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult getcount()
         {
-            var q = _planet.TravelProducts.GroupBy(a=>a.Country.CountryName).Select(a => new Cproductlist
+            var q = _planet.TravelProducts.Where(x=>x.ProductStatus == "已上架" ).GroupBy(a=>a.Country.CountryName).Select(a => new Cproductlist
             {
                 coutryname = a.Key,
                 count=a.Count(),
-
+               
 
             }).ToList();
             return Json(q);
@@ -183,21 +183,23 @@ namespace MIST143_Traveler.Controllers
             //return View();
             return ViewComponent("Productlistpagi", a);
         }
-        public IActionResult selecter(string date)
+        public IActionResult selecter(string date,string date2)
         {
             //var q = (from p in _planet.TravelProductDetails
             //        where p.Date == date
             //        select p).ToList();
             //return View(q);
             //Cproductlist datas = null;
-            if (date == null){
-                return View();
+            if (date == null||date2==null){
+                
+                return View("請輸入正確日期");
             }
             var a = DateTime.Parse(date);
+            var a2 = DateTime.Parse(date2); 
             //var z = DateTime.Parse(date2);
             var qw = _planet.TravelProducts.ToList();
             var qq =_planet.TravelProductDetails.ToList()
-                .Where(w =>Convert.ToDateTime(w.Date) > a &&w.TravelProduct.ProductStatus=="已上架").OrderBy(o=>Convert.ToDateTime(o.Date)).Select(q=>q.TravelProduct).Distinct().ToList();
+                .Where(w =>Convert.ToDateTime(w.Date) > a&& Convert.ToDateTime(w.Date) < a2 &&w.TravelProduct.ProductStatus=="已上架").OrderBy(o=>Convert.ToDateTime(o.Date)).Select(q=>q.TravelProduct).Distinct().ToList();
 
 
             return ViewComponent("Productlistpagi",qq);
@@ -209,16 +211,16 @@ namespace MIST143_Traveler.Controllers
             //        select p).ToList();
             //return View(q);
             //Cproductlist datas = null;
-
             //var z = DateTime.Parse(date2);
             if (contry == null) {
-                var q = from p in _planet.TravelProducts                        
+                var q = from p in _planet.TravelProducts
+                        where p.ProductStatus=="已上架"
                         select p;
                 return ViewComponent("Productlistpagi", q.ToList());
             }
             string[] aaaa = contry.Split(",");
 
-            var pp = _planet.TravelProducts.Where(e => aaaa.Contains(e.Country.CountryName)).Select(bb => bb).ToList();
+            var pp = _planet.TravelProducts.Where(e => aaaa.Contains(e.Country.CountryName)&&e.ProductStatus=="已上架").Select(bb => bb).ToList();
             return ViewComponent("Productlistpagi", pp);
         }
         public IActionResult kkkkk(string rest)
