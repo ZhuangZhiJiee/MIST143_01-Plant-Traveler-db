@@ -120,13 +120,7 @@
 
 
        }
-    @*.then(function () {
-            $.get('@Url.Action("Ccount", "CustomerCenter",new {v.MembersId})',
-           function (data) {
-               $('#cc').text(data)
-                console.log(data)
-                       })
-        })*@
+    
 </script>
 
 @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
