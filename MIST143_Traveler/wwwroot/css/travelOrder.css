@@ -371,3 +371,9 @@ input[type=number] {
     display: flex;
     flex-wrap: wrap;
 }
+#prodctDescription ul li, .preparationDescription ul li{
+    list-style: inside;
+}
+.eventIntroduce {
+    width: 859px !important;
+}
