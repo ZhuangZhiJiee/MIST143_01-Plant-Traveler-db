@@ -1,17 +1,18 @@
-﻿/*form label {
-    display: inline-block;
-    width: 100px;
-}*/
-/*
-form div {
-    margin-bottom: 10px;
-}*/
-
+﻿
 .error {
     color: red;
     /*margin-left: 5px;*/
 }
 
-/*label.error {
-    display: inline;
-}*/
+#checkEye {
+    position: absolute;
+    top: 50%;
+    right: 420px;
+    transform: translateY(10%);
+}
+#checkEye2 {
+    position: absolute;
+    top: 50%;
+    right: 55px;
+    transform: translateY(10%);
+}

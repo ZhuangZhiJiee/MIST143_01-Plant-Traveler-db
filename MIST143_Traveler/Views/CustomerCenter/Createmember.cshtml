@@ -5,6 +5,9 @@
     Layout = null;
 }
 <link href="~/css/會員中心/註冊光箱.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+
 @section Sytles{
     <style>
     </style>
@@ -15,7 +18,6 @@
 
 <hr />
 <form id="form" method="post">
-    @*<form asp-action="Createmember">*@
     <div class="container">
         <div class="col-12">
             <div class="row row-cols-1">
@@ -24,11 +26,9 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                         <div class="inputs p-2 flex-fill">
-                            @*<header>EMAIL帳號</header>*@
                             <label class="control-label">Email(登入帳號)</label>
-                            <input class="form-control" type="email" for="Email" placeholder="aaaaa@gmail.com" aria-label="default input example" name="Email" id="Email" required>
-                            @*<span asp-validation-for="Email" class="text-danger"></span>*@
-                            <div><small id="sm" class="form-text text-muted"></small></div>
+                            <input class="form-control" type="email" for="Email" placeholder="aaaaa@gmail.com" aria-label="default input example" name="Email" id="Email">
+                            @*<div><small id="sm" class="form-text text-muted"></small></div>*@
                         </div>
 
                     </div>
@@ -41,6 +41,7 @@
                         <div class="inputs p-2 flex-fill">
                             <label class="control-label">連絡電話</label>
                             <input class="form-control" asp-for="Phone" type="text" placeholder="PHONE" aria-label="default input example" name="Phone" id="Phone">
+
                         </div>
                     </div>
 
@@ -49,12 +50,14 @@
 
                             <label class="control-label">密碼</label>
                             <input class="form-control" asp-for="Password" type="password" placeholder="password" aria-label="default input example" name="Password" id="Password1">
+                            <i id="checkEye" class="fas fa-eye"></i>
                         </div>
 
                         <div class="inputs p-2 flex-fill">
                             <header>再次確認密碼</header>
                             <input class="form-control" type="password" placeholder="password" aria-label="default input example" id="Password2" name="Password2">
                             <small id="checkps" class="form-text text-muted"></small>
+                            <i id="checkEye2" class="fas fa-eye"></i>
                         </div>
                     </div>
 
@@ -66,15 +69,6 @@
                             </select>
                         </div>
 
-                        @*<div class="inputs p-2 ">
-                                <header>居住區域</header>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>大安區</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>*@
 
                         <div class="inputs p-2 flex-grow-1">
                             <header>地址</header>
@@ -110,7 +104,7 @@
                     <div class="modal-footer">
 
                         <button type="button" class="btn btn-success" id="sb1" onclick="BtnDemo()">Demo</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                        @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>*@
                         <input type="submit" class="btn btn-primary ccc">
                     </div>
 
@@ -125,14 +119,17 @@
 @section Scripts{
 
 }
-@*<script src="https://code.jquery.com/jquery-3.6.1.min.js"
-            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>*@
+<link href="~/css/會員中心/validationEngine.jquery.css" rel="stylesheet" />
+<script src="~/js/jquery.validate.inline.js"></script>
 
 <script>
+
     //表單驗證
+   
     $(function () {
+        $(function () {
+            $("#form").makeValidationInline();
+        });
         $("#form").validate({
             onkeyup: function (element, event) {
                 var value = this.elementValue(element).replace(/^\s+/g, "");
@@ -215,53 +212,47 @@
             dataType: 'Json',
             data: { CCC: Cdata },
             success: function (datas) {
-                if (!datas.res) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: '輸入錯誤',
-                        text: datas.msg,
+            if (!datas.res) {
+            Swal.fire({
+            icon: 'error',
+            title: '輸入錯誤',
+            text: datas.msg,
 
-                    })
-                    return;
-                }
-                @*Swal.fire(
-                    '註冊成功!',
-                    '將導入登入畫面',
-                    'success'
-                ).then(function (result) {
-                    window.location.href = "@Url.ActionLink("newLoginpag","CustomerCenter")";
-                })*@
-
-                let timerInterval
-                Swal.fire({
-                    
-                    title: '註冊成功!',
-                    html: '即將導入登入畫面',
-                    timer: 2000,
-                    timerProgressBar: true,
-                    didOpen: () => {
-                        Swal.showLoading()
-                        const b = Swal.getHtmlContainer().querySelector('b')
-                        timerInterval = setInterval(() => {
-                            b.textContent = Swal.getTimerLeft()
-                        }, 100)
-                    },
-                    willClose: () => {
-                        clearInterval(timerInterval)
-                        
-                    }
-                }).then(function (result) {
-                    window.location.href = "@Url.ActionLink("newLoginpag","CustomerCenter")";
-                })
+            })
+            return;
             }
-        })
-                /*form.submit();*/
-            }
-        })
-    })
 
-    //DEMO
-     function BtnDemo() {
+
+            let timerInterval
+            Swal.fire({
+
+            title: '註冊成功!',
+            html: '即將導入登入畫面',
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft()
+            }, 100)
+            },
+            willClose: () => {
+            clearInterval(timerInterval)
+
+            }
+            }).then(function (result) {
+            window.location.href = "@Url.ActionLink("newLoginpag", "CustomerCenter")";
+            })
+            }
+            })
+            /*form.submit();*/
+            }
+            })
+            })
+
+            //DEMO
+            function BtnDemo() {
 
             $('#Name').val("恆佑")
             $('#Email').val("ask@yahoo.com.tw")
@@ -270,38 +261,54 @@
             $('#Password2').val("a77777777")
 
             $('#address').val("和平東路二段106號11樓")
-        }
+            }
 
-   /* function CC() {*/
+            $("#checkEye").click(function ()
+            {
+            if ($(this).hasClass('fa-eye')) {
+            $("#Password1").attr('type', 'text');
+            }
+            else {
+            $("#Password1").attr('type', 'password');
+            }
+            $(this).toggleClass('fa-eye').toggleClass('fa-eye-slash');
+            });
 
-   /* }*/
+            $("#checkEye2").click(function () {
+            if ($(this).hasClass('fa-eye')) {
+            $("#Password2").attr('type', 'text');
+            }
+            else {
+            $("#Password2").attr('type', 'password');
+            }
+            $(this).toggleClass('fa-eye').toggleClass('fa-eye-slash');
+            });
 
 
+            async function LoadCities() {
+            /*  selCity.options.length = 0;*/
+            //抓資料庫城市資料
+            let selCity = document.querySelector("#selectC")
+            let response = await fetch("@Url.Content("~/CustomerCenter/city")")
+            let datas = await response.json()
+            datas.forEach(city => {
+            const opt = new Option(city)
+            selCity.options.add(opt)
+            })
+            }
+            LoadCities()
+            //判斷是否有人使用帳號
 
-    async function LoadCities() {
-        /*  selCity.options.length = 0;*/
-        //抓資料庫城市資料
-    let selCity = document.querySelector("#selectC")
-    let response = await fetch("@Url.Content("~/CustomerCenter/city")")
-    let datas = await response.json()
-    datas.forEach(city => {
-    const opt = new Option(city)
-    selCity.options.add(opt)
-    })
-    }
-    LoadCities()
-    //判斷是否有人使用帳號
-
-    function EMM() {
-    let emsm=document.querySelector("#sm")
-    let Em = document.querySelector("#Email")
-    Em.addEventListener("blur", async () => {
-        let response = await fetch("@Url.Content("~/CustomerCenter/CheckPas")" + `?Email=${Em.value}`)
+            @*function EMM() {
+            let emsm=document.querySelector("#sm")
+            let Em = document.querySelector("#Email")
+            Em.addEventListener("blur", async () => {
+            let response = await fetch("@Url.Content("~/CustomerCenter/CheckPas")" + `?Email=${Em.value}`)
             let datas = await response.text()
             emsm.textContent = datas
-    })
-    }
-    EMM()
+            })
+            }
+            EMM()*@
 </script>
 
 

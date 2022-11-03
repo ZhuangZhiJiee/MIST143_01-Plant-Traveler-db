@@ -2,3 +2,19 @@
     color: coral
 }
 
+.tdname {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+.thname {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+.thbtn {
+    max-width: 92px;
+}
+.tbbtn {
+    max-width: 92px;
+}
