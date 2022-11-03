@@ -61,7 +61,9 @@
                         @count
                     </td>
                     <td>
+
                         <a type="button" class="tdname" data-bs-toggle="modal" data-bs-target="#ORD" onclick="Odd('@Url.Action("OrderDE", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">@Html.DisplayFor(modelItem => item.商品名稱)</a>
+
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.訂購日期)
@@ -76,24 +78,32 @@
                     @{
                         if (item.訂單狀態 == "訂單完成" && item.評論狀態 <= 0)
                         {
+
                             <td class="tbbtn" style="max-width:92px">
+
                                 <a class="btn btn-outline-success rv" id="@item.訂單編號" data-bs-toggle="modal" data-bs-target="#exampleModal"onclick="OrderCancel('@Url.Action("CommentCreate", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">我要評論</a>
                             </td>
                         }
                         else
                         {
+
                             <td class="tbbtn"style="max-width:92px">
+
                             </td>
                         }
                         if (item.訂單狀態 == "訂單完成")
                         {
+
                             <td class="tbbtn">
+
                                 <a class="btn btn-outline-danger Cancel" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal"onclick="OrderCancel('@Url.Action("OrderCancel", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">申請取消</a>
                             </td>
                         }
                         else
                         {
+
                             <td class="tbbtn">
+
                             </td>
                         }
 
