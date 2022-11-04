@@ -1,4 +1,5 @@
 ﻿using MIST143_Traveler.Models;
+using MIST143_Traveler.MViewModel;
 using MIST143_Traveler.ShoppingViewModel;
 using System;
 using System.Collections.Generic;
@@ -29,5 +30,6 @@ namespace MIST143_Traveler.ShoppingViewModel
         public List<CCommentViewModel> _CCommentViewModel { get; set; }
         public int MembersId { get; set; }
         public bool MyfavoritesID { get; set; }
+        public List<Cproductlist>cproductlists{get;set;}
     }
 }

@@ -68,6 +68,7 @@ namespace MIST143_Traveler.Controllers
             CProductViewModel prod = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
                 .Select(s => new CProductViewModel
                 {
+                    //ClickId =
                     TravelProductName = s.TravelProductName,
                     TravelProductId = s.TravelProductId,
                     Price = s.Price,
@@ -80,14 +81,14 @@ namespace MIST143_Traveler.Controllers
                     MapUrl = s.MapUrl,
                     PreparationDescription = s.PreparationDescription,
                     Productpictures = s.TravelPictures.ToList(),
-                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),  
+                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
                     _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
                     {
                         Date = p.Date,
                         HotelName = p.Hotel.HotelName,
                         ViewName = p.ProductToViews.Select(v => v.View.ViewName).ToList(),
                     }).ToList(),
-                    _CCommentViewModel = pt.Comments.Where(a => a.TravelProductId == TravelProductId).Select(b => new CCommentViewModel 
+                    _CCommentViewModel = pt.Comments.Where(a => a.TravelProductId == TravelProductId).Select(b => new CCommentViewModel
                     {
                         MemberName = b.Members.MemberName,
                         PhotoPath = b.Members.PhotoPath,

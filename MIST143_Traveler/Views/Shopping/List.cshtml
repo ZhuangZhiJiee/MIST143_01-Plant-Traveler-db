@@ -53,11 +53,12 @@
             </div>
         </div>
         
-        <div class="分類">
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <div class="search-page-breadcrumb search-breadcrumb">
+            <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">首頁</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">101</li>
+                    <li class="breadcrumb-item"><a href="@Url.Content("~/Home/Index")">首頁</a></li>
+                    <li class="breadcrumb-item" style=" --light: #000000;"><a href="@Url.Content("~/ProductListPage/ProductListHomePage")">玩樂</a></li>
+                    <li class="breadcrumb-item active" style=" --light: #000000;" aria-current="page">搜尋結果</li>
                 </ol>
             </nav>
         </div>
