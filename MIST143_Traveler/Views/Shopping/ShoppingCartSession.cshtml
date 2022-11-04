@@ -22,52 +22,53 @@
                             <span class="ms-2">全選</span>
                             <a class="ms-3 buttonA">刪除選中活動</a>
                         </div>
-                        @foreach (var item in Model._CShoppingCartDetailViewModel)
-                        {
-                            <div class="leftSide p-3 paddingMore">
-                                <div class="shoppingCartInfoRow">
-                                    <input class="form-check-input mt-0 " type="checkbox" value=""
-                                           aria-label="Checkbox for following text input">
-                                    <div class="imgBox ms-3">
-                                        <img src="https://localhost:44338/images/TravelProductPictures/@item.Productpicture" class="rounded float-start"
-                                             alt="...">
-                                    </div>
-                                    <div class="infoBox ms-1 px-3">
-                                        <div class="titleFontStyle">
-                                            @item.TravelProductName
+
+                            @foreach (var item in Model._CShoppingCartDetailViewModel)
+                            {
+                                <div class="leftSide p-3 paddingMore">
+                                    <div class="shoppingCartInfoRow">
+                                        <input class="form-check-input mt-0 " type="checkbox" value=""
+                                               aria-label="Checkbox for following text input">
+                                        <div class="imgBox ms-3">
+                                            <img src="https://localhost:44338/images/TravelProductPictures/@item.Productpicture" class="rounded float-start"
+                                                 alt="...">
+                                        </div>
+                                        <div class="infoBox ms-1 px-3">
+                                            <div class="titleFontStyle">
+                                                @item.TravelProductName
+                                            </div>
+                                        </div>
+                                        @*<div class="subInfoText">
+                        2022年10月11日 10:00AM<br>
+                        當地時間
+                        </div>*@
+                                        <div class="chooseNumber ps-1">
+                                            <div class="subtext">每人</div>
+                                            <div class="chooseNumberBlock">
+                                                <button type="button"
+                                                        class="btn btn-outline-secondary productMinus">
+                                                    -
+                                                </button>
+                                                <input type="number" class="productNumber productNum" name="Count" value="1" />
+                                                <input type="hidden" class="productNumHidden" value="@item.Count" />
+                                                <button type="button"
+                                                        class="btn btn-outline-secondary productPlus">
+                                                    +
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    @*<div class="subInfoText">
-                                        2022年10月11日 10:00AM<br>
-                                        當地時間
-                                        </div>*@
-                                    <div class="chooseNumber ps-1">
-                                        <div class="subtext">每人</div>
-                                        <div class="chooseNumberBlock">
-                                            <button type="button"
-                                                    class="btn btn-outline-secondary productMinus">
-                                                -
-                                            </button>
-                                            <input type="number" class="productNumber productNum" name="Count" value="1" />
-                                            <input type="hidden" class="productNumHidden" value="@item.Count" />
-                                            <button type="button"
-                                                    class="btn btn-outline-secondary productPlus">
-                                                +
-                                            </button>
+                                    <div class="hiddenEle singlePrice">@item.Price</div>
+                                    <div class="border-bottom-line my-3"></div>
+                                    <div class="shoppingCartInfoRowbottomRow">
+                                        <div>
+                                            <a class="buttonA" href="./travelPayCheckout.html">編輯</a> |
+                                            <a class="buttonA">刪除</a>
                                         </div>
+                                        <div class="titleFontStyle"> NT$ <span class="totalPrice"></span></div>
                                     </div>
                                 </div>
-                                <div class="hiddenEle singlePrice">@item.Price</div>
-                                <div class="border-bottom-line my-3"></div>
-                                <div class="shoppingCartInfoRowbottomRow">
-                                    <div>
-                                        <a class="buttonA" href="./travelPayCheckout.html">編輯</a> |
-                                        <a class="buttonA">刪除</a>
-                                    </div>
-                                    <div class="titleFontStyle"> NT$ <span class="totalPrice"></span></div>
-                                </div>
-                            </div>
-                        }
+                            }
 
                     </div>
                     <div class="col-3 ">
@@ -79,15 +80,17 @@
                                 <input type="hidden" asp-for="MemberName" value="@Model.MemberName" />
                                 <input type="hidden" asp-for="Phone" value="@Model.Phone" />
                                 <input type="hidden" asp-for="Email" value="@Model.Email" />
-                                @for (int i = 0; i < Model._CShoppingCartDetailViewModel.Count; i++)
-                                {
-                                    <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TravelProductId" value="@Model._CShoppingCartDetailViewModel[i].TravelProductId" />
-                                    <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TravelProductName" value="@Model._CShoppingCartDetailViewModel[i].TravelProductName" />
-                                    <input type="hidden" class="payCount" asp-for="_CShoppingCartDetailViewModel[i].Count" value="@Model._CShoppingCartDetailViewModel[i].Count" />
-                                    <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Price" value="@Model._CShoppingCartDetailViewModel[i].Price" />
-                                    <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TotalPrice" value="@Model._CShoppingCartDetailViewModel[i].TotalPrice" />
-                                    <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Productpicture" value="@Model._CShoppingCartDetailViewModel[i].Productpicture" />
-                                }
+
+                                    @for (int i = 0; i < Model._CShoppingCartDetailViewModel.Count; i++)
+                                    {
+                                        <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TravelProductId" value="@Model._CShoppingCartDetailViewModel[i].TravelProductId" />
+                                        <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TravelProductName" value="@Model._CShoppingCartDetailViewModel[i].TravelProductName" />
+                                        <input type="hidden" class="payCount" asp-for="_CShoppingCartDetailViewModel[i].Count" value="@Model._CShoppingCartDetailViewModel[i].Count" />
+                                        <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Price" value="@Model._CShoppingCartDetailViewModel[i].Price" />
+                                        <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TotalPrice" value="@Model._CShoppingCartDetailViewModel[i].TotalPrice" />
+                                        <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Productpicture" value="@Model._CShoppingCartDetailViewModel[i].Productpicture" />
+                                    }
+
                                 <input type="submit" class="btn btn-main my-3 fullSize" id="goPayBtn" value="結帳" />
                             </form>
                         </div>
