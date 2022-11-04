@@ -20,10 +20,16 @@
                 </div>
                 <div class="banner-search-box ban-sea-box ban-box">
                     <span class="bi-search"></span>
-                    <input type="text" name="keyword" id="text" placeholder="探索全球目的地/活動" />
-                    @*<a href="@Url.Action("ProductListPage","ProductListPage2",new {})">搜尋</a>*@
+                    <input type="text" class="form-control" name="keyword" id="text" placeholder="探索全球目的地/活動" />
+                    <div class="list-group mt-3">
+                        <button type="button" class="list-group-item bg-white list-group-item-action" aria-current="true">
+                           
+                        </button>
+
+                    </div>  
                     <button type="button" onclick="show()" id="btn">搜尋</button>
                 </div>
+
             </div>
 
         </div>
@@ -204,28 +210,40 @@
 
                     <div class="basic-filter section-filter" style="width:800px;">
                         <div class="basic-filter-left">
-                            <div class="basic-filter-left">
-
+                            <div class="basic-filter-left">                         
                                 <div>
-                                    <label style="width:90%" for="start">選擇遊玩日期範圍:</label>
+                                    <nav class="navbar navbar-expand-lg navbar-dark " @*style="background-color:white"*@>
+                                        <div class="container-fluid">
 
-                                    <input type="date" @*onclick="datechoise()"*@ id="start123123" name="trip-start"
-                                           min="2022-10-01" max="2022-12-31" class="ipwidth" />
-                                    <input type="date" onclick="datechoise()"
-                                    id="start" name="trip-start"
-                                min="" max="2022-12-31" class="ipwidth" />
-                                    <button style="width:4%;padding:1%" type="button" id="showw">確定</button>
-                                </div>
+                                            <label style="width:20%" for="start">選擇遊玩日期範圍:</label>
 
-                                <div class="d-flex justify-content-end" @*style="border:1px red solid"*@>
-                                    <label for="list">排序方式:</label>
-                                    <select name="list" id="choise">
-                                        <option value="1">最推薦</option>
-                                        <option value="2">最低價</option>
-                                        <option value="3">最熱賣</option>
-                                        <option value="4">新上架</option>
-                                    </select>
+                                            <input type="date" @*onclick="datechoise()"*@ id="start123123" name="trip-start"
+                                                   min="2022-10-01" max="2022-12-31" class="ipwidth" />
+                                            <input type="date" onclick="datechoise()"
+                                                   id="start" name="trip-start"
+                                                   min="2022-10-01" max="2022-12-31" class="ipwidth" />
+                                            <button style="width:4%;padding:1%" type="button" id="showw">確定</button>
+                                            <select class="form-select djfdd" aria-label="Default select example">
+                                                <option selected>選擇方案</option>
+                                                <option value="1">單人旅行</option>
+                                                <option value="2">雙人旅行</option>
+                                                <option value="3">三人旅行</option>
+                                                <option value="4">家庭旅遊</option>                                              
+                                            </select>
+
+                                            <div class="d-flex justify-content-end" @*style="border:1px red solid"*@>
+                                                <label for="list">排序方式:</label>
+                                                <select name="list" id="choise">
+                                                    <option value="1">最推薦</option>
+                                                    <option value="2">最低價</option>
+                                                    <option value="3">最熱賣</option>
+                                                    <option value="4">新上架</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </nav>
                                 </div>
+                               
                                 @*<div id="aeio">
 
                                 </div>*@

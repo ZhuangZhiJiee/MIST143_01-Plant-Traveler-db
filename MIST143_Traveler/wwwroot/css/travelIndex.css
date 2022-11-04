@@ -619,3 +619,12 @@ ul.drop-down-menu li:hover > ul {
     max-height: 400px;
     overflow: auto;
 }
+
+/*Bot用CSS*/
+
+.MSbot {
+    position: fixed;
+    bottom: 100px;
+    right: 50px;
+    z-index: 5;
+}
