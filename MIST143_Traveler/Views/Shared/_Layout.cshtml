@@ -21,6 +21,15 @@
     @using System.Text.Json;
     @inject IHttpContextAccessor Accessor
     <!-- 從這邊開始複製header跟nav，上面引用的css位置注意一下-->
+    @*聊天機器人*@
+    <div class="MSbot d-flex">
+        <div style="width:100px">
+            <img id="BotIcon" src="@Url.Content("~/Images/客服icon.png")" onclick="showAzureBot()" style="width:100%" />
+        </div>
+        <div>
+            <iframe id="AzureBot" src='https://webchat.botframework.com/embed/msit143-planet-textanalytics-bot?s=m1ntiqmJxoE.U_callpLQRu2tMROH-FF27lCvT0iNyNUW5-5j_Orkk8' style='min-width: 400px; width: 100%; min-height: 500px;display:none'></iframe>
+        </div>
+    </div>
     <header class="main-header">
         <div class="container">
             <a href="@Url.Content("~/Home/Index")" class="logo">
@@ -75,7 +84,7 @@
                     }
                 }
 
-                <a href="@Url.Content("~/Shopping/ShoppingCartSession")">購物車</a>
+                <a href="@Url.Content("~/Shopping/ShoppingCartSession")">已報名行程</a>
 
                 @{
                     if (Accessor.HttpContext.Session.Keys.Contains(CDictionary.SK_Login))
@@ -148,7 +157,7 @@
                 </li>
                 <li><a style="border-radius: 10px" href="@Url.Content("~/ProductListPage/ProductListHomePage")">全部分類</a></li>
                 <li>
-                    <a style="border-radius: 10px" href="@Url.Content("~/ProductListPage/ProductListHomePage")">玩樂</a>  
+                    <a style="border-radius: 10px" href="@Url.Content("~/ProductListPage/ProductListHomePage")">玩樂</a>
                     <ul>
                         <li><a href="#">景點門票</a></li>
                         <li><a href="#">行程</a></li>
@@ -273,7 +282,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
           media="screen" />
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script> <!--註冊驗證-->
-    
+
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/jquery.unobtrusive-ajax.min.js"></script>

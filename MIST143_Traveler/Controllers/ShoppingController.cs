@@ -68,24 +68,27 @@ namespace MIST143_Traveler.Controllers
             CProductViewModel prod = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
                 .Select(s => new CProductViewModel
                 {
+                    //ClickId =
                     TravelProductName = s.TravelProductName,
                     TravelProductId = s.TravelProductId,
                     Price = s.Price,
                     Quantity = s.Quantity,
                     Stocks = s.Stocks,
+                    DeparatureDate = s.TravelProductDetails.FirstOrDefault().Date,
+                    AnotherDepartureDate = s.AnotherDepartureDate,
                     Description = s.Description,
                     EventIntroduction = s.EventIntroduction,
                     MapUrl = s.MapUrl,
                     PreparationDescription = s.PreparationDescription,
                     Productpictures = s.TravelPictures.ToList(),
-                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),  
+                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
                     _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
                     {
                         Date = p.Date,
                         HotelName = p.Hotel.HotelName,
                         ViewName = p.ProductToViews.Select(v => v.View.ViewName).ToList(),
                     }).ToList(),
-                    _CCommentViewModel = pt.Comments.Where(a => a.TravelProductId == TravelProductId).Select(b => new CCommentViewModel 
+                    _CCommentViewModel = pt.Comments.Where(a => a.TravelProductId == TravelProductId).Select(b => new CCommentViewModel
                     {
                         MemberName = b.Members.MemberName,
                         PhotoPath = b.Members.PhotoPath,
@@ -110,6 +113,8 @@ namespace MIST143_Traveler.Controllers
                    Price = s.Price,
                    Quantity = s.Quantity,
                    Stocks = s.Stocks,
+                   DeparatureDate = s.TravelProductDetails.FirstOrDefault().Date,
+                   AnotherDepartureDate = s.AnotherDepartureDate,
                    Description = s.Description,
                    EventIntroduction = s.EventIntroduction,
                    MapUrl = s.MapUrl,
@@ -145,6 +150,8 @@ namespace MIST143_Traveler.Controllers
                    Price = s.Price,
                    Quantity = s.Quantity,
                    Stocks = s.Stocks,
+                   DeparatureDate = s.TravelProductDetails.FirstOrDefault().Date,
+                   AnotherDepartureDate = s.AnotherDepartureDate,
                    Description = s.Description,
                    EventIntroduction = s.EventIntroduction,
                    MapUrl = s.MapUrl,
@@ -236,44 +243,56 @@ namespace MIST143_Traveler.Controllers
 
         public IActionResult ShoppingCartSession()
         {
-            if (HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT) == null) 
+            if (HttpContext.Session.GetString(CDictionary.SK_Login) != null) 
             {
-                return NoContent();
+                var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+                var v = JsonSerializer.Deserialize<Member>(Name);
+                if (HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT) != null)
+                {
+                    string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+                    CShoppingCartViewModel scv = new CShoppingCartViewModel()
+                    {
+                        MembersId = v.MembersId,
+                        MemberName = v.MemberName,
+                        Email = v.Email,
+                        Phone = v.Phone,
+                        _CShoppingCartDetailViewModel = JsonSerializer.Deserialize<List<CShoppingCartDetailViewModel>>(jsonCart),
+                    };
+                    return View(scv);
+                }
+                else
+                    return NoContent();
             }
-            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
-            var v = JsonSerializer.Deserialize<Member>(Name);
-            string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
-            CShoppingCartViewModel scv = new CShoppingCartViewModel()
-            {
-                MembersId = v.MembersId,
-                MemberName = v.MemberName,
-                Email = v.Email,
-                Phone = v.Phone,
-                _CShoppingCartDetailViewModel = JsonSerializer.Deserialize<List<CShoppingCartDetailViewModel>>(jsonCart),
-            };
+            else
+                return RedirectToAction("newLoginpag", "CustomerCenter");
 
-            return View(scv);
         }
         [HttpPost]
         public IActionResult PayData(CShoppingCartViewModel p)
         {
-            if (HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT) == null)
+            if (HttpContext.Session.GetString(CDictionary.SK_Login) != null)
             {
-                var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
-                var v = JsonSerializer.Deserialize<Member>(Name);
-                CShoppingCartViewModel scv = new CShoppingCartViewModel()
+                if (HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT) == null)
                 {
-                    MembersId= v.MembersId,
-                    MemberName = v.MemberName,
-                    Email = v.Email,
-                    Phone = v.Phone,
-                    _CShoppingCartDetailViewModel = p._CShoppingCartDetailViewModel,
-                };
-                return View(scv);
+                    var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+                    var v = JsonSerializer.Deserialize<Member>(Name);
+                    CShoppingCartViewModel scv = new CShoppingCartViewModel()
+                    {
+                        MembersId = v.MembersId,
+                        MemberName = v.MemberName,
+                        Email = v.Email,
+                        Phone = v.Phone,
+                        _CShoppingCartDetailViewModel = p._CShoppingCartDetailViewModel,
+                    };
+                    return View(scv);
+                }
+                else
+                {
+                    return View(p);
+                }
             }
-            else 
-            return View(p);
-
+            else
+                return RedirectToAction("newLoginpag", "CustomerCenter");
         }
         [HttpPost]
         public IActionResult PayCheckout(CShoppingCartViewModel p)

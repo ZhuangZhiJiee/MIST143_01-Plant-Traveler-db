@@ -13,6 +13,7 @@ namespace MIST143_Traveler.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(List<我的優惠券> ex)
         {
             return View(ex);
+
         }
     }
 }

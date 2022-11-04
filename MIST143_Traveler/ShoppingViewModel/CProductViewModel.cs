@@ -1,4 +1,5 @@
 ﻿using MIST143_Traveler.Models;
+using MIST143_Traveler.MViewModel;
 using MIST143_Traveler.ShoppingViewModel;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,9 @@ namespace MIST143_Traveler.ShoppingViewModel
         public string PreparationDescription { get; set; }
         public int Count { get; set; }
         public List<string> DailyDetailText { get; set; }
-        public List<string> Date { get; set; }
+        public string DeparatureDate { get; set; }
+        public string AnotherDepartureDate { get; set; }
+        public int RemainingDays { get; set; }
         public List<string> HotelName { get; set; }
         public List<TravelPicture> Productpictures { get; set; }
         public List<CProductDetailViewModel> _CProductDetailViewModel { get; set; }
@@ -28,5 +31,6 @@ namespace MIST143_Traveler.ShoppingViewModel
         public List<CCommentViewModel> _CCommentViewModel { get; set; }
         public int MembersId { get; set; }
         public bool MyfavoritesID { get; set; }
+        public List<Cproductlist>cproductlists{get;set;}
     }
 }

@@ -21,14 +21,23 @@
 .main-header .main-nav {
     margin-left: auto;
 }
-
-    .main-header .main-nav a {
-        text-decoration: none;
-        padding: 10px 0.8em;
-        border-radius: 15px;
-        font-size: 15px;
-        color: rgb(16, 22, 22);
-    }
+.jfklj {
+    border-radius: 6px;
+    padding: 11px;
+}
+.djfdd{
+    width:18%;
+}
+.colle {
+    padding-left: 88px;
+}
+.main-header .main-nav a {
+    text-decoration: none;
+    padding: 10px 0.8em;
+    border-radius: 15px;
+    font-size: 15px;
+    color: rgb(16, 22, 22);
+}
 
         .main-header .main-nav a:hover {
             background-color: rgba(200, 198, 198, 0.571);
@@ -82,7 +91,6 @@ button {
     padding: 0 40px;
     height: 30px;
     border-radius: 6px;
-    margin-left: 16px;
     background: #ff5b00;
     color: #fff;
     cursor: pointer;

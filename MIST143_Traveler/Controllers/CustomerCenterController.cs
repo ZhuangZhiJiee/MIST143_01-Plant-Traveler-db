@@ -286,6 +286,15 @@ namespace MIST143_Traveler.Controllers
                                   CouponStatus = Cuu.CouponStatus,
                               }
                             ).ToList();
+                //foreach (var item in Coup.優惠券列表)
+                //{
+                    
+                //   var timee = item.ExDate;
+                //    if (DateTime.Parse(timee) < DateTime.Now)
+                //    {
+                //        return ViewComponent("CouponExp", Coup);
+                //    }
+                //}
             }
             return ViewComponent("CouponAll", Coup);
         }

@@ -53,11 +53,12 @@
             </div>
         </div>
         
-        <div class="分類">
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <div class="search-page-breadcrumb search-breadcrumb">
+            <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">首頁</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">101</li>
+                    <li class="breadcrumb-item"><a href="@Url.Content("~/Home/Index")">首頁</a></li>
+                    <li class="breadcrumb-item" style=" --light: #000000;"><a href="@Url.Content("~/ProductListPage/ProductListHomePage")">玩樂</a></li>
+                    <li class="breadcrumb-item active" style=" --light: #000000;" aria-current="page">搜尋結果</li>
                 </ol>
             </nav>
         </div>
@@ -132,23 +133,30 @@
                                     </div>
                                     @*<div class="subInfoText ps-3">請選擇參加日期</div>*@
                                     @*<div class="selectInput ps-3">
-                                    <input type="date" id="start" name="trip-start" class="form-control" value="2022-10-11"
-                                           min="2022-10-11" max="2022-12-31">
-                                </div>*@
+            <input type="date" id="start" name="trip-start" class="form-control" value="2022-10-11"
+                   min="2022-10-11" max="2022-12-31">
+        </div>*@
                                     <div class="subInfoText ps-3">方案類型</div>
                                     <div class="payUserRow ps-3">
                                         <div class="payUser active">
                                             @Model.TravelProductName
                                         </div>
                                     </div>
-                                    <div class="subInfoText ps-3">日期</div>
-                                    <div class="selectInput ps-3">
-                                        @foreach (var item in Model._CProductDetailViewModel)
-                                        {
-                                            @item.Date<br />
-                                        }
-                                    </div>
+                                    <div class="subInfoText ps-3">選擇參加日期</div>
+                                    <div class="selectInput ps-3 hiddenSelectDate hiddenEle">@Model.DeparatureDate @Model.AnotherDepartureDate</div>
+                                    <div class="selectInput ps-3 selectDate payUserRow"></div>
                                     <br />
+                                    @if (Model._CProductDetailViewModel.Count != 1)
+                                    {
+                                        <div class="subInfoText ps-3">日期</div>
+                                        <div class="selectInput ps-3">
+                                            @foreach (var item in Model._CProductDetailViewModel)
+                                            {
+                                                @item.Date<br />
+                                            }
+                                        </div>
+                                        <br />
+                                    }
                                     <div class="subInfoText ps-3">景點</div>
                                     <div class="selectInput ps-3">
                                         @foreach (var item in Model._CProductDetailViewModel)
@@ -216,7 +224,7 @@
                                         <input type="hidden" name="Count" value="1" id="postProductNum" />
                                         <input type="hidden" name="Price" value="@Model.Price" />
                                         <input type="hidden" name="Productpicture" value="@Model.Productpictures.FirstOrDefault().TravelPicture1" />
-                                        <input type="submit" value="加入購物車" data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3" />
+                                        <input type="submit" value="報名行程" data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3" />
                                     </form>
 
                                 </div>
@@ -246,7 +254,8 @@
                 <div class="活動DIV">
                     <h2><span class="一條根"> </span><span>活動介紹</span></h2>
                 </div>
-                <div class="小介紹">
+                <div class="eventIntroduceHidden hiddenEle">@Model.EventIntroduction</div>
+                <div class="小介紹 eventIntroduce">
                     @Model.EventIntroduction
                 </div>
                 @foreach (var item in Model.Productpictures)
@@ -327,22 +336,22 @@
                 $('#totalPrice').text( @Model.Price)
                 //調整描述 換行 加圓點
                 let descritpionContent = $('#prodctDescriptionHidden').text()
-                let descritpionContentLength = descritpionContent.length
-                if (descritpionContent[descritpionContentLength - 1] === '#') {
-                    descritpionContent = descritpionContent.slice(0, descritpionContentLength - 1)
-                } else if (descritpionContent.slice(descritpionContentLength - 3, descritpionContentLength - 0) === '#\r\n') {
-                    descritpionContent = descritpionContent.slice(0, descritpionContentLength - 3)
-                }
-                descritpionContent = descritpionContent.replace(/#/g,"<br> ● ")
+                //let descritpionContentLength = descritpionContent.length
+                //if (descritpionContent[descritpionContentLength - 1] === '#') {
+                //    descritpionContent = descritpionContent.slice(0, descritpionContentLength - 1)
+                //} else if (descritpionContent.slice(descritpionContentLength - 3, descritpionContentLength - 0) === '#\r\n') {
+                //    descritpionContent = descritpionContent.slice(0, descritpionContentLength - 3)
+                //}
+                //descritpionContent = descritpionContent.replace(/#/g,"<br> ● ")
                 $('#prodctDescription').html(descritpionContent)
                 //換行 加圓點
                 let preparationDescription = $('.hiddenPreparationDescription').text()
-                if (preparationDescription[preparationDescription.length - 1] === '#') {
-                    preparationDescription = preparationDescription.slice(0, preparationDescription.length - 1)
-                } else if (preparationDescription.slice(preparationDescription.length - 3, preparationDescription.length - 0) === '#\r\n') {
-                    preparationDescription = preparationDescription.slice(0, preparationDescription.length - 3)
-                }
-                preparationDescription = preparationDescription.replace(/#/g, "<br> ● ")
+                //if (preparationDescription[preparationDescription.length - 1] === '#') {
+                //    preparationDescription = preparationDescription.slice(0, preparationDescription.length - 1)
+                //} else if (preparationDescription.slice(preparationDescription.length - 3, preparationDescription.length - 0) === '#\r\n') {
+                //    preparationDescription = preparationDescription.slice(0, preparationDescription.length - 3)
+                //}
+                //preparationDescription = preparationDescription.replace(/#/g, "<br> ● ")
                 $('.preparationDescription').html(preparationDescription)
 
                 let descritpionLabel = $(".hiddenInfoNote").html()
@@ -350,6 +359,29 @@
                 $('#productInfoNote').html(descritpionLabel)
                 $('.carousel-item')[0].classList.add("active")
                 $('.carouselExampleIndicators')[0].classList.add("active")
+
+                //eventIntroduceHidden
+                let eventIntroduceContent = $('.eventIntroduceHidden').text()
+                $('.eventIntroduce').html(eventIntroduceContent)
+
+                // 選擇參加日期 
+                let selectDateContent = $('.hiddenSelectDate').text()
+                selectDateContent = selectDateContent.replace(/#/g, " ")
+                let seletDateArray = selectDateContent.split(" ")
+                let singleHtml = ""
+                seletDateArray.forEach((item) => {
+                    singleHtml = singleHtml + `<div class="payUser selectDateBtn">${item}</div>`
+                })
+                $('.selectDate').html(singleHtml)
+
+                $(".selectDateBtn").each(function (index) {
+                    $(this).on("click", function () {
+                        $(".selectDateBtn").each(function (index) {
+                            $(this).removeClass("active")
+                        })
+                        $(this).addClass("active")
+                    })
+                })
 
             }
             //點擊加號
