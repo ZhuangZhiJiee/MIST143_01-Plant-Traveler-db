@@ -243,44 +243,56 @@ namespace MIST143_Traveler.Controllers
 
         public IActionResult ShoppingCartSession()
         {
-            if (HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT) == null) 
+            if (HttpContext.Session.GetString(CDictionary.SK_Login) != null) 
             {
-                return NoContent();
+                var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+                var v = JsonSerializer.Deserialize<Member>(Name);
+                if (HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT) != null)
+                {
+                    string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+                    CShoppingCartViewModel scv = new CShoppingCartViewModel()
+                    {
+                        MembersId = v.MembersId,
+                        MemberName = v.MemberName,
+                        Email = v.Email,
+                        Phone = v.Phone,
+                        _CShoppingCartDetailViewModel = JsonSerializer.Deserialize<List<CShoppingCartDetailViewModel>>(jsonCart),
+                    };
+                    return View(scv);
+                }
+                else
+                    return NoContent();
             }
-            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
-            var v = JsonSerializer.Deserialize<Member>(Name);
-            string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
-            CShoppingCartViewModel scv = new CShoppingCartViewModel()
-            {
-                MembersId = v.MembersId,
-                MemberName = v.MemberName,
-                Email = v.Email,
-                Phone = v.Phone,
-                _CShoppingCartDetailViewModel = JsonSerializer.Deserialize<List<CShoppingCartDetailViewModel>>(jsonCart),
-            };
+            else
+                return RedirectToAction("newLoginpag", "CustomerCenter");
 
-            return View(scv);
         }
         [HttpPost]
         public IActionResult PayData(CShoppingCartViewModel p)
         {
-            if (HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT) == null)
+            if (HttpContext.Session.GetString(CDictionary.SK_Login) != null)
             {
-                var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
-                var v = JsonSerializer.Deserialize<Member>(Name);
-                CShoppingCartViewModel scv = new CShoppingCartViewModel()
+                if (HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT) == null)
                 {
-                    MembersId= v.MembersId,
-                    MemberName = v.MemberName,
-                    Email = v.Email,
-                    Phone = v.Phone,
-                    _CShoppingCartDetailViewModel = p._CShoppingCartDetailViewModel,
-                };
-                return View(scv);
+                    var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+                    var v = JsonSerializer.Deserialize<Member>(Name);
+                    CShoppingCartViewModel scv = new CShoppingCartViewModel()
+                    {
+                        MembersId = v.MembersId,
+                        MemberName = v.MemberName,
+                        Email = v.Email,
+                        Phone = v.Phone,
+                        _CShoppingCartDetailViewModel = p._CShoppingCartDetailViewModel,
+                    };
+                    return View(scv);
+                }
+                else
+                {
+                    return View(p);
+                }
             }
-            else 
-            return View(p);
-
+            else
+                return RedirectToAction("newLoginpag", "CustomerCenter");
         }
         [HttpPost]
         public IActionResult PayCheckout(CShoppingCartViewModel p)
