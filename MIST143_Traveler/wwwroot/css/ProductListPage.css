@@ -12,187 +12,11 @@
     border-bottom: 2px solid rgba(225, 221, 221, 0.622);
 }*/
 /* header的css範圍 */
-.main-header .container {
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 20px; 
-    max-width: 1200px;
-    margin: auto;
-}
+
 .ban-sea-box {
 margin-top:3%;
 }
-.main-header .logo {
-    max-width: 70px;
-}
 
-    .main-header .logo img {
-        width: 100%;
-        vertical-align: middle;
-    }
-
-.main-header .main-nav {
-    margin-left: auto;
-}
-
-    .main-header .main-nav a {
-        text-decoration: none;
-        padding: 10px 0.8em;
-        border-radius: 15px;
-        font-size: 15px;
-        color: rgb(16, 22, 22);
-    }
-
-        .main-header .main-nav a:hover {
-            background-color: rgba(200, 198, 198, 0.571);
-        }
-
-        .main-header .main-nav a:nth-child(5) {
-            background-color: coral;
-            color: aliceblue;
-        }
-
-.main-header .header-search {
-    margin-left: 15px;
-}
-
-    .main-header .header-search .header-search-box {
-        display: flex;
-        position: relative;
-        border-radius: 100px;
-        border: 1px solid rgba(238, 236, 236, 0.888);
-        background-color: rgba(238, 236, 236, 0.888);
-    }
-
-        .main-header .header-search .header-search-box:hover,
-        .main-header .header-search .header-search-box input:focus {
-            background-color: white;
-            border: 1px solid orange;
-        }
-
-        .main-header .header-search .header-search-box button,
-        .main-header .header-search .header-search-box input {
-            border: none;
-            padding: 5px 10px;
-            background-color: transparent;
-            outline: none;
-        }
-
-        .main-header .header-search .header-search-box button {
-            position: absolute;
-            transform: translateX(20%);
-        }
-
-        .main-header .header-search .header-search-box input {
-            border-radius: 100px;
-            width: 20em;
-            text-indent: 3em;
-        }
-
-.secondary-nav {
-    width: 1200px;
-    height: 50px;
-    margin: auto;
-}
-
-.secondary-nav-container {
-    padding: 10px 0.8em;
-}
-
-    .secondary-nav-container li {
-    /*    display: inline;*/
-        padding: 2px 0.8em;
-        border-radius: 15px;
-        font-size: 16px;
-        color: rgb(16, 22, 22);
-    }
-
-    .secondary-nav-container a,
-    .secondary-nav-container a:hover {
-        text-decoration: none;
-        color: black;
-    }
-
-    .secondary-nav-container li:hover {
-        background-color: rgba(200, 198, 198, 0.571);
-    }
-/* header的css範圍 */
-
-/* footer的css範圍 */
-.main-footer {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-.default-footer {
-    width: 1200px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: rgb(122, 122, 128);
-}
-
-.default-footer_copyright {
-    width: 250px;
-}
-
-.default-footer_internal_links {
-    display: flex;
-}
-
-.default-footer_links {
-    margin: 0px 40px;
-}
-
-    .default-footer_links ul,
-    .default-footer_links li {
-        margin: 0px;
-        padding: 10px 0 0 0;
-    }
-
-.footer_label {
-    font-weight: bold;
-}
-
-.subcribe_email input {
-    border: 1px solid rgba(225, 221, 221, 0.622);
-    width: 20em;
-    padding: 5px 10px;
-    border-radius: 5px 0 0 5px;
-    background-color: rgba(225, 221, 221, 0.622);
-    outline: none;
-    margin-bottom: 15px;
-}
-
-.subcribe_email button {
-    border-radius: 0 5px 5px 0;
-    border: 1px solid coral;
-    border: none;
-    padding: 5px 10px;
-    outline: none;
-    background-color: coral;
-    color: aliceblue;
-    font-size: 13px;
-}
-
-.subcribe_email input:hover,
-.subcribe_email input:focus {
-    background-color: white;
-    border: 1px solid orange;
-}
-
-.footer_paymentInfo {
-    display: flex;
-    justify-content: space-between;
-}
-
-    .footer_paymentInfo li {
-        font-size: 40px;
-        margin-right: 50px;
-    }
 /* footer的css範圍 */
 .test {
     /* display:flex;*/
@@ -754,7 +578,7 @@ body {
     float:left;
 
 }
-blockquote, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, li, ol, p, pre, table, td, th, ul {
+blockquote, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, li, ol, p, pre, table, td, th,  {
     margin: 0;
     padding: 0;
 }

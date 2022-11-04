@@ -33,3 +33,7 @@ Odd = (url, title) => {
         }
     })
 }
+
+function showAzureBot() {
+    $('#AzureBot').toggle("normal")
+}
