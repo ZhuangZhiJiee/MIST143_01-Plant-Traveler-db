@@ -26,8 +26,15 @@ namespace MIST143_Traveler.MViewModel
 
         public int 數量 {get; set;}
 
+        public decimal 測試 { get { return this.數量 * this.購買金額; } }
+
+
+        public decimal? 折扣{ get; set; }
+
+       
         public List<int> dbb { get; set; }
         public List<COrderDetailview> _COrderDetailview { get; set; }
+        public List<CorderItemView> orderItem { get; set; }
     }
   
 }

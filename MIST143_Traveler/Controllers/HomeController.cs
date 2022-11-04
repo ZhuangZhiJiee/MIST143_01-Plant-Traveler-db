@@ -33,10 +33,11 @@ namespace MIST143_Traveler.Controllers
         //}
         
 
-        public IActionResult ContactCenter()
+        public IActionResult ContactCenter(int MembersId)
         {
+
             
-            return View(); 
+            return View(MembersId); 
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
