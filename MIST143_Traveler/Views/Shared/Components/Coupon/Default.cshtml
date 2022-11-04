@@ -6,8 +6,6 @@
     ViewData["Title"] = "Coupon";
 }
 
-
-
 @*<link href="~/css/客服中心.css" rel="stylesheet" />*@
 <link href="~/css/客戶中心訂單內容物.css" rel="stylesheet" />
 <link href="~/css/會員中心/優惠券樣式.css" rel="stylesheet" />
@@ -27,9 +25,9 @@
         </div>
 
         <div>
-            <a type="button" onclick="all()">全部</a><span>|</span><a>可使用</a><span>|</span><a>將逾期</a><span>|</span><a type="button" onclick="exp()">已失效</a>
+            <a type="button" onclick="alll()">可使用</a><span>|</span><a type="button" onclick="sss()">將逾期</a><span>|</span><a type="button" onclick="exp()">已失效</a>
         </div>
-        <div class="container col-6 d-flex" id="COCO">
+        <div class="container" id="COCO">
             <div class="row row-2">
                 <!--優惠券-->
 
@@ -124,16 +122,18 @@
 
 
     }
-    function all()
+    function alll()
     {
-        $('#COCO').load('@Url.Action("VIEWCoupon", "CustomerCenter",new {vc.MembersId})')
+        $('#COCO').load('@Url.Action("CouponAll", "CustomerCenter",new {vc.MembersId})')
     }
      function exp()
-     {
-
-         $('#COCO').load('@Url.Action("LMyFavorites", "CustomerCenter",new {vc.MembersId})')
+    {
+         $('#COCO').load('@Url.Action("CouponExp", "CustomerCenter",new {vc.MembersId})')
     }
-
+      function exp()
+    {
+         $('#COCO').load('@Url.Action("CouponClose", "CustomerCenter",new {vc.MembersId})')
+    }
 </script>
 
 @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@

@@ -1,61 +1,65 @@
 ﻿@*@model MIST143_Traveler.MViewModel.COrderDetail*@
 @model List<MIST143_Traveler.MViewModel.Corderview>
-@using Microsoft.AspNetCore.Http
-@using System.Text.Json;
-@inject IHttpContextAccessor Accessor
-@{
+    @using Microsoft.AspNetCore.Http
+    @using System.Text.Json;
+    @inject IHttpContextAccessor Accessor
+    @{
     ViewData["Title"] = "Default";
 
-}
+    }
 
-<link href="~/css/會員中心/Table.css" rel="stylesheet" />
-<!--RWD CSS-->
+    <link href="~/css/會員中心/Table.css" rel="stylesheet" />
+    <!--RWD CSS-->
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
 
-<h3 class="mb-2">我的訂單</h3>
-<div class="dropdown mb-3 d-flex justify-content-end">
-    <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        訂單
-    </button>
-    <ul class="dropdown-menu">
-        <li><a class="dropdown-item" id="全部">全部</a></li>
-        <li><a class="dropdown-item" id="訂單完成">訂單完成</a></li>
-        <li><a class="dropdown-item" id="訂單取消">訂單取消</a></li>
-    </ul>
-</div>
-<table id="table_id" class="display responsive nowrap">
-    <thead>
-        <tr>
-            <th >
-                編號
-            </th>
-            <th class="thname">
-                商品名稱
-            </th>
-            <th>
-                訂購日期
-            </th>
-            <th>
-                購買金額
-            </th>
-            <th>
-                訂單狀態
-            </th>
-            <th class="thbtn">
-            </th>
-            <th class="thbtn">
-            </th>
+    <h3 class="mb-2">我的訂單</h3>
+    <div class="dropdown mb-3 d-flex justify-content-end">
+        <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            訂單
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" id="全部">全部</a></li>
+            <li><a class="dropdown-item" id="訂單完成">訂單完成</a></li>
+            <li><a class="dropdown-item" id="訂單取消">訂單取消</a></li>
+        </ul>
+    </div>
+    <table id="table_id" class="display responsive nowrap">
+        <thead>
+            <tr>
+                <th>
+                    編號
+                </th>
+                <th class="thname">
+                    商品名稱
+                </th>
+                <th>
+                    訂購日期
+                </th>
+                <th>
+                    購買金額
+                </th>
+                <th>
+                    訂單狀態
+                </th>
+                <th class="thbtn">
+                </th>
+                <th class="thbtn">
+                </th>
 
-        </tr>
-    </thead>
-    <tbody id="訂單編號">
-        @{
-            int count = 0;
-            @foreach (var item in Model)
-            {
-                count++;
+            </tr>
+        </thead>
+        <tbody id="訂單編號">
+            @{
+
+                int count = 0;
+                foreach (var item in Model)
+                {
+                    var 折扣 = item.折扣;
+                    count++;
+
+
                 <tr class="樣式">
                     <td>
                         @count
@@ -70,7 +74,27 @@
                     </td>
                     <td>
 
-                        @Convert.ToInt32(item.購買金額 * item.數量)
+                        @{
+
+
+                            decimal 總金額 = 0;
+                            decimal 金額 = 0;
+                            int 數量 = 0;
+                            foreach (var x in item.orderItem)//找到同樣訂單編號的商品
+                            {
+
+                                金額 += x.購買金額 * x.數量;
+
+                            }
+                            if (折扣 == null)
+                            {
+                                折扣 = 0;
+                            }
+                            總金額 = 金額 - (decimal)折扣;
+
+                                @總金額.ToString("###,##0")
+
+                        }
                     </td>
                     <td class="statuss" id="stat" value="@item.訂單狀態">
                         @Html.DisplayFor(modelItem => item.訂單狀態)
@@ -79,79 +103,79 @@
                         if (item.訂單狀態 == "訂單完成" && item.評論狀態 <= 0)
                         {
 
-                            <td class="tbbtn" style="max-width:92px">
+                        <td class="tbbtn" style="max-width:92px">
 
-                                <a class="btn btn-outline-success rv" id="@item.訂單編號" data-bs-toggle="modal" data-bs-target="#exampleModal"onclick="OrderCancel('@Url.Action("CommentCreate", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">我要評論</a>
-                            </td>
+                            <a class="btn btn-outline-success rv" id="@item.訂單編號" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("CommentCreate", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">我要評論</a>
+                        </td>
                         }
                         else
                         {
 
-                            <td class="tbbtn"style="max-width:92px">
-
-                            </td>
+                        <td class="tbbtn" style="max-width:92px">
+                        </td>
                         }
                         if (item.訂單狀態 == "訂單完成")
                         {
 
-                            <td class="tbbtn">
+                        <td class="tbbtn">
 
-                                <a class="btn btn-outline-danger Cancel" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal"onclick="OrderCancel('@Url.Action("OrderCancel", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">申請取消</a>
-                            </td>
+                            <a class="btn btn-outline-danger Cancel" id="Cancel" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="OrderCancel('@Url.Action("OrderCancel", "CustomerCenter", new {id=item.訂單編號 }, Context.Request.Scheme)',null)">申請取消</a>
+                        </td>
                         }
                         else
                         {
 
-                            <td class="tbbtn">
-
-                            </td>
+                        <td class="tbbtn">
+                        </td>
                         }
 
                     }
 
                 </tr>
+
+
+                        }
             }
-        }
-    </tbody>
+        </tbody>
 
-</table>
+    </table>
 
-@*評論用*@
-
+    @*評論用*@
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+
+
+                </div>
+
             </div>
-            <div class="modal-body">
-
-
-
-
-            </div>
-
         </div>
     </div>
-</div>
 
 
-<div id="ORD" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="newstaticBackdrop" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="width:1180px">
-            <div id="_modalDialog_body" class="modal-body">
-                <div id="selectTree" class="ztree" style="height:300px;overflow:auto; ">
+    <div id="ORD" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="newstaticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="width:1180px">
+                <div id="_modalDialog_body" class="modal-body">
+                    <div id="selectTree" class="ztree" style="height:300px;overflow:auto; ">
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
+    <script>
     @{
         var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
         var v = JsonSerializer.Deserialize<Member>(OBJ);
@@ -454,10 +478,10 @@
 
 
 
-</script>
+    </script>
 
-@section Scripts{
-    <script>
+    @section Scripts{
+        <script>
 
         @{
     var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
@@ -475,11 +499,11 @@
 
 
 
-    </script>
+        </script>
 
-}
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-<!--TABLE-->
-<!--<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>-->
-<!--TABLE-->
+    }
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <!--TABLE-->
+    <!--<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>-->
+    <!--TABLE-->

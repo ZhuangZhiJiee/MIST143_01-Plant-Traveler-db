@@ -40,6 +40,7 @@ namespace MIST143_Traveler.MViewModel
 
         public int 評論狀態 { get; set; }
 
+        public decimal? 折扣金額{ get; set; }
     }
     
 }

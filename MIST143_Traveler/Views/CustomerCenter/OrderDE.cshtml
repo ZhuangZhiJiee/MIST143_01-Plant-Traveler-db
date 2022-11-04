@@ -31,9 +31,7 @@
                 <th>
                     付款方式
                 </th>
-                <th>
-                    優惠券
-                </th>
+
                 <th>
                     小計
                 </th>
@@ -45,65 +43,83 @@
         </thead>
         <tbody>
             @{
+                decimal 小計金額 = 0;
+                decimal 小計 = 0;
+                var 折扣 = Model.訂單.Select(p => p.折扣金額).FirstOrDefault();
+
                 foreach (var item in Model.訂單)
                 {
-              
+                   
+                    小計 = item.數量 * item.購買金額;
+                    <tr class="mb-3">
+                        <td>
+                            @item.訂單編號
+                        </td>
+                        <td>
+                            <img style="width:100px" src="https://localhost:44338/images/TravelProductPictures/@item.FImagePath.FirstOrDefault()" />
+                        </td>
+                        <td class="ctd">
+                            @item.商品名稱
+                        </td>
+                        <td>
+                            @item.購買金額.ToString("###,##0")
+                        </td>
+                        <td>
+                            @item.數量
+                        </td>
+                        <td>
+                            @item.付款方式
+                        </td>
+
+                   
+                        <td>
+                            @小計
+                            
+                        </td>
+                        <td>
+                            @item.訂購日期
+                        </td>
+                    </tr>
+                    小計金額 += 小計;
+
+                }
+                
                 <tr>
-                    <td>
-                        @item.訂單編號
-                    </td>
-                    <td>
-                       <img style="width:100px" src="https://localhost:44338/images/TravelProductPictures/@item.FImagePath.FirstOrDefault()" />
-                    </td>
-                    <td class="ctd">
-                        @item.商品名稱
-                    </td>
-                    <td>
-                        @item.購買金額.ToString("###,##0")
-                    </td>
-                    <td>
-                        @item.數量
-                    </td>
-                    <td>
-                        @item.付款方式
-                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    
+                    <td style="color:red" colspan="2">
+                        @{
+                            if (Model.訂單.FirstOrDefault().優惠券 == null)
+                            {
+                                <p>優惠券名稱:無使用優惠券</p>
+                                折扣 = 0;
+                            }
+                            else
+                            {
+                                <p>優惠券名稱:@Model.訂單.FirstOrDefault().優惠券</p>
+                            }
 
-                    @{
-                        if (item.優惠券 == null)
-                        {
-                            <td>
-                                無
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                @item.優惠券
-                            </td>
+                            decimal 總金額 = 小計金額 - (decimal)折扣;
+                            <p>小計總金額:$@小計金額.ToString("###,##0")</p>
+                            <p>折抵:$@折扣</p>
+                            <p>總金額:$@總金額.ToString("###,##0")</p>
                         }
 
 
-                    }
-                    <td>
-                        @(item.數量* item.購買金額)
                     </td>
-                    <td>
-                        @item.訂購日期
-                    </td>
-
                 </tr>
-                        }
             }
-
 
         </tbody>
 
-           
-
-        
     </table>
-
 </div>
-
-    <dl class="row">
-    </dl>
+<script>
+   
+</script>
