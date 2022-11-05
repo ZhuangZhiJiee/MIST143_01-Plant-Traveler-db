@@ -112,7 +112,8 @@ namespace MIST143_Traveler.Controllers
         {
             Member Cus = _PlanetTravelContext.Members.FirstOrDefault(a => a.MembersId == inCus.MembersId);
 
-
+            var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+            var v = JsonSerializer.Deserialize<Member>(Name);
             if (Cus != null)
             {
                 if (inCus.photo != null)
@@ -124,10 +125,18 @@ namespace MIST143_Traveler.Controllers
                 }
                 Cus.Address = inCus.Address;
                 Cus.MemberName = inCus.MemberName;
+
+                //測試
+                string Cname = Cus.MemberName;
+                v.MemberName = Cname;
+                var s = JsonSerializer.Serialize(v);
+                HttpContext.Session.SetString(CDictionary.SK_Login, s);
+
+
                 Cus.Phone = inCus.Phone;
                 Cus.CityId = _PlanetTravelContext.Cities.FirstOrDefault(a => a.CityName == inCus.Cityname).CityId;
                 _PlanetTravelContext.SaveChanges();
-                return Json(new { Res = true, Msg = "成功" });
+                return Json(new { Res = true});
             }
             return Json(new { Res = false, Msg = "失敗" });
         }
@@ -155,6 +164,8 @@ namespace MIST143_Traveler.Controllers
             CMemberView cm = new CMemberView();
             if (MembersId != 0)
             {
+                var 時間 = DateTime.Now.AddDays(-1).ToShortDateString();
+                var t = _PlanetTravelContext.Coupons.Where(a => DateTime.Parse(a.ExDate) > DateTime.Parse(時間));
                 var c = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId && a.CouponStatus == true).Count();
 
                 var q = _PlanetTravelContext.Myfavorites.Where(a => a.MembersId == MembersId).Count();
@@ -248,7 +259,6 @@ namespace MIST143_Traveler.Controllers
 
                 Coup.優惠券列表 = (from Cuu in _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId)
                               from Cup in _PlanetTravelContext.Coupons.Where(s => s.CouponId == Cuu.CouponId)
-
                               select new 我的優惠券
                               {
                                   MembersId = MembersId,
@@ -260,9 +270,10 @@ namespace MIST143_Traveler.Controllers
                                   CouponStatus = Cuu.CouponStatus,
                               }
                             ).ToList();
-
+                
             }
-            return ViewComponent("Coupon", Coup);
+            var ex = Coup.優惠券列表.Where(a => DateTime.Parse(a.ExDate) > DateTime.Now).ToList();
+            return ViewComponent("Coupon", ex);
         }
 
         //==========================Coupon======================
@@ -286,15 +297,11 @@ namespace MIST143_Traveler.Controllers
                                   CouponStatus = Cuu.CouponStatus,
                               }
                             ).ToList();
-                //foreach (var item in Coup.優惠券列表)
-                //{
-                    
-                //   var timee = item.ExDate;
-                //    if (DateTime.Parse(timee) < DateTime.Now)
-                //    {
-                //        return ViewComponent("CouponExp", Coup);
-                //    }
-                //}
+                var ex = Coup.優惠券列表.Where(a => DateTime.Parse(a.ExDate) > DateTime.Now).ToList();
+                if (ex != null)
+                {
+                    return ViewComponent("CouponAll", ex);
+                }
             }
             return ViewComponent("CouponAll", Coup);
         }
@@ -321,6 +328,7 @@ namespace MIST143_Traveler.Controllers
                 var ex = Coup.優惠券列表.Where(a => DateTime.Parse(a.ExDate) < DateTime.Now).ToList();
                 if (ex != null)
                 {
+                    
                     return ViewComponent("CouponExp", ex);
                 }
             }
@@ -343,16 +351,19 @@ namespace MIST143_Traveler.Controllers
                                   CouponName = Cup.CouponName,
                                   Condition = Cup.Condition,
                                   Discount = Cup.Discount,
-                                  ExDate = Cup.ExDate,
+                                  ExDate =Cup.ExDate,
                                   CouponStatus = Cuu.CouponStatus,
                               }
                             ).ToList();
-                var tit = DateTime.Now;
-                //var ex = Coup.優惠券列表.Where(a => DateTime.Parse(a.ExDate) = DateTime.Now.AddDays(10).ToShortDateString()).ToList();
-                //if (ex != null)
-                //{
-                //    return ViewComponent("CouponExp", ex);
-                //}
+                var tit = DateTime.Now.AddDays(7).ToShortDateString();
+                var 昨天= DateTime.Now.AddDays(-1).ToShortDateString();
+                
+                var exe = Coup.優惠券列表.Where(a => DateTime.Parse(a.ExDate)< DateTime.Parse(tit)).ToList();
+                var ex = exe.Where(b => DateTime.Parse(b.ExDate) > DateTime.Parse(昨天)).ToList();
+                if (ex != null)
+                {
+                    return ViewComponent("CouponClose", ex);
+                }
             }
             return ViewComponent("CouponAll", Coup);
         }
@@ -497,28 +508,7 @@ namespace MIST143_Traveler.Controllers
             return View(idd);
         }
 
-        //[HttpPost]
-        //public IActionResult OrderCancel(OrderCancel inD)
-        //{
-        //    OrderCancel co = null;
-        //    if (inD != null)
-        //    {
 
-        //        co = _PlanetTravelContext.Orders.Where(a => a.OrderId == inD.OrderId).Select(s => new OrderCancel
-        //        {
-        //            OrderId = inD.OrderId,
-        //            Titel = inD.Titel,
-        //            CancaelContent = inD.CancaelContent,
-
-        //        }).FirstOrDefault();
-
-
-        //        _PlanetTravelContext.OrderCancels.Add(co);
-        //        _PlanetTravelContext.SaveChanges();
-        //        return Json(new { Res = true, Msg = "成功" });
-        //    };
-        //    return Json(new { Res = false, Msg = "失敗" });
-        //}
 
         [HttpPost]
         public IActionResult OrderCancel(COrderCancel inD)
@@ -725,6 +715,11 @@ namespace MIST143_Traveler.Controllers
 
         public IActionResult Ccount(int MembersId)
         {
+            
+            var 時間 = DateTime.Now.AddDays(-1).ToShortDateString();
+            var c = _PlanetTravelContext.Coupons.Where(a => DateTime.Parse(a.ExDate) > DateTime.Parse(時間)).ToList();
+            //var x = from ss in _PlanetTravelContext.Coupons.Where(a => DateTime.Parse(a.ExDate) > DateTime.Parse(時間)).ToList();
+                   //from aa in _PlanetTravelContext.CouponLists.Where(s=>s.)
             var q = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId && a.CouponStatus == true).Count().ToString();
             return Content(q, "text/plain", System.Text.Encoding.UTF8);
         }

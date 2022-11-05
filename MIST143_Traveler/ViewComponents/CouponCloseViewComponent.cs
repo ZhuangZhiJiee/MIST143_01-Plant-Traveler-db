@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace MIST143_Traveler.ViewComponents
 {
     [Microsoft.AspNetCore.Mvc.ViewComponent]
-    public class CouponAllViewComponent: Microsoft.AspNetCore.Mvc.ViewComponent
+
+    public class CouponCloseViewComponent : Microsoft.AspNetCore.Mvc.ViewComponent
     {
         public async Task<IViewComponentResult> InvokeAsync(List<我的優惠券> ex)
         {

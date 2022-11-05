@@ -1,4 +1,4 @@
-﻿@model MIST143_Traveler.MViewModel.會員中心檢視優惠券
+﻿@model List<MIST143_Traveler.MViewModel.我的優惠券>
 @using Microsoft.AspNetCore.Http
 @using System.Text.Json;
 @inject IHttpContextAccessor Accessor
@@ -25,16 +25,16 @@
         </div>
 
         <div>
-            <a type="button" onclick="alll()">可使用</a><span>|</span><a type="button" onclick="sss()">將逾期</a><span>|</span><a type="button" onclick="exp()">已失效</a>
+            <a type="button" onclick="alll()">可使用</a><span>|</span><a type="button" onclick="sss()">即將到期</a><span>|</span><a type="button" onclick="exp()">已失效</a>
         </div>
         <div class="container" id="COCO">
 
-            <div class="row row-2">
+            <div>
                 <!--優惠券-->
 
                 @{
                     List<string> Coupon = new List<string>();
-                    foreach (var co in Model.優惠券列表)
+                    foreach (var co in Model)
                     {
                         if (co.CouponStatus == true)
                         {
@@ -131,7 +131,7 @@
     {
          $('#COCO').load('@Url.Action("CouponExp", "CustomerCenter",new {vc.MembersId})')
     }
-      function exp()
+    function sss()
     {
          $('#COCO').load('@Url.Action("CouponClose", "CustomerCenter",new {vc.MembersId})')
     }
