@@ -1,4 +1,4 @@
-﻿@model MIST143_Traveler.MViewModel.會員中心檢視優惠券
+﻿@model List<MIST143_Traveler.MViewModel.我的優惠券>
 @using Microsoft.AspNetCore.Http
 @using System.Text.Json;
 @inject IHttpContextAccessor Accessor
@@ -6,12 +6,12 @@
     ViewData["Title"] = "CouponAll";
 }
 <div class="container" id="COCO">
-    <div class="row row-2">
+    <div>
         <!--優惠券-->
 
         @{
             List<string> Coupon = new List<string>();
-            foreach (var co in Model.優惠券列表)
+            foreach (var co in Model)
             {
                 if (co.CouponStatus == true)
                 {

@@ -49,7 +49,7 @@
             </form>
 
             <nav class="main-nav">
-                @*<a href="@Url.Content("~/Home/ContactCenter")">客服中心</a>*@
+
                 <a href="@Url.Content("~/Home/ContactCenter")">客服中心</a>
                 @{if (Accessor.HttpContext.Session.Keys.Contains(CDictionary.SK_PRODUCT))
                     {
@@ -92,11 +92,13 @@
                         var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
                         var v = JsonSerializer.Deserialize<Member>(OBJ);
 
+                        <a href="@Url.ActionLink("CouponHome","Home",new {v.MembersId})">優惠專區</a>
                         <button class="btn btn-light dropdown-toggle" style="text-decoration:none;border:none" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                             @{
                                 if (v.PhotoPath != null)
                                 {
-                                    <img src="~/Images/客戶大頭貼/@v.PhotoPath" style="width: 30px; height: 30px; border-radius: 50%" id="smimg" />@v.MemberName
+
+                                    <img src="~/Images/客戶大頭貼/@v.PhotoPath" style="width: 30px; height: 30px; border-radius: 50%" id="smimg" /><span id="Cname">@v.MemberName</span>
                                 }
                                 else
                                 {

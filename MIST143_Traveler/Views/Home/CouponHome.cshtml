@@ -1,0 +1,94 @@
+﻿@model List<MIST143_Traveler.Models.Coupon>
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@{
+    ViewData["Title"] = "CouponHome";
+}
+
+
+<link href="~/css/會員中心/COUPONHOME.css" rel="stylesheet" />
+<link href="~/css/會員中心/優惠券樣式.css" rel="stylesheet" />
+
+
+<body>
+    <div class="container col-12 d-flex">
+        <div class="col-6 lef">
+
+            <img src="~/Images/contact/雙11.jpg" />
+
+            <img src="~/Images/contact/台WAY.jpg" />
+          
+        </div>
+
+        <div class="col-6">
+            <!--優惠券-->
+
+            @{
+                List<string> Coupon = new List<string>();
+                foreach (var co in Model)
+                {
+
+                    //if (co.CouponStatus == true)
+                    //{
+                    Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
+                                                    <div class='coupon-info coupon-info-right-dashed'>
+                                                        <div class='coupon-store'>{co.CouponName}</div>
+                                                        <div class='coupon-price'>折扣{(int)co.Discount}<span>優惠券</span></div>
+                                                        <div class='coupon-description'>訂單限滿{co.Condition}使用</div>
+                                                    </div>
+                                                    <div class='coupon-get' type='button' onclick='getcoupon({co.CouponId})'>
+                                                        <div class='coupon-desc'>副券</div>
+                                                        <div class='coupon-expiry-date'>到期日{co.ExDate}</div>
+                                                    </div>
+                                                </div>");
+                }
+
+            }
+            @*}*@
+            @foreach (var g in Coupon)
+            {
+                @Html.Raw(g);
+            }
+            <!--優惠券-->
+
+        </div>
+
+    </div>
+</body>
+@section Scripts{
+    <script>
+           @{
+                var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
+                var v = JsonSerializer.Deserialize<Member>(OBJ);
+            }
+
+        function getcoupon(id) {
+         
+            console.log(id)
+            $.ajax({
+                url: '@Url.Action("Couponget", "Home")',
+                data: { id: id },
+                success: function (datas) {
+                    if (!datas.res) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '已經領過了哦',
+                            text: datas.msg,
+                        })
+                        return;
+                    }
+                    Swal.fire(
+                        '領取成功',
+                        '',
+                        'success'
+                    )
+
+                }
+            })
+        }
+
+    </script>
+
+}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

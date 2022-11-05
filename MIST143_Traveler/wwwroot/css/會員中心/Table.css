@@ -1,16 +1,19 @@
 ﻿.樣式:hover {
-    color: coral
+    color: coral;
+        
 }
 
 .tdname {
     max-width: 300px;
     overflow: hidden;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
+   
 }
 .thname {
     max-width: 300px;
     overflow: hidden;
     text-overflow:ellipsis;
+    
 }
 .thbtn {
     max-width: 92px;

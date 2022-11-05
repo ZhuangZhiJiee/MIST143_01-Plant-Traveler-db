@@ -89,6 +89,10 @@ namespace MIST143_Traveler.MViewModel
             get;
             set;
         }
-
+        public string 測試可使用
+        {
+            get;
+            set;
+        }
     }
 }
