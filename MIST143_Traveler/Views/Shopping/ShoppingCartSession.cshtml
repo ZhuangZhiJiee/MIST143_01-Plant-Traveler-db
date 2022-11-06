@@ -25,7 +25,7 @@
 
                             @foreach (var item in Model._CShoppingCartDetailViewModel)
                             {
-                                <div class="leftSide p-3 paddingMore">
+                                <div class="leftSide p-3 paddingMore productItem">
                                     <div class="shoppingCartInfoRow">
                                         <input class="form-check-input mt-0 " type="checkbox" value=""
                                                aria-label="Checkbox for following text input">
@@ -63,7 +63,7 @@
                                     <div class="shoppingCartInfoRowbottomRow">
                                         <div>
                                             <a class="buttonA" href="./travelPayCheckout.html">編輯</a> |
-                                            <a class="buttonA">刪除</a>
+                                            <a class="buttonA deleProductItem">刪除</a>
                                         </div>
                                         <div class="titleFontStyle"> NT$ <span class="totalPrice"></span></div>
                                     </div>
@@ -83,12 +83,15 @@
 
                                     @for (int i = 0; i < Model._CShoppingCartDetailViewModel.Count; i++)
                                     {
-                                        <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TravelProductId" value="@Model._CShoppingCartDetailViewModel[i].TravelProductId" />
-                                        <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TravelProductName" value="@Model._CShoppingCartDetailViewModel[i].TravelProductName" />
-                                        <input type="hidden" class="payCount" asp-for="_CShoppingCartDetailViewModel[i].Count" value="@Model._CShoppingCartDetailViewModel[i].Count" />
-                                        <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Price" value="@Model._CShoppingCartDetailViewModel[i].Price" />
-                                        <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TotalPrice" value="@Model._CShoppingCartDetailViewModel[i].TotalPrice" />
-                                        <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Productpicture" value="@Model._CShoppingCartDetailViewModel[i].Productpicture" />
+                                        <div class="postData">
+                                            <input type="text" asp-for="_CShoppingCartDetailViewModel[i].TravelProductId" value="@Model._CShoppingCartDetailViewModel[i].TravelProductId" />
+                                            <input type="text" asp-for="_CShoppingCartDetailViewModel[i].TravelProductName" value="@Model._CShoppingCartDetailViewModel[i].TravelProductName" />
+                                            <input type="text" class="payCount" asp-for="_CShoppingCartDetailViewModel[i].Count" value="@Model._CShoppingCartDetailViewModel[i].Count" />
+                                            <input type="text" asp-for="_CShoppingCartDetailViewModel[i].Price" value="@Model._CShoppingCartDetailViewModel[i].Price" />
+                                            <input type="text" asp-for="_CShoppingCartDetailViewModel[i].TotalPrice" value="@Model._CShoppingCartDetailViewModel[i].TotalPrice" />
+                                            <input type="text" asp-for="_CShoppingCartDetailViewModel[i].Productpicture" value="@Model._CShoppingCartDetailViewModel[i].Productpicture" />
+                                        </div>
+                                       
                                     }
 
                                 <input type="submit" class="btn btn-main my-3 fullSize" id="goPayBtn" value="結帳" />
@@ -143,6 +146,19 @@
                     })
                 })
 
+                //刪除商品
+                deleItem()
+            }
+            function deleItem() {
+                $('.deleProductItem').each(function (index) {
+                    console.log("index",index)
+                    $(this).on("click", function (e) {
+                        $('.productItem').eq(index).remove()
+                        $('.postData').eq(index).remove()
+                        deleItem()
+
+                    })
+                })
             }
             function clickPlusOrMinus(type,index) {
                 //type === true +, type === false -

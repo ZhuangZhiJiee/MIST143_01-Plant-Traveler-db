@@ -377,3 +377,28 @@ input[type=number] {
 .eventIntroduce {
     width: 859px !important;
 }
+.starComment {
+    width: 120px;
+    margin-bottom: 13px;
+}
+
+.card-title.short{
+    height: 22px;
+}
+.btnFourWordPadding{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.deleProductItem{
+    cursor: pointer;
+}
+
+.modal-footer{
+    justify-content:space-between !important;
+}
+.payUserRow .payUser.active2 {
+    border: solid 1px #0045ff;
+    background-color: rgb(61 137 223 / 12%);
+    color: #0088e9;
+}

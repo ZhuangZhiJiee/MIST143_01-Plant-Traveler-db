@@ -23,7 +23,7 @@ namespace MIST143_Traveler.ShoppingViewModel
         public List<string> DailyDetailText { get; set; }
         public string DeparatureDate { get; set; }
         public string AnotherDepartureDate { get; set; }
-        public int RemainingDays { get; set; }
+        public double RemainingDays { get; set; }
         public List<string> HotelName { get; set; }
         public List<TravelPicture> Productpictures { get; set; }
         public List<CProductDetailViewModel> _CProductDetailViewModel { get; set; }

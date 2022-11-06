@@ -40,6 +40,10 @@
     <form method="post" action="PayEnd" id="payType">
         <input type="hidden" name="MembersId" value="@Model.MembersId" />
         <input type="hidden" name="PaymethodId" value="1" />
+        @if (Model.AccompanyPeople != null)
+        {
+            <input type="hidden" name="AccompanyPeople" value="@Model.AccompanyPeople" />
+        }
         <input type="text" name="CouponId" class="couponIdInput" value="0" />
         <input type="text" name="CouponListId" class="couponListId" value="0" />
         @for (int i = 0; i < Model._CShoppingCartDetailViewModel.Count; i++)
@@ -168,10 +172,10 @@
 
                                 <div class="infoBoxInner">
                                     @*<div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="輸入優惠碼"
-                   aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-main" type="button" id="button-addon2">使用</button>
-        </div>*@
+                                        <input type="text" class="form-control" placeholder="輸入優惠碼"
+                                               aria-label="Recipient's username" aria-describedby="button-addon2">
+                                        <button class="btn btn-main" type="button" id="button-addon2">使用</button>
+                                    </div>*@
                                     @foreach (var item in Model._CCouponViewModel)
                                     {
                                         <input type="text" class="couponIdValue" value="@item.CouponId" />
