@@ -50,11 +50,17 @@ namespace MIST143_Traveler.Controllers
         {
             var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
             var v = JsonSerializer.Deserialize<Member>(Name);
-
-
             var q = _PlanetTravelContext.Coupons.Select(a => a).ToList();
-            var ex=q.Where(a => DateTime.Parse(a.ExDate) > DateTime.Now).ToList();
-            return View(ex);
+
+            CCouponCMid 券 = new CCouponCMid()
+            {
+                已領過 = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == v.MembersId).ToList(),
+                所有 = q.Where(a => DateTime.Parse(a.ExDate) > DateTime.Now && a.Useful == true).ToList(),
+            };
+            
+
+
+            return View(券);
         }
 
         [HttpPost]

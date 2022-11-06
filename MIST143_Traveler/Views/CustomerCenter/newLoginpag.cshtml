@@ -62,7 +62,7 @@
                         <input type="password" class="form-control" placeholder="password" id="Pas" name="Password">
                     </div>
                     <div class="row align-items-center remember mb-4">
-                        <input type="checkbox">記住我
+                        <input type="checkbox" value="true" id="chkKeepLogin">記住我
                     </div>
                     <div class="form-group mt-2">
                         <input type="submit" value="Login" onclick="BtnLogin()" id="btnlog" class="btn float-right login_btn">
@@ -95,6 +95,7 @@
     const DemoValue = () => {
         let act = document.querySelector("#Actemail");
         let pas = document.querySelector("#Pas");
+        
         //Swal.fire(
         //    'Good job!',
         //    'You clicked the button!',
@@ -102,13 +103,16 @@
         //)
         act.value = "d555@gmail.com";
         pas.value = "a1234567";
-    }
+        }
+
+
         //登入開始
         const BtnLogin = () => {//ONCLICK事件
 
         var postData = {//把要取欄位的值轉成JSON物件
             Email: $("#Actemail").val(),//EMIL跟PASSWORD名子要跟VIEWMODEL一樣
-            Password: $("#Pas").val()
+            Password: $("#Pas").val(),
+            KeepLogin: $("#chkKeepLogin").val(),
             };
 
         $.ajax({

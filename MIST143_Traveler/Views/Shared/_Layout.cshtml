@@ -92,7 +92,7 @@
                         var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
                         var v = JsonSerializer.Deserialize<Member>(OBJ);
 
-                        <a href="@Url.ActionLink("CouponHome","Home",new {v.MembersId})">優惠專區</a>
+                        
                         <button class="btn btn-light dropdown-toggle" style="text-decoration:none;border:none" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                             @{
                                 if (v.PhotoPath != null)
@@ -109,9 +109,9 @@
 
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="color:white;text-decoration:none">
-                            <li><a href="@Url.ActionLink("List","CustomerCenter",new {v.MembersId})" class="dropdown-item bi bi-people" type="button">會員專區</a></li>
-
-                            <li><a href="@Url.ActionLink("Logout","CustomerCenter")" class="dropdown-item bi bi-star" type="button">登出</a></li>
+                            <li><a href="@Url.ActionLink("List","CustomerCenter",new {v.MembersId})" class="bi bi-people" type="button">會員專區</a></li>
+                            <li><a href="@Url.ActionLink("CouponHome","Home",new {v.MembersId})" class="bi bi-wallet2">優惠專區</a></li>
+                            <li><a href="@Url.ActionLink("Logout","CustomerCenter")" class="bi bi-star" type="button">登出</a></li>
                         </ul>
                     }
                     else
@@ -139,7 +139,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" onclick="ccclear()" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
 

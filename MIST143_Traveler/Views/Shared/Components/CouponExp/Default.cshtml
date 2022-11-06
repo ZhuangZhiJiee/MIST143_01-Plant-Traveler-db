@@ -7,6 +7,7 @@
 @{
     ViewData["Title"] = "CouponExp";
 }
+
 <div class="container" id="COCO">
     <div>
         <!--優惠券-->
@@ -17,7 +18,7 @@
             {
                 if (co.CouponStatus == true)
                 {
-                    Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
+                    Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient' style='filter: grayscale(1)'>
                                         <div class='coupon-info coupon-info-right-dashed'>
                                             <div class='coupon-store'>{co.CouponName}</div>
                                             <div class='coupon-price'>折扣{(int)co.Discount}<span>優惠券</span></div>
