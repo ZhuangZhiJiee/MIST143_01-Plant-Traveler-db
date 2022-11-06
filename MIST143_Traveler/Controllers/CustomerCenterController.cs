@@ -17,15 +17,20 @@ using System.Threading.Tasks;
 using Microsoft.IdentityModel.Protocols;
 using System.Security.Cryptography;
 using System.Text;
+using MIST143_Traveler.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MIST143_Traveler.Controllers
 {
+    //[Authorize]
     public class CustomerCenterController : Controller
     {
+        private IHttpContextAccessor _httpContextAccessor;
         private readonly PlanetTravelContext _PlanetTravelContext;
         private IWebHostEnvironment _enviro;
-        public CustomerCenterController(PlanetTravelContext PlanetTrave, IWebHostEnvironment p)
+        public CustomerCenterController(PlanetTravelContext PlanetTrave, IWebHostEnvironment p, IHttpContextAccessor httpContextAccessor)
         {
+            _httpContextAccessor = httpContextAccessor;
             _PlanetTravelContext = PlanetTrave;
             _enviro = p;
         }
@@ -39,7 +44,7 @@ namespace MIST143_Traveler.Controllers
             HttpContext.Session.Remove(CDictionary.SK_Login);
             return RedirectToAction("Index", "Home");
         }
-
+        [AllowAnonymous]
         public IActionResult newLoginpag()
         {
             return View();
@@ -168,11 +173,24 @@ namespace MIST143_Traveler.Controllers
                 var t = _PlanetTravelContext.Coupons.Where(a => DateTime.Parse(a.ExDate) > DateTime.Parse(時間));
                 var c = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId && a.CouponStatus == true).Count();
 
-                var q = _PlanetTravelContext.Myfavorites.Where(a => a.MembersId == MembersId).Count();
+                var myf = _PlanetTravelContext.Myfavorites.Where(a => a.MembersId == MembersId).Count();
+
+                //cm = (from a in _PlanetTravelContext.Members.Where(a => a.MembersId == MembersId)
+                //      from b in _PlanetTravelContext.Coupons.Where(a => DateTime.Parse(a.ExDate) > DateTime.Parse(時間))
+                //      from d in _PlanetTravelContext.CouponLists.f(q => q.MembersId == a.MembersId && q.CouponId == b.CouponId).
+                //      Select new CMemberView
+                //      {
+                //          myccount = b.ExDate.Count(),
+                //          myfcount = myf,
+                //          //member = q,
+                //          Cityname = a.City.CityName,
+
+                //      }).FirstOrDefault();
+
                 cm = _PlanetTravelContext.Members.Where(a => a.MembersId == MembersId).Select(a => new CMemberView
                 {
                     myccount = c,
-                    myfcount = q,
+                    myfcount = myf,
                     member = a,
                     Cityname = a.City.CityName,
 
@@ -205,6 +223,7 @@ namespace MIST143_Traveler.Controllers
 
 
         //左邊功能開始
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult newLoginpag(CLogin vModel)
         {
@@ -216,11 +235,17 @@ namespace MIST143_Traveler.Controllers
                 if (cust.Password.Equals(vModel.Password))
                 {
 
-
-
                     string jsonUser = JsonSerializer.Serialize(cust);
                     HttpContext.Session.SetString(
                         CDictionary.SK_Login, jsonUser);
+                    //if (vModel.KeepLogin == "true")
+                    //{
+                    //    CookieOptions option = new CookieOptions();
+                    //    option.Expires = DateTime.Now.AddMinutes(60);
+                    //    int index = vModel.Email.IndexOf("@");
+                    //    string email = vModel.Email.Substring(0,index);
+                    //    Response.Cookies.Append(email, vModel.Password, option);
+                    //}
 
                     return Json(new { Res = true, Msg = "成功" });
                 }
@@ -272,7 +297,7 @@ namespace MIST143_Traveler.Controllers
                             ).ToList();
                 
             }
-            var ex = Coup.優惠券列表.Where(a => DateTime.Parse(a.ExDate) > DateTime.Now).ToList();
+            var ex = Coup.優惠券列表.Where(a => DateTime.Parse(a.ExDate) >= DateTime.Now).ToList();
             return ViewComponent("Coupon", ex);
         }
 
@@ -325,7 +350,7 @@ namespace MIST143_Traveler.Controllers
                                   CouponStatus = Cuu.CouponStatus,
                               }
                             ).ToList();
-                var ex = Coup.優惠券列表.Where(a => DateTime.Parse(a.ExDate) < DateTime.Now).ToList();
+                var ex = Coup.優惠券列表.Where(a => DateTime.Parse(a.ExDate) <= DateTime.Now).ToList();
                 if (ex != null)
                 {
                     
@@ -536,12 +561,12 @@ namespace MIST143_Traveler.Controllers
 
 
         //===================================註冊頁面=======================================
-
+        [AllowAnonymous]
         public IActionResult Createmember()
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Createmember(CMemberView CCC)//註冊
         {
@@ -724,7 +749,7 @@ namespace MIST143_Traveler.Controllers
             return Content(q, "text/plain", System.Text.Encoding.UTF8);
         }
         //============================================================================
-
+        [AllowAnonymous]
         public IActionResult City(int id)
         {
             /* var qq = _PlanetTravelContext.Members.FirstOrDefault(p=>p.MembersId==id).CityId;*///找到這個MEMBER的城市ID

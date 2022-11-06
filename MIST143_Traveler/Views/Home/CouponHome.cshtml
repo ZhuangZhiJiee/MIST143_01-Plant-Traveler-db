@@ -1,4 +1,4 @@
-﻿@model List<MIST143_Traveler.Models.Coupon>
+﻿@model MIST143_Traveler.MViewModel.CCouponCMid
 @using Microsoft.AspNetCore.Http
 @using System.Text.Json;
 @inject IHttpContextAccessor Accessor
@@ -18,7 +18,7 @@
             <img src="~/Images/contact/雙11.jpg" />
 
             <img src="~/Images/contact/台WAY.jpg" />
-          
+
         </div>
 
         <div class="col-6">
@@ -26,26 +26,54 @@
 
             @{
                 List<string> Coupon = new List<string>();
-                foreach (var co in Model)
+                foreach (var co in Model.所有)
                 {
+                    if (Model.已領過.Any(a => a.CouponId == co.CouponId))
+                    {
+                        //Coupon.Add($@"<div class='coupon coupon - wave - left coupon - yellow'>
+                        //     <div class='coupon-info coupon-hole coupon-info-right-dashed'>
+                        //    <div class='coupon-store'>{co.CouponName}</div>  
+                        //<div class='coupon-price'>¥5.00</div>
+                        //<div class='coupon-desc'>5元优惠券满50.00元使用</div>
+                        //<div class='coupon-expiry-date'>有效期：2019.10.01-2019.10.30</div>
+                        //</div>
+                        //<div class='coupon-get coupon-get-already'></div>
+                        //</div>");
+                        Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
+                                                            <div class='coupon-info coupon-info-right-dashed'>
+                                                                <div class='coupon-store'>{co.CouponName}</div>
+                                                                <div class='coupon-price'>折扣{(int)co.Discount}<span>優惠券</span></div>
+                                                                <div class='coupon-description'>訂單限滿{co.Condition}使用</div>
+                                                            </div>
+                                                            <div class='coupon-get' type='button' onclick='getcoupon({co.CouponId})'>
+                                                               
+                                                                <div class='coupon-get coupon-get-already'>123456</div>
+                                                            </div>
+                                                        </div>");
 
-                    //if (co.CouponStatus == true)
-                    //{
-                    Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
-                                                    <div class='coupon-info coupon-info-right-dashed'>
-                                                        <div class='coupon-store'>{co.CouponName}</div>
-                                                        <div class='coupon-price'>折扣{(int)co.Discount}<span>優惠券</span></div>
-                                                        <div class='coupon-description'>訂單限滿{co.Condition}使用</div>
-                                                    </div>
-                                                    <div class='coupon-get' type='button' onclick='getcoupon({co.CouponId})'>
-                                                        <div class='coupon-desc'>副券</div>
-                                                        <div class='coupon-expiry-date'>到期日{co.ExDate}</div>
-                                                    </div>
-                                                </div>");
+
+                    }
+                    else
+                    {
+                        Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
+                                                            <div class='coupon-info coupon-info-right-dashed'>
+                                                                <div class='coupon-store'>{co.CouponName}</div>
+                                                                <div class='coupon-price'>折扣{(int)co.Discount}<span>優惠券</span></div>
+                                                                <div class='coupon-description'>訂單限滿{co.Condition}使用</div>
+                                                            </div>
+                                                            <div class='coupon-get' type='button' onclick='getcoupon({co.CouponId})'>
+                                                                <div class='coupon-desc'>副券</div>
+                                                                <div class='coupon-expiry-date'>到期日{co.ExDate}</div>
+                                                            </div>
+                                                        </div>");
+
+                    }
+
+
                 }
 
             }
-            @*}*@
+
             @foreach (var g in Coupon)
             {
                 @Html.Raw(g);
@@ -63,8 +91,10 @@
                 var v = JsonSerializer.Deserialize<Member>(OBJ);
             }
 
+
+
         function getcoupon(id) {
-         
+
             console.log(id)
             $.ajax({
                 url: '@Url.Action("Couponget", "Home")',
@@ -78,11 +108,29 @@
                         })
                         return;
                     }
-                    Swal.fire(
-                        '領取成功',
-                        '',
-                        'success'
-                    )
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Auto close alert!',
+                        html: 'I will close in <b></b> milliseconds.',
+                        timer: 1000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                b.textContent = Swal.getTimerLeft()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            
+                            location.reload()
+                        }
+                    })
 
                 }
             })
