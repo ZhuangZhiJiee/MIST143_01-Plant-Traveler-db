@@ -174,7 +174,7 @@
                                         {
                                             if (item.HotelName != null)
                                             {
-                                                @item.Date @item.HotelName}<br />
+                                                @item.Date <span>: </span> @item.HotelName}<br />
 
                                         }
                                     </div>
@@ -206,7 +206,10 @@
                                             <div class="my-3">
                                                 <div class="titleFontStyle">NT$ <span id="totalPrice"></span></div>
                                                 <div class="subInfoText">完成所有必填選項</div>
+                                                <br />
                                                 <div class="subInfoText">剩餘:  @Model.Stocks / @Model.Quantity 個位置</div>
+                                                <br />
+                                                <div class="subInfoText">倒數:  @Model.RemainingDays 天出團</div>
                                             </div>
                                             <div class="rightBtns">
 
@@ -224,12 +227,31 @@
                                         <input type="hidden" name="Count" value="1" id="postProductNum" />
                                         <input type="hidden" name="Price" value="@Model.Price" />
                                         <input type="hidden" name="Productpicture" value="@Model.Productpictures.FirstOrDefault().TravelPicture1" />
-                                        <input type="submit" value="報名行程" data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3" />
+                                        <input type="submit" value="報名行程" data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3 btnFourWordPadding" />
                                     </form>
 
                                 </div>
                             </div>
                             <div class="col-4">
+
+
+                                <div class="leftSide grey p-3">
+                                    <div class="titleFontStyle">遊玩景點</div>
+                                        <br />
+
+                                        @foreach (var item in Model._CProductDetailViewModel)
+                                        {
+                                            <div class="mb-3">
+                                                @item.Date <br />
+                                                @foreach (var item2 in item.ViewName) 
+                                                {
+                                                    @item2<span> </span>
+                                                }
+                                            </div>
+                                        }
+                                    @*<div id="productInfoNote"></div>*@
+                                </div>
+
                                 <div class="leftSide grey p-3">
                                     <div class="titleFontStyle">行程明細</div>
                                     <div class="hiddenInfoNote hiddenEle">
@@ -245,7 +267,7 @@
                                     <div id="productInfoNote"></div>
                                 </div>
                             </div>
-                        </div>
+                            </div>
                     </div>
                 </div>
             </article>
@@ -291,9 +313,14 @@
                                         </div>
                                         <div class="col-md-10">
                                             <div class="card-body">
-                                                <h5 class="card-title">@item.MemberName</h5>
-                                                <img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" /><img src="~/Images/Product/一顆星.png" />
-                                                <input type="text" value="@item.Star" />
+                                                <h5 class="card-title short">@item.MemberName</h5>
+                                                <img src="~/Images/Product/1星.png" class="star1 hiddenEle starComment"/>
+                                                <img src="~/Images/Product/2星.png" class="star2 hiddenEle starComment" />
+                                                <img src="~/Images/Product/3星.png" class="star3 hiddenEle starComment" />
+                                                <img src="~/Images/Product/4星.png" class="star4 hiddenEle starComment" />
+                                                <img src="~/Images/Product/5星.png" class="star5 hiddenEle starComment" />
+                                                @*<img src="~/Images/Product/A_starB.png" /><img src="~/Images/Product/A_star.png" /><img src="~/Images/Product/A_star.png" /><img src="~/Images/Product/A_star.png" /><img src="~/Images/Product/A_star.png" />*@
+                                                <input type="hidden" value="@item.Star" class="starInput" />
                                                 <p class="card-text">@item.CommentText。</p>
                                                 <p class="card-text"><small class="text-muted">@item.CommentDate</small></p>
                                             </div>
@@ -315,7 +342,7 @@
                         aria-label="Close"></button>
                 <div class="infoTitle mt-4"></div>
                 <div class="modal-body text-center ">
-                    <h4>已加入至購物車</h4>
+                    <h4>已報名行程</h4>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
@@ -382,6 +409,11 @@
                         $(this).addClass("active")
                     })
                 })
+                //顯示評分星星
+                $('.starInput').each(function (index) {
+                    let starNum = $(this).val()
+                    $(`.star${starNum}`).eq(index).removeClass('hiddenEle')
+                });
 
             }
             //點擊加號

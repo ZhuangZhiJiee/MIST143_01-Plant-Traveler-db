@@ -64,7 +64,12 @@ namespace MIST143_Traveler.Controllers
 
             //-----------------------------------------------
 
+            //======================計算剩餘天數========================================================
+            DateTime deparaturedate = Convert.ToDateTime(pt.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).FirstOrDefault().Date);
+            DateTime datetoday = DateTime.Today;
+            double remainingdays = new  TimeSpan(deparaturedate.Ticks - datetoday.Ticks).TotalDays;
 
+            //=========================資料存ViewModel==================================================
             CProductViewModel prod = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
                 .Select(s => new CProductViewModel
                 {
@@ -76,6 +81,7 @@ namespace MIST143_Traveler.Controllers
                     Stocks = s.Stocks,
                     DeparatureDate = s.TravelProductDetails.FirstOrDefault().Date,
                     AnotherDepartureDate = s.AnotherDepartureDate,
+                    RemainingDays = remainingdays,
                     Description = s.Description,
                     EventIntroduction = s.EventIntroduction,
                     MapUrl = s.MapUrl,
@@ -115,6 +121,7 @@ namespace MIST143_Traveler.Controllers
                    Stocks = s.Stocks,
                    DeparatureDate = s.TravelProductDetails.FirstOrDefault().Date,
                    AnotherDepartureDate = s.AnotherDepartureDate,
+                   RemainingDays = remainingdays,
                    Description = s.Description,
                    EventIntroduction = s.EventIntroduction,
                    MapUrl = s.MapUrl,
@@ -152,6 +159,7 @@ namespace MIST143_Traveler.Controllers
                    Stocks = s.Stocks,
                    DeparatureDate = s.TravelProductDetails.FirstOrDefault().Date,
                    AnotherDepartureDate = s.AnotherDepartureDate,
+                   RemainingDays = remainingdays,
                    Description = s.Description,
                    EventIntroduction = s.EventIntroduction,
                    MapUrl = s.MapUrl,
@@ -240,7 +248,6 @@ namespace MIST143_Traveler.Controllers
 
             return NoContent();
         }
-
         public IActionResult ShoppingCartSession()
         {
             if (HttpContext.Session.GetString(CDictionary.SK_Login) != null) 
@@ -303,6 +310,7 @@ namespace MIST143_Traveler.Controllers
                 MemberName = p.MemberName,
                 Email = p.Email,
                 Phone = p.Phone,
+                AccompanyPeople = p.AccompanyPeople,
                 _CShoppingCartDetailViewModel = p._CShoppingCartDetailViewModel,
                 _CCouponViewModel = pt.CouponLists.Where(a => a.MembersId == p.MembersId && a.CouponStatus == true).Select(b => new CCouponViewModel
                 {
@@ -387,38 +395,169 @@ namespace MIST143_Traveler.Controllers
                 checkMacValue = Convert.ToHexString(byteArray).ToUpper();
                 ViewBag.checkMacValue = checkMacValue;
                 #endregion
+                //===========================歐附寶存入資料庫===================================================
+                #region
+                if (p.AccompanyPeople != null)
+                {
+                    if (p.CouponId == 0)
+                    {
+                        Order odn = new Order()
+                        {
+                            MembersId = p.MembersId,
+                            PaymentId = p.PaymethodId,
+                            OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                            OrderStatusId = 3,
+                            AccompanyPeople = p.AccompanyPeople,
+                        };
+                        pt.Orders.Add(odn);
+                    }
+                    else
+                    {
+                        Order od = new Order()
+                        {
+                            MembersId = p.MembersId,
+                            PaymentId = p.PaymethodId,
+                            OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                            CouponId = p.CouponId,
+                            OrderStatusId = 3,
+                            AccompanyPeople = p.AccompanyPeople,
+                        };
+                        pt.Orders.Add(od);
+                        CouponList couponList = pt.CouponLists.FirstOrDefault(t => t.CouponListId == p.CouponListId);
+                        if (couponList != null)
+                        {
+                            couponList.CouponStatus = false;
+                        }
+                    }
+                }
+                else
+                {
+                    if (p.CouponId == 0)
+                    {
+                        Order odn = new Order()
+                        {
+                            MembersId = p.MembersId,
+                            PaymentId = p.PaymethodId,
+                            OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                            OrderStatusId = 3,
+                        };
+                        pt.Orders.Add(odn);
+                    }
+                    else
+                    {
+                        Order od = new Order()
+                        {
+                            MembersId = p.MembersId,
+                            PaymentId = p.PaymethodId,
+                            OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                            CouponId = p.CouponId,
+                            OrderStatusId = 3,
+                        };
+                        pt.Orders.Add(od);
+                        CouponList couponList = pt.CouponLists.FirstOrDefault(t => t.CouponListId == p.CouponListId);
+                        if (couponList != null)
+                        {
+                            couponList.CouponStatus = false;
+                        }
+                    }
+                }
+
+                pt.SaveChanges();
+
+                for (int i = 0; i < p._CPayViewModel.Count; i++)
+                {
+                    OrderDetail odd = new OrderDetail()
+                    {
+                        OrderId = pt.Orders.OrderBy(e => e.OrderId).LastOrDefault().OrderId,
+                        TravelProductId = p._CPayViewModel[i].TravelProductId,
+                        Quantity = p._CPayViewModel[i].Count,
+                        UnitPrice = p._CPayViewModel[i].Price,
+
+                    };
+                    pt.OrderDetails.Add(odd);
+                }
+
+                for (int i = 0; i < p._CPayViewModel.Count; i++)
+                {
+                    TravelProduct prod = pt.TravelProducts.FirstOrDefault(t => t.TravelProductId == p._CPayViewModel[i].TravelProductId);
+                    if (prod != null)
+                    {
+                        prod.Stocks = prod.Stocks - p._CPayViewModel[i].Count;
+                    }
+                }
+
+                pt.SaveChanges();
                 return View();
             }
+            #endregion
             //========================結帳頁面=========================================================
-            if (p.CouponId == 0)
+            if (p.AccompanyPeople != null)
             {
-                Order odn = new Order()
+                if (p.CouponId == 0)
                 {
-                    MembersId = p.MembersId,
-                    PaymentId = p.PaymethodId,
-                    OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
-                    OrderStatusId = 3,
-                };
-                pt.Orders.Add(odn);
+                    Order odn = new Order()
+                    {
+                        MembersId = p.MembersId,
+                        PaymentId = p.PaymethodId,
+                        OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                        OrderStatusId = 3,
+                        AccompanyPeople = p.AccompanyPeople,
+                    };
+                    pt.Orders.Add(odn);
+                }
+                else
+                {
+                    Order od = new Order()
+                    {
+                        MembersId = p.MembersId,
+                        PaymentId = p.PaymethodId,
+                        OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                        CouponId = p.CouponId,
+                        OrderStatusId = 3,
+                        AccompanyPeople = p.AccompanyPeople,
+                    };
+                    pt.Orders.Add(od);
+                    CouponList couponList = pt.CouponLists.FirstOrDefault(t => t.CouponListId == p.CouponListId);
+                    if (couponList != null)
+                    {
+                        couponList.CouponStatus = false;
+                    }
+                }
             }
             else 
             {
-                Order od = new Order()
+                if (p.CouponId == 0)
                 {
-                    MembersId = p.MembersId,
-                    PaymentId = p.PaymethodId,
-                    OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
-                    CouponId = p.CouponId,
-                    OrderStatusId = 3,
-                };
-                pt.Orders.Add(od);
-                CouponList couponList = pt.CouponLists.FirstOrDefault(t => t.CouponListId == p.CouponListId);
-                if (couponList != null)
+                    Order odn = new Order()
+                    {
+                        MembersId = p.MembersId,
+                        PaymentId = p.PaymethodId,
+                        OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                        OrderStatusId = 3,
+                    };
+                    pt.Orders.Add(odn);
+                }
+                else
                 {
-                    couponList.CouponStatus = false;
+                    Order od = new Order()
+                    {
+                        MembersId = p.MembersId,
+                        PaymentId = p.PaymethodId,
+                        OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                        CouponId = p.CouponId,
+                        OrderStatusId = 3,
+                    };
+                    pt.Orders.Add(od);
+                    CouponList couponList = pt.CouponLists.FirstOrDefault(t => t.CouponListId == p.CouponListId);
+                    if (couponList != null)
+                    {
+                        couponList.CouponStatus = false;
+                    }
                 }
             }
+
             pt.SaveChanges();
+
             for (int i = 0; i < p._CPayViewModel.Count; i++) 
             {
                 OrderDetail odd = new OrderDetail()

@@ -103,7 +103,7 @@
                                 <div class="infoBoxInner">
                                     <div class="payUserRow">
                                         <div class="payUserBlock">
-                                            <div class="payUser active">
+                                            <div class="payUser active2">
                                                 @Model.MemberName
                                             </div>
                                         </div>
@@ -124,9 +124,8 @@
                                             <div>@Model.Email</div>
                                         </div>
                                         <div class="editBox">
-                                            <button type="button" class="btn btn-main-outline" data-bs-toggle="modal"
-                                                    data-bs-target="#contentModal">
-                                                編輯
+                                            <button type="button" class="btn btn-outline-primary deleUserItem ">
+                                                刪除
                                             </button>
                                         </div>
                                     </div>
@@ -141,7 +140,7 @@
                                 <input type="hidden" asp-for="MemberName" value="@Model.MemberName" />
                                 <input type="hidden" asp-for="Email" value="@Model.Email" />
                                 <input type="hidden" asp-for="Phone" value="@Model.Phone" />
-                                 <input type="text" class="memberNameInput" value="" />
+                                <input type="text" class="memberNameInput" name="AccompanyPeople" value="" />
                                 @for (int i = 0; i < Model._CShoppingCartDetailViewModel.Count; i++)
                                 {
                                     <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TravelProductId" value="@Model._CShoppingCartDetailViewModel[i].TravelProductId" />
@@ -248,7 +247,7 @@
                                     *
                                 </span>
                             </label>
-                            <input type="text" class="form-control" value="">
+                            <input type="text" class="form-control phoneInput" value="">
                         </div>
                         <div class="mb-3">
                             <label class="col-form-label">
@@ -256,14 +255,22 @@
                                     *
                                 </span>
                             </label>
-                            <input type="text" class="form-control" value="">
+                            <input type="text" class="form-control emailInput" value="">
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveBtn">儲存</button>
+                    <div class="modal-footer spaceBetween">
+                        <div>
+                            <button type="button" class="btn btn-primary demoBtn">DEMO1</button>
+                            <button type="button" class="btn btn-primary demoTwoBtn">DEMO2</button>
+                            <button type="button" class="btn btn-primary demoThreeBtn">DEMO3</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveBtn">儲存</button>
+                        </div>
+
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -275,12 +282,65 @@
         $('#saveBtn').click(function () {
             let newName = $('.addName').val()
             $('.addName').val("")
-            console.log("newName", newName)
+            $('.phoneInput').val('')
+            $('.emailInput').val('')
             let oldHtml = $('.payUserBlock').html()
-            $('.payUserBlock').html(oldHtml + `<div class='payUser active'>${newName}</div>`)
+            $('.payUserBlock').html(oldHtml + `<div class='payUser payUserItem'>${newName}</div>`)
             let oldInputValue = $(".memberNameInput").val()
             let newInputValue = oldInputValue === "" ? newName : `、${newName}`
             $(".memberNameInput").val(`${oldInputValue}${newInputValue}`)
+            clickPayUser()
         })
+    $('.demoBtn').click(function () {
+        $('.addName').val('林小美')
+        $('.phoneInput').val('0945154315')
+        $('.emailInput').val('marco@gmail.com')
+    })
+    $('.demoTwoBtn').click(function () {
+        $('.addName').val('席維尼')
+        $('.phoneInput').val('0941543544')
+        $('.emailInput').val('shidada@yahoo.com')
+    })
+    $('.demoThreeBtn').click(function () {
+        $('.addName').val('汪方')
+        $('.phoneInput').val('0945641254')
+        $('.emailInput').val('woang@gmail.com')
+    })
+    
+    $('.deleUserItem').click(function () {
+        console.log("deleUserItem")
+        $('.payUserItem').each(function (index) {
+            if ($(this).attr("class").indexOf('active') > -1) {
+                $(this).remove()
+                let name = $(this).text()
+                let postInputValue = $('.memberNameInput').val()
+                let word = ""
+                if (postInputValue.indexOf(name) > 0) {
+                    word = `、${name}`
+                } else if (postInputValue.indexOf(name) === 0){
+                    word = `${name}、`
+                }
+                console.log("${space}${name}", `${word}`)
+                const regex = new RegExp(word);
+                postInputValue = postInputValue.replace(regex, "")
+                $('.memberNameInput').val(postInputValue)
+                clickPayUser()
+            }
+        })
+    })
+    $('.deleeee').click(function () {
+        console.log("deleeee")
+    })
+    function clickPayUser() {
+        $('.payUserItem').each(function (index) {
+            console.log("index", index)
+            $(this).on("click", function (e) {
+                $('.payUserItem').each(function (index) {
+                    $(this).removeClass("active")
+                })
+                $('.payUserItem').eq(index).addClass('active')
+            })
+        })
+    }
 </script>
 }
