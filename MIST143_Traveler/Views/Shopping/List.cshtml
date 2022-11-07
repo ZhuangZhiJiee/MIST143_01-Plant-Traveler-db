@@ -68,13 +68,13 @@
         </div>
         <div class="小介紹">
             <div class="評價">
-                <div class="小介紹">
+                <div class="小介紹 greyText">
                     旅遊景點:
                     @foreach (var item in Model._CProductDetailViewModel)
                     {
                         @foreach (var item2 in item.ViewName)
                         {
-                            @item2
+                            @item2<span> </span>
                         }
                     }
                 </div>
@@ -207,9 +207,9 @@
                                                 <div class="titleFontStyle">NT$ <span id="totalPrice"></span></div>
                                                 <div class="subInfoText">完成所有必填選項</div>
                                                 <br />
-                                                <div class="subInfoText">剩餘:  @Model.Stocks / @Model.Quantity 個位置</div>
+                                                <div>剩餘:  <span class="stocks">@Model.Stocks</span> / @Model.Quantity 個位置<span class="text-danger hiddenEle soldInfo ms-2">快售完</span></div>
                                                 <br />
-                                                <div class="subInfoText">倒數:  @Model.RemainingDays 天出團</div>
+                                                <div >倒數:  @Model.RemainingDays 天出團</div>
                                             </div>
                                             <div class="rightBtns">
 
@@ -227,7 +227,7 @@
                                         <input type="hidden" name="Count" value="1" id="postProductNum" />
                                         <input type="hidden" name="Price" value="@Model.Price" />
                                         <input type="hidden" name="Productpicture" value="@Model.Productpictures.FirstOrDefault().TravelPicture1" />
-                                        <input type="submit" value="報名行程" data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3 btnFourWordPadding" />
+                                        <input type="submit" value="報名行程" data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-main mx-3 btnFourWordPadding addlesson" />
                                     </form>
 
                                 </div>
@@ -298,11 +298,19 @@
                 </div>
                 <div class="小介紹 preparationDescription"></div>
 
-                @if (Model._CCommentViewModel != null)
-                {
-                    <div class="活動DIV">
-                        <h2><span class="一條根"> </span><span>活動評價</span></h2>
+                
+                <div class="活動DIV">
+                    <h2><span class="一條根"> </span><span>活動評價</span></h2>
 
+                    @if (Model._CCommentViewModel.Count == 0)
+                    {
+                        <div>
+                            <br />
+                                 目前尚無活動評價
+                        </div>
+                    }
+                    else
+                    {
                         @foreach (var item in Model._CCommentViewModel)
                         {
                             <div class="評論">
@@ -314,12 +322,11 @@
                                         <div class="col-md-10">
                                             <div class="card-body">
                                                 <h5 class="card-title short">@item.MemberName</h5>
-                                                <img src="~/Images/Product/1星.png" class="star1 hiddenEle starComment"/>
+                                                <img src="~/Images/Product/1星.png" class="star1 hiddenEle starComment" />
                                                 <img src="~/Images/Product/2星.png" class="star2 hiddenEle starComment" />
                                                 <img src="~/Images/Product/3星.png" class="star3 hiddenEle starComment" />
                                                 <img src="~/Images/Product/4星.png" class="star4 hiddenEle starComment" />
                                                 <img src="~/Images/Product/5星.png" class="star5 hiddenEle starComment" />
-                                                @*<img src="~/Images/Product/A_starB.png" /><img src="~/Images/Product/A_star.png" /><img src="~/Images/Product/A_star.png" /><img src="~/Images/Product/A_star.png" /><img src="~/Images/Product/A_star.png" />*@
                                                 <input type="hidden" value="@item.Star" class="starInput" />
                                                 <p class="card-text">@item.CommentText。</p>
                                                 <p class="card-text"><small class="text-muted">@item.CommentDate</small></p>
@@ -329,8 +336,8 @@
                                 </div>
                             </div>
                         }
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
     <!-- 已加入購物車訊息彈窗 -->
@@ -415,6 +422,11 @@
                     $(`.star${starNum}`).eq(index).removeClass('hiddenEle')
                 });
 
+                //是否顯示快售完
+                let stocksNum = parseInt($('.stocks').text())
+                if (stocksNum < 10) {
+                    $('.soldInfo').removeClass('hiddenEle')
+                }
             }
             //點擊加號
             $('#productPlus').click(function () {
