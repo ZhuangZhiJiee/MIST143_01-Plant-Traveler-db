@@ -140,14 +140,13 @@
                                 <input type="hidden" asp-for="MemberName" value="@Model.MemberName" />
                                 <input type="hidden" asp-for="Email" value="@Model.Email" />
                                 <input type="hidden" asp-for="Phone" value="@Model.Phone" />
-                                <input type="text" class="memberNameInput" name="AccompanyPeople" value="" />
+                                <input type="hidden" class="memberNameInput" name="AccompanyPeople" value="" />
                                 @for (int i = 0; i < Model._CShoppingCartDetailViewModel.Count; i++)
                                 {
                                     <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TravelProductId" value="@Model._CShoppingCartDetailViewModel[i].TravelProductId" />
                                     <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TravelProductName" value="@Model._CShoppingCartDetailViewModel[i].TravelProductName" />
                                     <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Count" value="@Model._CShoppingCartDetailViewModel[i].Count" />
                                     <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Price" value="@Model._CShoppingCartDetailViewModel[i].Price" />
-                                    <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TotalPrice" value="@Model._CShoppingCartDetailViewModel[i].TotalPrice" />
                                     <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Productpicture" value="@Model._CShoppingCartDetailViewModel[i].Productpicture" />
                                 }
                                 <input type="submit" value="前往付款" class="btn btn-main " />

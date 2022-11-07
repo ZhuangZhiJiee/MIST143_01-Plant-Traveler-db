@@ -12,6 +12,9 @@ using System.Collections.Specialized;
 using System.Web;
 using System.Security.Cryptography;
 using System.Text;
+using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Mvc;
+using MimeKit;
 
 namespace MIST143_Traveler.Controllers
 {
@@ -247,6 +250,22 @@ namespace MIST143_Traveler.Controllers
             HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonCart);
 
             return NoContent();
+        }
+        public IActionResult RemoveSession(int? TravelProductId) 
+        {
+            if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT)) 
+            {
+                List<CShoppingCartDetailViewModel> list = null;
+                string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+                list = JsonSerializer.Deserialize<List<CShoppingCartDetailViewModel>>(jsonCart);
+
+                int index = list.FindIndex(m => m.TravelProductId == TravelProductId);
+                list.RemoveAt(index);
+                jsonCart = JsonSerializer.Serialize(list);
+                HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonCart);
+            }
+
+            return RedirectToAction("ShoppingCartSession");
         }
         public IActionResult ShoppingCartSession()
         {
@@ -581,6 +600,30 @@ namespace MIST143_Traveler.Controllers
             }
 
             pt.SaveChanges();
+
+            MimeMessage message = new MimeMessage();
+            BodyBuilder builder = new BodyBuilder();
+            builder.HtmlBody = $"<p>您好，恭喜您付款已完成，祝您旅途愉快!</p>" +
+                               $"<p>提醒您現在為疫情期間，請多留意自身健康安全</p>" +
+                              $"<div style='border: 1px solid black;text-align: center;'>      </div>" +
+                              $"<p>PlanetTraveler星球旅遊 關心您</p>" +
+                              $"<p>傳送時間:{DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>";
+
+
+
+            message.From.Add(new MailboxAddress("PlanetTraveler星球旅遊", "planettravelermsit143@outlook.com"));
+            message.To.Add(new MailboxAddress("親愛的顧客", "planettravelermsit143@outlook.com"));
+            message.Subject = "恭喜付款完成";
+            message.Body = builder.ToMessageBody();
+
+            using (SmtpClient client = new SmtpClient())
+            {
+                client.Connect("smtp.outlook.com", 25, MailKit.Security.SecureSocketOptions.StartTls);
+                client.Authenticate("planettravelermsit143@outlook.com", "gogo1116");
+                client.Send(message);
+                client.Disconnect(true);
+            }
+
             System.Threading.Thread.Sleep(3000);
             return RedirectToAction("Index", "Home");
         }

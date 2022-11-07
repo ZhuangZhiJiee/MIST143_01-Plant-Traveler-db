@@ -62,8 +62,7 @@
                                     <div class="border-bottom-line my-3"></div>
                                     <div class="shoppingCartInfoRowbottomRow">
                                         <div>
-                                            <a class="buttonA" href="./travelPayCheckout.html">編輯</a> |
-                                            <a class="buttonA deleProductItem">刪除</a>
+                                            <a href="@Url.Action("RemoveSession","shopping", new { TravelProductId = item.TravelProductId })" class="buttonA deleProductItem" >刪除</a>
                                         </div>
                                         <div class="titleFontStyle"> NT$ <span class="totalPrice"></span></div>
                                     </div>
@@ -75,7 +74,7 @@
                         <div class="rightSide ">
                             <div class="subInfoText">1件總計 <i class="bi bi-caret-down"></i></div>
                             <div class="titleFontStyle">NT$ <span id="totalPayPrice"></span></div>
-                            <form action="PayData" method="post">
+                            <form action="PayData" method="post"> 
                                 <input type="hidden" asp-for="MembersId" value="@Model.MembersId" />
                                 <input type="hidden" asp-for="MemberName" value="@Model.MemberName" />
                                 <input type="hidden" asp-for="Phone" value="@Model.Phone" />
@@ -84,12 +83,11 @@
                                     @for (int i = 0; i < Model._CShoppingCartDetailViewModel.Count; i++)
                                     {
                                         <div class="postData">
-                                            <input type="text" asp-for="_CShoppingCartDetailViewModel[i].TravelProductId" value="@Model._CShoppingCartDetailViewModel[i].TravelProductId" />
-                                            <input type="text" asp-for="_CShoppingCartDetailViewModel[i].TravelProductName" value="@Model._CShoppingCartDetailViewModel[i].TravelProductName" />
-                                            <input type="text" class="payCount" asp-for="_CShoppingCartDetailViewModel[i].Count" value="@Model._CShoppingCartDetailViewModel[i].Count" />
-                                            <input type="text" asp-for="_CShoppingCartDetailViewModel[i].Price" value="@Model._CShoppingCartDetailViewModel[i].Price" />
-                                            <input type="text" asp-for="_CShoppingCartDetailViewModel[i].TotalPrice" value="@Model._CShoppingCartDetailViewModel[i].TotalPrice" />
-                                            <input type="text" asp-for="_CShoppingCartDetailViewModel[i].Productpicture" value="@Model._CShoppingCartDetailViewModel[i].Productpicture" />
+                                            <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TravelProductId" value="@Model._CShoppingCartDetailViewModel[i].TravelProductId" />
+                                            <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TravelProductName" value="@Model._CShoppingCartDetailViewModel[i].TravelProductName" />
+                                            <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Count" value="@Model._CShoppingCartDetailViewModel[i].Count" class="payCount" />
+                                            <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Price" value="@Model._CShoppingCartDetailViewModel[i].Price" />
+                                            <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Productpicture" value="@Model._CShoppingCartDetailViewModel[i].Productpicture" />
                                         </div>
                                        
                                     }
