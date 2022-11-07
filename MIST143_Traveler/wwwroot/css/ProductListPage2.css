@@ -21,16 +21,20 @@
 .main-header .main-nav {
     margin-left: auto;
 }
+
 .jfklj {
     border-radius: 6px;
     padding: 11px;
 }
-.djfdd{
-    width:18%;
+
+.djfdd {
+    width: 18%;
 }
+
 .colle {
     padding-left: 88px;
 }
+
 .main-header .main-nav a {
     text-decoration: none;
     padding: 10px 0.8em;
@@ -39,14 +43,14 @@
     color: rgb(16, 22, 22);
 }
 
-        .main-header .main-nav a:hover {
-            background-color: rgba(200, 198, 198, 0.571);
-        }
+    .main-header .main-nav a:hover {
+        background-color: rgba(200, 198, 198, 0.571);
+    }
 
-        .main-header .main-nav a:nth-child(5) {
-            background-color: coral;
-            color: aliceblue;
-        }
+    .main-header .main-nav a:nth-child(5) {
+        background-color: coral;
+        color: aliceblue;
+    }
 
 .main-header .header-search {
     margin-left: 15px;
@@ -84,6 +88,7 @@
             width: 20em;
             text-indent: 3em;
         }
+
 button {
     font-size: 15px;
     line-height: 1.44;
@@ -96,6 +101,7 @@ button {
     cursor: pointer;
     border: none;
 }
+
 .secondary-nav {
     width: 1200px;
     height: 50px;
@@ -107,7 +113,7 @@ button {
 }
 
     .secondary-nav-container li {
-       /* display: inline;*/
+        /* display: inline;*/
         padding: 10px 0.8em;
         border-radius: 15px;
         font-size: 16px;
@@ -155,7 +161,7 @@ button {
     .default-footer_links ul,
     .default-footer_links li {
         margin: 0px;
-      /*  padding: 10px 0 0 0;*/
+        /*  padding: 10px 0 0 0;*/
     }
 
 .footer_label {
@@ -244,7 +250,7 @@ button {
     height: 310px;
 }
 
-img {
+.mg {
     margin-bottom: 8px;
     max-width: 100%;
     height: 45%;
@@ -638,13 +644,12 @@ a {
     border-radius: 8px;
     padding-left: 16px;
 }
- 
+
 #menu {
     position: fixed;
     right: 0;
     top: 50%;
     width: 8em;
-  
     margin-top: -2.5em;
 }
 
@@ -989,7 +994,6 @@ div {
 }
 
 input {
-
     /* font-size: 20px; */
     font-weight: 500;
     color: #212121;

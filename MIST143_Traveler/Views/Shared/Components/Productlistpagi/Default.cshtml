@@ -11,7 +11,7 @@
 
 
 @{
-    
+
     <div class="experience-activity-card-section j-experience-activity-card-section desktop">
         @foreach (var item in Model)
         {
@@ -20,7 +20,7 @@
 
             <div class="asdqwr asd">
                 <div class="card" style="">
-                    <img class="card-img-top" src="https://localhost:44338/images/TravelProductPictures/@imgurl" alt="Card image cap">
+                    <img class="card-img-top" style="height:143px;" src="https://localhost:44338/images/TravelProductPictures/@imgurl" alt="Card image cap">
                     <div class="card-body">
                         @{
                             if (Accessor.HttpContext.Session.Keys.Contains(CDictionary.SK_Login))
@@ -29,7 +29,6 @@
                                 var v = JsonSerializer.Deserialize<Member>(OBJ);
                                 <a href="@Url.Action("List", "shopping", new { TravelProductId = item.TravelProductId, v.MembersId })">
                                     <h3 class="activity-card-title">
-                                        @*【領券現折100】Klook獨家優惠｜台北101觀景台門票｜萬聖節搗蛋派對｜高空Sky Lounge百萬夜景*@
                                         @item.TravelProductName
                                     </h3>
                                 </a>
@@ -38,7 +37,6 @@
                             {
                                 <a href="@Url.Action("List" ,"shopping", new {TravelProductId=item.TravelProductId})">
                                     <h3 class="activity-card-title">
-                                        @*【領券現折100】Klook獨家優惠｜台北101觀景台門票｜萬聖節搗蛋派對｜高空Sky Lounge百萬夜景*@
                                         @item.TravelProductName
                                     </h3>
                                 </a>
@@ -47,16 +45,15 @@
 
 
                         <div class="page-activity-recommend-score">
-                            <span class="page-activity-recommend-score-number">
-                                <svg width="12" height="12" class="svg-icon"></svg>
-                                <span class="score-rate">4.7</span>
-                            </span>
+
                             <span class="page-activity-recommend-review-number">
-                                (
-                                <span class="review-number">30K+ 則評價</span>
-                                )
+
+                                @item.TravelProductType.TravelProductTypeName
+
                             </span>
+
                         </div>
+
                         <div class="activity-card-bottom">
                             <div>
                                 <div class="activity-card-price-box home-activity-card_price small-card">
@@ -67,9 +64,10 @@
                         </div>
                         <div class="tagging-wrap bottom-tag small-style">
                             <div class="tagging-box">
-                                <div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
-                                    <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
-                                </div>
+                                <div class="subInfoText">剩餘:  @item.Stocks / @item.Quantity 個位置</div>
+                                @*<div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                                        <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                                    </div>*@
                             </div>
                         </div>
                     </div>

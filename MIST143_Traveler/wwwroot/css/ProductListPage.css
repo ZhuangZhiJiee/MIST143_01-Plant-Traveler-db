@@ -3,8 +3,8 @@
     margin: 0px;
     padding: 0px;
     list-style: none;*/
-    /* border: 1px solid red; */
-    /*font-family: Georgia, "Times New Roman", Times, serif;
+/* border: 1px solid red; */
+/*font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .border-bottom-line {
@@ -14,7 +14,7 @@
 /* header的css範圍 */
 
 .ban-sea-box {
-margin-top:3%;
+    margin-top: 3%;
 }
 
 /* footer的css範圍 */
@@ -60,7 +60,7 @@ margin-top:3%;
     height: 310px;
 }
 
-img {
+.uuuimg {
     margin-bottom: 8px;
     max-width: 100%;
     height: 45%;
@@ -347,14 +347,16 @@ img {
 .desktop {
     /*display: flex;*/
     margin-top: 20px;
-    margin:auto;
+    margin: auto;
     font-size: 14px;
     font-weight: 400;
     /*line-height: 16.1px;*/
 }
+
 .search {
-width:500px;
+    width: 500px;
 }
+
 .rwd-header-search-box-desktop {
     margin-top: 20px;
 }
@@ -431,6 +433,7 @@ width:500px;
     border-radius: 8px;
     padding-left: 16px;
 }
+
 #menu {
     position: fixed;
     right: 0;
@@ -438,6 +441,7 @@ width:500px;
     width: 8em;
     margin-top: -2.5em;
 }
+
 .destination-tips-popup-new {
     position: absolute;
     -webkit-transform: translate(100%,-50%);
@@ -486,6 +490,7 @@ width:500px;
 .experience-activity-card-section {
     margin-top: 72px;
 }
+
 html,
 body {
     height: 100%;
@@ -495,10 +500,10 @@ body {
     position: fixed;
     display: none;
     top: 0;
-    height:100%;
-    width:75%;
+    height: 100%;
+    width: 75%;
     bottom: 0;
-    margin:initial auto;
+    margin: initial auto;
     background: rgba(0, 0, 0, 0.8);
     z-index: 2;
 }
@@ -522,8 +527,9 @@ body {
 
 .CloseIcon {
     cursor: pointer;
-    display:flex;
+    display: flex;
 }
+
 .view-all-button {
     position: -webkit-sticky;
     position: sticky;
@@ -531,6 +537,7 @@ body {
     bottom: 30px;
     z-index: 2;
 }
+
 .destination-guide-button.desktop .destination-guide-button_main {
     text-align: center;
     margin-left: 50%;
@@ -542,6 +549,7 @@ body {
     -webkit-box-flex: 0;
     flex: 0 0 100px;
 }
+
 .experience-destination-modal .destination-search-input {
     border-radius: 8px 8px 4px 4px;
     border-color: #eee;
@@ -559,6 +567,7 @@ body {
     font-size: 16px;
     line-height: 1;
 }
+
 .search-box-recommend {
     max-height: 348px;
     overflow-y: auto;
@@ -575,10 +584,10 @@ body {
 .search-box-recommend_left {
     width: 44%;
     border-right: 1px solid #eee;
-    float:left;
-
+    float: left;
 }
-blockquote, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, li, ol, p, pre, table, td, th,  {
+
+blockquote, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, li, ol, p, pre, table, td, th, {
     margin: 0;
     padding: 0;
 }
@@ -586,34 +595,36 @@ blockquote, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, li, ol, p, pre, 
 ol, ul {
     list-style-type: none;
 }
-.search-box-recommend_groups{
-    margin:auto;
-    width:115.2px;
 
-}
-.search-box-recommend_groups > li.active {
-    background-color: #ff5b00;
-    color: #fff;
+.search-box-recommend_groups {
+    margin: auto;
+    width: 115.2px;
 }
 
-
-.search-box-recommend_groups > li {
-    display: -webkit-box;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    justify-content: center;
-    position: relative;
-    height: 58px;
-    padding-left: 24px;
-    padding-right: 6px;
-    line-height: 1.2;
-}
-    .search-box-recommend_groups > li.active .search-box-recommend_cities {
-        color: inherit;
+    .search-box-recommend_groups > li.active {
+        background-color: #ff5b00;
+        color: #fff;
     }
+
+
+    .search-box-recommend_groups > li {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        justify-content: center;
+        position: relative;
+        height: 58px;
+        padding-left: 24px;
+        padding-right: 6px;
+        line-height: 1.2;
+    }
+
+        .search-box-recommend_groups > li.active .search-box-recommend_cities {
+            color: inherit;
+        }
 
 
 .search-box-recommend_cities {
@@ -621,13 +632,15 @@ ol, ul {
     color: #757575;
     font-size: 12px;
 }
+
 b, strong {
     font-weight: 600;
 }
+
 .search-box-recommend_right {
     -webkit-box-flex: 1;
-    float:left;
-    width:56%;
+    float: left;
+    width: 56%;
     padding: 14px 24px 24px;
     overflow-y: auto;
 }
@@ -636,20 +649,24 @@ b, strong {
 .area-selector {
     width: 100%;
 }
+
 .area-selector_label {
-    left:0px;
+    left: 0px;
 }
+
 .area-selector_country .area-selector_country:lang(zh-Hans-CN), .area-selector_country:lang(zh-Hant-HK), .area-selector_country:lang(zh-Hant-TW) {
-    float:left;
+    float: left;
     width: 14%;
 }
+
 .area-selector_cities {
     -webkit-box-flex: 1;
-    float:left;
-    margin-right:50px;
-    width:86%;
+    float: left;
+    margin-right: 50px;
+    width: 86%;
     flex: 1;
 }
+
 .flgd {
     width: 300px;
     /*    border:3px solid red;*/
@@ -657,6 +674,7 @@ b, strong {
     margin: 10px 10px 10px 10px;
     float: right;
 }
+
 #menu {
     position: fixed;
     right: 0;
@@ -664,17 +682,20 @@ b, strong {
     width: 8em;
     margin-top: -2.5em;
 }
-.area_button{
-    margin-left:45%;
-    width:8em;
+
+.area_button {
+    margin-left: 45%;
+    width: 8em;
 }
+
 .myMOUSE {
     cursor: pointer;
 }
+
 .basic-filter {
     width: 80%;
 }
-.section-right-head {
-    width:30%
-}
 
+.section-right-head {
+    width: 30%
+}
