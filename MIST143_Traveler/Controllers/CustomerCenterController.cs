@@ -169,23 +169,16 @@ namespace MIST143_Traveler.Controllers
             CMemberView cm = new CMemberView();
             if (MembersId != 0)
             {
+                _PlanetTravelContext.Coupons.ToList();//如果在同一個變數想WHERE兩張表的內容需要先用TOLIST先把他接住
+                var cl = _PlanetTravelContext.CouponLists.ToList();
                 var 時間 = DateTime.Now.AddDays(-1).ToShortDateString();
-                var t = _PlanetTravelContext.Coupons.Where(a => DateTime.Parse(a.ExDate) > DateTime.Parse(時間));
-                var c = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId && a.CouponStatus == true).Count();
-
+                
+                //var c = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId && a.CouponStatus == true).Count();
+                var c = cl.Where(a => a.MembersId == MembersId && a.CouponStatus == true && 
+                Convert.ToDateTime(a.Coupon.ExDate) > Convert.ToDateTime(時間)).Count();
+                    
                 var myf = _PlanetTravelContext.Myfavorites.Where(a => a.MembersId == MembersId).Count();
 
-                //cm = (from a in _PlanetTravelContext.Members.Where(a => a.MembersId == MembersId)
-                //      from b in _PlanetTravelContext.Coupons.Where(a => DateTime.Parse(a.ExDate) > DateTime.Parse(時間))
-                //      from d in _PlanetTravelContext.CouponLists.f(q => q.MembersId == a.MembersId && q.CouponId == b.CouponId).
-                //      Select new CMemberView
-                //      {
-                //          myccount = b.ExDate.Count(),
-                //          myfcount = myf,
-                //          //member = q,
-                //          Cityname = a.City.CityName,
-
-                //      }).FirstOrDefault();
 
                 cm = _PlanetTravelContext.Members.Where(a => a.MembersId == MembersId).Select(a => new CMemberView
                 {
@@ -619,6 +612,7 @@ namespace MIST143_Traveler.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Forgetpas(CLogin Mem)
         {
@@ -646,7 +640,7 @@ namespace MIST143_Traveler.Controllers
 
             Cust.Password = rannum.ToString();
             _PlanetTravelContext.SaveChanges();
-            message.From.Add(new MailboxAddress("PlanetTraveler星球旅遊", "planettravelermsit143@outlook.complanettravelermsit143@outlook.com"));
+            message.From.Add(new MailboxAddress("PlanetTraveler星球旅遊", "planettravelermsit143@outlook.com"));
             message.To.Add(new MailboxAddress("親愛的顧客", Mem.Email));
             message.Subject = "PlanetTraveler星球旅遊:忘記密碼";
             message.Body = builder.ToMessageBody();
@@ -742,9 +736,8 @@ namespace MIST143_Traveler.Controllers
         {
             
             var 時間 = DateTime.Now.AddDays(-1).ToShortDateString();
-            var c = _PlanetTravelContext.Coupons.Where(a => DateTime.Parse(a.ExDate) > DateTime.Parse(時間)).ToList();
-            //var x = from ss in _PlanetTravelContext.Coupons.Where(a => DateTime.Parse(a.ExDate) > DateTime.Parse(時間)).ToList();
-                   //from aa in _PlanetTravelContext.CouponLists.Where(s=>s.)
+            //var c = _PlanetTravelContext.Coupons.Where(a => DateTime.Parse(a.ExDate) > DateTime.Parse(時間)).ToList();
+            
             var q = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId && a.CouponStatus == true).Count().ToString();
             return Content(q, "text/plain", System.Text.Encoding.UTF8);
         }

@@ -1,7 +1,12 @@
 ﻿body {
 }
 .lef > img {
-    width: 80%;
+    width: 90%;
     margin-bottom: 30px;
     margin-top: 30px;
+}
+.cpage {
+    margin-bottom: 4rem;
+    background: url('/Images/contact/coupp.jpg');
+    background-size: cover;
 }

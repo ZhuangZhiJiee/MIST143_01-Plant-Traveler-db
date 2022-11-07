@@ -34,7 +34,7 @@
                                     {
                                         <label class="btn">
                                             <input type="file" name="photo" class="form-control" onchange="uploadImg()" id="file" style="display:none" accept="image/*">
-                                            <img src="~/Images/客戶大頭貼/@Model.PhotoPath" id="avatarShow" style="width:240px;height:240px;border-radius:50%" />
+                                            <img src="~/Images/客戶大頭貼/@Model.PhotoPath" id="avatarShow" class="avatarShow" style="width:240px;height:240px;border-radius:50%" />
                                         </label>
                                         <input id="avatar" type="hidden" name="avatar" />
                                     }
@@ -43,7 +43,7 @@
 
                                         <label class="btn">
                                             <input type="file" name="photo" class="form-control" onchange="uploadImg()" id="file" style="display:none" accept="image/*">
-                                            <img src="~/Images/contact/300.png" id="avatarShow" style="width:240px;height:240px;border-radius:50%" />
+                                            <img src="~/Images/contact/300.png" id="avatarShow" style="width:240px;height:240px;border-radius:50%" class="avatarShow" />
                                         </label>
                                         <input id="avatar" type="hidden" name="avatar" />
                                     }
@@ -167,8 +167,7 @@
                 },
                 success: function (data) {
                     if (data != "") {
-                        $("#avatarShow").attr("src", data);
-                        $("#smimg").attr("src",data)
+                        $(".avatarShow").attr("src", data);
                         Swal.fire(
                             '照片變更已儲存!',
                             '讚啦!',
