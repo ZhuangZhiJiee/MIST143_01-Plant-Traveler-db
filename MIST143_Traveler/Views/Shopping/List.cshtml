@@ -53,15 +53,16 @@
             </div>
         </div>
         
-        <div class="search-page-breadcrumb search-breadcrumb">
+        @*<div class="search-page-breadcrumb search-breadcrumb">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="@Url.Content("~/Home/Index")">首頁</a></li>
                     <li class="breadcrumb-item" style=" --light: #000000;"><a href="@Url.Content("~/ProductListPage/ProductListHomePage")">玩樂</a></li>
-                    <li class="breadcrumb-item active" style=" --light: #000000;" aria-current="page">搜尋結果</li>
+                    <li class="breadcrumb-item active" style=" --light: #000000;" aria-current="page"><a href="@Url.Content("~/ProductListPage2/ProductListPage")">搜尋結果</a></li>
+                    <li class="breadcrumb-item active" style=" --light: #000000;" aria-current="page">@Model.cproductlists.Where(d=>d.TravelProductId==Model.TravelProductId).Select(d=>d.coutryname).FirstOrDefault()</li>
                 </ol>
             </nav>
-        </div>
+        </div>*@
 
         <div class="標題">
             <h3 id="productName">@Model.TravelProductName</h3>
@@ -192,7 +193,7 @@
                                                         -
                                                     </button>
                                                     <div class="number">
-                                                        <input type="number" class="productNumber" id="productNum" asp-for="_CShoppingCartDetailViewModel[0].Count" value="1" />
+                                                        @*<input type="number" class="productNumber" id="productNum" asp-for="_CShoppingCartDetailViewModel[0].Count" value="1" />*@
                                                     </div>
                                                     <button type="button" id="productPlus"
                                                             class="btn btn-outline-secondary">
@@ -213,11 +214,11 @@
                                             </div>
                                             <div class="rightBtns">
 
-                                                <input type="hidden" asp-for="_CShoppingCartDetailViewModel[0].TravelProductId" value="@Model.TravelProductId" />
+                                                @*<input type="hidden" asp-for="_CShoppingCartDetailViewModel[0].TravelProductId" value="@Model.TravelProductId" />
                                                 <input type="hidden" asp-for="_CShoppingCartDetailViewModel[0].TravelProductName" value="@Model.TravelProductName" />
                                                 <input type="hidden" asp-for="_CShoppingCartDetailViewModel[0].Price" value="@Model.Price" />
                                                 <input type="hidden" asp-for="_CShoppingCartDetailViewModel[0].Productpicture" value="@Model.Productpictures.FirstOrDefault().TravelPicture1" />
-                                                <input type="submit" value="  立即預定  " class="btn btn-main ms-3" />
+                                                <input type="submit" value="  立即預定  " class="btn btn-main ms-3" />*@
                                             </div>
                                         </div>
                                     </form>

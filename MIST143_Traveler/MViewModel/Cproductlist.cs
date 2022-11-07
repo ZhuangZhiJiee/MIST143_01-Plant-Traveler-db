@@ -96,6 +96,7 @@ namespace MIST143_Traveler.MViewModel
             set;
         }
         public string coutryname { get; set; }
+        public string CountryName { get; set; }
     }
 
 }
