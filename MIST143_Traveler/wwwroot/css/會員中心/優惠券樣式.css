@@ -63,7 +63,7 @@
     padding-top: 1rem;
     padding-bottom: 1.5rem;
     position: relative;
-    min-width: 15rem;
+    min-width: 25rem;
 }
 
 .coupon-info-right-dashed {
@@ -112,7 +112,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    min-width: 5rem;
+    min-width: 10rem;
     position: relative;
 }
 

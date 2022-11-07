@@ -14,46 +14,32 @@
 
 
 <body>
-
     <article>
-        <div class="col-12 上面空間">
 
 
-            <!-- Example single danger button -->
-            @*<div class="btn-group">
-                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    訂單管理
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Separated link</a></li>
-                </ul>
-            </div>*@
+        <div class="row row-cols-1">
+            <div class="col-12 上面空間">
 
+                <h3>我的訂單</h3>
+                <div>
+                    <div class="text-center">
+                        <img src="https://res.klook.com/image/upload/v1645521732/tuv7ipnsnwwp5sa8sbjg.gif" width="260" height="180" alt="">
+                        <h4 class="還沒下單">還沒下單</h4>
+                        <div class="找不到靈感"></div>
 
-            <div>
-                <div class="text-center">
-                    <img src="https://res.klook.com/image/upload/v1645521732/tuv7ipnsnwwp5sa8sbjg.gif" width="260" height="180" alt="">
-                    <h4 class="還沒下單">還沒下單?</h4>
-                    <div class="找不到靈感">找不到靈感?不妨看看下方精選推薦！</div>
+                        <div class="按鈕間隔">
+                            <a href="@Url.ActionLink("ProductListPage","ProductListPage2")" type="button" class="btn btn-warning 按鈕顏色">
+                                <span>
+                                    去逛逛
+                                </span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-
-
         </div>
+
     </article>
-    <div>
-        <h3 class="人氣推薦">人氣推薦 </h3>
-        <div class="等兆倫的跑馬燈">
-
-
-        </div>
-    </div>
-
 </body>
 @section Scripts{
     <script>
