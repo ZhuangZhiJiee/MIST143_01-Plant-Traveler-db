@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MIST143_Traveler.Models.TravelProduct>
+﻿@model MIST143_Traveler.MacViewModel.vViewModel
 
 @{
     ViewData["Title"] = "testt";
@@ -135,7 +135,7 @@
 <body>
     @{
         var count = 0;
-        foreach (var item in Model)
+        foreach (var item in Model._ViewDetailViewModel)
         {
             count++;
             string productLink = Url.Content("~/Item?Index");
@@ -146,7 +146,7 @@
             <div class="d-flex">
                 <div class="card mb-md-auto" style="width:1000px">
                     <a href="@Url.Action("List" ,"shopping", new {TravelProductId=item.TravelProductId})">
-                        <img src="https://localhost:44338/images/TravelProductPictures/e60fb2ed-0262-47eb-ac0a-64a169626f9a.jpg" style="height:150px" class="card-img-top">
+                        <img src="https://localhost:44338/images/@item.TravelPicture1" style="height:150px" class="card-img-top">
                     </a>
 
                     <div class="card-body">
