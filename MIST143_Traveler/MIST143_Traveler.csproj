@@ -53,6 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\SouvenirShop\" />
     <Folder Include="wwwroot\Images\客戶大頭貼\" />
   </ItemGroup>
 

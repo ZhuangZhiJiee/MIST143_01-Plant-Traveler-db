@@ -43,14 +43,41 @@
     -->
 
     <div class="banner">
-        <img src="~/images/macImg/658e718b-d83c-41a5-a1cc-a28daf93ff9a.jpg">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/images/macImg/001.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Images/macImg/658e718b-d83c-41a5-a1cc-a28daf93ff9a.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Images/macImg/003.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        
 
     </div>
+    <br >
     <form action="~/TransportationPage/TransportationHomePage" method="post">
         <div class="d-flex justify-content-center" >
             <div class="置中">
-                <input type="text" name="keyword" placeholder="請輸入國家目的地" />
-                <input type="submit" class="btn btn-warning" value="搜尋" onsubmit="myButton()" />
+                <input type="text" name="keyword" style="width:600px" placeholder="請輸入國家目的地" />
+                <input type="submit" class="btn btn-warning" value="搜尋"  onsubmit="myButton()" />
             </div>
         </div>
 
