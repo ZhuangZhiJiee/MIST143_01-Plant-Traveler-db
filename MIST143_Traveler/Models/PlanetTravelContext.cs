@@ -21,6 +21,7 @@ namespace MIST143_Traveler.Models
         public virtual DbSet<AdminStatus> AdminStatuses { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Coordinate> Coordinates { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<CouponList> CouponLists { get; set; }
@@ -34,6 +35,7 @@ namespace MIST143_Traveler.Models
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<ProductCoordinate> ProductCoordinates { get; set; }
         public virtual DbSet<ProductToTransportation> ProductToTransportations { get; set; }
         public virtual DbSet<ProductToView> ProductToViews { get; set; }
         public virtual DbSet<Trasportation> Trasportations { get; set; }
@@ -140,6 +142,25 @@ namespace MIST143_Traveler.Models
                     .HasForeignKey(d => d.TravelProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Comment_TravelProduct");
+            });
+
+            modelBuilder.Entity<Coordinate>(entity =>
+            {
+                entity.ToTable("Coordinate");
+
+                entity.Property(e => e.CoordinateId).HasColumnName("CoordinateID");
+
+                entity.Property(e => e.AttractionsName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Latitude)
+                    .IsRequired()
+                    .HasColumnName("latitude");
+
+                entity.Property(e => e.Longitude)
+                    .IsRequired()
+                    .HasColumnName("longitude");
             });
 
             modelBuilder.Entity<Country>(entity =>
@@ -436,6 +457,30 @@ namespace MIST143_Traveler.Models
                 entity.Property(e => e.PaymentName)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<ProductCoordinate>(entity =>
+            {
+                entity.HasKey(e => e.ProductNameCoordinateId)
+                    .HasName("PK_coordinate");
+
+                entity.ToTable("ProductCoordinate");
+
+                entity.Property(e => e.ProductNameCoordinateId).HasColumnName("ProductNameCoordinateID");
+
+                entity.Property(e => e.CoordinateId).HasColumnName("CoordinateID");
+
+                entity.Property(e => e.TravelProductId).HasColumnName("TravelProductID");
+
+                entity.HasOne(d => d.Coordinate)
+                    .WithMany(p => p.ProductCoordinates)
+                    .HasForeignKey(d => d.CoordinateId)
+                    .HasConstraintName("FK_ProductCoordinate_Coordinate");
+
+                entity.HasOne(d => d.TravelProduct)
+                    .WithMany(p => p.ProductCoordinates)
+                    .HasForeignKey(d => d.TravelProductId)
+                    .HasConstraintName("FK_ProductCoordinate_TravelProduct");
             });
 
             modelBuilder.Entity<ProductToTransportation>(entity =>

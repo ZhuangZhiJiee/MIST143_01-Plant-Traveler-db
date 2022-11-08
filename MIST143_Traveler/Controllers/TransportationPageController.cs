@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MIST143_Traveler.MViewModel;
+using MIST143_Traveler.MacViewModel;
 
 namespace MIST143_Traveler.Controllers
 {
@@ -57,9 +58,19 @@ namespace MIST143_Traveler.Controllers
         [HttpPost]
         public IActionResult TransportationHomePage(string keyword/*CLocationKeyWordViewModel 參數名稱*/)
         {
-            List<TravelProduct> _travelProduct = ptc.TravelProducts.Where(p=>p.Country.CountryName== keyword).ToList();
+            //List<TravelProduct> _travelProduct = ptc.TravelProducts.Where(p=>p.Country.CountryName== keyword).ToList();
+            vViewModel prod = ptc.TravelProducts.Select(s => new vViewModel
+            {
+                _ViewDetailViewModel = ptc.TravelProducts.Where(p => p.Country.CountryName.Contains(keyword)).Select(p => new ViewDetailViewModel
+                {
+                    TravelProductId = p.TravelProductId,
+                    TravelProductName = p.TravelProductName,
+                    Description = p.Description,
+                    TravelPicture1 = p.TravelPictures.FirstOrDefault(a => a.TravelProductId == a.TravelProduct.TravelProductId).TravelPicture1,
+                }).ToList(),
+            }).FirstOrDefault();
 
-            return View("testt", _travelProduct);
+            return View("testt", prod);
             //1234
         }
         //public IActionResult showTransportationHomePage(List<TravelProduct> _travelProduct)
