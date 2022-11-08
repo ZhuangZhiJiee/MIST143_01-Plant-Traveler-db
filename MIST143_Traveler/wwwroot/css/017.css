@@ -262,12 +262,12 @@ border-top: solid #c0c3c0;
 }
 
 .likeIt .item:hover h2 {
-    color: #fff;
+    color: #000;
     border-bottom-color: #fff;
 }
 
 .likeIt .item:hover p {
-    color: #fff;
+    color: #000;
 }
 
 /* .path {
@@ -338,7 +338,7 @@ border-top: solid #c0c3c0;
 }
 
 .products {
-    background-color: #ccc;
+    background-color: #fff;
 
 }
 

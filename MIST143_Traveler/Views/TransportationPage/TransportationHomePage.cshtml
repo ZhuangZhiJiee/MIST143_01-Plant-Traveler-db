@@ -43,14 +43,41 @@
     -->
 
     <div class="banner">
-        <img src="~/images/macImg/658e718b-d83c-41a5-a1cc-a28daf93ff9a.jpg">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/images/macImg/001.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Images/macImg/658e718b-d83c-41a5-a1cc-a28daf93ff9a.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Images/macImg/003.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        
 
     </div>
+    <br >
     <form action="~/TransportationPage/TransportationHomePage" method="post">
         <div class="d-flex justify-content-center" >
             <div class="置中">
-                <input type="text" name="keyword" placeholder="請輸入國家目的地" />
-                <input type="submit" class="btn btn-warning" value="搜尋" onsubmit="myButton()" />
+                <input type="text" name="keyword" style="width:600px" placeholder="請輸入國家目的地" />
+                <input type="submit" class="btn btn-warning" value="搜尋"  onsubmit="myButton()" />
             </div>
         </div>
 
@@ -214,7 +241,7 @@
                 <span style="font-weight:bold" ;>高鐵會員 TGo 點數雙重送</span>
                 </>
                 <br>
-                <p>TGo / Klook 點數一起累積 再抽免費搭</p>
+                <p>TGo / PlanetTravel 點數一起累積 再抽免費搭</p>
             </div>
         </div>
     </div>
@@ -302,9 +329,9 @@
                 <img src="~/images/macImg/heighway.jpg" height="300" width="200">
             </div>
             <div class="item">
-                <h3>台灣高鐵國旅聯票線上訂票，訂高鐵票Klook一指搞定！</h3>
+                <h3>台灣高鐵國旅聯票線上訂票，訂高鐵票PlanetTravel一指搞定！</h3>
                 <p>
-                    什麼是台灣高鐵國旅聯票？台灣高鐵國旅聯票是台灣高鐵公司與Klook攜手合作推出的高鐵優惠交通聯票，超划算的台灣高鐵優惠價格，搭配熱門的台灣高鐵聯票加購項目。台灣高鐵國旅聯票秉持著讓用戶體驗一鍵方便預訂的原則，透過Klook預訂台灣高鐵國旅聯票，同時預訂高鐵優惠車票及Klook推出的經典熱門台灣高鐵聯票加購項目，省去在高鐵站買票的時間，也不需要在遊樂場所、高鐵站附近租車行排隊人擠人，一機在手，透過Klook查看台灣高鐵時刻表，以及可搭配的高鐵聯票熱門加購項目，預訂台灣高鐵國旅聯票讓你不錯過台灣之美！
+                    什麼是台灣高鐵國旅聯票？台灣高鐵國旅聯票是台灣高鐵公司與PlanetTravel攜手合作推出的高鐵優惠交通聯票，超划算的台灣高鐵優惠價格，搭配熱門的台灣高鐵聯票加購項目。台灣高鐵國旅聯票秉持著讓用戶體驗一鍵方便預訂的原則，透過PlanetTravel預訂台灣高鐵國旅聯票，同時預訂高鐵優惠車票及PlanetTravel推出的經典熱門台灣高鐵聯票加購項目，省去在高鐵站買票的時間，也不需要在遊樂場所、高鐵站附近租車行排隊人擠人，一機在手，透過PlanetTravel查看台灣高鐵時刻表，以及可搭配的高鐵聯票熱門加購項目，預訂台灣高鐵國旅聯票讓你不錯過台灣之美！
 
                     搭乘台灣高鐵玩遍台灣既輕鬆又簡單！
                 </p>
@@ -313,12 +340,12 @@
                     <span class="1">Read more</span>
                 </div>
                 <div class="panel1">
-                    Klook
+                    PlanetTravel
                     線上訂購台灣高鐵國旅聯票，提前為你保留台灣高鐵預訂座位，省去在高鐵車站排隊買高鐵車票的煩惱。我們與台灣高鐵公司攜手合作推出台灣高鐵國旅聯票，提供熱門台灣高鐵路線訂票服務，免去在高鐵買票的時間，且免台灣高鐵車票預訂手續費、當日預訂即買即用台灣高鐵國旅聯票，出發前可免費取消。超優惠的台灣高鐵國旅聯票搭配台灣高鐵加購項目：租車優惠、機車租借、樂園門票等及多項台灣高鐵特色加購活動，買到賺到，是今年絕對不能錯過的高鐵超神交通聯票。
 
-                    完成台灣高鐵乘車體驗後，你還可以同時賺取台灣高鐵會員 TGo 點數及 Klook
+                    完成台灣高鐵乘車體驗後，你還可以同時賺取台灣高鐵會員 TGo 點數及 PlanetTravel
                     積分，雙重回饋一鍵享受！不用費心於四處比較台灣高鐵票價，或一早起床搶台灣高鐵早鳥票，省去在高鐵車站買票排隊的時間，我們提供超優惠的台灣高鐵預訂價格，台灣高鐵車票8折起優惠，搭配精選台灣高鐵加購項目，一機在手，台灣高鐵訂票優惠跟著有。還在等什麼？快點打開台灣高鐵時刻表，透過
-                    Klook 訂台灣高鐵國旅聯票，享受安全舒適的台灣高鐵優質體驗！
+                    PlanetTravel 訂台灣高鐵國旅聯票，享受安全舒適的台灣高鐵優質體驗！
                 </div>
             </div>
         </div>
@@ -335,7 +362,7 @@
                     </div>
 
                     <p>
-                        台灣高鐵合作之便利商店（7-11、全家、萊爾富、OK超商）取票，每張車票需支付TWD 10手續費，取票規則請參考 **提醒您，若現場取實體高鐵票，如需變更／退票，需至原取票窗口辦理，Klook
+                        台灣高鐵合作之便利商店（7-11、全家、萊爾富、OK超商）取票，每張車票需支付TWD 10手續費，取票規則請參考 **提醒您，若現場取實體高鐵票，如需變更／退票，需至原取票窗口辦理，PlanetTravel
                         不受理線上變更／退票（請務必索取「退票證明」以便申請加購項目退款）
                     </p>
                 </div>
@@ -360,7 +387,7 @@
                         <span style="font-weight:bold" ;>如何領取高鐵車票？</span>
                     </div>
                     <p>
-                        高鐵車票取票前： * 退票需於搭車前30分鐘，於 Klook 平台「我的訂單」> 選擇高鐵聯票訂單 > 點選「取消預訂」即可取消高鐵票並申請退款，或至高鐵各車站窗口辦理 *
+                        高鐵車票取票前： * 退票需於搭車前30分鐘，於 PlanetTravel 平台「我的訂單」> 選擇高鐵聯票訂單 > 點選「取消預訂」即可取消高鐵票並申請退款，或至高鐵各車站窗口辦理 *
                         如需取消加購項目，請先行取消高鐵票，並透過線上客服與我們聯繫（前往訂單頁面 > 選擇訂單 > 點擊「線上客服」圖示）。
                     </p>
                 </div>
