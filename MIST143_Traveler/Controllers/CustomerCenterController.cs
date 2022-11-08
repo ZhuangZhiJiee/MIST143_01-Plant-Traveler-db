@@ -130,9 +130,9 @@ namespace MIST143_Traveler.Controllers
                 }
                 Cus.Address = inCus.Address;
                 Cus.MemberName = inCus.MemberName;
-
+                
                 //測試
-                string Cname = Cus.MemberName;
+                string Cname = inCus.MemberName;
                 v.MemberName = Cname;
                 var s = JsonSerializer.Serialize(v);
                 HttpContext.Session.SetString(CDictionary.SK_Login, s);
@@ -140,8 +140,9 @@ namespace MIST143_Traveler.Controllers
 
                 Cus.Phone = inCus.Phone;
                 Cus.CityId = _PlanetTravelContext.Cities.FirstOrDefault(a => a.CityName == inCus.Cityname).CityId;
+
                 _PlanetTravelContext.SaveChanges();
-                return Json(new { Res = true});
+                return Json(new { Res = true, data = Cname });
             }
             return Json(new { Res = false, Msg = "失敗" });
         }
@@ -766,7 +767,8 @@ namespace MIST143_Traveler.Controllers
                                 產品名稱 = li.TravelProduct.TravelProductName,
                                 內容 = li.CommentText,
                                 分數 = li.Star,
-                                日期 = li.CommentDate,
+                                日期 = DateTime.Parse(li.CommentDate).ToString("yyyy-MM-dd"),
+                                
                                 //DateTime.Parse(od.OrderDate).ToString("yyyy-MM-dd"),
                             }).ToList();
                 if (Comli.評論.Count > 0)

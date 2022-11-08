@@ -25,12 +25,12 @@
                     <div class="carousel-indicators">
                         @for (int i = 0; i < Model.Productpictures.Count; i++)
                         {
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="carouselExampleIndicators"  aria-current="true" aria-label="幻燈片 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="carouselExampleIndicators" aria-current="true" aria-label="幻燈片 1"></button>
                         }
-                        
-                      
-                    </div>
 
+
+                    </div>
+                   
                     <div class="carousel-inner 照片的包皮">
                         @foreach (var item in Model.Productpictures)
                         {
@@ -52,7 +52,7 @@
 
             </div>
         </div>
-        
+        @*<img src="http://192.168.36.53:81/images/TravelProductPictures/af1c30ae-e8c4-447a-aec6-d233b64d02b8.jpg"/>*@
         @*<div class="search-page-breadcrumb search-breadcrumb">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
