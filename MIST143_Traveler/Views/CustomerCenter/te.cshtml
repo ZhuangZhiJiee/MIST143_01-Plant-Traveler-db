@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "te";
+}
+
+<h1>te</h1>
+<input id="productid" value="1" />@*商品ID*@
+<input id="PROID" value="1"/>@*數量*@
+<button onclick="aaa()">修改</button>
+
+<script>
+    function aaa() {
+
+        var Data = {
+            ProductID:$("#productid").val(),
+        }
+
+        
+        /*$('#bbb').val(2);*/
+        if ($('#PROID').val() > 0)//如果商品數量變更就把商品ID傳出去
+
+            $.ajax({
+                url: '@Url.Action("te", "CustomerCenter")',
+                method: 'Post',
+                data: { ms: Data },
+                success: function (datas) {
+                    Swal.fire(
+                        '寄送成功!',
+                        '',
+                        'success')
+                }
+            })
+        
+       
+    }
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
