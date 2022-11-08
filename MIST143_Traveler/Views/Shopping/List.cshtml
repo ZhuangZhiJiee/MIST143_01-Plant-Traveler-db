@@ -53,15 +53,16 @@
             </div>
         </div>
         
-        <div class="search-page-breadcrumb search-breadcrumb">
+        @*<div class="search-page-breadcrumb search-breadcrumb">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="@Url.Content("~/Home/Index")">首頁</a></li>
                     <li class="breadcrumb-item" style=" --light: #000000;"><a href="@Url.Content("~/ProductListPage/ProductListHomePage")">玩樂</a></li>
-                    <li class="breadcrumb-item active" style=" --light: #000000;" aria-current="page">搜尋結果</li>
+                    <li class="breadcrumb-item active" style=" --light: #000000;" aria-current="page"><a href="@Url.Content("~/ProductListPage2/ProductListPage")">搜尋結果</a></li>
+                    <li class="breadcrumb-item active" style=" --light: #000000;" aria-current="page">@Model.cproductlists.Where(d=>d.TravelProductId==Model.TravelProductId).Select(d=>d.coutryname).FirstOrDefault()</li>
                 </ol>
             </nav>
-        </div>
+        </div>*@
 
         <div class="標題">
             <h3 id="productName">@Model.TravelProductName</h3>
@@ -207,7 +208,7 @@
                                                 <div class="titleFontStyle">NT$ <span id="totalPrice"></span></div>
                                                 <div class="subInfoText">完成所有必填選項</div>
                                                 <br />
-                                                <div>剩餘:  <span class="stocks">@Model.Stocks</span> / @Model.Quantity 個位置<span class="text-danger hiddenEle soldInfo ms-2">快售完</span></div>
+                                                <div>剩餘:  <span class="stocks">@Model.Stocks</span> / @Model.Quantity 個位置<span class="text-danger hiddenEle soldInfo ms-2">快售完，敬請把握</span></div>
                                                 <br />
                                                 <div >倒數:  @Model.RemainingDays 天出團</div>
                                             </div>

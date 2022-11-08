@@ -117,7 +117,7 @@ namespace MIST143_Traveler.Controllers
                     {
                         var q = from p in _planet.TravelProducts
                                 where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架"
-                                orderby p.Stocks
+                                orderby (p.Quantity-p.Stocks) descending
                                 select p;
                         a.AddRange(q);
                     }
