@@ -800,7 +800,7 @@ namespace MIST143_Traveler.Controllers
         public IActionResult CommentCreate(Ccomment comm)
         {
 
-            comm.CommentDate = DateTime.Now.ToString();
+            comm.CommentDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             comm.CommentStatus = true;
             Comment ss = comm.comment;
             _PlanetTravelContext.Comments.Add(ss);
@@ -870,6 +870,41 @@ namespace MIST143_Traveler.Controllers
             return PartialView("Review");
 
             //客戶評論 END================================================
+        }
+        public IActionResult te()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public IActionResult te(CCsendmailcs ms)
+        {
+            //var em = _PlanetTravelContext.Members.ToList();
+            //var myf = _PlanetTravelContext.Myfavorites.Where(a => a.TravelProductId == ms.ProductID).Select(a => a.Members.Email).ToList();
+
+            //MimeMessage message = new MimeMessage();
+            //BodyBuilder builder = new BodyBuilder();
+    
+      
+            //builder.HtmlBody = $"<p>你好，您的新密碼為{rannum}</p>" +
+
+            //                  $"<div style='border: 2px solid black;text-align: center;'>      </div>" +
+            //                  $"<p>傳送時間:{DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>";
+
+            //message.From.Add(new MailboxAddress("PlanetTraveler星球旅遊", "planettravelermsit143@outlook.com"));
+            //message.To.Add(new MailboxAddress("親愛的顧客", Mem.Email));
+            //message.Subject = "PlanetTraveler星球旅遊";
+            //message.Body = builder.ToMessageBody();
+
+            //using (SmtpClient client = new SmtpClient())
+            //{
+            //    client.Connect("smtp.outlook.com", 25, MailKit.Security.SecureSocketOptions.StartTls);
+            //    client.Authenticate("planettravelermsit143@outlook.com", "gogo1116");
+            //    client.Send(message);
+            //    client.Disconnect(true);
+            //}
+            return Json(new { Res = true });
+
         }
     }
 

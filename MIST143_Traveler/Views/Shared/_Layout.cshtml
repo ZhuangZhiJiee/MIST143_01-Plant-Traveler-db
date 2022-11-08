@@ -92,7 +92,7 @@
                         var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
                         var v = JsonSerializer.Deserialize<Member>(OBJ);
 
-                        
+
                         <button class="btn btn-light dropdown-toggle" style="text-decoration:none;border:none" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                             @{
                                 if (v.PhotoPath != null)
@@ -119,6 +119,8 @@
                         <a class="btn btn-outline-warning" onclick="showmodal('@Url.Action("Createmember","CustomerCenter",null,Context.Request.Scheme)',null)">註冊</a>
 
                         <a class="btn btn-outline-light" href="@Url.Content("~/CustomerCenter/newLoginpag")">登入</a>
+
+                        <a class="btn btn-outline-light" href="@Url.Content("~/CustomerCenter/te")">測試</a>
 
                     }
 
