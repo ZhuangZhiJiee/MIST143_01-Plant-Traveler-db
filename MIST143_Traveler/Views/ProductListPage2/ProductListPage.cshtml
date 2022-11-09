@@ -56,7 +56,7 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                                                 <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-                                                    東亞(<span></span>)
+                                                    東亞(<span id="cc1"></span>)
                                                 </button>
                                             </h2>
                                             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
@@ -395,7 +395,6 @@
                 $("#ans").load(url + num);
             })*@
 
-          
 
             const sel = document.querySelector("#choise");
             sel.addEventListener("change", () => {
@@ -418,7 +417,36 @@
                     $("#ans2").html("");
                     $("#ans2").html(data);
                 })
+
             })
+
+            $("#btn").click(function () {
+                var qq = $("#text").val()
+                var url = "@Url.Content("~/ProductListPage2/filter")"
+                var name = `?keyword=` + qq
+                $("#ans").load(url + name)
+                $.getJSON("/ProductListPage2/getSearchCountt", { keyword: qq }, function (data) {
+                    $("#cc1").html("");
+                    $("#cc1").html(data);
+                })
+
+            })
+
+
+
+
+            $(function () {
+                var qq = $("#ans").count()
+                var url = "@Url.Content("~/ProductListPage2/countall")"
+                var num = `?cont=` + qq
+                $("#ans").load(url + num)
+                console.log(num)
+            })
+
+
+
+
+
 
             $(function () {
                 var qq = $("#ans").count()

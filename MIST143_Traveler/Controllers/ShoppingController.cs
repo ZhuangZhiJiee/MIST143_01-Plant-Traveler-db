@@ -88,6 +88,7 @@ namespace MIST143_Traveler.Controllers
                     Description = s.Description,
                     EventIntroduction = s.EventIntroduction,
                     MapUrl = s.MapUrl,
+                    CountryName = s.Country.CountryName,
                     PreparationDescription = s.PreparationDescription,
                     Productpictures = s.TravelPictures.ToList(),
                     DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
@@ -170,7 +171,9 @@ namespace MIST143_Traveler.Controllers
                    Productpictures = s.TravelPictures.ToList(),
                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
                    MembersId = d.MembersId,
-                  
+               
+
+
                    _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
                    {
                        Date = p.Date,
