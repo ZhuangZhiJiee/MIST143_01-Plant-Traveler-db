@@ -39,7 +39,7 @@
         </nav>
     </div>
     <div class="main-content search-main-content">
-        <p class="search-result-title">以下是與「 <a id="txt">@ViewBag.keyword</a>」的體驗，共找到 <a id="ans2">@ViewBag.Count</a> 個方案</p>
+        <p class="search-result-title">以下是與「<a id="txt">@ViewBag.keyword</a>」的體驗，共找到 <a id="ans2"></a> 個方案</p>
 
 
 
@@ -318,14 +318,12 @@
 
     @section Scripts{
         <script>
-            function QQ() {
+            @*function QQ() {
                 $.get("@Url.Action("getcount", "ProductListPage2")",
-                    function (data) {
-                        console.log(data)
+                    function (data) {                   
                         $(`#c${1}`).next().text(5)
                         for (let i of data) {
                             for (let q = 1; q <=7 ; q++) {
-
                                 var s = $(`#c${q}`)
                                 var sb = $(`#c${q}`).next()
                                 if (i.coutryname == s.html())
@@ -335,7 +333,7 @@
                         }
                     }
                 )
-            }
+            }*@
 
 
         $("#showw").click(function () {
@@ -370,13 +368,16 @@
                 var ii = $.map($(".flexCheckDefault:checked"), function (data) {
                       return data.value;
                   });
-                var url = "@Url.Content("~/ProductListPage2/see")"
-                var check = `?contry=${ii}`;
+                var url = "@Url.Content("~/ProductListPage2/getCountryCount")"
+                var check = `?country=${ii}`;
                 console.log(ii);
-                $("#ans").load(url + check);
+                var qq = $("#text").val()
+                var name = `&keyword=` + qq
+                $("#ans").load(url + check+name);
 
             })
-            const prodid = document.querySelector("#productid");
+
+             const prodid = document.querySelector("#productid");
             prodid.addEventListener("change", () => {
                 var url = "@Url.Content("~/ProductListPage2/product")"
                 var ied = prodid.selectedIndex
@@ -384,6 +385,17 @@
                 console.log(num);
                 $("#ans").load(url + num);
             })
+             @*const prodid = document.querySelector("#productid");
+            prodid.addEventListener("change", () => {
+                var url = "@Url.Content("~/ProductListPage2/productkey")"
+                var ied = prodid.selectedIndex
+                var num = `?numidkey=${ied}`;
+                  var qq = $("#text").val()
+                console.log(num);
+                $("#ans").load(url + num);
+            })*@
+
+          
 
             const sel = document.querySelector("#choise");
             sel.addEventListener("change", () => {
@@ -402,14 +414,35 @@
                 var url = "@Url.Content("~/ProductListPage2/filter")"
                 var name = `?keyword=` + qq
                 $("#ans").load(url + name)
+                $.getJSON("/ProductListPage2/getSearchCountt", { keyword: qq }, function (data) {
+                    $("#ans2").html("");
+                    $("#ans2").html(data);
+                })
             })
+
+            $(function () {
+                var qq = $("#ans").count()
+                var url = "@Url.Content("~/ProductListPage2/countall")"
+                var num = `?cont=` + qq
+                $("#ans").load(url + num)
+                console.log(num)
+            })
+
+
+
+
+
 
             $(function () {
                 var qq = $(".viewBag").html();
                 var url = "@Url.Content("~/ProductListPage2/filter")"
                 var name = `?keyword=` + qq
                 $("#ans").load(url + name)
-                QQ()
+
+
+
+
+               /* QQ()*/
             })
 
 

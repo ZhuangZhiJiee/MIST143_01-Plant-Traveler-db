@@ -52,39 +52,34 @@ namespace MIST143_Traveler.Controllers
             ViewBag.keyword = keyword;
             return View(q);
         }
-        public IActionResult getcount()
+        public IActionResult getcount(string keyword)
         {
-            var q = _planet.TravelProducts.Where(x => x.ProductStatus == "已上架").GroupBy(a => a.Country.CountryName).Select(a => new Cproductlist
+            var a = new List<Cproductlist>();
+            if (keyword != null)
             {
-                coutryname = a.Key,
-                count = a.Count(),
+                var q = _planet.TravelProducts.Where(x => x.ProductStatus == "已上架" && x.TravelProductName.Contains(keyword)).GroupBy(a => a.Country.CountryName).Select(a => new Cproductlist
+                {
+                    coutryname = a.Key,
+                    count = a.Count(),
+                });
+                a.AddRange(q);
+            }
+            else
+            {
+                var q = _planet.TravelProducts.Where(x => x.ProductStatus == "已上架").GroupBy(a => a.Country.CountryName).Select(a => new Cproductlist
+                {
+                    coutryname = a.Key,
+                    count = a.Count(),
 
+                });
 
-            }).ToList();
-            return Json(q);
+                a.AddRange(q);
+            }
+
+            return Json(a);
         }
         public IActionResult filter(string[] keyword, int number)
         {
-            //Cproductlist suisei = new Cproductlist();
-            //suisei.隨便啦 = (from p in _planet.TravelProducts
-            //              where p.TravelProductName == (string)keyword || p.Description == (string)keyword
-            //              select new 好麻煩
-            //              {
-            //                  TravelProductName = p.TravelProductName,
-            //                  TravelProductId = p.TravelProductId,
-            //                  Price=p.Price,
-            //                  Description=p.Description,
-            //                  TravelPicture1=p.TravelPictures.FirstOrDefault().TravelPicture1,Date=p.TravelProductDetails.FirstOrDefault().Date,
-            //              }).ToList();
-            //if (suisei.隨便啦.Count() <= 0)
-            //{
-            //    suisei.隨便啦 = from p in _planet.TravelProducts
-            //                 select p;
-
-            //}
-            //ViewBag.Count = suisei.隨便啦.Count();
-            //return ViewComponent("Productlistpagi",suisei.隨便啦);
-
 
             var a = new List<TravelProduct>();
             if (keyword.FirstOrDefault() != null)
@@ -117,7 +112,7 @@ namespace MIST143_Traveler.Controllers
                     {
                         var q = from p in _planet.TravelProducts
                                 where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架"
-                                orderby (p.Quantity-p.Stocks) descending
+                                orderby (p.Quantity - p.Stocks) descending
                                 select p;
                         a.AddRange(q);
                     }
@@ -133,58 +128,16 @@ namespace MIST143_Traveler.Controllers
                         a.AddRange(q);
                     }
                 }
-
-
-
-
-            }
-            else
-            {
-                if (number == 0)
-                {
-
-
-                    var q = from p in _planet.TravelProducts
-                            where p.ProductStatus == "已上架"
-                            select p;
-                    a.AddRange(q);
-
-                }
-                else if (number == 1)
-                {
-
-                    var q = from p in _planet.TravelProducts
-                            where p.ProductStatus == "已上架"
-                            orderby p.Price
-                            select p;
-                    a.AddRange(q);
-
-                }
-                else if (number == 2)
-                {
-
-                    var q = from p in _planet.TravelProducts
-                            where p.ProductStatus == "已上架"
-                            orderby p.Stocks
-                            select p;
-                    a.AddRange(q);
-
-                }
-                else if (number == 3)
-                {
-
-                    var q = from p in _planet.TravelProducts
-                            where p.ProductStatus == "已上架"
-                            orderby p.TravelProductId descending
-                            select p;
-                    a.AddRange(q);
-
-                }
-
             }
             ViewBag.Count = a.Count();
+
             //return View();
             return ViewComponent("Productlistpagi", a);
+        }
+
+        public IActionResult countall(int num)
+        {
+            return View();
         }
         public IActionResult product(int? numid)
         {
@@ -275,18 +228,72 @@ namespace MIST143_Traveler.Controllers
                 var q = from p in _planet.TravelProducts
                         where p.ProductStatus == "已上架"
                         select p;
-                return ViewComponent("Productlistpagi", q.ToList());
+                return ViewComponent("Productlistpagi", q.Distinct().ToList());
             }
             string[] aaaa = contry.Split(",");
 
-            var pp = _planet.TravelProducts.Where(e => aaaa.Contains(e.Country.CountryName) && e.ProductStatus == "已上架").Select(bb => bb).ToList();
+            var pp = _planet.TravelProducts.Where(e => aaaa.Contains(e.Country.CountryName) && e.ProductStatus == "已上架").Select(bb => bb).Distinct().ToList();
+
             return ViewComponent("Productlistpagi", pp);
         }
         public IActionResult kkkkk(string rest)
         {
             return Content(rest);
         }
+        public IActionResult getSearchCountt(string keyword)
+        {
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架").Count();
+            return Json(count);
+        }
 
+
+        //--------------選爆--------------------------------------------------
+        public IActionResult getCountryCount(string keyword, string country)
+        {
+            var a = new List<TravelProduct>();
+            if (keyword != null)
+            {
+                if (country == null)
+                {
+                    var q = from p in _planet.TravelProducts
+                            where p.ProductStatus == "已上架" && p.TravelProductName.Contains(keyword)|| p.ProductStatus == "已上架" && p.Description.Contains(keyword)
+                            select p;
+                    return ViewComponent("Productlistpagi", q.Distinct().ToList());
+                }
+                else
+                {
+                    string[] aaaa = country.Split(",");
+
+                    var pp = _planet.TravelProducts.Where(e => aaaa.Contains(e.Country.CountryName) && e.ProductStatus == "已上架" && e.TravelProductName.Contains(keyword)||e.Description.Contains(keyword) && aaaa.Contains(e.Country.CountryName) && e.ProductStatus == "已上架").Select(bb => bb);
+                 a.AddRange(pp.Distinct().ToList());
+                }
+               
+
+            }
+            else { 
+            if (country != null)
+            {
+               string[] aaa = country.Split(",");
+
+            var pp = _planet.TravelProducts.Where(e => aaa.Contains(e.Country.CountryName) && e.ProductStatus == "已上架" && e.TravelProductName.Contains(keyword) || e.Description.Contains(keyword) && aaa.Contains(e.Country.CountryName) && e.ProductStatus == "已上架").Select(bb => bb);
+                a.AddRange(pp.Distinct().ToList());
+            }
+            }
+            return ViewComponent("Productlistpagi", a);
+
+        }
+        public IActionResult productkey(string keyword, int numidkey) 
+        {
+            //if (keyword != null)
+            //{
+            //    if (numidkey == 1)
+            //    { 
+            //    var q =_planet.TravelProducts.Where(d=>d.TravelProductTypeId==1 && keyword.Contains(d.TravelProductName)||d.Description.Contains(keyword)&&)
+            //    }
+            //}
+
+            return View();
+        }
     }
 
 }
