@@ -32,5 +32,6 @@ namespace MIST143_Traveler.ShoppingViewModel
         public int MembersId { get; set; }
         public bool MyfavoritesID { get; set; }
         public List<Cproductlist>cproductlists{get;set;}
+        public string CountryName { get; set; }
     }
 }
