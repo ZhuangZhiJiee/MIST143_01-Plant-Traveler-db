@@ -15,6 +15,25 @@ namespace MIST143_Traveler.MViewModel
         {
             get;set;
         }
-
+        public string 商品名稱
+        {
+            get;set;
+        }
+        public string 商品照片
+        {
+            get; set;
+        }
+        public decimal 商品價格
+        {
+            get;set;
+        }
+        public string 商品描述
+        {
+            get;set;
+        }
+        public string 商品詳情
+        {
+            get; set;
+        }
     }
 }

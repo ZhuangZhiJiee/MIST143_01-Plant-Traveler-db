@@ -396,7 +396,6 @@
             })*@
 
 
-
             const sel = document.querySelector("#choise");
             sel.addEventListener("change", () => {
 
@@ -432,6 +431,19 @@
                 })
 
             })
+
+
+
+
+            $(function () {
+                var qq = $("#ans").count()
+                var url = "@Url.Content("~/ProductListPage2/countall")"
+                var num = `?cont=` + qq
+                $("#ans").load(url + num)
+                console.log(num)
+            })
+
+
 
 
 
