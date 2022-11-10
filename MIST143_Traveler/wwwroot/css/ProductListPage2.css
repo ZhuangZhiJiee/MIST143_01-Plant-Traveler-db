@@ -1074,3 +1074,7 @@ input {
 .basic-filter {
     width: 53%;
 }
+.dfhue.disabled {
+    cursor: no-drop;
+    cursor: not-allowed;
+}
