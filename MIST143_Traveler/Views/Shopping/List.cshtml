@@ -12,7 +12,7 @@
 
     <link href="~/css/924自用.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
-    @*<link href="~/css/bootstrap.min.css" rel="stylesheet" />*@
+   
     <link href="~/css/product.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/travelOrder.css" />
 }
@@ -93,19 +93,19 @@
                                 <div>
                                     <input type="hidden" id="PID" name="TravelProductId" value="@Model.TravelProductId" />
                                     <input type="hidden" id="MID" name="MembersId" value="@v.MembersId" />
-
+                                    @*bi bi-heart-fill*@
                                     <label class="btn">
                                         @{
 
                                             if (Model.MyfavoritesID)
                                             {
                                                 <input hidden value="true" id="ch" />
-                                                <i id='heart' onclick="love(@Model.TravelProductId)" class='bi bi-heart-fill'>加入我的最愛</i>
+                                                <span id='heart' onclick="love(@Model.TravelProductId)" class='bi bi-heart-fill'>加入我的最愛</span>
                                             }
                                             else
                                             {
                                                 <input hidden value="false" id="ch" />
-                                                <i id='heart' onclick="love(@Model.TravelProductId)" class='bi bi-heart'>加入我的最愛</i>
+                                                <span id='heart' onclick="love(@Model.TravelProductId)" class='bi bi-heart'>加入我的最愛</span>
                                             }
                                         }
                                     </label>

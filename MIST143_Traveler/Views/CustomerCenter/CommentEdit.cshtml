@@ -47,7 +47,7 @@
 
         <div class="form-group d-flex justify-content-end">
             <div>
-                <input type="submit" value="修改" onclick="se()" class="btn btn-primary" />
+                <input type="button" value="修改" onclick="se()" class="btn btn-primary" />
             </div>
         </div>
         @*</form>*@
@@ -76,7 +76,7 @@
                 }
                 Swal.fire(
                     '您的變更已儲存!',
-                    '讚啦!',
+                    '',
                     'success')
                 window.onload = function () {
                     $('#exampleModal').on('hide.bs.modal', function () {

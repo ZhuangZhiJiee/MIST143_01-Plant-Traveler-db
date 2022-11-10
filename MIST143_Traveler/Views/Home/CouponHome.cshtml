@@ -34,6 +34,7 @@
 
             @{
                 List<string> Coupon = new List<string>();
+                
                 foreach (var co in Model.所有)
                 {
                     if (Model.已領過.Any(a => a.CouponId == co.CouponId))
