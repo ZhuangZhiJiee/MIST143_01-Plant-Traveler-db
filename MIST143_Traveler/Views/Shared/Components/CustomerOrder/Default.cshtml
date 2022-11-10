@@ -21,6 +21,7 @@
         </button>
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" id="全部">全部</a></li>
+            <li><a class="dropdown-item" id="處理中">處理中</a></li>
             <li><a class="dropdown-item" id="訂單完成">訂單完成</a></li>
             <li><a class="dropdown-item" id="訂單取消">訂單取消</a></li>
         </ul>
@@ -191,6 +192,9 @@
         });
         $('#全部').on('click', function () {
             $('.dataTables_filter [type=search]').val("").keyup();
+        });
+        $('#處理中').on('click', function () {
+            $('.dataTables_filter [type=search]').val("處理中").keyup();
         });
     })
 
@@ -487,11 +491,11 @@
     var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
     var v = JsonSerializer.Deserialize<Member>(OBJ);
 }
-
-    $(".delete").click(function () {
+            
+    @*$(".delete").click(function () {
     const orderId = $(this)/*.closest("td").siblings().find(".OId")*/.val();
         $('#cont').load("@Url.Content("~/CustomerCenter/Order")" + `?MembersId=${@v.MembersId}&OrderId=${orderId}`);
-    });
+    });*@
 
 
 

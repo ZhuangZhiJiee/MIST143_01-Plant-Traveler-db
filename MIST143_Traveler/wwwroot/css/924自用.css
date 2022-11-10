@@ -1,10 +1,4 @@
-/*.card img{
-    width: 48px;
-    height: 48PX;
-     display: flex; 
-    align-items: center;
-    
-}*/
+
 .search_area{
     padding: 60px 0;
 }
@@ -27,5 +21,15 @@ a{
 }
 .accordion-item{
   border: aqua;
+}
+
+.¤p·R¤ß {
+    background: url('/Images/contact/llove.png')no-repeat;
+    background-size: cover;
+    height: 100%;
+    
+}
+.bi bi-heart-fill{
+    color:red;
 }
 
