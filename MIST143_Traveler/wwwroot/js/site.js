@@ -1,4 +1,5 @@
 ﻿
+
 showmodal = (url, title) => {
     $.ajax({
         type: "GET",
