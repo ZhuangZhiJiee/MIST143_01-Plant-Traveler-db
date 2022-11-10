@@ -46,38 +46,13 @@ namespace MIST143_Traveler.Controllers
             //              select i).ToList();
             Cproductlist plist = new Cproductlist();
             var q = (from p in _planet.TravelProducts
-                     where p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架"
+                     where p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架"||p.Country.CountryName == (keyword) && p.ProductStatus == "已上架"
                      select p).ToList();
             //plist.travelProduct = q;
             ViewBag.keyword = keyword;
             return View(q);
         }
-        public IActionResult getcount(string keyword)
-        {
-            var a = new List<Cproductlist>();
-            if (keyword != null)
-            {
-                var q = _planet.TravelProducts.Where(x => x.ProductStatus == "已上架" && x.TravelProductName.Contains(keyword)).GroupBy(a => a.Country.CountryName).Select(a => new Cproductlist
-                {
-                    coutryname = a.Key,
-                    count = a.Count(),
-                });
-                a.AddRange(q);
-            }
-            else
-            {
-                var q = _planet.TravelProducts.Where(x => x.ProductStatus == "已上架").GroupBy(a => a.Country.CountryName).Select(a => new Cproductlist
-                {
-                    coutryname = a.Key,
-                    count = a.Count(),
-
-                });
-
-                a.AddRange(q);
-            }
-
-            return Json(a);
-        }
+       
         public IActionResult filter(string[] keyword, int number)
         {
 
@@ -90,7 +65,7 @@ namespace MIST143_Traveler.Controllers
                     {
 
                         var q = from p in _planet.TravelProducts
-                                where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架"
+                                where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架" || p.Country.CountryName==(item) && p.ProductStatus == "已上架"
                                 select p;
                         a.AddRange(q);
                     }
@@ -100,7 +75,7 @@ namespace MIST143_Traveler.Controllers
                     foreach (var item in keyword)
                     {
                         var q = from p in _planet.TravelProducts
-                                where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架"
+                                where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架"||p.Country.CountryName==(item) && p.ProductStatus == "已上架"
                                 orderby p.Price
                                 select p;
                         a.AddRange(q);
@@ -111,7 +86,7 @@ namespace MIST143_Traveler.Controllers
                     foreach (var item in keyword)
                     {
                         var q = from p in _planet.TravelProducts
-                                where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架"
+                                where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架" || p.Country.CountryName == (item) && p.ProductStatus == "已上架"
                                 orderby (p.Quantity - p.Stocks) descending
                                 select p;
                         a.AddRange(q);
@@ -122,12 +97,56 @@ namespace MIST143_Traveler.Controllers
                     foreach (var item in keyword)
                     {
                         var q = from p in _planet.TravelProducts
-                                where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架"
+                                where p.TravelProductName.Contains(item) && p.ProductStatus == "已上架" || p.Description.Contains(item) && p.ProductStatus == "已上架" || p.Country.CountryName == (item) && p.ProductStatus == "已上架"
                                 orderby p.TravelProductId descending
                                 select p;
                         a.AddRange(q);
                     }
                 }
+            }
+            else
+            {
+                if (number == 0)
+                {
+
+
+                    var q = from p in _planet.TravelProducts
+                            where p.ProductStatus == "已上架"
+                            select p;
+                    a.AddRange(q);
+
+                }
+                else if (number == 1)
+                {
+
+                    var q = from p in _planet.TravelProducts
+                            where p.ProductStatus == "已上架"
+                            orderby p.Price
+                            select p;
+                    a.AddRange(q);
+
+                }
+                else if (number == 2)
+                {
+
+                    var q = from p in _planet.TravelProducts
+                            where p.ProductStatus == "已上架"
+                            orderby p.Stocks
+                            select p;
+                    a.AddRange(q);
+
+                }
+                else if (number == 3)
+                {
+
+                    var q = from p in _planet.TravelProducts
+                            where p.ProductStatus == "已上架"
+                            orderby p.TravelProductId descending
+                            select p;
+                    a.AddRange(q);
+
+                }
+
             }
             ViewBag.Count = a.Count();
 
@@ -141,56 +160,25 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult product(int? numid)
         {
+
+            
             var a = new List<TravelProduct>();
+            var qq = _planet.TravelProductDetails.GroupBy(e => e.TravelProductId).Select(g => new
+            {
+                travelProductID = g.Key,
+                dayCount = g.Count(),
+            }).ToList();
             if (numid == 1)
             {
-                var q = from p in _planet.TravelProducts
-                        where p.TravelProductType.TravelProductTypeId == 1 && p.ProductStatus == "已上架"
-                        select p;
-                a.AddRange(q);
-            }
-            else if (numid == 2)
-            {
-                var q = from p in _planet.TravelProducts
-                        where p.TravelProductType.TravelProductTypeId == 2 && p.ProductStatus == "已上架"
-                        select p;
-                a.AddRange(q);
-            }
-            else if (numid == 3)
-            {
-                var q = from p in _planet.TravelProducts
-                        where p.TravelProductType.TravelProductTypeId == 3 && p.ProductStatus == "已上架"
-                        select p;
-                a.AddRange(q);
-            }
-            else if (numid == 4)
-            {
-                var q = from p in _planet.TravelProducts
-                        where p.TravelProductType.TravelProductTypeId == 4 && p.ProductStatus == "已上架"
-                        select p;
-                a.AddRange(q);
-            }
-            else if (numid == 5)
-            {
-                var q = from p in _planet.TravelProducts
-                        where p.TravelProductType.TravelProductTypeId == 5 && p.ProductStatus == "已上架"
-                        select p;
-                a.AddRange(q);
-            }
-            else if (numid == 6)
-            {
-                var q = from p in _planet.TravelProducts
-                        where p.TravelProductType.TravelProductTypeId == 6 && p.ProductStatus == "已上架"
-                        select p;
-                a.AddRange(q);
+                var qqq = qq.Where(e => e.dayCount == 1).Select(e => e.travelProductID).ToList();
+                a = _planet.TravelProducts.Where(e => qqq.Contains(e.TravelProductId)).ToList();
             }
             else
             {
-                var q = from p in _planet.TravelProducts
-                        where p.ProductStatus == "已上架"
-                        select p;
-                a.AddRange(q);
+                var qqq = qq.Where(e => e.dayCount >1).Select(e => e.travelProductID).ToList();
+                a = _planet.TravelProducts.Where(e => qqq.Contains(e.TravelProductId)).ToList();
             }
+            
             return ViewComponent("Productlistpagi", a);
         }
         public IActionResult selecter(string date, string date2)
@@ -242,10 +230,75 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult getSearchCountt(string keyword)
         {
-            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架").Count();
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架"||p.Country.CountryName==(keyword) && p.ProductStatus == "已上架").Count();
+            return Json(count);
+
+        }
+        public IActionResult getSearchCounty(string keyword)
+        {
+           
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 1|| keyword == ("台灣") && p.CountryId == 1 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 1 || p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 2 || keyword == ("日本") && p.CountryId == 2 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 2  || p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 8|| keyword == ("韓國")&& p.CountryId == 8&& p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 8).Count();
             return Json(count);
         }
+        public IActionResult getSearchCountyt(string keyword)
+        {
 
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 1|| keyword == ("台灣") && p.CountryId == 1 || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 1 ).Count();
+            return Json(count);
+        }
+        public IActionResult getSearchCountyj(string keyword)
+        {
+
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 2 || keyword == ("日本") && p.CountryId == 2 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 2).Count();
+            return Json(count);
+        }
+        public IActionResult getSearchCountyk(string keyword)
+        {
+
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 8 && keyword == ("韓國") || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 8 && keyword == ("韓國")).Count();
+            return Json(count);
+        }
+        public IActionResult getSearchCountd(string keyword)
+        {          
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 9 && keyword == ("越南") || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 9 && keyword == ("越南")).Count();
+            return Json(count);
+        }
+        public IActionResult getSearchCountb(string keyword)
+        {
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 5 && keyword == ("美國") || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 5&& keyword == ("美國")).Count();
+            return Json(count);
+        }
+        public IActionResult getSearchCounto(string keyword)
+        {
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 6&& keyword == ("英國") || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 6 && keyword == ("英國") || p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 7 && keyword == ("法國") || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 7&& keyword == ("法國")).Count();
+            return Json(count);
+        }
+        public IActionResult getcount(string keyword)
+        {
+            var a = new List<Cproductlist>();
+            if (keyword != null)
+            {
+                var q = _planet.TravelProducts.Where(x => x.ProductStatus == "已上架" && x.TravelProductName.Contains(keyword)).GroupBy(a => a.Country.CountryName).Select(a => new Cproductlist
+                {
+                    coutryname = a.Key,
+                    count = a.Count(),
+                });
+                a.AddRange(q);
+            }
+            else
+            {
+                var q = _planet.TravelProducts.Where(x => x.ProductStatus == "已上架").GroupBy(a => a.Country.CountryName).Select(a => new Cproductlist
+                {
+                    coutryname = a.Key,
+                    count = a.Count(),
+
+                });
+
+                a.AddRange(q);
+            }
+
+            return Json(a);
+        }
 
         //--------------選爆--------------------------------------------------
         public IActionResult getCountryCount(string keyword, string country)
@@ -256,7 +309,7 @@ namespace MIST143_Traveler.Controllers
                 if (country == null)
                 {
                     var q = from p in _planet.TravelProducts
-                            where p.ProductStatus == "已上架" && p.TravelProductName.Contains(keyword)|| p.ProductStatus == "已上架" && p.Description.Contains(keyword)
+                            where p.ProductStatus == "已上架" && p.TravelProductName.Contains(keyword)|| p.ProductStatus == "已上架" && p.Description.Contains(keyword)||keyword==p.Country.CountryName&&p.ProductStatus=="已上架"
                             select p;
                     return ViewComponent("Productlistpagi", q.Distinct().ToList());
                 }
