@@ -626,5 +626,5 @@ ul.drop-down-menu li:hover > ul {
     position: fixed;
     bottom: 100px;
     right: 50px;
-    z-index: 5;
+    z-index: 12;
 }

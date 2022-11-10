@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MIST143_Traveler.Hubs;
 using MIST143_Traveler.Models;
 using System;
 using System.Collections.Generic;
@@ -27,20 +28,23 @@ namespace MIST143_Traveler
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddDbContext<PlanetTravelContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("PlanetTravelConnection"));
+                
             });
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
             {
-                //���n�J�ɷ|�۰ʾɨ�o�Ӻ�}
+                
                 option.LoginPath = new PathString("/api/Login/NoLogin");
             });
             services.AddControllersWithViews();
             services.AddSession();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-           
+            services.AddSignalR();
+
             services.AddMvc();
             services.AddHttpContextAccessor();
           
@@ -75,6 +79,7 @@ namespace MIST143_Traveler
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }
