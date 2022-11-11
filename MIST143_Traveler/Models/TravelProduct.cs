@@ -40,5 +40,7 @@ namespace MIST143_Traveler.Models
         public virtual ICollection<ProductCoordinate> ProductCoordinates { get; set; }
         public virtual ICollection<TravelPicture> TravelPictures { get; set; }
         public virtual ICollection<TravelProductDetail> TravelProductDetails { get; set; }
+
+        
     }
 }

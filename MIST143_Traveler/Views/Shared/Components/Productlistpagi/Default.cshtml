@@ -7,6 +7,8 @@
 
 @{
     ViewData["Title"] = "Default";
+    //PlanetTravelContext db = new PlanetTravelContext();
+    //var cm = db.Comments.Where(d => d.TravelProductId == Model[0].TravelProductId).Average(s => s.Star);
 }
 
 
@@ -20,7 +22,7 @@
 
             <div class="asdqwr asd">
                 <div class="card" style="">
-                    <img class="card-img-top" style="height:143px;" src="https://localhost:44338/images/TravelProductPictures/@imgurl" alt="Card image cap">
+                    <img class="card-img-top" style="height:114px;" src="https://localhost:44338/images/TravelProductPictures/@imgurl" alt="Card image cap">
                     <div class="card-body">
                         @{
                             if (Accessor.HttpContext.Session.Keys.Contains(CDictionary.SK_Login))
@@ -35,7 +37,7 @@
                             }
                             else
                             {
-                                <a href="@Url.Action("List" ,"shopping", new {TravelProductId=item.TravelProductId})">
+                                <a href="@Url.Action("List", "shopping", new { TravelProductId = item.TravelProductId })">
                                     <h3 class="activity-card-title">
                                         @item.TravelProductName
                                     </h3>
@@ -45,34 +47,59 @@
 
 
                         <div class="page-activity-recommend-score">
-
                             <span class="page-activity-recommend-review-number">
-
                                 @item.TravelProductType.TravelProductTypeName
+                            </span>
+                        </div>
+                        <div class="page-activity-recommend-score">
+                            <span class="page-activity-recommend-score-number">
+                               
+                               
+                          
+                                @{
+                                    if (item.Comments.Count > 0)
+                                    {
+                                        <span class="score-rate">★@item.Comments.Select(i => i.Star).ToList().Average()</span>
+                                    }
+                                    else
+                                    { <span class="score-rate"> ★0(還沒有人給星)</span> }
+                                }
 
                             </span>
 
                         </div>
+                        <div class="page-activity-recommend-score">
+                            <span class="page-activity-recommend-review-number">
+                                @{
+                                    if (item.Comments.Count > 0)
+                                    {
+                                        <span class="review-number"> @item.Comments.Select(i => i.CommentText).Count()則評價</span>
 
-                        <div class="activity-card-bottom">
-                            <div>
-                                <div class="activity-card-price-box home-activity-card_price small-card">
-                                    <span class="activity-card-price-box__sell-price dynamic-width-price">NT: @item.Price.ToString("###,###,##0")</span>
-                                    @*<span class="activity-card-price-box__underline-price dynamic-width-price"></span>*@
+                                    }
+                                    else
+                                    {
+                                        <span class="review-number"> 0 則評價</span>
+                                    }
+                                }
+                            </span>
+                         </div>
+                            <div class="activity-card-bottom">                               
+                                    <div class="activity-card-price-box home-activity-card_price small-card">
+                                        <span class="activity-card-price-box__sell-price dynamic-width-price">NT: @item.Price.ToString("###,###,##0")</span>
+                                        @*<span class="activity-card-price-box__underline-price dynamic-width-price"></span>*@
+                                    </div>                              
+                            </div>
+                            <div class="tagging-wrap bottom-tag small-style">
+                                <div class="tagging-box">
+                                    <div class="subInfoText">剩餘:  @item.Stocks / @item.Quantity 個位置</div>
+                                    @*<div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
+                        <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
+                    </div>*@
                                 </div>
                             </div>
                         </div>
-                        <div class="tagging-wrap bottom-tag small-style">
-                            <div class="tagging-box">
-                                <div class="subInfoText">剩餘:  @item.Stocks / @item.Quantity 個位置</div>
-                                @*<div text="最優價格保證" color="#FF5B00" backgroundcolor="rgba(255, 240, 229, 255)" bordercolor="#FFF0E5" borderradius="4px" maxwidth="auto" class="tagging-tag small-style">
-                                        <div class="tagging-tag_custom" style="max-width:auto;color:#FF5B00;border-color:#FFF0E5;background-color:rgba(255, 240, 229, 255);border-radius:4px;">最優價格保證</div>
-                                    </div>*@
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
+                    </div>
 
             </div>
         }
