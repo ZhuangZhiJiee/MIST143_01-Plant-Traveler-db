@@ -21,12 +21,12 @@ namespace MIST143_Traveler.Controllers
     public class ShoppingController : Controller
     {
         private PlanetTravelContext pt;
-        public ShoppingController(PlanetTravelContext q) 
+        public ShoppingController(PlanetTravelContext q)
         {
             pt = q;
         }
-           
-        public IActionResult List(int? TravelProductId,int? MembersId)
+
+        public IActionResult List(int? TravelProductId, int? MembersId)
         {
             //---------------------------------------------------------
             List<Cproductlist> tp = new List<Cproductlist>();
@@ -38,7 +38,7 @@ namespace MIST143_Traveler.Controllers
                 productpicture = i.TravelPicture1,
             }).FirstOrDefault();
             //var q1 = pt.TravelPictures.Where(i=>i.TravelProduct.TravelProductType)
-            if (pro != null) 
+            if (pro != null)
             {
                 var poi = JsonSerializer.Deserialize<List<Cproductlist>>(pro);
                 bool ch = true;
@@ -48,10 +48,10 @@ namespace MIST143_Traveler.Controllers
                     {
                         ch = false;
 
-                    }                   
+                    }
                 }
-                if (ch) 
-                { 
+                if (ch)
+                {
                     poi.Add(q);
                     var tye = JsonSerializer.Serialize(poi);
                     HttpContext.Session.SetString(CDictionary.SK_PRODUCT, tye);
@@ -70,7 +70,7 @@ namespace MIST143_Traveler.Controllers
             //======================計算剩餘天數========================================================
             DateTime deparaturedate = Convert.ToDateTime(pt.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).FirstOrDefault().Date);
             DateTime datetoday = DateTime.Today;
-            double remainingdays = new  TimeSpan(deparaturedate.Ticks - datetoday.Ticks).TotalDays;
+            double remainingdays = new TimeSpan(deparaturedate.Ticks - datetoday.Ticks).TotalDays;
 
             //=========================資料存ViewModel==================================================
             CProductViewModel prod = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
@@ -107,11 +107,11 @@ namespace MIST143_Traveler.Controllers
                         CommentDate = b.CommentDate,
                     }).ToList(),
                 }).FirstOrDefault();
-           
+
             if (MembersId != null)
             {
                 var d = pt.Members.FirstOrDefault(a => a.MembersId == MembersId);
-                var myid = pt.Myfavorites.FirstOrDefault(a => a.MembersId == MembersId&&a.TravelProductId== TravelProductId);
+                var myid = pt.Myfavorites.FirstOrDefault(a => a.MembersId == MembersId && a.TravelProductId == TravelProductId);
                 if (myid != null)
                 {
                     CProductViewModel myfaid = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
@@ -133,13 +133,13 @@ namespace MIST143_Traveler.Controllers
                    Productpictures = s.TravelPictures.ToList(),
                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
                    MembersId = d.MembersId,
-                   MyfavoritesID= s.Myfavorites.Where(w => w.MembersId == MembersId && s.TravelProductId == myid.TravelProductId).Any(),
-                    _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
+                   MyfavoritesID = s.Myfavorites.Where(w => w.MembersId == MembersId && s.TravelProductId == myid.TravelProductId).Any(),
+                   _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
                    {
-                        Date = p.Date,
-                        HotelName = p.Hotel.HotelName,
-                        ViewName = p.ProductToViews.Select(v => v.View.ViewName).ToList(),
-                    }).ToList(),
+                       Date = p.Date,
+                       HotelName = p.Hotel.HotelName,
+                       ViewName = p.ProductToViews.Select(v => v.View.ViewName).ToList(),
+                   }).ToList(),
                    _CCommentViewModel = pt.Comments.Where(a => a.TravelProductId == TravelProductId && a.CommentStatus == true).Select(b => new CCommentViewModel
                    {
                        MemberName = b.Members.MemberName,
@@ -149,7 +149,7 @@ namespace MIST143_Traveler.Controllers
                        CommentDate = b.CommentDate,
                    }).ToList(),
                }).FirstOrDefault();
-                 
+
                     return View(myfaid);
                 }
                 CProductViewModel prMid = pt.TravelProducts.Where(p => p.TravelProductId == TravelProductId)
@@ -171,7 +171,7 @@ namespace MIST143_Traveler.Controllers
                    Productpictures = s.TravelPictures.ToList(),
                    DailyDetailText = s.TravelProductDetails.Where(a => a.TravelProductId == TravelProductId).Select(a => a.DailyDetailText).ToList(),
                    MembersId = d.MembersId,
-               
+
 
 
                    _CProductDetailViewModel = s.TravelProductDetails.Select(p => new CProductDetailViewModel
@@ -192,7 +192,7 @@ namespace MIST143_Traveler.Controllers
                 return View(prMid);
             }
             return View(prod);
-            
+
         }
         [HttpPost]
         public IActionResult List(CtoMyFavorites iid)
@@ -202,7 +202,7 @@ namespace MIST143_Traveler.Controllers
             Myfavorite ss = iid.myfavorite;
             pt.Myfavorites.Remove(cc);
             pt.SaveChanges();
-            return Json(new {Res=true});
+            return Json(new { Res = true });
         }
         public IActionResult toMyFavorites(CtoMyFavorites PMID)
         {
@@ -229,7 +229,7 @@ namespace MIST143_Traveler.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddToSession(CAddToSessionViewModel s) 
+        public IActionResult AddToSession(CAddToSessionViewModel s)
         {
             string jsonCart = "";
             List<CShoppingCartDetailViewModel> list = null;
@@ -254,9 +254,9 @@ namespace MIST143_Traveler.Controllers
 
             return NoContent();
         }
-        public IActionResult RemoveSession(int? TravelProductId) 
+        public IActionResult RemoveSession(int? TravelProductId)
         {
-            if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT)) 
+            if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
             {
                 List<CShoppingCartDetailViewModel> list = null;
                 string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
@@ -272,7 +272,7 @@ namespace MIST143_Traveler.Controllers
         }
         public IActionResult ShoppingCartSession()
         {
-            if (HttpContext.Session.GetString(CDictionary.SK_Login) != null) 
+            if (HttpContext.Session.GetString(CDictionary.SK_Login) != null)
             {
                 var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
                 var v = JsonSerializer.Deserialize<Member>(Name);
@@ -301,24 +301,17 @@ namespace MIST143_Traveler.Controllers
         {
             if (HttpContext.Session.GetString(CDictionary.SK_Login) != null)
             {
-                if (HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT) == null)
+                var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
+                var v = JsonSerializer.Deserialize<Member>(Name);
+                CShoppingCartViewModel scv = new CShoppingCartViewModel()
                 {
-                    var Name = HttpContext.Session.GetString(CDictionary.SK_Login);
-                    var v = JsonSerializer.Deserialize<Member>(Name);
-                    CShoppingCartViewModel scv = new CShoppingCartViewModel()
-                    {
-                        MembersId = v.MembersId,
-                        MemberName = v.MemberName,
-                        Email = v.Email,
-                        Phone = v.Phone,
-                        _CShoppingCartDetailViewModel = p._CShoppingCartDetailViewModel,
-                    };
-                    return View(scv);
-                }
-                else
-                {
-                    return View(p);
-                }
+                    MembersId = v.MembersId,
+                    MemberName = v.MemberName,
+                    Email = v.Email,
+                    Phone = v.Phone,
+                    _CShoppingCartDetailViewModel = p._CShoppingCartDetailViewModel,
+                };
+                return View(scv);
             }
             else
                 return RedirectToAction("newLoginpag", "CustomerCenter");
@@ -332,7 +325,6 @@ namespace MIST143_Traveler.Controllers
                 MemberName = p.MemberName,
                 Email = p.Email,
                 Phone = p.Phone,
-                //AccompanyPeople = p.AccompanyPeople,
                 _CShoppingCartDetailViewModel = p._CShoppingCartDetailViewModel,
                 _CCouponViewModel = pt.CouponLists.Where(a => a.MembersId == p.MembersId && a.CouponStatus == true).Select(b => new CCouponViewModel
                 {
@@ -344,7 +336,7 @@ namespace MIST143_Traveler.Controllers
                     ExDate = b.Coupon.ExDate,
                 }).ToList(),
             };
-            
+
             return View(scv);
         }
         [HttpPost]
@@ -419,12 +411,6 @@ namespace MIST143_Traveler.Controllers
                 #endregion
                 //===========================歐附寶存入資料庫===================================================
                 #region
- 
-                return View();
-            }
-            #endregion
-            //========================結帳頁面=========================================================
-
                 if (p.CouponId == 0)
                 {
                     Order odn = new Order()
@@ -433,7 +419,6 @@ namespace MIST143_Traveler.Controllers
                         PaymentId = p.PaymethodId,
                         OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
                         OrderStatusId = 3,
-                        //AccompanyPeople = p.AccompanyPeople,
                     };
                     pt.Orders.Add(odn);
                 }
@@ -446,7 +431,6 @@ namespace MIST143_Traveler.Controllers
                         OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
                         CouponId = p.CouponId,
                         OrderStatusId = 3,
-                        //AccompanyPeople = p.AccompanyPeople,
                     };
                     pt.Orders.Add(od);
                     CouponList couponList = pt.CouponLists.FirstOrDefault(t => t.CouponListId == p.CouponListId);
@@ -456,71 +440,166 @@ namespace MIST143_Traveler.Controllers
                     }
                 }
 
-            pt.SaveChanges();
+                pt.SaveChanges();
 
-            for (int i = 0; i < p._CPayViewModel.Count; i++)
-            {
-                if (p._CPayViewModel[i].AccompanyPeople != null)
+                for (int i = 0; i < p._CPayViewModel.Count; i++)
                 {
-                    OrderDetail odd = new OrderDetail()
+                    if (p._CPayViewModel[i].AccompanyPeople != null)
                     {
-                        OrderId = pt.Orders.OrderBy(e => e.OrderId).LastOrDefault().OrderId,
-                        TravelProductId = p._CPayViewModel[i].TravelProductId,
-                        Quantity = p._CPayViewModel[i].Count,
-                        UnitPrice = p._CPayViewModel[i].Price,
-                        AccompanyPeople = p._CPayViewModel[i].AccompanyPeople,
-                    };
-                    pt.OrderDetails.Add(odd);
-                }
-                else 
-                {
-                    OrderDetail odd = new OrderDetail()
+                        OrderDetail odd = new OrderDetail()
+                        {
+                            OrderId = pt.Orders.OrderBy(e => e.OrderId).LastOrDefault().OrderId,
+                            TravelProductId = p._CPayViewModel[i].TravelProductId,
+                            Quantity = p._CPayViewModel[i].Count,
+                            UnitPrice = p._CPayViewModel[i].Price,
+                            AccompanyPeople = p._CPayViewModel[i].AccompanyPeople,
+                        };
+                        pt.OrderDetails.Add(odd);
+                    }
+                    else
                     {
-                        OrderId = pt.Orders.OrderBy(e => e.OrderId).LastOrDefault().OrderId,
-                        TravelProductId = p._CPayViewModel[i].TravelProductId,
-                        Quantity = p._CPayViewModel[i].Count,
-                        UnitPrice = p._CPayViewModel[i].Price,
-                    };
-                    pt.OrderDetails.Add(odd);
-                } 
-            }
-
-            for (int i = 0; i < p._CPayViewModel.Count; i++) 
-            {
-                TravelProduct prod = pt.TravelProducts.FirstOrDefault(t => t.TravelProductId == p._CPayViewModel[i].TravelProductId);
-                if (prod != null)
-                {
-                    prod.Stocks = prod.Stocks - p._CPayViewModel[i].Count;
+                        OrderDetail odd = new OrderDetail()
+                        {
+                            OrderId = pt.Orders.OrderBy(e => e.OrderId).LastOrDefault().OrderId,
+                            TravelProductId = p._CPayViewModel[i].TravelProductId,
+                            Quantity = p._CPayViewModel[i].Count,
+                            UnitPrice = p._CPayViewModel[i].Price,
+                        };
+                        pt.OrderDetails.Add(odd);
+                    }
                 }
+
+                for (int i = 0; i < p._CPayViewModel.Count; i++)
+                {
+                    TravelProduct prod = pt.TravelProducts.FirstOrDefault(t => t.TravelProductId == p._CPayViewModel[i].TravelProductId);
+                    if (prod != null)
+                    {
+                        prod.Stocks = prod.Stocks - p._CPayViewModel[i].Count;
+                    }
+                }
+                //================================清除Session=======================================================================
+                if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
+                {
+                    List<CShoppingCartDetailViewModel> list = null;
+                    string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+                    list = JsonSerializer.Deserialize<List<CShoppingCartDetailViewModel>>(jsonCart);
+
+                    list.Clear();
+                    jsonCart = JsonSerializer.Serialize(list);
+                    HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonCart);
+                }
+                return View();
             }
+            #endregion
 
-            pt.SaveChanges();
-
-            MimeMessage message = new MimeMessage();
-            BodyBuilder builder = new BodyBuilder();
-            builder.HtmlBody = $"<p>您好，恭喜您付款已完成，祝您旅途愉快!</p>" +
-                               $"<p>提醒您現在為疫情期間，請多留意自身健康安全</p>" +
-                              $"<div style='border: 1px solid black;text-align: center;'>      </div>" +
-                              $"<p>PlanetTraveler星球旅遊 關心您</p>" +
-                              $"<p>傳送時間:{DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>";
-
-
-
-            message.From.Add(new MailboxAddress("PlanetTraveler星球旅遊", "planettravelermsit143@outlook.com"));
-            message.To.Add(new MailboxAddress("親愛的顧客", "planettravelermsit143@outlook.com"));
-            message.Subject = "恭喜付款完成";
-            message.Body = builder.ToMessageBody();
-
-            using (SmtpClient client = new SmtpClient())
+            //========================結帳頁面-存入資料庫=========================================================
+            else
             {
-                client.Connect("smtp.outlook.com", 25, MailKit.Security.SecureSocketOptions.StartTls);
-                client.Authenticate("planettravelermsit143@outlook.com", "gogo1116");
-                client.Send(message);
-                client.Disconnect(true);
-            }
+                if (p.CouponId == 0)
+                {
+                    Order odn = new Order()
+                    {
+                        MembersId = p.MembersId,
+                        PaymentId = p.PaymethodId,
+                        OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                        OrderStatusId = 3,
+                    };
+                    pt.Orders.Add(odn);
+                }
+                else
+                {
+                    Order od = new Order()
+                    {
+                        MembersId = p.MembersId,
+                        PaymentId = p.PaymethodId,
+                        OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                        CouponId = p.CouponId,
+                        OrderStatusId = 3,
+                    };
+                    pt.Orders.Add(od);
+                    CouponList couponList = pt.CouponLists.FirstOrDefault(t => t.CouponListId == p.CouponListId);
+                    if (couponList != null)
+                    {
+                        couponList.CouponStatus = false;
+                    }
+                }
 
-            System.Threading.Thread.Sleep(3000);
-            return RedirectToAction("Index", "Home");
+                pt.SaveChanges();
+
+                for (int i = 0; i < p._CPayViewModel.Count; i++)
+                {
+                    if (p._CPayViewModel[i].AccompanyPeople != null)
+                    {
+                        OrderDetail odd = new OrderDetail()
+                        {
+                            OrderId = pt.Orders.OrderBy(e => e.OrderId).LastOrDefault().OrderId,
+                            TravelProductId = p._CPayViewModel[i].TravelProductId,
+                            Quantity = p._CPayViewModel[i].Count,
+                            UnitPrice = p._CPayViewModel[i].Price,
+                            AccompanyPeople = p._CPayViewModel[i].AccompanyPeople,
+                        };
+                        pt.OrderDetails.Add(odd);
+                    }
+                    else
+                    {
+                        OrderDetail odd = new OrderDetail()
+                        {
+                            OrderId = pt.Orders.OrderBy(e => e.OrderId).LastOrDefault().OrderId,
+                            TravelProductId = p._CPayViewModel[i].TravelProductId,
+                            Quantity = p._CPayViewModel[i].Count,
+                            UnitPrice = p._CPayViewModel[i].Price,
+                        };
+                        pt.OrderDetails.Add(odd);
+                    }
+                }
+
+                for (int i = 0; i < p._CPayViewModel.Count; i++)
+                {
+                    TravelProduct prod = pt.TravelProducts.FirstOrDefault(t => t.TravelProductId == p._CPayViewModel[i].TravelProductId);
+                    if (prod != null)
+                    {
+                        prod.Stocks = prod.Stocks - p._CPayViewModel[i].Count;
+                    }
+                }
+                pt.SaveChanges();
+                //================================清除Session=======================================================================
+                if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
+                {
+                    List<CShoppingCartDetailViewModel> list = null;
+                    string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+                    list = JsonSerializer.Deserialize<List<CShoppingCartDetailViewModel>>(jsonCart);
+
+                    list.Clear();
+                    jsonCart = JsonSerializer.Serialize(list);
+                    HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonCart);
+                }
+                //=================================寄信=============================================================================
+                MimeMessage message = new MimeMessage();
+                BodyBuilder builder = new BodyBuilder();
+                builder.HtmlBody = $"<p>您好，恭喜您付款已完成，祝您旅途愉快!</p>" +
+                                   $"<p>提醒您現在為疫情期間，請多留意自身健康安全</p>" +
+                                  $"<div style='border: 1px solid black;text-align: center;'>      </div>" +
+                                  $"<p>PlanetTraveler星球旅遊 關心您</p>" +
+                                  $"<p>傳送時間:{DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>";
+
+
+
+                message.From.Add(new MailboxAddress("PlanetTraveler星球旅遊", "planettravelermsit143@outlook.com"));
+                message.To.Add(new MailboxAddress("親愛的顧客", "planettravelermsit143@outlook.com"));
+                message.Subject = "恭喜付款完成";
+                message.Body = builder.ToMessageBody();
+
+                using (SmtpClient client = new SmtpClient())
+                {
+                    client.Connect("smtp.outlook.com", 25, MailKit.Security.SecureSocketOptions.StartTls);
+                    client.Authenticate("planettravelermsit143@outlook.com", "gogo1116");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+
+                System.Threading.Thread.Sleep(3000);
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }
