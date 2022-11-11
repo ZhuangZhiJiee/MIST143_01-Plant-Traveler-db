@@ -40,6 +40,7 @@
                 </th>
 
             </tr>
+       
         </thead>
         <tbody>
             @{
@@ -49,7 +50,7 @@
 
                 foreach (var item in Model.訂單)
                 {
-                   
+
                     小計 = item.數量 * item.購買金額;
                     <tr class="mb-3">
                         <td>
@@ -71,10 +72,10 @@
                             @item.付款方式
                         </td>
 
-                   
+
                         <td>
                             @小計
-                            
+
                         </td>
                         <td>
                             @item.訂購日期
@@ -82,38 +83,47 @@
                     </tr>
                     小計金額 += 小計;
 
+                    <tr>
+                        <td>
+                           
+                        </td>
+                        <td> 同行成員: </td>
+                        <td>@item.隨行人員</td>
+                    </tr>
+                   
+
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td style="color:red" colspan="2">
+                            @{
+                                if (Model.訂單.FirstOrDefault().優惠券 == null)
+                                {
+                                    <p>優惠券名稱:無使用優惠券</p>
+                                    折扣 = 0;
+                                }
+                                else
+                                {
+                                    <p>優惠券名稱:@Model.訂單.FirstOrDefault().優惠券</p>
+                                }
+
+                                decimal 總金額 = 小計金額 - (decimal)折扣;
+                                <p>小計總金額:$@小計金額.ToString("###,##0")</p>
+                                <p>折抵:$@折扣</p>
+                                <p>總金額:$@總金額.ToString("###,##0")</p>
+                            }
+
+
+                        </td>
+                    </tr>
+
                 }
-                
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    
-                    <td style="color:red" colspan="2">
-                        @{
-                            if (Model.訂單.FirstOrDefault().優惠券 == null)
-                            {
-                                <p>優惠券名稱:無使用優惠券</p>
-                                折扣 = 0;
-                            }
-                            else
-                            {
-                                <p>優惠券名稱:@Model.訂單.FirstOrDefault().優惠券</p>
-                            }
-
-                            decimal 總金額 = 小計金額 - (decimal)折扣;
-                            <p>小計總金額:$@小計金額.ToString("###,##0")</p>
-                            <p>折抵:$@折扣</p>
-                            <p>總金額:$@總金額.ToString("###,##0")</p>
-                        }
-
-
-                    </td>
-                </tr>
             }
 
         </tbody>
