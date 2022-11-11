@@ -28,6 +28,7 @@
             <textarea class="form-control" id="text"></textarea>
         </div>
         <div class="modal-footer">
+            <button type="button" class="btn btn-success" onclick="cdemo()">demo</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
             <button type="button" class="btn btn-primary" onclick="secc()">送出</button>
         </div>
@@ -35,10 +36,13 @@
 </div>
 <!--修改光箱-->
 <script>
-     @{
+    @{
         var OBJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
         var v = JsonSerializer.Deserialize<Member>(OBJ);
 
+    }
+    function cdemo() {
+        $("#text").val("臨時有事情")
     }
     function secc() {
 

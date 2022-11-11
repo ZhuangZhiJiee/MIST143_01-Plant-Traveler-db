@@ -411,6 +411,7 @@ namespace MIST143_Traveler.Controllers
                 #endregion
                 //===========================歐附寶存入資料庫===================================================
                 #region
+                
                 if (p.CouponId == 0)
                 {
                     Order odn = new Order()

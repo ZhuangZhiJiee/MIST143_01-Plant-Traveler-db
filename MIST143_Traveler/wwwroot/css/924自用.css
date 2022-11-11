@@ -29,7 +29,32 @@ a{
     height: 100%;
     
 }
-.bi bi-heart-fill{
-    color:red;
+.bi bi-heart-fill {
+    color: red;
+    
+}
+.邊框:focus{
+    outline:0;
+    outline:none;
 }
 
+.line:focus {
+    outline: 0;
+    outline: none;
+}
+.我的最愛:focus {
+    outline: 0;
+}
+/*a:active, a:focus {
+    outline: 0;
+    border: none;
+    -moz-outline-style: none;
+}*/
+.我的最愛:active, .我的最愛:focus {
+    outline: 0;
+    border: none;    
+}
+.btn:active, .btn:focus {
+    outline: 0;
+    border: none;
+}

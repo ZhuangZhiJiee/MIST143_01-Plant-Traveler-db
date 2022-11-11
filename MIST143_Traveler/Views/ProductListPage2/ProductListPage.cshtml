@@ -121,7 +121,7 @@
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="info[]" value="" id="flexCheckDefault" disabled>
                                                         <label class="dfhue disabled">法國</label>(<span id="c7"></span>)
-                                                    </div>                                                  
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -155,15 +155,21 @@
                                         <label style="width:20%" for="start">選擇遊玩日期範圍:</label>
 
                                         <input type="date" @*onclick="datechoise()"*@ id="start123123" name="trip-start"
-                                               min="2022-10-01" max="2022-12-31" class="ipwidth" />
+                                                 max="2022-12-31" class="ipwidth" />
                                         <input type="date" onclick="datechoise()"
                                                id="start" name="trip-start"
                                                min="2022-10-01" max="2022-12-31" class="ipwidth" />
                                         <button style="width:4%;padding:1%" type="button" id="showw">確定</button>
                                         <select class="form-select djfdd" id="productid" aria-label="Default select example">
                                             <option selected>選擇方案</option>
-                                            <option value="1">1日遊</option>     
-                                            <option value="2">多日遊</option>                                          
+                                            <option value="1">1日遊</option>
+                                            <option value="2">多日遊</option>
+                                            <option value="3">單人旅行</option>
+                                            <option value="4">雙人旅行</option>
+                                            <option value="5">三人旅行</option>
+                                            <option value="6">美食</option>
+                                            <option value="7">家庭旅遊</option>
+                                            <option value="8">活動展覽</option>
                                         </select>
 
                                         <div class="d-flex justify-content-end" @*style="border:1px red solid"*@>
@@ -254,6 +260,7 @@
     </div>
     <div class="viewBag d-none">@ViewBag.keyword</div>
 
+
     @section Scripts{
         <script>
 
@@ -269,10 +276,10 @@
             $("#ans").load(url + day + day2);
 
         })
-
+          
 
         </script>
-
+       
         <script>
 
             @*const select = document.querySelector("#choise");
@@ -357,6 +364,12 @@
                     }
                 )
             }*@
+            $(function () {
+                $("#datepicker").datepicker("min"= new Date:0)
+                
+
+            });
+            
             $("#btn").click(function () {
                 var qq = $("#text").val()
                 var url = "@Url.Content("~/ProductListPage2/filter")"
@@ -535,7 +548,6 @@
                         '註冊成功!',
                         '讚啦!',
                         'success'
-
                     )
                 }
                 }
