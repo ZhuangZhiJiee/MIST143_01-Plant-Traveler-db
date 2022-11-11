@@ -429,7 +429,8 @@ namespace MIST143_Traveler.Controllers
                             PaymentId = p.PaymethodId,
                             OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
                             OrderStatusId = 3,
-                            AccompanyPeople = p.AccompanyPeople,
+
+                            //AccompanyPeople = p..AccompanyPeople,
                         };
                         pt.Orders.Add(odn);
                     }
@@ -442,7 +443,7 @@ namespace MIST143_Traveler.Controllers
                             OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
                             CouponId = p.CouponId,
                             OrderStatusId = 3,
-                            AccompanyPeople = p.AccompanyPeople,
+                            //AccompanyPeople = p.AccompanyPeople,
                         };
                         pt.Orders.Add(od);
                         CouponList couponList = pt.CouponLists.FirstOrDefault(t => t.CouponListId == p.CouponListId);
@@ -523,7 +524,7 @@ namespace MIST143_Traveler.Controllers
                         PaymentId = p.PaymethodId,
                         OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
                         OrderStatusId = 3,
-                        AccompanyPeople = p.AccompanyPeople,
+                        //AccompanyPeople = p.AccompanyPeople,
                     };
                     pt.Orders.Add(odn);
                 }
@@ -536,7 +537,7 @@ namespace MIST143_Traveler.Controllers
                         OrderDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
                         CouponId = p.CouponId,
                         OrderStatusId = 3,
-                        AccompanyPeople = p.AccompanyPeople,
+                        //AccompanyPeople = p.AccompanyPeople,
                     };
                     pt.Orders.Add(od);
                     CouponList couponList = pt.CouponLists.FirstOrDefault(t => t.CouponListId == p.CouponListId);

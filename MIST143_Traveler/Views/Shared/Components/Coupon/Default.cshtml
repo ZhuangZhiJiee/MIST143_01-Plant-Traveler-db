@@ -22,7 +22,9 @@
 
             <input type="text" class="form-control" name="GiftKey" id="Giftnum" placeholder="請輸入優惠碼" aria-label="Recipient's username" aria-describedby="button-addon2">
             <button class="btn btn-warning 按鈕顏色" onclick="Gift()" type="button" id="button-addon2">兌換</button>
+            <button class="btn btn-success" onclick="democoupon()" type="button" >DEMO</button>
         </div>
+       
 
         <div>
             <a type="button" onclick="alll()">可使用</a><span>|</span><a type="button" onclick="sss()">即將到期</a><span>|</span><a type="button" onclick="exp()">已失效</a>
@@ -39,16 +41,16 @@
                         if (co.CouponStatus == true)
                         {
                             Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient'>
-                                        <div class='coupon-info coupon-info-right-dashed'>
-                                            <div class='coupon-store'>{co.CouponName}</div>
-                                            <div class='coupon-price'>折扣{(int)co.Discount}<span>優惠券</span></div>
-                                            <div class='coupon-description'>訂單限滿{co.Condition}使用</div>
-                                        </div>
-                                        <div class='coupon-get'>
-                                            <div class='coupon-get coupon-desc'>副券</div>
-                                            <div class='coupon-expiry-date'>到期日{co.ExDate}</div>
-                                        </div>
-                                    </div>");
+                                                <div class='coupon-info coupon-info-right-dashed'>
+                                                    <div class='coupon-store'>{co.CouponName}</div>
+                                                    <div class='coupon-price'>折扣{(int)co.Discount}<span>優惠券</span></div>
+                                                    <div class='coupon-description'>訂單限滿{co.Condition}使用</div>
+                                                </div>
+                                                <div class='coupon-get'>
+                                                    <div class='coupon-get coupon-desc'>副券</div>
+                                                    <div class='coupon-expiry-date'>到期日{co.ExDate}</div>
+                                                </div>
+                                            </div>");
                         }
 
                     }
@@ -69,6 +71,13 @@
     @{
         var OBaJ = Accessor.HttpContext.Session.GetString(CDictionary.SK_Login);//取得登入者的SESSION
         var vc = JsonSerializer.Deserialize<Member>(OBaJ);}
+
+    function democoupon()
+    {
+        $("#Giftnum").val(5566)
+
+    }
+      
 
        async function Gift(){
             var Giftdata =
