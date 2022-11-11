@@ -17,6 +17,7 @@ namespace MIST143_Traveler.Controllers
             _planet.TravelPictures.ToList();
             _planet.TravelProducts.ToList();
             _planet.TravelProductTypes.ToList();
+            _planet.Comments.ToList();
         }
         public IActionResult Index()
         {
@@ -172,6 +173,36 @@ namespace MIST143_Traveler.Controllers
             {
                 var qqq = qq.Where(e => e.dayCount == 1).Select(e => e.travelProductID).ToList();
                 a = _planet.TravelProducts.Where(e => qqq.Contains(e.TravelProductId)).ToList();
+            }
+            else if(numid==3)
+                    {
+                var qqq = _planet.TravelProducts.Where(d => d.TravelProductTypeId == 1).Select(d => d).ToList();
+                a.AddRange(qqq);
+            }
+            else if (numid == 4)
+            {
+                var qqq = _planet.TravelProducts.Where(d => d.TravelProductTypeId == 2).Select(d => d).ToList();
+                a.AddRange(qqq);
+            }
+            else if (numid == 5)
+            {
+                var qqq = _planet.TravelProducts.Where(d => d.TravelProductTypeId == 3).Select(d => d).ToList();
+                a.AddRange(qqq);
+            }
+            else if (numid == 6)
+            {
+                var qqq = _planet.TravelProducts.Where(d => d.TravelProductTypeId == 5).Select(d => d).ToList();
+                a.AddRange(qqq);
+            }
+            else if (numid == 7)
+            {
+                var qqq = _planet.TravelProducts.Where(d => d.TravelProductTypeId == 4).Select(d => d).ToList();
+                a.AddRange(qqq);
+            }
+            else if (numid == 8)
+            {
+                var qqq = _planet.TravelProducts.Where(d => d.TravelProductTypeId == 6).Select(d => d).ToList();
+                a.AddRange(qqq);
             }
             else
             {
@@ -346,6 +377,12 @@ namespace MIST143_Traveler.Controllers
             //}
 
             return View();
+        }
+        public IActionResult star()
+        {
+            var q = _planet.Comments.Where(c => c.TravelProductId == c.TravelProduct.TravelProductId).Average(d => d.Star);
+
+        return ViewComponent("Productlistpagi", q);
         }
     }
 
