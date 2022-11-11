@@ -59,78 +59,82 @@
                                 </div>
                             }
                             @*<div class="infoTitle mt-4">參加人資料</div>
-                <div class="infoBoxOuter">
-                    <div class="infoBoxInner">
-                        <div class="titleFontStyle">成人</div>
-                        <div class="payUserRow">
-                            <div class="payUser active">
-                                林恆佑
-                            </div>
-                            <div class="payUser" data-bs-toggle="modal" data-bs-target="#joinModal">
-                                + 新增
-                            </div>
-                        </div>
-                        <div class="userInfoBox">
-                            <div class="leftUserInfoBox">
-                                <div>姓名</div>
-                                <div>生日</div>
-                                <div>身分證件號碼</div>
-                            </div>
-                            <div class="rightUserInfoBox">
-                                <div>林恆佑</div>
-                                <div>2000/1/1</div>
-                                <div>A123456789</div>
-                            </div>
-                            <div class="editBox">
-                                <button type="button" class="btn btn-main-outline" data-bs-toggle="modal"
-                                        data-bs-target="#joinModal">
-                                    編輯
-                                </button>
-                            </div>
-                        </div>
+        <div class="infoBoxOuter">
+            <div class="infoBoxInner">
+                <div class="titleFontStyle">成人</div>
+                <div class="payUserRow">
+                    <div class="payUser active">
+                        林恆佑
                     </div>
-                </div>*@
+                    <div class="payUser" data-bs-toggle="modal" data-bs-target="#joinModal">
+                        + 新增
+                    </div>
+                </div>
+                <div class="userInfoBox">
+                    <div class="leftUserInfoBox">
+                        <div>姓名</div>
+                        <div>生日</div>
+                        <div>身分證件號碼</div>
+                    </div>
+                    <div class="rightUserInfoBox">
+                        <div>林恆佑</div>
+                        <div>2000/1/1</div>
+                        <div>A123456789</div>
+                    </div>
+                    <div class="editBox">
+                        <button type="button" class="btn btn-main-outline" data-bs-toggle="modal"
+                                data-bs-target="#joinModal">
+                            編輯
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
                             @*<div class="infoTitle mt-4">其他附加資訊</div>
-                <div class="p-3 pt-0">
-                    <div>聯絡電話 <span class="color-main"> *</span></div>
-                    <div class="mb-3">
-                        <input type="tel" class="form-control" placeholder="例: +886900000099">
-                    </div>
-                </div>*@
+        <div class="p-3 pt-0">
+            <div>聯絡電話 <span class="color-main"> *</span></div>
+            <div class="mb-3">
+                <input type="tel" class="form-control" placeholder="例: +886900000099">
+            </div>
+        </div>*@
                             <div class="infoTitle hasTag">聯絡資料</div>
-                            <div class="subInfoText ps-3">如訂單有變動，我們將通知您</div>
-                            <div class="infoBoxOuter">
-                                <div class="infoBoxInner">
-                                    <div class="payUserRow">
-                                        <div class="payUserBlock">
-                                            <div class="payUser active2">
-                                                @Model.MemberName
+                            @foreach (var item in Model._CShoppingCartDetailViewModel)
+                            {
+                                <div class="subInfoText ps-3">@item.TravelProductName</div>
+                                <div class="infoBoxOuter">
+                                    <div class="infoBoxInner">
+                                        <div class="payUserRow">
+                                            <div class="payUserBlock">
+                                                <div class="payUser active2">
+                                                    @Model.MemberName
+                                                </div>
+                                            </div>
+                                            <div class="payUser addPayUser" data-bs-toggle="modal" data-bs-target="#contentModal">
+                                                + 新增
                                             </div>
                                         </div>
-                                        <div class="payUser" data-bs-toggle="modal" data-bs-target="#contentModal">
-                                            + 新增
-                                        </div>
-                                    </div>
-                                   
-                                    <div class="userInfoBox">
-                                        <div class="leftUserInfoBox">
-                                            <div>姓名</div>
-                                            <div>手機號碼</div>
-                                            <div>電子郵件</div>
-                                        </div>
-                                        <div class="rightUserInfoBox">
-                                            <div>@Model.MemberName</div>
-                                            <div>@Model.Phone</div>
-                                            <div>@Model.Email</div>
-                                        </div>
-                                        <div class="editBox">
-                                            <button type="button" class="btn btn-outline-primary deleUserItem ">
-                                                刪除
-                                            </button>
+
+                                        <div class="userInfoBox">
+                                            <div class="leftUserInfoBox">
+                                                <div>姓名</div>
+                                                <div>手機號碼</div>
+                                                <div>電子郵件</div>
+                                            </div>
+                                            <div class="rightUserInfoBox">
+                                                <div>@Model.MemberName</div>
+                                                <div>@Model.Phone</div>
+                                                <div>@Model.Email</div>
+                                            </div>
+                                            <div class="editBox">
+                                                <button type="button" class="btn btn-outline-primary deleUserItem ">
+                                                    刪除
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
+
                             <div class="dangerInfoBox">
                                 請確認資料填寫無誤，訂單送出後可能無法更改
                             </div>
@@ -140,7 +144,7 @@
                                 <input type="hidden" asp-for="MemberName" value="@Model.MemberName" />
                                 <input type="hidden" asp-for="Email" value="@Model.Email" />
                                 <input type="hidden" asp-for="Phone" value="@Model.Phone" />
-                                <input type="hidden" class="memberNameInput" name="AccompanyPeople" value="" />
+
                                 @for (int i = 0; i < Model._CShoppingCartDetailViewModel.Count; i++)
                                 {
                                     <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].TravelProductId" value="@Model._CShoppingCartDetailViewModel[i].TravelProductId" />
@@ -148,6 +152,7 @@
                                     <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Count" value="@Model._CShoppingCartDetailViewModel[i].Count" />
                                     <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Price" value="@Model._CShoppingCartDetailViewModel[i].Price" />
                                     <input type="hidden" asp-for="_CShoppingCartDetailViewModel[i].Productpicture" value="@Model._CShoppingCartDetailViewModel[i].Productpicture" />
+                                    <input type="text" class="memberNameInput" asp-for="_CShoppingCartDetailViewModel[i].AccompanyPeople" value="" />
                                 }
                                 <input type="submit" value="前往付款" class="btn btn-main " />
                             </div>
@@ -278,18 +283,25 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script>
-        $('#saveBtn').click(function () {
-            let newName = $('.addName').val()
-            $('.addName').val("")
-            $('.phoneInput').val('')
-            $('.emailInput').val('')
-            let oldHtml = $('.payUserBlock').html()
-            $('.payUserBlock').html(oldHtml + `<div class='payUser payUserItem'>${newName}</div>`)
-            let oldInputValue = $(".memberNameInput").val()
-            let newInputValue = oldInputValue === "" ? newName : `、${newName}`
-            $(".memberNameInput").val(`${oldInputValue}${newInputValue}`)
-            clickPayUser()
+    let clickIndex = 0;
+    $(".addPayUser").each(function (index) {
+        $(this).on("click", function () {
+            clickIndex = index
         })
+    })
+
+    $('#saveBtn').click(function () {
+        let newName = $('.addName').val()
+        $('.addName').val("")
+        $('.phoneInput').val('')
+        $('.emailInput').val('')
+        let oldHtml = $('.payUserBlock').eq(clickIndex).html()
+        $('.payUserBlock').eq(clickIndex).html(oldHtml + `<div class='payUser payUserItem'>${newName}</div>`)
+        let oldInputValue = $(".memberNameInput").eq(clickIndex).val()
+        let newInputValue = oldInputValue === "" ? newName : `、${newName}`
+        $(".memberNameInput").eq(clickIndex).val(`${oldInputValue}${newInputValue}`)
+        clickPayUser()
+    })
     $('.demoBtn').click(function () {
         $('.addName').val('林小美')
         $('.phoneInput').val('0945154315')
@@ -305,31 +317,51 @@
         $('.phoneInput').val('0945641254')
         $('.emailInput').val('woang@gmail.com')
     })
-    
-    $('.deleUserItem').click(function () {
-        console.log("deleUserItem")
-        $('.payUserItem').each(function (index) {
-            if ($(this).attr("class").indexOf('active') > -1) {
-                $(this).remove()
-                let name = $(this).text()
-                let postInputValue = $('.memberNameInput').val()
-                let word = ""
-                if (postInputValue.indexOf(name) > 0) {
-                    word = `、${name}`
-                } else if (postInputValue.indexOf(name) === 0){
-                    word = `${name}、`
+    $('.deleUserItem').each(function (deleIndex) {
+        $(this).on("click", function (e) {
+            $('.payUserItem').each(function (index) {
+                if ($(this).attr("class").indexOf('active') > -1) {
+                    $(this).remove()
+                    let name = $(this).text()
+                    let postInputValue = $('.memberNameInput').eq(deleIndex).val()
+                    let word = ""
+                    if (postInputValue.indexOf(name) > 0) {
+                        word = `、${name}`
+                    } else if (postInputValue.indexOf(name) === 0) {
+                        word = `${name}、`
+                    }
+                    console.log("${space}${name}", `${word}`)
+                    const regex = new RegExp(word);
+                    postInputValue = postInputValue.replace(regex, "")
+                    $('.memberNameInput').eq(deleIndex).val(postInputValue)
+                    clickPayUser()
                 }
-                console.log("${space}${name}", `${word}`)
-                const regex = new RegExp(word);
-                postInputValue = postInputValue.replace(regex, "")
-                $('.memberNameInput').val(postInputValue)
-                clickPayUser()
-            }
+            })
         })
     })
-    $('.deleeee').click(function () {
-        console.log("deleeee")
-    })
+
+    //$('.deleUserItem').click(function () {
+    //    console.log("deleUserItem")
+    //    $('.payUserItem').each(function (index) {
+    //        if ($(this).attr("class").indexOf('active') > -1) {
+    //            $(this).remove()
+    //            let name = $(this).text()
+    //            let postInputValue = $('.memberNameInput').val()
+    //            let word = ""
+    //            if (postInputValue.indexOf(name) > 0) {
+    //                word = `、${name}`
+    //            } else if (postInputValue.indexOf(name) === 0){
+    //                word = `${name}、`
+    //            }
+    //            console.log("${space}${name}", `${word}`)
+    //            const regex = new RegExp(word);
+    //            postInputValue = postInputValue.replace(regex, "")
+    //            $('.memberNameInput').val(postInputValue)
+    //            clickPayUser()
+    //        }
+    //    })
+    //})
+
     function clickPayUser() {
         $('.payUserItem').each(function (index) {
             console.log("index", index)
