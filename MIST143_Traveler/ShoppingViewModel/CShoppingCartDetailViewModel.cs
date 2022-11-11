@@ -14,6 +14,7 @@ namespace MIST143_Traveler.ShoppingViewModel
         public decimal Price { get; set; }
         public decimal TotalPrice { get { return this.Count * this.Price; } }
         public string Productpicture { get; set; }
+        public string AccompanyPeople { get; set; }
     }
 
 
