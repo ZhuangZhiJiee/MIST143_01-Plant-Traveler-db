@@ -486,6 +486,7 @@ namespace MIST143_Traveler.Controllers
             {
                 var q = _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId);
                 List<Corderview> Cord = new List<Corderview>();
+
                 Cord = (from od in _PlanetTravelContext.Orders.Where(a => a.MembersId == MembersId)
                             //from p in od.OrderDetails.Where(a => a.OrderId == od.OrderId)
                         select new Corderview
@@ -511,7 +512,7 @@ namespace MIST143_Traveler.Controllers
                             數量 = od.OrderDetails.Select(a => a.Quantity).FirstOrDefault(),
 
                         }).ToList();
-
+                var dsd = JsonSerializer.Serialize(Cord);
                 if (Cord.Count > 0)
                 {
                     return ViewComponent("CustomerOrder", Cord);
@@ -942,8 +943,8 @@ namespace MIST143_Traveler.Controllers
 
         }
 
-       
-     
+    
+
     }
 
 }

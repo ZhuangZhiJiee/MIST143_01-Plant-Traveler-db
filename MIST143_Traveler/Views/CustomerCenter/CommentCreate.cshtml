@@ -22,7 +22,7 @@
 <hr />
 <div class="row">
     <div class="col-12">
-        <form asp-action="CommentCreate">
+        
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="star">
                 <img src="~/Images/contact/star2.png" />
@@ -62,16 +62,21 @@
                 <span asp-validation-for="CommentDate" class="text-danger"></span>
             </div>
 
-            <div class="form-group mt-4 d-flex justify-content-end" >
-                <input value="Create" onclick="COOM()" class="btn btn-warning" />
+            <div class="form-group mt-4 d-flex justify-content-end">
+                <div  class="btn btn-success" onclick="comdimo()">demo</div>
+                <input value="Create" onclick="COOM()" class="btn btn-warning">
+                
             </div>
-        </form>
+        
     </div>
 </div>
 
 <script>
     /*function str() {*/
-
+    function comdimo() {
+        $("#CommentText").val("風景宜人，適合全家旅遊")
+    }
+    
 
         
         //可用css("proName","value")來做修改

@@ -12,6 +12,7 @@ namespace MIST143_Traveler.Models
         public int TravelProductId { get; set; }
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
+        public string AccompanyPeople { get; set; }
 
         public virtual Order Order { get; set; }
         public virtual TravelProduct TravelProduct { get; set; }
