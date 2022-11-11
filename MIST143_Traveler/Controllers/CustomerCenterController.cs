@@ -64,6 +64,8 @@ namespace MIST143_Traveler.Controllers
 
                      select new 訂單管理
                      {
+                         
+                         隨行人員 = a.AccompanyPeople,
                          TravelProductId = b.TravelProductId,
                          訂單編號 = a.OrderId,
                          商品名稱 = b.TravelProductName,

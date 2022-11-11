@@ -115,7 +115,7 @@
                         <td class="tbbtn" style="max-width:92px">
                         </td>
                         }
-                        if (item.訂單狀態 == "訂單完成")
+                        if (item.訂單狀態 == "訂單完成"&&DateTime.Parse(item.訂購日期)>DateTime.Now.AddDays(-6))
                         {
 
                         <td class="tbbtn">
