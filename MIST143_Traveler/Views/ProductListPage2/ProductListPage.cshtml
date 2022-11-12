@@ -155,11 +155,11 @@
                                         <label style="width:20%" for="start">選擇遊玩日期範圍:</label>
 
                                         <input type="date" @*onclick="datechoise()"*@ id="start123123" name="trip-start"
-                                                 max="2022-12-31" class="ipwidth" />
+                                                min="2022-10-01" max="2022-12-31" class="ipwidth" />
                                         <input type="date" onclick="datechoise()"
                                                id="start" name="trip-start"
                                                min="2022-10-01" max="2022-12-31" class="ipwidth" />
-                                        <button style="width:4%;padding:1%" type="button" id="showw">確定</button>
+                                        <button style="width:8%;padding:1%" type="button" id="showw">確定</button>
                                         <select class="form-select djfdd" id="productid" aria-label="Default select example">
                                             <option selected>選擇方案</option>
                                             <option value="1">1日遊</option>
@@ -364,11 +364,11 @@
                     }
                 )
             }*@
-            $(function () {
-                $("#datepicker").datepicker("min"= new Date:0)
+            //$(function () {
+            //    $("#datepicker").datepicker("min"= new Date:0)
                 
 
-            });
+            //});
             
             $("#btn").click(function () {
                 var qq = $("#text").val()
