@@ -9,14 +9,11 @@
     margin: auto;
 }
 
-.main-header .logo {
-    max-width: 70px;
+.main-header .logo img {
+    width: 130px;
+    vertical-align: middle;
 }
 
-    .main-header .logo img {
-        width: 100%;
-        vertical-align: middle;
-    }
 
 .main-header .main-nav {
     margin-left: auto;
@@ -70,27 +67,17 @@
             border: 1px solid orange;
         }
 
-        .main-header .header-search .header-search-box button,
-        .main-header .header-search .header-search-box input {
-            border: none;
-            padding: 5px 10px;
-            background-color: transparent;
-            outline: none;
-        }
+
 
         .main-header .header-search .header-search-box button {
             position: absolute;
             transform: translateX(20%);
         }
 
-        .main-header .header-search .header-search-box input {
-            border-radius: 100px;
-            width: 20em;
-            text-indent: 3em;
-        }
+
 
 button {
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.44;
     font-weight: 500;
     padding: 0 40px;
@@ -791,7 +778,7 @@ a {
 }
 
 .accordion-btn {
-    width: 83%;
+    width: 100%;
 }
 
 .accord-btn {
@@ -908,7 +895,7 @@ px
 
 .form-check-input {
     width: 1em;
-    height: 0;
+    height: 20px;
     margin-top: 0.25em;
     vertical-align: top;
     background-color: #fff;
@@ -973,7 +960,7 @@ svg {
 }
 
 *, :after, :before {
-    /* box-sizing: border-box; */
+     box-sizing: border-box; 
 }
 
 user agent stylesheet
@@ -993,25 +980,25 @@ div {
     border-bottom: 1px solid #4a4a4a;
 }
 
-input {
+/*input {*/
     /* font-size: 20px; */
-    font-weight: 500;
+    /*font-weight: 500;
     color: #212121;
     padding: 10px 0;
     outline: none;
     border: none;
     border-bottom: 1px solid #4a4a4a;
-}
+}*/
 
 .footer {
     text-align: right;
     padding-top: 20px;
 }
 
-*, :after, :before {
+/**, :after, :before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
-}
+}*/
 
 .klk-button-primary {
     color: #fff;
@@ -1050,10 +1037,10 @@ input {
     flex-direction: column;
 }
 
-*, :after, :before {
+/**, :after, :before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
-}
+}*/
 
 .tree {
     height: 3890px;

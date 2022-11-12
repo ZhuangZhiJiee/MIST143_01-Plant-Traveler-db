@@ -40,7 +40,7 @@
                 </th>
 
             </tr>
-       
+
         </thead>
         <tbody>
             @{
@@ -82,15 +82,24 @@
                         </td>
                     </tr>
                     小計金額 += 小計;
-
                     <tr>
-                        <td>
-                           
-                        </td>
-                        <td> 同行成員: </td>
-                        <td>@item.隨行人員</td>
-                    </tr>
-                   
+                        @foreach (var item2 in Model.訂單)
+                        {
+                            if (item2.隨行人員 != null)
+                            {
+                            
+
+                                <td>
+                                    @item2.隨行人員
+                                </td>
+
+                            
+                        }
+
+                    }
+                        </tr>
+                    }
+
 
                     <tr>
                         <td></td>
@@ -123,7 +132,7 @@
                         </td>
                     </tr>
 
-                }
+
             }
 
         </tbody>
@@ -131,5 +140,5 @@
     </table>
 </div>
 <script>
-   
+
 </script>

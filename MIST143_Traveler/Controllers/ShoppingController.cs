@@ -478,6 +478,7 @@ namespace MIST143_Traveler.Controllers
                         prod.Stocks = prod.Stocks - p._CPayViewModel[i].Count;
                     }
                 }
+                pt.SaveChanges();
                 //================================清除Session=======================================================================
                 if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
                 {
@@ -586,7 +587,7 @@ namespace MIST143_Traveler.Controllers
 
 
                 message.From.Add(new MailboxAddress("PlanetTraveler星球旅遊", "planettravelermsit143@outlook.com"));
-                message.To.Add(new MailboxAddress("親愛的顧客", "planettravelermsit143@outlook.com"));
+                message.To.Add(new MailboxAddress("親愛的顧客", p.Email));
                 message.Subject = "恭喜付款完成";
                 message.Body = builder.ToMessageBody();
 
