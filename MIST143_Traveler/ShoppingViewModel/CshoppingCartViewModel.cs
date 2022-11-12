@@ -12,7 +12,6 @@ namespace MIST143_Traveler.ShoppingViewModel
         public string MemberName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public string AccompanyPeople { get; set; }
         public int PaymethodId { get; set; }
         public int? CouponId { get; set; }
         public int? CouponListId { get; set; }
