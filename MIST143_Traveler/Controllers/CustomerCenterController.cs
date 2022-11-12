@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Authorization;
 //using System.Net.Mail;
 using System.Net.Mime;
 using MimeKit.Utils;
+using System.Runtime.Versioning;
 
 namespace MIST143_Traveler.Controllers
 {
@@ -31,6 +32,7 @@ namespace MIST143_Traveler.Controllers
         private IHttpContextAccessor _httpContextAccessor;
         private readonly PlanetTravelContext _PlanetTravelContext;
         private IWebHostEnvironment _enviro;
+        public static string randomCode;
         public CustomerCenterController(PlanetTravelContext PlanetTrave, IWebHostEnvironment p, IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
@@ -64,7 +66,7 @@ namespace MIST143_Traveler.Controllers
 
                      select new 訂單管理
                      {
-                         
+
                          隨行人員 = a.AccompanyPeople,
                          TravelProductId = b.TravelProductId,
                          訂單編號 = a.OrderId,
@@ -135,7 +137,7 @@ namespace MIST143_Traveler.Controllers
                 }
                 Cus.Address = inCus.Address;
                 Cus.MemberName = inCus.MemberName;
-                
+
                 //測試
                 string Cname = inCus.MemberName;
                 v.MemberName = Cname;
@@ -178,11 +180,11 @@ namespace MIST143_Traveler.Controllers
                 _PlanetTravelContext.Coupons.ToList();//如果在同一個變數想WHERE兩張表的內容需要先用TOLIST先把他接住
                 var cl = _PlanetTravelContext.CouponLists.ToList();
                 var 時間 = DateTime.Now.AddDays(-1).ToShortDateString();
-                
+
                 //var c = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId && a.CouponStatus == true).Count();
-                var c = cl.Where(a => a.MembersId == MembersId && a.CouponStatus == true && 
+                var c = cl.Where(a => a.MembersId == MembersId && a.CouponStatus == true &&
                 Convert.ToDateTime(a.Coupon.ExDate) > Convert.ToDateTime(時間)).Count();
-                    
+
                 var myf = _PlanetTravelContext.Myfavorites.Where(a => a.MembersId == MembersId).Count();
 
 
@@ -220,38 +222,56 @@ namespace MIST143_Traveler.Controllers
 
         }
 
+        public IActionResult GetCaptcha()
+        {
+            randomCode = CCaptcha.CreateRandomCode(5).ToLower();
+            byte[] captcha = CCaptcha.CreatImage(randomCode);
+            return File(captcha, "image/jpeg");
+        }
 
         //左邊功能開始
         [AllowAnonymous]
         [HttpPost]
         public IActionResult newLoginpag(CLogin vModel)
         {
+
+            string randomCode = CustomerCenterController.randomCode;
             Member cust = _PlanetTravelContext.Members.FirstOrDefault
               (c => c.Email.Equals(vModel.Email));
             if (cust != null)
             {
-
-                if (cust.Password.Equals(vModel.Password))
+                if (vModel.CAPTCHA != null)
                 {
+                    if (vModel.CAPTCHA.ToLower() == randomCode)
+                    {
 
-                    string jsonUser = JsonSerializer.Serialize(cust);
-                    HttpContext.Session.SetString(
-                        CDictionary.SK_Login, jsonUser);
-                    //if (vModel.KeepLogin == "true")
-                    //{
-                    //    CookieOptions option = new CookieOptions();
-                    //    option.Expires = DateTime.Now.AddMinutes(60);
-                    //    int index = vModel.Email.IndexOf("@");
-                    //    string email = vModel.Email.Substring(0,index);
-                    //    Response.Cookies.Append(email, vModel.Password, option);
-                    //}
+                        if (cust.Password.Equals(vModel.Password))
+                        {
 
-                    return Json(new { Res = true, Msg = "成功" });
+                            string jsonUser = JsonSerializer.Serialize(cust);
+                            HttpContext.Session.SetString(
+                                CDictionary.SK_Login, jsonUser);
+                            //if (vModel.KeepLogin == "true")
+                            //{
+                            //    CookieOptions option = new CookieOptions();
+                            //    option.Expires = DateTime.Now.AddMinutes(60);
+                            //    int index = vModel.Email.IndexOf("@");
+                            //    string email = vModel.Email.Substring(0,index);
+                            //    Response.Cookies.Append(email, vModel.Password, option);
+                            //}
+
+                            return Json(new { Res = true, Msg = "成功" });
+                        }
+                        else
+                            return Json(new { Res = false, Msg = "失敗" });
+                    }
                 }
-                else 
-                    return Json(new { Res = false, Msg = "失敗" });
-
+                
+                else
+                return Json(new { Res = false, Msg = "請確認驗證碼" });
             }
+            else
+                return Json(new { Res = false, Msg = "失敗" });
             return View();
         }
 
@@ -294,7 +314,7 @@ namespace MIST143_Traveler.Controllers
                                   CouponStatus = Cuu.CouponStatus,
                               }
                             ).ToList();
-                
+
             }
             var ex = Coup.優惠券列表.Where(a => DateTime.Parse(a.ExDate) >= DateTime.Now).ToList();
             return ViewComponent("Coupon", ex);
@@ -352,7 +372,7 @@ namespace MIST143_Traveler.Controllers
                 var ex = Coup.優惠券列表.Where(a => DateTime.Parse(a.ExDate) <= DateTime.Now).ToList();
                 if (ex != null)
                 {
-                    
+
                     return ViewComponent("CouponExp", ex);
                 }
             }
@@ -375,14 +395,14 @@ namespace MIST143_Traveler.Controllers
                                   CouponName = Cup.CouponName,
                                   Condition = Cup.Condition,
                                   Discount = Cup.Discount,
-                                  ExDate =Cup.ExDate,
+                                  ExDate = Cup.ExDate,
                                   CouponStatus = Cuu.CouponStatus,
                               }
                             ).ToList();
                 var tit = DateTime.Now.AddDays(7).ToShortDateString();
-                var 昨天= DateTime.Now.AddDays(-1).ToShortDateString();
-                
-                var exe = Coup.優惠券列表.Where(a => DateTime.Parse(a.ExDate)< DateTime.Parse(tit)).ToList();
+                var 昨天 = DateTime.Now.AddDays(-1).ToShortDateString();
+
+                var exe = Coup.優惠券列表.Where(a => DateTime.Parse(a.ExDate) < DateTime.Parse(tit)).ToList();
                 var ex = exe.Where(b => DateTime.Parse(b.ExDate) > DateTime.Parse(昨天)).ToList();
                 if (ex != null)
                 {
@@ -741,10 +761,10 @@ namespace MIST143_Traveler.Controllers
 
         public IActionResult Ccount(int MembersId)
         {
-            
+
             var 時間 = DateTime.Now.AddDays(-1).ToShortDateString();
             //var c = _PlanetTravelContext.Coupons.Where(a => DateTime.Parse(a.ExDate) > DateTime.Parse(時間)).ToList();
-            
+
             var q = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId && a.CouponStatus == true).Count().ToString();
             return Content(q, "text/plain", System.Text.Encoding.UTF8);
         }
@@ -774,7 +794,7 @@ namespace MIST143_Traveler.Controllers
                                 內容 = li.CommentText,
                                 分數 = li.Star,
                                 日期 = DateTime.Parse(li.CommentDate).ToString("yyyy-MM-dd"),
-                                
+
                                 //DateTime.Parse(od.OrderDate).ToString("yyyy-MM-dd"),
                             }).ToList();
                 if (Comli.評論.Count > 0)
@@ -805,7 +825,11 @@ namespace MIST143_Traveler.Controllers
         [HttpPost]
         public IActionResult CommentCreate(Ccomment comm)
         {
-
+            var q = _PlanetTravelContext.Members.Where(a => a.MembersId == comm.MembersId).Select(a => a.MemberStatusId).FirstOrDefault();
+            if (q == 2)
+            {
+                return Json(new { Res = false });
+            }
             comm.CommentDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             comm.CommentStatus = true;
             Comment ss = comm.comment;
@@ -889,34 +913,35 @@ namespace MIST143_Traveler.Controllers
             var em = _PlanetTravelContext.Members.ToList();
             var myf = _PlanetTravelContext.Myfavorites.Where(a => a.TravelProductId == ms.ProductID).Select(a => a.Members.Email).ToList();
             商品描述 = (from a in _PlanetTravelContext.TravelProducts.Where(a => a.TravelProductId == ms.ProductID)
-                        select new CCsendmailcs { 
-                          商品名稱=a.TravelProductName,
-                          商品照片=a.TravelPictures.Where(a=>a.TravelProductId==ms.ProductID).Select(a=>a.TravelPicture1).FirstOrDefault(),
-                          商品價格=a.Price,
-                          商品描述=a.EventIntroduction,
-                          商品詳情=a.Description,
-                        }).FirstOrDefault();
+                    select new CCsendmailcs
+                    {
+                        商品名稱 = a.TravelProductName,
+                        商品照片 = a.TravelPictures.Where(a => a.TravelProductId == ms.ProductID).Select(a => a.TravelPicture1).FirstOrDefault(),
+                        商品價格 = a.Price,
+                        商品描述 = a.EventIntroduction,
+                        商品詳情 = a.Description,
+                    }).FirstOrDefault();
 
             MimeMessage message = new MimeMessage();
             BodyBuilder builder = new BodyBuilder();
             var mu = new Multipart();
             string imgPath = _enviro.WebRootPath + "/Images/logoRefer.png";
-            
+
             var image = builder.LinkedResources.Add(imgPath);
-            
+
             image.ContentId = MimeUtils.GenerateMessageId();
-            
-            var attach = new MimePart("image","PNG")
+
+            var attach = new MimePart("image", "PNG")
             {
-                FileName=Path.GetFullPath(imgPath)
+                FileName = Path.GetFullPath(imgPath)
             };
 
-            builder.HtmlBody = 
-                                $"<img width:80px src='cid:{image.ContentId}'/>"+
+            builder.HtmlBody =
+                                $"<img width:80px src='cid:{image.ContentId}'/>" +
                                $"<p>您好，您關注的商品更新了!</p>" +
                                 $"<div class='container col-md-12'>" +
                                 $"<a href='https://localhost:44302/shopping/List?TravelProductId={ms.ProductID}'>" +
-                                 $"<h3>{商品描述.商品名稱}</h3>" +$"</a>"+
+                                 $"<h3>{商品描述.商品名稱}</h3>" + $"</a>" +
                                   $"<img src='https://localhost:44338/images/TravelProductPictures/{商品描述.商品照片}'width='600px''>" +
                                   $"<p>{商品描述.商品描述}</p>" +
                                   $"<p>{商品描述.商品詳情}</p>" +
@@ -924,16 +949,16 @@ namespace MIST143_Traveler.Controllers
                                 $"</div>" +
                               $"<div style='border: 2px solid black;text-align: center;'>      </div>" +
                               $"<p>傳送時間:{DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>";
-           
+
             message.From.Add(new MailboxAddress("PlanetTraveler星球旅遊", "planetmait143-1@outlook.com"));
             foreach (var item in myf)
             {
-                message.To.Add(new MailboxAddress("",item));
+                message.To.Add(new MailboxAddress("", item));
             }
-          
+
             message.Subject = "PlanetTraveler星球旅遊";
             message.Body = builder.ToMessageBody();
-          
+
             using (SmtpClient client = new SmtpClient())
             {
                 client.Connect("smtp.outlook.com", 25, MailKit.Security.SecureSocketOptions.StartTls);
@@ -945,7 +970,7 @@ namespace MIST143_Traveler.Controllers
 
         }
 
-    
+
 
     }
 

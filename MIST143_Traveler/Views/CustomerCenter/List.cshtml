@@ -127,6 +127,7 @@
                                 <div class="d-flex mb-3">
                                     <div class="me-auto p-2">
                                         <button type="submit" class="btn btn-warning 按鈕顏色" id="send" onclick="bb()">儲存</button>
+                                        <input  class="btn btn-success" style="width:75px" value="DEMO" onclick="demoname()">
                                     </div>
                                 </div>
                             </div>
@@ -144,6 +145,10 @@
 
 @section Scripts{
     <script>
+        function demoname() {
+            $("#MemberName").val("陳曉華")
+            $("#Phone").val("0988888888")
+        }
 
         const cont = document.querySelector("#cont")
         const Btnsave = document.querySelector("#send")

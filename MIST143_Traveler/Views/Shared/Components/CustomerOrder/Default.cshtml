@@ -465,7 +465,16 @@
             data: { comm: Cdata },
             success: function (datas)
             {
-                if (datas.res)
+                if (!datas.res) {//看左邊 如果DATAS傳回失敗的話
+                    Swal.fire({
+                        icon: 'error',
+                        title: '您已被停權 欲了解，請洽客服',
+                        text: datas.msg,
+
+                    })
+                    return;
+                }
+                else
                 {
                     Swal.fire(
                         '感謝您的評論!',

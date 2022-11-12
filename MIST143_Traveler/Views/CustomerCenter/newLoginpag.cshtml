@@ -27,10 +27,7 @@
 
 </head>
 
-@*@using (Html.BeginForm())
-    {
 
-        @Html.AntiForgeryToken()*@
 <body>
 
 
@@ -47,7 +44,6 @@
                 </div>
                 <div class="card-body">
 
-                    @*<form name="userInfo" method="post" enctype="application/x-www-form-urlencoded" action="~/CustomerCenter/newLogh">*@
                     <div class="input-group form-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -55,48 +51,74 @@
                         <input type="text" class="form-control" placeholder="Email帳號" id="Actemail" name="Email">
 
                     </div>
-                    <div class="input-group form-group mb-2">
+                    <div class="input-group form-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
                         <input type="password" class="form-control" placeholder="password" id="Pas" name="Password">
                     </div>
+
+                    <div class="input-group form-group mb-2">
+                        <div class="d-flex">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                            </div>
+                            <input type="text" placeholder="請輸入驗證碼" class="form-control" id="captcha" name="Captcha">
+                            <span class="input-group">
+                                <img id="imgcode" src="@Url.Content("~/CustomerCenter/GetCaptcha")" style="cursor:pointer;margin-left:20px;" />
+                            </span>
+                        </div>
+                    </div>
+
+                    
+
                     <div class="row align-items-center remember mb-4">
                         <input type="checkbox" value="true" id="chkKeepLogin">記住我
                     </div>
+
                     <div class="form-group mt-2">
                         <input type="submit" value="Login" onclick="BtnLogin()" id="btnlog" class="btn float-right login_btn">
                     </div>
-                    @*</form>*@
 
                 </div>
                 <div class="card-footer">
-                    <div class="d-flex justify-content-center links">
-                        Don't have an account?<a href="#">Sign Up</a>
-                    </div>
+
                     <div class="d-flex justify-content-center">
-                        <a href="@Url.ActionLink("Forgetpas","CustomerCenter")">Forgot your password?</a>
+                        <a href="@Url.ActionLink("Forgetpas","CustomerCenter")">忘記密碼</a>
                     </div>
                     <button type="button" class="btn btn-success" id=" demo" onclick="DemoValue()">Demo</button>
                     <button type="button" class="btn btn-success" id=" acc" onclick="Demo()">Demo帳號</button>
+                    <button type="button" class="btn btn-primary" id=" ac" onclick="DemoS()">Demo停權</button>
                 </div>
             </div>
         </div>
     </div>
     @*"@Url.ActionLink("Coupon", "CustomerCenter"*@
 
-</body >
-    <script>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+        crossorigin="anonymous"></script>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+      media="screen" />
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
         function Demo()
         {
-            $("#Actemail").val("d555@gmail.com")
-            $("#Pas").val("a1234567")
+            $("#Actemail").val("customer@outlook.com")
+            $("#Pas").val("a77777777")
+        }
+        function DemoS() {
+            $("#Actemail").val("wei@outlook.com")
+            $("#Pas").val("a77777777")
         }
 
     const DemoValue = () => {
         let act = document.querySelector("#Actemail");
         let pas = document.querySelector("#Pas");
-        
+
         //Swal.fire(
         //    'Good job!',
         //    'You clicked the button!',
@@ -113,7 +135,7 @@
         var postData = {//把要取欄位的值轉成JSON物件
             Email: $("#Actemail").val(),//EMIL跟PASSWORD名子要跟VIEWMODEL一樣
             Password: $("#Pas").val(),
-            KeepLogin: $("#chkKeepLogin").val(),
+            CAPTCHA: $("#captcha").val(),
             };
 
         $.ajax({
@@ -132,7 +154,7 @@
                     })
                     return;
                 }
-           
+
 
                 window.location = "/Home/Index";//成功的話導向首頁
 
@@ -142,16 +164,14 @@
             },
 
         });
-      }
+        }
+        //驗證碼
+    $("#imgcode").click(async function () {
+        await $(this).attr("src", '@Url.Content("~/CustomerCenter/GetCaptcha?time=")' + (new Date()).getTime());
+        });
 
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
-          media="screen" />
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</script>
+
 
 
 
