@@ -59,7 +59,7 @@
                                 @{
                                     if (item.Comments.Count > 0)
                                     {
-                                        <span class="score-rate">★@item.Comments.Select(i => i.Star).ToList().Average()</span>
+                                        <span class="score-rate">★@item.Comments.Select(i => i.Star).ToList().Average().ToString("f1")</span>
                                     }
                                     else
                                     { <span class="score-rate"> ★0(還沒有人給星)</span> }
