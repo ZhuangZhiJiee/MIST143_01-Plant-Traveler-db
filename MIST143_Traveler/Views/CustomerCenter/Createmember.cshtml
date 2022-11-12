@@ -102,8 +102,8 @@
 
 
                     <div class="modal-footer">
-
-                        <button type="button" class="btn btn-success" id="sb1" onclick="BtnDemo()">Demo</button>
+                        <button type="button" class="btn btn-warning" onclick="BtnDemo1()">Demo重複帳號</button>
+                        <button type="button" class="btn btn-success" id="sb1" onclick="BtnDemo2()">Demo所有資料</button>
                         @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>*@
                         <input type="submit" class="btn btn-primary ccc">
                     </div>
@@ -250,9 +250,12 @@
             }
             })
             })
-
+         
             //DEMO
-            function BtnDemo() {
+    function BtnDemo1() {
+        $('#Email').val("d555@gmail.com")
+    }
+            function BtnDemo2() {
 
             $('#Name').val("陳小華")
                 $('#Email').val("msit143-1customer@outlook.com")

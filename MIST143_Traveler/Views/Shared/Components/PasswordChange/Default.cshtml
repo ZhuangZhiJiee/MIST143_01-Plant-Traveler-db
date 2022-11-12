@@ -43,6 +43,7 @@
 
                     <div class="d-flex mb-3">
                         <div class="me-auto p-2">
+                            <button type="button" class="btn btn-success" id="de" onclick="demopas()">DEMO</button>
                             <button type="submit" class="btn btn-warning 按鈕顏色" id="send" onclick="Passs()">儲存</button>
                         </div>
                     </div>
@@ -69,6 +70,10 @@
 <script>
     const aaa=()=> {
         console.log(123)
+    }
+    function demopas() {
+        $("#Password1").val("a77777777")
+        $("#Password2").val("a77777777")
     }
     const Passs = () => {
             var pasData = {
