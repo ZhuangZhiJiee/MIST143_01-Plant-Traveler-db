@@ -408,3 +408,13 @@ input[type=number] {
 .addlesson {
     margin-top: -93px;
 }
+#productPlus, #productMinus {
+    border: solid 0.7px black;
+}
+.infoTextLabel{
+    font-size:20px;
+}
+
+.carouselContainer{
+    margin: 0 auto;
+}
