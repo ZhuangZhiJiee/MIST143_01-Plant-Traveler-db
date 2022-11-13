@@ -16,7 +16,7 @@
             List<string> Coupon = new List<string>();
             foreach (var co in Model)
             {
-                if (co.CouponStatus == true)
+                if (co.CouponStatus == false)
                 {
                     Coupon.Add($@"<div class='coupon coupon-wave-left coupon-wave-right coupon-yellow-gradient' style='filter: grayscale(1)'>
                                         <div class='coupon-info coupon-info-right-dashed'>

@@ -761,11 +761,16 @@ namespace MIST143_Traveler.Controllers
 
         public IActionResult Ccount(int MembersId)
         {
+            var cl = _PlanetTravelContext.CouponLists.ToList();
 
             var 時間 = DateTime.Now.AddDays(-1).ToShortDateString();
             //var c = _PlanetTravelContext.Coupons.Where(a => DateTime.Parse(a.ExDate) > DateTime.Parse(時間)).ToList();
 
-            var q = _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId && a.CouponStatus == true).Count().ToString();
+            //var c = cl.Where(a => a.MembersId == MembersId && a.CouponStatus == true && Convert.ToDateTime(a.Coupon.ExDate) > Convert.ToDateTime(時間)).Count().ToString();
+
+           var q= _PlanetTravelContext.CouponLists.Where(a => a.MembersId == MembersId && a.CouponStatus == true).Count().ToString();
+
+
             return Content(q, "text/plain", System.Text.Encoding.UTF8);
         }
         //============================================================================
