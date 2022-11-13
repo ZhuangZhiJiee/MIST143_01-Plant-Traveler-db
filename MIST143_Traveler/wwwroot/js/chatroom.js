@@ -64,7 +64,7 @@ function showChatRoom() {
 }
 
 function chatDemoBtn1() {
-    inputA.value = "您好，你們的越南河內旅遊最新行程已經全部賣完了，請問近期還會開團嗎?";   
+    inputA.value = "您好，你們的樂高樂園行程已經全部賣完了，請問近期還會開團嗎?";   
 }
 function chatDemoBtn2() {
     inputA.value = "您好，我是您的星球旅遊服務專員Miyo林，很高興為您服務。您可以先將該行程加入我的最愛，如果有其他的客人取消行程，將會寄送候補通知E-Mail給您。";
