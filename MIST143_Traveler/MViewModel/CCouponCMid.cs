@@ -16,5 +16,7 @@ namespace MIST143_Traveler.MViewModel
         {
             get;set;
         }
+
+        public bool 未過期 { get; set; }
     }
 }

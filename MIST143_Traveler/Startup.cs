@@ -41,7 +41,11 @@ namespace MIST143_Traveler
                 option.LoginPath = new PathString("/api/Login/NoLogin");
             });
             services.AddControllersWithViews();
-            services.AddSession();
+            services.AddSession(options=> {
+               
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+                
+            });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSignalR();
 

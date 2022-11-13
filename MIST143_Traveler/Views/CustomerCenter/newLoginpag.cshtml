@@ -36,11 +36,11 @@
             <div class="card">
                 <div class="card-header">
                     <h3>Sign In</h3>
-                    <div class="d-flex justify-content-end social_icon">
+                    @*<div class="d-flex justify-content-end social_icon">
                         <span><i class="fab fa-facebook-square"></i></span>
                         <span><i class="fab fa-google-plus-square"></i></span>
                         <span><i class="fab fa-twitter-square"></i></span>
-                    </div>
+                    </div>*@
                 </div>
                 <div class="card-body">
 
@@ -55,10 +55,13 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" class="form-control" placeholder="password" id="Pas" name="Password">
+                        <div class="flex-fill">
+                            <input type="password" class="form-control" placeholder="password" id="Pas" name="Password">
+                            <i id="checkEye" class="fas fa-eye"></i>
+                        </div>
                     </div>
 
-                    <div class="input-group form-group mb-2">
+                    <div class="input-group form-group mb-3">
                         <div class="d-flex">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
@@ -72,9 +75,9 @@
 
                     
 
-                    <div class="row align-items-center remember mb-4">
+                    @*<div class="row align-items-center remember mb-4">
                         <input type="checkbox" value="true" id="chkKeepLogin">記住我
-                    </div>
+                    </div>*@
 
                     <div class="form-group mt-2">
                         <input type="submit" value="Login" onclick="BtnLogin()" id="btnlog" class="btn float-right login_btn">
@@ -89,6 +92,7 @@
                     <button type="button" class="btn btn-success" id=" demo" onclick="DemoValue()">Demo</button>
                     <button type="button" class="btn btn-success" id=" acc" onclick="Demo()">Demo帳號</button>
                     <button type="button" class="btn btn-primary" id=" ac" onclick="DemoS()">Demo停權</button>
+                    <button type="button" class="btn btn-primary" id=" ac" onclick="DemoCALL()">客服</button>
                 </div>
             </div>
         </div>
@@ -105,9 +109,25 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+    $("#checkEye").click(function () {
+        if ($(this).hasClass('fa-eye')) {
+            $("#Pas").attr('type', 'text');
+        }
+        else {
+            $("#Pas").attr('type', 'password');
+        }
+        $(this).toggleClass('fa-eye').toggleClass('fa-eye-slash');
+    });
+
+    function DemoCALL() {
+        $("#Actemail").val("customer143-1@outlook.com")
+        $("#Pas").val("a77777777")
+    }
+
+
         function Demo()
         {
-            $("#Actemail").val("customer@outlook.com")
+            $("#Actemail").val("customer143-1@outlook.com")
             $("#Pas").val("a77777777")
         }
         function DemoS() {

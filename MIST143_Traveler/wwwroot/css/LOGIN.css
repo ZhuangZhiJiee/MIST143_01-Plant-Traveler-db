@@ -16,6 +16,13 @@ html, body {
     align-content: center;
 }
 
+#checkEye {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
 .card {
     height: 450px;
     margin-top: auto;
