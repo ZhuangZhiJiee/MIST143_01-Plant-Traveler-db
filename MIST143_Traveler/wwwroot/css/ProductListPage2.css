@@ -228,7 +228,7 @@ button {
 
 .asd {
     display: flex;
-    margin: -15px;
+    margin: -22px;
 }
 
 .card {
@@ -828,7 +828,7 @@ a {
     font-style: normal;
     font-weight: 500;
     border-radius: 6px;
-    padding: 10px 20px;
+    padding: 4px 20px;
     margin: 0;
     text-align: center;
     line-height: 22px;
@@ -1014,7 +1014,7 @@ div {
     font-style: normal;
     font-weight: 500;
     border-radius: 6px;
-    padding: 10px 20px;
+    padding: 4px 20px;
     margin: 0;
     text-align: center;
     line-height: 22px;
