@@ -155,10 +155,10 @@
                                         <label style="width:20%" for="start">選擇遊玩日期範圍:</label>
 
                                         <input type="date" @*onclick="datechoise()"*@ id="start123123" name="trip-start"
-                                                min="2022-10-01" max="2022-12-31" class="ipwidth" />
+                                                class="ipwidth" />
                                         <input type="date" onclick="datechoise()"
                                                id="start" name="trip-start"
-                                               min="2022-10-01" max="2022-12-31" class="ipwidth" />
+                                              class="ipwidth" />
                                         <button style="width:8%;padding:1%" type="button" id="showw">確定</button>
                                         <select class="form-select djfdd" id="productid" aria-label="Default select example">
                                             <option selected>選擇方案</option>
@@ -231,15 +231,7 @@
                                     <div class="accordion" id="accordionPanelsStayOpenExample">
                                         <div class="accordion-item d-flex aitemhi">
 
-                                            @*<button class="accordion-button aitem" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOn" aria-expanded="true" aria-controls="panelsStayOpen-collapseOn">
-                                                    東亞
-                                                </button>
-                                                <h2 class="accordion-header" id="panelsStayOpen-headingOn"> </h2>
-                                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOn">
-                                                    <div class="accordion-body">
-                                                        <strong></strong>
-                                                    </div>
-                                                </div>*@
+                                        
                                         </div>
 
                                     </div>
@@ -281,8 +273,7 @@
         </script>
        
         <script>
-
-            @*const select = document.querySelector("#choise");
+             @*const select = document.querySelector("#choise");
             sel.addEventListener("change", () => {
 
                 var url = "@Url.Content("~/ProductListPage2/selecter")"
@@ -293,6 +284,33 @@
                 $("#ans").load(url + day + nme);
 
             })*@
+            //$(document).ready(function () {
+            //    var date = new Date();
+
+            //    var day = date.getDate();
+            //    var month = date.getMonth() + 1;
+            //    var year = date.getFullYear();
+
+            //    if (month < 10) month = "0" + month;
+            //    if (day < 10) day = "0" + day;
+
+            //    var today = year + "-" + month + "-" + day;
+            //    $("#start123123").attr("value", today);
+            //    $("#start").attr("value", $("#start123123").attr("value"), today)
+            //});
+            var today = new Date().toJSON().slice(0, 10);
+            var date = $('#start123123');
+            date.attr('min', today);
+
+
+
+            var today2 = new Date().toJSON().slice(0, 10);
+
+            var date2 = $('#start');
+            date2.attr('min', today2);
+
+
+
 
             $(".flexCheckDefault").click(function () {
                 var ii = $.map($(".flexCheckDefault:checked"), function (data) {
@@ -306,7 +324,16 @@
                 $("#ans").load(url + check+name);
 
             })
+             @*$(".flexCheckDefault").click(function () {
+                var ii = $.map($(".flexCheckDefault:checked"), function (data) {
+                      return data.value;
+                  });
+                var url = "@Url.Content("~/ProductListPage2/see")"
+                var check = `?contry=${ii}`;
+                console.log(ii);
+                $("#ans").load(url + check);
 
+              })*@
              const prodid = document.querySelector("#productid");
             prodid.addEventListener("change", () => {
                 var url = "@Url.Content("~/ProductListPage2/product")"
@@ -315,15 +342,7 @@
                 console.log(num);
                 $("#ans").load(url + num);
             })
-             @*const prodid = document.querySelector("#productid");
-            prodid.addEventListener("change", () => {
-                var url = "@Url.Content("~/ProductListPage2/productkey")"
-                var ied = prodid.selectedIndex
-                var num = `?numidkey=${ied}`;
-                  var qq = $("#text").val()
-                console.log(num);
-                $("#ans").load(url + num);
-            })*@
+
 
 
             const sel = document.querySelector("#choise");
@@ -349,27 +368,6 @@
                 })
 
             })
-             @*function QQ() {
-                $.get("@Url.Action("getcount", "ProductListPage2")",
-                    function (data) {
-                        $(`#c${1}`).next().text(5)
-                        for (let i of data) {
-                            for (let q = 1; q <= 7; q++) {
-                                var s = $(`#c${q}`)
-                                var sb = $(`#c${q}`).next()
-                                if (i.coutryname == s.html())
-                                    sb.text(i.count)
-                            }
-                        }
-                    }
-                )
-            }*@
-            //$(function () {
-            //    $("#datepicker").datepicker("min"= new Date:0)
-                
-
-            //});
-            
             $("#btn").click(function () {
                 var qq = $("#text").val()
                 var url = "@Url.Content("~/ProductListPage2/filter")"
@@ -380,6 +378,16 @@
                     $("#cc1").html(data);
                 })
             })
+             $(".flexCheckDefault").click(function () {
+                var ii = $.map($(".flexCheckDefault:checked"), function (data) {
+                      return data.value;
+                  });
+                var url = "@Url.Content("~/ProductListPage2/see")"
+                var check = `?contry=${ii}`;
+                console.log(ii);
+                $("#ans").load(url + check);
+
+              })
              $("#btn").click(function () {
                 var qq = $("#text").val()
                 var url = "@Url.Content("~/ProductListPage2/filter")"
@@ -513,65 +521,6 @@
                 console.log(arr);
             });
 
-            //function happy() {
-            //    $.post(`/ProductListPage2/filter`, { keyword: arr }, function (data) {
-
-
-            //    })
-            //}
-            //$("#flexCheckDefault").click(function () {
-            //    var checkvalue = $(this).val();
-            //    alert(checkvalue);
-            //});
-
-            @*var data = {
-                info: $("input[type=checkbox][name=info]:checked").val(),
-
-            }
-            console.log(data)
-            $.ajax({
-                url: '@Url.Action("filter", "ProductListPage2")',
-                method: 'Post',
-                dataType: 'Json',
-                data: { keyword: data },
-                success: function (datas) {
-                    if (!datas.res) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: '輸入錯誤',
-                            text: datas.msg,
-
-                        })
-                        return;
-                    }
-                    Swal.fire(
-                        '註冊成功!',
-                        '讚啦!',
-                        'success'
-                    )
-                }
-                }
-            })*@
-
-            @*var div = decodeURIComponent($('input[type=checkbox]').serialize());
-            $.ajaxSetup({
-                type: 'GET',
-                url: '@Url.Action("filter", "ProductListPage2")',
-                dataType: 'json',
-                data: {''}
-            })*@
-
-
-            @*$(document).ready(function () {
-                $("input:checkbox").change(function () {
-                    var isChecked = $("input:checkbox").is(":checked") ? 1 : 0;
-                    $.ajax({
-                        url: '@Url.Action("filter", "ProductListPage2")',
-                        type: 'POST',
-                        data: { strID: $("input:checkbox").attr("id"), strState: isChecked }
-                    });
-                });
-            });*@
 
         </script>
 
