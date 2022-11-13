@@ -19,9 +19,37 @@
 
 <body class="p-0 m-0 border-0 bd-example">
     @*<div class="p-0 m-0 border-0 mx-auto 最大的">*@
-        <div class="col-10">
+        <div class="col-9 carouselContainer">
             <div class="activity-page-container">
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        @for (int i = 0; i < Model.Productpictures.Count; i++)
+                        {
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="carouselExampleIndicators" aria-current="true" aria-label="幻燈片 1"></button>
+                        }
+
+                    </div>
+                    <div class="carousel-inner 照片的包皮">
+                        @foreach (var item in Model.Productpictures)
+                        {
+                            <div class="carousel-item" data-bs-interval="1500">
+                                <img src="https://localhost:44338/images/TravelProductPictures/@item.TravelPicture1" class="d-block carouselImg" alt="...">
+                            </div>
+                        }
+
+
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                @*<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                     <div class="carousel-indicators">
                         @for (int i = 0; i < Model.Productpictures.Count; i++)
                         {
@@ -30,7 +58,7 @@
 
 
                     </div>
-                   
+
                     <div class="carousel-inner 照片的包皮">
                         @foreach (var item in Model.Productpictures)
                         {
@@ -48,7 +76,7 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下一個</font></font></span>
                     </button>
-                </div>
+                </div>*@
 
             </div>
         </div>
@@ -208,9 +236,9 @@
                                                 <div class="titleFontStyle">NT$ <span id="totalPrice"></span></div>
                                                 <div class="subInfoText">完成所有必填選項</div>
                                                 <br />
-                                                <div>剩餘:  <span class="stocks">@Model.Stocks</span> / @Model.Quantity 個位置<span class="text-danger hiddenEle soldInfo ms-2">快售完，敬請把握</span></div>
+                                                <div class="infoTextLabel">剩餘:  <span class="stocks">@Model.Stocks</span> / @Model.Quantity 個位置<span class="text-danger hiddenEle soldInfo ms-2">快售完，敬請把握</span></div>
                                                 <br />
-                                                <div >倒數:  @Model.RemainingDays 天出團</div>
+                                                <div class="infoTextLabel">倒數:  @Model.RemainingDays 天出團</div>
                                             </div>
                                             <div class="rightBtns">
 
@@ -301,7 +329,7 @@
 
                 
                 <div class="活動DIV">
-                    <h2><span class="一條根"> </span><span>活動評價</span></h2>
+                    <h2 class="活動DIV"><span class="一條根"> </span><span>活動評價</span></h2>
 
                     @if (Model._CCommentViewModel.Count == 0)
                     {
@@ -428,6 +456,7 @@
                 if (stocksNum < 10) {
                     $('.soldInfo').removeClass('hiddenEle')
                 }
+
             }
             //點擊加號
             $('#productPlus').click(function () {
