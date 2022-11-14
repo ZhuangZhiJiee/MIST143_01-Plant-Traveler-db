@@ -51,6 +51,8 @@ namespace MIST143_Traveler.Controllers
                      select p).ToList();
             //plist.travelProduct = q;
             ViewBag.keyword = keyword;
+            ViewBag.numa = q.Count();
+            ViewBag.rew = "0";
             return View(q);
         }
        
@@ -259,49 +261,50 @@ namespace MIST143_Traveler.Controllers
         {
             return Content(rest);
         }
+       
         public IActionResult getSearchCountt(string keyword)
         {
-            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架"||p.Country.CountryName==(keyword) && p.ProductStatus == "已上架"||keyword=="全部"&& p.ProductStatus == "已上架").Count();
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架"||p.Country.CountryName==(keyword) && p.ProductStatus == "已上架"||keyword==""&& p.ProductStatus == "已上架").Count();
             return Json(count);
 
         }
         public IActionResult getSearchCounty(string keyword)
         {
            
-            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 1|| keyword == ("台灣") && p.CountryId == 1 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 1 || p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 2 || keyword == ("日本") && p.CountryId == 2 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 2  || p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 8|| keyword == ("韓國")&& p.CountryId == 8&& p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 8 || keyword == "全部" && p.ProductStatus == "已上架" && p.CountryId == 1 || keyword == "全部" && p.ProductStatus == "已上架" && p.CountryId == 2 || keyword == "全部" && p.ProductStatus == "已上架" && p.CountryId == 8).Count();
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 1|| keyword == ("台灣") && p.CountryId == 1 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 1 || p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 2 || keyword == ("日本") && p.CountryId == 2 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 2  || p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 8|| keyword == ("韓國")&& p.CountryId == 8&& p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 8 || keyword == "" && p.ProductStatus == "已上架" && p.CountryId == 1 || keyword == "" && p.ProductStatus == "已上架" && p.CountryId == 2 || keyword == "" && p.ProductStatus == "已上架" && p.CountryId == 8).Count();
             return Json(count);
         }
         public IActionResult getSearchCountyt(string keyword)
         {
 
-            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 1|| keyword == ("台灣") && p.CountryId == 1 || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 1||keyword== "全部" && p.ProductStatus == "已上架" && p.CountryId == 1).Count();
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 1|| keyword == ("台灣") && p.CountryId == 1 || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 1||keyword== "" && p.ProductStatus == "已上架" && p.CountryId == 1).Count();
             return Json(count);
         }
         public IActionResult getSearchCountyj(string keyword)
         {
 
-            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 2 || keyword == ("日本") && p.CountryId == 2 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 2 || keyword == "全部" && p.ProductStatus == "已上架" && p.CountryId == 2).Count();
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 2 || keyword == ("日本") && p.CountryId == 2 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 2 || keyword == "" && p.ProductStatus == "已上架" && p.CountryId == 2).Count();
             return Json(count);
         }
         public IActionResult getSearchCountyk(string keyword)
         {
 
-            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 8 && keyword == ("韓國") && p.CountryId == 8 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 8 || keyword == "全部" && p.ProductStatus == "已上架" && p.CountryId == 8).Count();
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 8 && keyword == ("韓國") && p.CountryId == 8 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 8 || keyword == "" && p.ProductStatus == "已上架" && p.CountryId == 8).Count();
             return Json(count);
         }
         public IActionResult getSearchCountd(string keyword)
         {          
-            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 9 && keyword == ("越南") && p.CountryId == 9 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 9 || keyword == "全部" && p.ProductStatus == "已上架" && p.CountryId == 9).Count();
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 9 && keyword == ("越南") && p.CountryId == 9 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 9 || keyword == "" && p.ProductStatus == "已上架" && p.CountryId == 9).Count();
             return Json(count);
         }
         public IActionResult getSearchCountb(string keyword)
         {
-            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 5 && keyword == ("美國") && p.CountryId == 5 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 5 || keyword == "全部" && p.ProductStatus == "已上架" && p.CountryId == 5).Count();
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 5 && keyword == ("美國") && p.CountryId == 5 && p.ProductStatus == "已上架" || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 5 || keyword == "" && p.ProductStatus == "已上架" && p.CountryId == 5).Count();
             return Json(count);
         }
         public IActionResult getSearchCounto(string keyword)
         {
-            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 6&& keyword == ("英國") || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 6 && keyword == ("英國") || p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 7 && keyword == ("法國") || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 7&& keyword == ("法國") || keyword == "全部" && p.ProductStatus == "已上架" && p.CountryId == 6 || keyword == "全部" && p.ProductStatus == "已上架" && p.CountryId == 7).Count();
+            var count = _planet.TravelProducts.Where(p => p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 6&& keyword == ("英國") || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 6 && keyword == ("英國") || p.TravelProductName.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 7 && keyword == ("法國") || p.Description.Contains(keyword) && p.ProductStatus == "已上架" && p.CountryId == 7&& keyword == ("法國") || keyword == "" && p.ProductStatus == "已上架" && p.CountryId == 6 || keyword == "" && p.ProductStatus == "已上架" && p.CountryId == 7).Count();
             return Json(count);
         }
         public IActionResult getcount(string keyword)
