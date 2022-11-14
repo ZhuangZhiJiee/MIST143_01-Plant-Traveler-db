@@ -482,16 +482,17 @@ namespace MIST143_Traveler.Controllers
                 }
                 pt.SaveChanges();
                 //================================清除Session=======================================================================
-                if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
-                {
-                    List<CShoppingCartDetailViewModel> list = null;
-                    string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
-                    list = JsonSerializer.Deserialize<List<CShoppingCartDetailViewModel>>(jsonCart);
+                //if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
+                //{
+                //    List<CShoppingCartDetailViewModel> list = null;
+                //    string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+                //    list = JsonSerializer.Deserialize<List<CShoppingCartDetailViewModel>>(jsonCart);
 
-                    list.Clear();
-                    jsonCart = JsonSerializer.Serialize(list);
-                    HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonCart);
-                }
+                //    list.Clear();
+                //    jsonCart = JsonSerializer.Serialize(list);
+                //    HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonCart);
+                //}
+                HttpContext.Session.Remove(CDictionary.SK_PURCHASED_PRODUCT);
                 return View();
             }
             #endregion
@@ -567,16 +568,17 @@ namespace MIST143_Traveler.Controllers
                 }
                 pt.SaveChanges();
                 //================================清除Session=======================================================================
-                if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
-                {
-                    List<CShoppingCartDetailViewModel> list = null;
-                    string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
-                    list = JsonSerializer.Deserialize<List<CShoppingCartDetailViewModel>>(jsonCart);
+                //if (HttpContext.Session.Keys.Contains(CDictionary.SK_PURCHASED_PRODUCT))
+                //{
+                //    List<CShoppingCartDetailViewModel> list = null;
+                //    string jsonCart = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCT);
+                //    list = JsonSerializer.Deserialize<List<CShoppingCartDetailViewModel>>(jsonCart);
 
-                    list.Clear();
-                    jsonCart = JsonSerializer.Serialize(list);
-                    HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonCart);
-                }
+                //    list = null;
+                //    jsonCart = JsonSerializer.Serialize(list);
+                //    HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCT, jsonCart);
+                //}
+                HttpContext.Session.Remove(CDictionary.SK_PURCHASED_PRODUCT);
                 //=================================寄信=============================================================================
                 MimeMessage message = new MimeMessage();
                 BodyBuilder builder = new BodyBuilder();
