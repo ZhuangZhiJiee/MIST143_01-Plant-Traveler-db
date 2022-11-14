@@ -284,20 +284,20 @@
                 $("#ans").load(url + day + nme);
 
             })*@
-            //$(document).ready(function () {
-            //    var date = new Date();
+            $(document).ready(function () {
+                var date = new Date();
 
-            //    var day = date.getDate();
-            //    var month = date.getMonth() + 1;
-            //    var year = date.getFullYear();
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
 
-            //    if (month < 10) month = "0" + month;
-            //    if (day < 10) day = "0" + day;
+                if (month < 10) month = "0" + month;
+                if (day < 10) day = "0" + day;
 
-            //    var today = year + "-" + month + "-" + day;
-            //    $("#start123123").attr("value", today);
+                var today = year + "-" + month + "-" + day;
+                $("#start123123").attr("value", today);
             //    $("#start").attr("value", $("#start123123").attr("value"), today)
-            //});
+            });
             var today = new Date().toJSON().slice(0, 10);
             var date = $('#start123123');
             date.attr('min', today);
@@ -324,7 +324,7 @@
                 $("#ans").load(url + check+name);
 
             })
-             @*$(".flexCheckDefault").click(function () {
+             $(".flexCheckDefault").click(function () {
                 var ii = $.map($(".flexCheckDefault:checked"), function (data) {
                       return data.value;
                   });
@@ -333,7 +333,7 @@
                 console.log(ii);
                 $("#ans").load(url + check);
 
-              })*@
+              })
              const prodid = document.querySelector("#productid");
             prodid.addEventListener("change", () => {
                 var url = "@Url.Content("~/ProductListPage2/product")"
