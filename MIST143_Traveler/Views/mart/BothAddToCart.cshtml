@@ -1,0 +1,246 @@
+﻿@model MIST143_Traveler.Models.TProduct
+@{
+    ViewData["Title"] = "BothAddToCart";
+    Layout = "~/Views/Shared/_MartLayout.cshtml";
+}
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link href="~/css/souvenirShop.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+    <link href="~/css/souvenirPage.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <style type="text/css">
+    </style>
+</head>
+<div style="display:block;">
+    <div class="row">
+        <div class="col-7  item1">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                            aria-label="Slide 4"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="~/images/All/螢幕快照 2022-11-03 17.54.19.jpg" class="d-block w-100"
+                             alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/images/All/螢幕快照 2022-11-03 17.46.39.jpg" class="d-block w-100"
+                             alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/images/All/螢幕快照 2022-11-03 17.51.34.jpg" class="d-block w-100"
+                             alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/images/All/螢幕快照 2022-11-03 18.02.29.jpg" class="d-block w-100"
+                             alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-5 item2">
+            <h2>UNISEX STARSHIP PULLOVER HOODIE Free Size</h2>
+            <br>
+            <p>$4950.00</p>
+            <hr>
+            <h4>Product Details:</h4>
+            <br>
+            <h5>Made in the U.S.A.</h5>
+
+            <h5>Fabric Content:</h5>
+
+            <ul>
+                <li>100% cotton</li>
+
+                <li>14oz. premium heavyweight fleece</li>
+
+                <li> Due to the custom dye process, natural variances in color may occur</li>
+
+            </ul>
+            <br>
+            <p>Color: Cream</p>
+
+            <div class="color">
+                <div class="color_box"></div>
+            </div>
+            <br>
+            <br>
+
+            <div class="btn-group dropend">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    Size F
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" href="#">F</a>
+                    </li>
+
+                </ul>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p>Quantity:</p>
+            <!--<div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+                <button type="button"
+                        class="btn btn-outline-secondary productMinus">
+                    -
+                </button>
+                <input type="number" class="productNumber productNum" name="Count" id="counterpas" value="1" />
+
+                <input type="hidden" class="productNumHidden"-->
+            @*value="@item.Count"*@
+            <!--/>
+                <button type="button"
+                        class="btn btn-outline-secondary productPlus">
+                    +
+                </button>
+            </div>-->
+            <form asp-action="BothAddToCart">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <input type="hidden" name="txtFid" value="@Model.FId" />
+                    <div class="col-md-10">
+
+                        @Html.TextBox("txtCount", "1", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <button class="bttn" id="counter" style="text-decoration: none">
+                        <div class="add">
+                            @Html.ActionLink("加入購物車", "CartView", "martController")@*3是產品FID*@
+                            @*<input type="submit" value="ADD TO CART" class="btn btn-default" />*@
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+@*<form asp-action="BothAddToCart">
+        <h4>數量</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <input type="hidden" name="txtFid" value="@Model.FId" />
+            <div class="col-md-10">
+                數量<br>
+                @Html.TextBox("txtCount", "1", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="購買" class="btn btn-default" />
+        </div>
+    </form>*@
+
+
+@*<div>
+        <a asp-controller="Home" asp-action="Index">Back to Home</a>
+    </div>*@
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+        crossorigin="anonymous"></script>
+<script>
+    function clickPlusOrMinus(type, index) {
+        //type === true +, type === false -
+        let currentNum = parseInt($('.productNum').eq(index).val())
+        let currentPrice = parseInt($('.singlePrice').eq(index).text())
+        if (type === true) {
+            currentNum += 1
+        } else {
+            if (currentNum > 1) {
+                currentNum -= 1
+                $('.productNum').eq(index).val(currentNum)
+            }
+        }
+        $('.productNum').eq(index).val(currentNum)
+        $('.payCount').eq(index).val(currentNum)
+        $('.totalPrice').eq(index).text(currentNum * currentPrice)
+        countTotal()
+    }
+    @*//綁定加號按鈕
+    $(".productPlus").each(function (index) {
+        //點擊加號
+        $(this).on("click", function () {
+            clickPlusOrMinus(true, index)
+        });
+    });
+    $(".productMinus").each(function (index) {
+        //點擊加號
+        $(this).on("click", function () {
+            clickPlusOrMinus(false, index)
+
+        });
+    });
+    $("#counter").click(function () {
+        var c = $("#counterpas").val()
+        var url = "@Url.Content("~/Shopping/BothAddToCart")";
+        var cnt = `?counta=` + c
+        $.get("Shopping/BothAddToCart", { "count": c },
+
+    })*@
+</script>
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+}
