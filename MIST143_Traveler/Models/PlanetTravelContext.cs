@@ -38,6 +38,7 @@ namespace MIST143_Traveler.Models
         public virtual DbSet<ProductCoordinate> ProductCoordinates { get; set; }
         public virtual DbSet<ProductToTransportation> ProductToTransportations { get; set; }
         public virtual DbSet<ProductToView> ProductToViews { get; set; }
+        public virtual DbSet<TProduct> TProducts { get; set; }
         public virtual DbSet<Trasportation> Trasportations { get; set; }
         public virtual DbSet<TravelPicture> TravelPictures { get; set; }
         public virtual DbSet<TravelProduct> TravelProducts { get; set; }
@@ -45,14 +46,14 @@ namespace MIST143_Traveler.Models
         public virtual DbSet<TravelProductType> TravelProductTypes { get; set; }
         public virtual DbSet<View> Views { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=PlanetTravel;Integrated Security=True");
-            }
-        }
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//        {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//                optionsBuilder.UseSqlServer("Data Source=192.168.36.26;Initial Catalog=PlanetTravel;User ID=jay;Password=1234");
+//            }
+//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -527,6 +528,37 @@ namespace MIST143_Traveler.Models
                     .HasForeignKey(d => d.ViewId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ProductToView_View");
+            });
+
+            modelBuilder.Entity<TProduct>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("tProduct");
+
+                entity.Property(e => e.FCost)
+                    .HasColumnType("money")
+                    .HasColumnName("fCost");
+
+                entity.Property(e => e.FId).HasColumnName("fID");
+
+                entity.Property(e => e.FImage)
+                    .HasColumnType("image")
+                    .HasColumnName("fImage");
+
+                entity.Property(e => e.FImagePath)
+                    .HasMaxLength(50)
+                    .HasColumnName("fImagePath");
+
+                entity.Property(e => e.FName)
+                    .HasMaxLength(50)
+                    .HasColumnName("fName");
+
+                entity.Property(e => e.FPrice)
+                    .HasColumnType("money")
+                    .HasColumnName("fPrice");
+
+                entity.Property(e => e.FQty).HasColumnName("fQty");
             });
 
             modelBuilder.Entity<Trasportation>(entity =>
