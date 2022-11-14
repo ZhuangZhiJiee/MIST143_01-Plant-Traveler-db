@@ -455,6 +455,13 @@
                 let stocksNum = parseInt($('.stocks').text())
                 if (stocksNum < 10) {
                     $('.soldInfo').removeClass('hiddenEle')
+                  
+                    if (stocksNum == 0) {
+                        $('.soldInfo').text("已售完，請點擊加入我的最愛，我們將會進行補位通知")
+                    } else {
+                        $('.soldInfo').text("快售完，敬請把握")
+                        
+                    }
                 }
 
 
