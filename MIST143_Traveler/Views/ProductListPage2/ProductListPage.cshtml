@@ -39,7 +39,7 @@
         </nav>
     </div>
     <div class="main-content search-main-content">
-        <p class="search-result-title">以下是與「<a id="txt">@ViewBag.keyword</a>」的體驗，共找到 <a id="ans2"></a> 個方案</p>
+        <p class="search-result-title">以下是與「<a id="txt">@ViewBag.keyword</a>」的體驗，共找到 <a id="ans2">@ViewBag.numa</a> 個方案</p>
 
 
 
@@ -52,26 +52,25 @@
                             <div class="klk-tree klk-tree-checkable klk-tree-multiple">
                                 @{
                                     <div class="accordion" id="accordionPanelsStayOpenExample">
-
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                                                 <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-                                                    東亞(<span id="cc1"></span>)
+                                                    東亞(<span id="cc1">@ViewBag.numa</span>)
                                                 </button>
                                             </h2>
                                             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
                                                 <div class="accordion-body">
                                                     <div class="form-check">
                                                         <input class="form-check-input flexCheckDefault" type="checkbox" name="info[]" value="台灣">
-                                                        <label value="台灣">台灣</label>(<span id="c1"></span>)
+                                                        <label value="台灣">台灣</label>(<span id="c1">@ViewBag.numa</span>)
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input flexCheckDefault" type="checkbox" name="info[]" value="韓國">
-                                                        <label value="韓國">韓國</label>(<span id="c2"></span>)
+                                                        <label value="韓國">韓國</label>(<span id="c2">@ViewBag.rew</span>)
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input flexCheckDefault" type="checkbox" name="info[]" value="日本">
-                                                        <label value="日本">日本</label>(<span id="c3"></span>)
+                                                        <label value="日本">日本</label>(<span id="c3">@ViewBag.rew</span>)
                                                     </div>
                                                 </div>
                                             </div>
@@ -79,14 +78,14 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
                                                 <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                                    東南亞(<span id="cc2"></span>)
+                                                    東南亞(<span id="cc2">@ViewBag.rew</span>)
                                                 </button>
                                             </h2>
                                             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                                                 <div class="accordion-body">
                                                     <div class="form-check">
                                                         <input class="form-check-input flexCheckDefault" type="checkbox" name="info[]" value="越南" id="flexCheckDefault">
-                                                        <label value="越南">越南</label>(<span id="c4"></span>)
+                                                        <label value="越南">越南</label>(<span id="c4">@ViewBag.rew</span>)
                                                     </div>
                                                 </div>
                                             </div>
@@ -94,14 +93,14 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="panelsStayOpen-headingThree">
                                                 <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                                    北美洲(<span id="cc3"></span>)
+                                                    北美洲(<span id="cc3">@ViewBag.rew</span>)
                                                 </button>
                                             </h2>
                                             <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
                                                 <div class="accordion-body">
                                                     <div class="form-check">
                                                         <input class="form-check-input flexCheckDefault" type="checkbox" name="info[]" value="美國" id="flexCheckDefault">
-                                                        <label value="美國">美國</label>(<span id="c5"></span>)
+                                                        <label value="美國">美國</label>(<span id="c5">@ViewBag.rew</span>)
                                                     </div>
                                                 </div>
                                             </div>
@@ -109,18 +108,18 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="panelsStayOpen-headingFive">
                                                 <button class="accordion-button collapsed accordion-btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
-                                                    歐洲(<span id="cc4"></span>)
+                                                    歐洲(<span id="cc4">@ViewBag.rew</span>)
                                                 </button>
                                             </h2>
                                             <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
                                                 <div class="accordion-body">
                                                     <div class="form-check">
                                                         <input class="form-check-input dfhue disabled" type="checkbox" name="info[]" value="" id="flexCheckDefault" disabled>
-                                                        <label class="dfhue disabled">英國</label>(<span id="c6"></span>)
+                                                        <label class="dfhue disabled">英國</label>(<span id="c6">@ViewBag.rew</span>)
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="info[]" value="" id="flexCheckDefault" disabled>
-                                                        <label class="dfhue disabled">法國</label>(<span id="c7"></span>)
+                                                        <label class="dfhue disabled">法國</label>(<span id="c7">@ViewBag.rew</span>)
                                                     </div>
                                                 </div>
                                             </div>
